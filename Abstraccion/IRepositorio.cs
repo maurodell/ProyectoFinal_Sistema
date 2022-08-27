@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Abstraccion
 {
-    public interface Repositorio<T> where T : IEntidad
+    public interface IRepositorio<T> where T : IEntidad
     {
         bool Crear(T Parametro);
-        bool Baja(T Parametro);
-        bool Alta(T Parametro);
+        bool Baja(int Parametro);
+        bool Alta(int Parametro);
         bool Modificar(T Parametro);
-        List<T> Listar(T Parametro);
-        T Leer(int Parametro);
+        bool Eliminar(int Parametro);
+        List<T> Listar();
+        List<T> Buscar(T Parametro);
     }
 }

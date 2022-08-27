@@ -41,9 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLLCategoria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Abstraccion\Abstraccion.csproj">
+      <Project>{a61240e9-d232-4b2a-a0f3-613f385ad6d6}</Project>
+      <Name>Abstraccion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BE\BE.csproj">
       <Project>{279b445d-c44f-4c41-b2c7-7a656817f01d}</Project>
       <Name>BE</Name>
