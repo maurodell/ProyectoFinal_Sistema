@@ -96,9 +96,9 @@ namespace UI
 
         private void categoríasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmCategoria frmCategoria = new frmCategoria();
-            frmCategoria.MdiParent = this;
-            frmCategoria.Show();
+            frmCategorias frmCategorias = new frmCategorias();
+            frmCategorias.MdiParent = this;
+            frmCategorias.Show();
         }
     }
 }

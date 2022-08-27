@@ -8,16 +8,20 @@ using BE;
 using System.Xml.Linq;
 using System.Xml;
 using System.Data;
+using System.IO;
+using System.Reflection;
 
 namespace MPP
 {
     public class MPPCategoria : IRepositorio<Categoria>
     {
+        string path = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)+"\\Categorias.XML";
+
         public bool Alta(int Parametro)
         {
             try
             {
-                XDocument documento = XDocument.Load("Categorias.XML");
+                XDocument documento = XDocument.Load(path);
 
                 var consulta = from categoria in documento.Descendants("categoria")
                                where categoria.Element("codigo").Value == Parametro.ToString()
@@ -28,7 +32,7 @@ namespace MPP
                     EModifcar.Element("estado").Value = "1";
                 }
 
-                documento.Save("Categorias.XML");
+                documento.Save(path);
                 return true;
             }
             catch (XmlException ex)
@@ -41,7 +45,7 @@ namespace MPP
         {
             try
             {
-                XDocument documento = XDocument.Load("Categorias.XML");
+                XDocument documento = XDocument.Load(path);
 
                 var consulta = from categoria in documento.Descendants("categoria")
                                where categoria.Element("codigo").Value == Parametro.ToString()
@@ -52,7 +56,7 @@ namespace MPP
                     EModifcar.Element("estado").Value = "0";
                 }
 
-                documento.Save("Categorias.XML");
+                documento.Save(path);
                 return true;
             }
             catch (XmlException ex)
@@ -68,7 +72,7 @@ namespace MPP
                 List<Categoria> categorias = Listar();
                 int cantidadPart = categorias.Count();
 
-                XDocument crear = XDocument.Load("Categorias.XML");
+                XDocument crear = XDocument.Load(path);
                 crear.Element("categorias").Add(new XElement("categoria",
                                                 new XAttribute("codigo", (cantidadPart + 1)),
                                                 new XElement("nombre", Parametro.nombre), //para pasar el código del juego que se agrega último
@@ -77,7 +81,7 @@ namespace MPP
                 
                 if(VerificarExistencia(Parametro.nombre))
                 {
-                    crear.Save("Categorias.XML");
+                    crear.Save(path);
                     return true;
                 }
                 else
@@ -95,14 +99,14 @@ namespace MPP
         {
             try
             {
-                XDocument documento = XDocument.Load("Categorias.XML");
+                XDocument documento = XDocument.Load(path);
 
                 var consulta = from categoria in documento.Descendants("categoria")
                                where categoria.Element("codigo").Value == Parametro.ToString()
                                select categoria;
                 consulta.Remove();
 
-                documento.Save("Categorias.XML");
+                documento.Save(path);
                 return true;
             }
             catch (XmlException ex)
@@ -116,7 +120,7 @@ namespace MPP
             try
             {
                 DataSet DS = new DataSet();
-                DS.ReadXml("Categorias.XML");
+                DS.ReadXml(path);
 
                 List<Categoria> categorias = new List<Categoria>();
 
@@ -156,7 +160,7 @@ namespace MPP
         {
             try
             {
-                XDocument documento = XDocument.Load("Categorias.XML");
+                XDocument documento = XDocument.Load(path);
 
                 var consulta = from categoria in documento.Descendants("categoria")
                                where categoria.Element("codigo").Value == Parametro.Codigo.ToString()
@@ -169,7 +173,7 @@ namespace MPP
                 }
                 if (VerificarExistencia(Parametro.nombre))
                 {
-                    documento.Save("Categorias.XML");
+                    documento.Save(path);
                     return true;
                 }
                 else
