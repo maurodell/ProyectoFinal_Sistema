@@ -16,6 +16,7 @@ namespace BLL
             mppCategoria = new MPPCategoria();
         }
         MPPCategoria mppCategoria;
+        Categoria BEcategoria;
         public bool Alta(int Parametro)
         {
             return mppCategoria.Alta(Parametro);
@@ -28,7 +29,15 @@ namespace BLL
 
         public bool Crear(Categoria Parametro)
         {
-            return mppCategoria.Crear(Parametro);
+            return false;
+        }
+        public bool Insertar(string nombre, string descripcion)
+        {
+            BEcategoria = new Categoria();
+            BEcategoria.nombre = nombre;
+            BEcategoria.descripcion = descripcion;
+
+            return mppCategoria.Crear(BEcategoria);
         }
 
         public List<Categoria> Listar()
@@ -36,9 +45,9 @@ namespace BLL
             return mppCategoria.Listar();
         }
 
-        public List<Categoria> Buscar(Categoria Parametro)
+        public List<Categoria> Buscar(String Parametro)
         {
-            throw new NotImplementedException();
+            return mppCategoria.Buscar(Parametro);
         }
 
         public bool Modificar(Categoria Parametro)

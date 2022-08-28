@@ -15,7 +15,7 @@ namespace MPP
 {
     public class MPPCategoria : IRepositorio<Categoria>
     {
-        string path = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)+"\\Categorias.XML";
+        string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)+"\\archivos_xml"+"\\Categorias.XML";
 
         public bool Alta(int Parametro)
         {
@@ -136,7 +136,7 @@ namespace MPP
                                 Codigo = Convert.ToInt32(item["codigo"]),
                                 nombre = Convert.ToString(item["nombre"]),
                                 descripcion = Convert.ToString(item["descripcion"]),
-                                estado = Convert.ToBoolean(item["estado"])
+                                estado = Convert.ToBoolean(Convert.ToInt32(item["estado"]))
                             };
                             categorias.Add(categoria);
                         }
@@ -151,9 +151,34 @@ namespace MPP
             }
         }
 
-        public List<Categoria> Buscar(Categoria Parametro)
+        public List<Categoria> Buscar(String Parametro)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Categoria catBuscar;
+                List<Categoria> listaCategoriaDevolver = new List<Categoria>();
+
+                XDocument documento = XDocument.Load(path);
+
+                var consulta = from categoria in documento.Descendants("categoria")
+                               where categoria.Element("nombre").Value.Contains(Parametro)
+                               select categoria;
+
+                foreach (XElement EModifcar in consulta)
+                {
+                    catBuscar = new Categoria();
+                    catBuscar.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
+                    catBuscar.nombre = EModifcar.Element("nombre").Value;
+                    catBuscar.descripcion = EModifcar.Element("descripcion").Value;
+
+                    listaCategoriaDevolver.Add(catBuscar);
+                }
+                return listaCategoriaDevolver;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool Modificar(Categoria Parametro)

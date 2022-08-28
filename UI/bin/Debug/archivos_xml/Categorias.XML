@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<categorias>
+  <categoria codigo="1">
+    <nombre>Limpieza</nombre>
+    <descripcion>Productos para la limpieza de la cocina, baño, exterior, interior.</descripcion>
+    <estado>1</estado>
+  </categoria>
+  <categoria codigo="2">
+    <nombre>Bebidas sin alcohol</nombre>
+    <descripcion>Gaseosas, Aguas, Jugos, Aguas con gas.</descripcion>
+    <estado>1</estado>
+  </categoria>
+</categorias>

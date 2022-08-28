@@ -99,6 +99,12 @@ namespace UI
             frmCategorias frmCategorias = new frmCategorias();
             frmCategorias.MdiParent = this;
             frmCategorias.Show();
+            frmCategorias.Size = new Size(830, 560);
+        }
+
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

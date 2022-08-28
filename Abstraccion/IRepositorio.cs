@@ -14,6 +14,6 @@ namespace Abstraccion
         bool Modificar(T Parametro);
         bool Eliminar(int Parametro);
         List<T> Listar();
-        List<T> Buscar(T Parametro);
+        List<T> Buscar(String Parametro);
     }
 }
