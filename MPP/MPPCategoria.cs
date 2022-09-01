@@ -13,9 +13,9 @@ using System.Reflection;
 
 namespace MPP
 {
-    public class MPPCategoria : IRepositorio<Categoria>
+    public class MPPCategoria : IRepositorio<BECategoria>
     {
-        string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)+"\\archivos_xml"+"\\Categorias.XML";
+        private string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)+"\\archivos_xml"+"\\Categorias.XML";
 
         public bool Alta(int Parametro)
         {
@@ -24,7 +24,7 @@ namespace MPP
                 XDocument documento = XDocument.Load(path);
 
                 var consulta = from categoria in documento.Descendants("categoria")
-                               where categoria.Element("codigo").Value == Parametro.ToString()
+                               where categoria.Attribute("codigo").Value == Parametro.ToString()
                                select categoria;
 
                 foreach (XElement EModifcar in consulta)
@@ -48,7 +48,7 @@ namespace MPP
                 XDocument documento = XDocument.Load(path);
 
                 var consulta = from categoria in documento.Descendants("categoria")
-                               where categoria.Element("codigo").Value == Parametro.ToString()
+                               where categoria.Attribute("codigo").Value == Parametro.ToString()
                                select categoria;
 
                 foreach (XElement EModifcar in consulta)
@@ -65,11 +65,11 @@ namespace MPP
             }
         }
 
-        public bool Crear(Categoria Parametro)
+        public bool Crear(BECategoria Parametro)
         {
             try
             {
-                List<Categoria> categorias = Listar();
+                List<BECategoria> categorias = Listar();
                 int cantidadPart = categorias.Count();
 
                 XDocument crear = XDocument.Load(path);
@@ -102,7 +102,7 @@ namespace MPP
                 XDocument documento = XDocument.Load(path);
 
                 var consulta = from categoria in documento.Descendants("categoria")
-                               where categoria.Element("codigo").Value == Parametro.ToString()
+                               where categoria.Attribute("codigo").Value == Parametro.ToString()
                                select categoria;
                 consulta.Remove();
 
@@ -115,14 +115,14 @@ namespace MPP
             }
         }
 
-        public List<Categoria> Listar()
+        public List<BECategoria> Listar()
         {
             try
             {
                 DataSet DS = new DataSet();
                 DS.ReadXml(path);
 
-                List<Categoria> categorias = new List<Categoria>();
+                List<BECategoria> categorias = new List<BECategoria>();
 
                 if (DS.Tables.Count > 0)
                 {
@@ -131,7 +131,7 @@ namespace MPP
                         string estado = item["estado"].ToString(); //-->listo los que tengan el estado en true
                         if (estado.Equals("1"))
                         {
-                            Categoria categoria = new Categoria
+                            BECategoria categoria = new BECategoria
                             {
                                 Codigo = Convert.ToInt32(item["codigo"]),
                                 nombre = Convert.ToString(item["nombre"]),
@@ -150,13 +150,44 @@ namespace MPP
                 throw new XmlException();
             }
         }
-
-        public List<Categoria> Buscar(String Parametro)
+        public List<BECategoria> ListarTodos()
         {
             try
             {
-                Categoria catBuscar;
-                List<Categoria> listaCategoriaDevolver = new List<Categoria>();
+                DataSet DS = new DataSet();
+                DS.ReadXml(path);
+
+                List<BECategoria> categorias = new List<BECategoria>();
+
+                if (DS.Tables.Count > 0)
+                {
+                    foreach (DataRow item in DS.Tables[0].Rows)
+                    {
+
+                        BECategoria categoria = new BECategoria
+                        {
+                            Codigo = Convert.ToInt32(item["codigo"]),
+                            nombre = Convert.ToString(item["nombre"]),
+                            descripcion = Convert.ToString(item["descripcion"]),
+                            estado = Convert.ToBoolean(Convert.ToInt32(item["estado"]))
+                        };
+                        categorias.Add(categoria);
+                    }
+                }
+                return categorias;
+            }
+            catch (XmlException)
+            {
+                throw new XmlException();
+            }
+        }
+
+        public List<BECategoria> Buscar(String Parametro)
+        {
+            try
+            {
+                BECategoria catBuscar;
+                List<BECategoria> listaCategoriaDevolver = new List<BECategoria>();
 
                 XDocument documento = XDocument.Load(path);
 
@@ -166,7 +197,7 @@ namespace MPP
 
                 foreach (XElement EModifcar in consulta)
                 {
-                    catBuscar = new Categoria();
+                    catBuscar = new BECategoria();
                     catBuscar.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
                     catBuscar.nombre = EModifcar.Element("nombre").Value;
                     catBuscar.descripcion = EModifcar.Element("descripcion").Value;
@@ -181,31 +212,42 @@ namespace MPP
             }
         }
 
-        public bool Modificar(Categoria Parametro)
+        public bool Modificar(BECategoria Parametro, string nombreAnterior)
         {
             try
             {
                 XDocument documento = XDocument.Load(path);
 
                 var consulta = from categoria in documento.Descendants("categoria")
-                               where categoria.Element("codigo").Value == Parametro.Codigo.ToString()
+                               where categoria.Attribute("codigo").Value == Parametro.Codigo.ToString()
                                select categoria;
-
-                foreach (XElement EModifcar in consulta)
+                if (Parametro.nombre != nombreAnterior)
                 {
-                    EModifcar.Element("nombre").Value = Parametro.nombre;
-                    EModifcar.Element("descripcion").Value = Parametro.descripcion;
-                }
-                if (VerificarExistencia(Parametro.nombre))
-                {
-                    documento.Save(path);
-                    return true;
+                    if (VerificarExistencia(Parametro.nombre))
+                    {
+                        foreach (XElement EModifcar in consulta)
+                        {
+                            EModifcar.Element("nombre").Value = Parametro.nombre;
+                            EModifcar.Element("descripcion").Value = Parametro.descripcion;
+                        }
+                        documento.Save(path);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
-                    return false;
-                }
+                    foreach (XElement EModifcar in consulta)
+                    {
+                        EModifcar.Element("descripcion").Value = Parametro.descripcion;
+                    }
 
+                    documento.Save(path);
+                    return true;
+                }
             }
             catch (XmlException ex)
             {
@@ -215,11 +257,11 @@ namespace MPP
         bool VerificarExistencia(string nombre)
         {
             bool resp = true;
-            List<Categoria> categorias = Listar();
+            List<BECategoria> categorias = Listar();
 
             if (categorias.Count() > 0)
             {
-                foreach (Categoria item in categorias)
+                foreach (BECategoria item in categorias)
                 {
                     if (item.nombre == nombre)
                     {

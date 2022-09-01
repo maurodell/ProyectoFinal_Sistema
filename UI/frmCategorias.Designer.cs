@@ -39,14 +39,20 @@ namespace UI
             this.dgvListadoCat = new System.Windows.Forms.DataGridView();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.btnInsertar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnInsertar = new System.Windows.Forms.Button();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.chkSeleccionar = new System.Windows.Forms.CheckBox();
+            this.btnActivar = new System.Windows.Forms.Button();
+            this.btnDesactivar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabCat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListadoCat)).BeginInit();
@@ -66,6 +72,10 @@ namespace UI
             // 
             // tabCat
             // 
+            this.tabCat.Controls.Add(this.btnEliminar);
+            this.tabCat.Controls.Add(this.btnDesactivar);
+            this.tabCat.Controls.Add(this.btnActivar);
+            this.tabCat.Controls.Add(this.chkSeleccionar);
             this.tabCat.Controls.Add(this.btnBuscar);
             this.tabCat.Controls.Add(this.label1);
             this.tabCat.Controls.Add(this.txtBuscar);
@@ -128,8 +138,11 @@ namespace UI
             this.dgvListadoCat.ReadOnly = true;
             this.dgvListadoCat.RowHeadersWidth = 102;
             this.dgvListadoCat.RowTemplate.Height = 40;
-            this.dgvListadoCat.Size = new System.Drawing.Size(2095, 865);
+            this.dgvListadoCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvListadoCat.Size = new System.Drawing.Size(2095, 850);
             this.dgvListadoCat.TabIndex = 0;
+            this.dgvListadoCat.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCat_CellContentClick);
+            this.dgvListadoCat.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCat_CellDoubleClick);
             // 
             // Seleccionar
             // 
@@ -140,6 +153,8 @@ namespace UI
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnActualizar);
+            this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.txtCodigo);
             this.tabPage2.Controls.Add(this.btnCancelar);
             this.tabPage2.Controls.Add(this.btnInsertar);
@@ -155,14 +170,48 @@ namespace UI
             this.tabPage2.Text = "Mantenimiento";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // txtCodigo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(92, 132);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(151, 32);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Nombre (*)";
+            this.txtCodigo.Enabled = false;
+            this.txtCodigo.Location = new System.Drawing.Point(276, 53);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(225, 38);
+            this.txtCodigo.TabIndex = 6;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(891, 615);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(187, 51);
+            this.btnCancelar.TabIndex = 5;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnInsertar
+            // 
+            this.btnInsertar.Location = new System.Drawing.Point(612, 615);
+            this.btnInsertar.Name = "btnInsertar";
+            this.btnInsertar.Size = new System.Drawing.Size(187, 51);
+            this.btnInsertar.TabIndex = 4;
+            this.btnInsertar.Text = "Insertar";
+            this.btnInsertar.UseVisualStyleBackColor = true;
+            this.btnInsertar.Click += new System.EventHandler(this.btnInsertar_Click);
+            // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.Location = new System.Drawing.Point(276, 226);
+            this.txtDescripcion.Multiline = true;
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(802, 227);
+            this.txtDescripcion.TabIndex = 3;
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(276, 132);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(802, 38);
+            this.txtNombre.TabIndex = 2;
             // 
             // label3
             // 
@@ -173,52 +222,78 @@ namespace UI
             this.label3.TabIndex = 1;
             this.label3.Text = "Descripción";
             // 
-            // txtNombre
+            // label2
             // 
-            this.txtNombre.Location = new System.Drawing.Point(276, 132);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(522, 38);
-            this.txtNombre.TabIndex = 2;
-            // 
-            // txtDescripcion
-            // 
-            this.txtDescripcion.Location = new System.Drawing.Point(276, 226);
-            this.txtDescripcion.Multiline = true;
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(522, 227);
-            this.txtDescripcion.TabIndex = 3;
-            // 
-            // btnInsertar
-            // 
-            this.btnInsertar.Location = new System.Drawing.Point(276, 529);
-            this.btnInsertar.Name = "btnInsertar";
-            this.btnInsertar.Size = new System.Drawing.Size(187, 51);
-            this.btnInsertar.TabIndex = 4;
-            this.btnInsertar.Text = "Insertar";
-            this.btnInsertar.UseVisualStyleBackColor = true;
-            this.btnInsertar.Click += new System.EventHandler(this.btnInsertar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(611, 529);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(187, 51);
-            this.btnCancelar.TabIndex = 5;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(31, 36);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(225, 38);
-            this.txtCodigo.TabIndex = 6;
-            this.txtCodigo.Visible = false;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(92, 132);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(151, 32);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Nombre (*)";
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(270, 523);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(280, 32);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "(*) Datos obligatorios";
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Location = new System.Drawing.Point(612, 615);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(187, 51);
+            this.btnActualizar.TabIndex = 8;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
+            // chkSeleccionar
+            // 
+            this.chkSeleccionar.AutoSize = true;
+            this.chkSeleccionar.Location = new System.Drawing.Point(28, 1083);
+            this.chkSeleccionar.Name = "chkSeleccionar";
+            this.chkSeleccionar.Size = new System.Drawing.Size(203, 36);
+            this.chkSeleccionar.TabIndex = 5;
+            this.chkSeleccionar.Text = "Seleccionar";
+            this.chkSeleccionar.UseVisualStyleBackColor = true;
+            this.chkSeleccionar.CheckedChanged += new System.EventHandler(this.chkSeleccionar_CheckedChanged);
+            // 
+            // btnActivar
+            // 
+            this.btnActivar.Location = new System.Drawing.Point(447, 1076);
+            this.btnActivar.Name = "btnActivar";
+            this.btnActivar.Size = new System.Drawing.Size(341, 50);
+            this.btnActivar.TabIndex = 6;
+            this.btnActivar.Text = "Activar";
+            this.btnActivar.UseVisualStyleBackColor = true;
+            this.btnActivar.Click += new System.EventHandler(this.btnActivar_Click);
+            // 
+            // btnDesactivar
+            // 
+            this.btnDesactivar.Location = new System.Drawing.Point(846, 1075);
+            this.btnDesactivar.Name = "btnDesactivar";
+            this.btnDesactivar.Size = new System.Drawing.Size(342, 50);
+            this.btnDesactivar.TabIndex = 7;
+            this.btnDesactivar.Text = "Desactivar";
+            this.btnDesactivar.UseVisualStyleBackColor = true;
+            this.btnDesactivar.Click += new System.EventHandler(this.btnDesactivar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(1241, 1075);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(342, 50);
+            this.btnEliminar.TabIndex = 8;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // frmCategorias
             // 
@@ -259,5 +334,11 @@ namespace UI
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnDesactivar;
+        private System.Windows.Forms.Button btnActivar;
+        private System.Windows.Forms.CheckBox chkSeleccionar;
     }
 }

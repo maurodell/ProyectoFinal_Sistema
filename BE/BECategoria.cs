@@ -1,7 +1,7 @@
 ﻿
 namespace BE
 {
-    public class Categoria : Entidad
+    public class BECategoria : Entidad
     {
         public string nombre { get; set; }
         public string descripcion { get; set; }

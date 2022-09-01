@@ -11,9 +11,10 @@ namespace Abstraccion
         bool Crear(T Parametro);
         bool Baja(int Parametro);
         bool Alta(int Parametro);
-        bool Modificar(T Parametro);
+        bool Modificar(T Parametro, string parametro2);
         bool Eliminar(int Parametro);
         List<T> Listar();
+        List<T> ListarTodos();
         List<T> Buscar(String Parametro);
     }
 }

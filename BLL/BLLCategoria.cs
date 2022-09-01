@@ -9,14 +9,14 @@ using Abstraccion;
 
 namespace BLL
 {
-    public class BLLCategoria : IRepositorio<Categoria>
+    public class BLLCategoria : IRepositorio<BECategoria>
     {
         public BLLCategoria()
         {
             mppCategoria = new MPPCategoria();
         }
         MPPCategoria mppCategoria;
-        Categoria BEcategoria;
+        BECategoria BEcategoria;
         public bool Alta(int Parametro)
         {
             return mppCategoria.Alta(Parametro);
@@ -27,37 +27,49 @@ namespace BLL
             return mppCategoria.Baja(Parametro);
         }
 
-        public bool Crear(Categoria Parametro)
+        public bool Crear(BECategoria Parametro)
         {
             return false;
         }
         public bool Insertar(string nombre, string descripcion)
         {
-            BEcategoria = new Categoria();
+            BEcategoria = new BECategoria();
             BEcategoria.nombre = nombre;
             BEcategoria.descripcion = descripcion;
 
             return mppCategoria.Crear(BEcategoria);
         }
 
-        public List<Categoria> Listar()
+        public List<BECategoria> Listar()
         {
             return mppCategoria.Listar();
         }
-
-        public List<Categoria> Buscar(String Parametro)
+        public List<BECategoria> ListarTodos()
+        {
+            return mppCategoria.ListarTodos();
+        }
+        public List<BECategoria> Buscar(String Parametro)
         {
             return mppCategoria.Buscar(Parametro);
         }
 
-        public bool Modificar(Categoria Parametro)
+        public bool Modificar(int codigo, string nombreAnterior, string nombre, string descripcion)
         {
-            return mppCategoria.Modificar(Parametro);
+            BEcategoria = new BECategoria();
+            BEcategoria.Codigo = codigo;
+            BEcategoria.nombre = nombre;
+            BEcategoria.descripcion = descripcion;
+            return mppCategoria.Modificar(BEcategoria, nombreAnterior);
         }
 
         public bool Eliminar(int Parametro)
         {
             return mppCategoria.Eliminar(Parametro);
+        }
+
+        public bool Modificar(BECategoria Parametro, string parametro2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

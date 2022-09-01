@@ -2,12 +2,12 @@
 <categorias>
   <categoria codigo="1">
     <nombre>Limpieza</nombre>
-    <descripcion>Productos para la limpieza de la cocina, baño, exterior, interior.</descripcion>
-    <estado>1</estado>
+    <descripcion>Productos para la limpieza de las cocinas, baño, exterior, interior.</descripcion>
+    <estado>0</estado>
   </categoria>
   <categoria codigo="2">
     <nombre>Bebidas sin alcohol</nombre>
-    <descripcion>Gaseosas, Aguas, Jugos, Aguas con gas.</descripcion>
+    <descripcion>Gaseosas, Aguas, Jugos, Jugos Naturales, Aguas con gases.</descripcion>
     <estado>1</estado>
   </categoria>
 </categorias>
