@@ -224,7 +224,7 @@ namespace MPP
                                select categoria;
                 if (Parametro.nombre != nombreAnterior)
                 {
-                    if (VerificarExistencia(Parametro.nombre))
+                    if (VerificarExistencia(nombreAnterior))
                     {
                         foreach (XElement EModifcar in consulta)
                         {

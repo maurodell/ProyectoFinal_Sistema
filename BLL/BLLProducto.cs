@@ -36,17 +36,17 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
-        public bool Insertar(int codigoCategoria, string codigoBarra, string nombre, decimal precioVenta, int stock, string descripcion, string ubicacion, string imagen)
+        public bool Insertar(int codigoCategoria, string codigoBarra, string nombre, decimal precioVenta, int stock, string descripcion, string ubicacion, DateTime fechaVencimiento, string imagen)
         {
             BEproducto = new BEProducto();
             BEproducto.codigoCategoria = codigoCategoria;
-            //BEproducto.codigoBarra = codigoBarra.Count() > 0 ? codigoBarra : "";
             BEproducto.codigoBarra = codigoBarra;
             BEproducto.nombre = nombre;
             BEproducto.precioVenta = precioVenta;
             BEproducto.stock = stock;
             BEproducto.descripcion = descripcion;
             BEproducto.ubicacion = ubicacion;
+            BEproducto.fechaVencimiento = fechaVencimiento;
             BEproducto.imagen = imagen;
 
             return mppProducto.Crear(BEproducto);

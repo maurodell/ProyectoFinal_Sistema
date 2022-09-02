@@ -87,6 +87,7 @@ namespace MPP
                     productBuscar.precioVenta = Convert.ToDecimal(EModifcar.Element("precioVenta").Value);
                     productBuscar.stock = Convert.ToInt32(EModifcar.Element("stock").Value);
                     productBuscar.descripcion = EModifcar.Element("descripcion").Value;
+                    productBuscar.fechaVencimiento = Convert.ToDateTime(EModifcar.Element("fechaVencimiento").Value);
                     productBuscar.imagen = EModifcar.Element("imagen").Value;
                     productBuscar.estado = Convert.ToBoolean(EModifcar.Element("estado").Value);
 
@@ -117,6 +118,7 @@ namespace MPP
                                                 new XElement("stock", Parametro.stock),
                                                 new XElement("descripcion", Parametro.descripcion),
                                                 new XElement("ubicacion", Parametro.ubicacion),
+                                                new XElement("fechaVencimiento", Parametro.fechaVencimiento),
                                                 new XElement("imagen", Parametro.imagen),
                                                 new XElement("estado", 1)));
 
@@ -182,6 +184,7 @@ namespace MPP
                                 stock = Convert.ToInt32(item["stock"]),
                                 descripcion = Convert.ToString(item["descripcion"]),
                                 ubicacion = Convert.ToString(item["ubicacion"]),
+                                fechaVencimiento = Convert.ToDateTime(item["fechaVencimiento"]),
                                 imagen = Convert.ToString(item["imagen"]),
                                 estado = Convert.ToBoolean(Convert.ToInt32(item["estado"]))
                             };
@@ -221,6 +224,7 @@ namespace MPP
                             stock = Convert.ToInt32(item["stock"]),
                             descripcion = Convert.ToString(item["descripcion"]),
                             ubicacion = Convert.ToString(item["ubicacion"]),
+                            fechaVencimiento = Convert.ToDateTime(item["fechaVencimiento"]),
                             imagen = Convert.ToString(item["imagen"]),
                             estado = Convert.ToBoolean(Convert.ToInt32(item["estado"]))
                         };
@@ -246,7 +250,7 @@ namespace MPP
                                select producto;
                 if (Parametro.nombre != nombreAnterior)
                 {
-                    if (VerificarExistencia(Parametro.nombre))
+                    if (VerificarExistencia(nombreAnterior))
                     {
                         foreach (XElement EModifcar in consulta)
                         {
@@ -256,6 +260,7 @@ namespace MPP
                             EModifcar.Element("precioVenta").Value = Convert.ToString(Parametro.precioVenta);
                             EModifcar.Element("stock").Value = Convert.ToString(Parametro.stock);
                             EModifcar.Element("descripcion").Value = Parametro.descripcion;
+                            EModifcar.Element("fechaVencimiento").Value = Convert.ToString(Parametro.fechaVencimiento);
                             EModifcar.Element("imagen").Value = Parametro.imagen;
                         }
                         documento.Save(path);
@@ -275,6 +280,7 @@ namespace MPP
                         EModifcar.Element("precioVenta").Value = Convert.ToString(Parametro.precioVenta);
                         EModifcar.Element("stock").Value = Convert.ToString(Parametro.stock);
                         EModifcar.Element("descripcion").Value = Parametro.descripcion;
+                        EModifcar.Element("fechaVencimiento").Value = Convert.ToString(Parametro.fechaVencimiento);
                         EModifcar.Element("imagen").Value = Parametro.imagen;
                     }
 

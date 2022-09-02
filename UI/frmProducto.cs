@@ -58,17 +58,20 @@ namespace UI
             dgvListadoProd.Columns[2].HeaderText = "Código Barra";
             dgvListadoProd.Columns[2].Width = 50;
             dgvListadoProd.Columns[3].Width = 100;
-            dgvListadoProd.Columns[4].Width = 150;
+            dgvListadoProd.Columns[4].Width = 60;
             dgvListadoProd.Columns[4].HeaderText = "Precio Venta";
-            dgvListadoProd.Columns[5].Width = 100;
-            dgvListadoProd.Columns[6].Width = 100;
+            dgvListadoProd.Columns[5].Width = 50;
+            dgvListadoProd.Columns[6].Width = 150;
             dgvListadoProd.Columns[6].HeaderText = "Descripción";
             dgvListadoProd.Columns[7].Width = 50;
             dgvListadoProd.Columns[7].HeaderText = "Ubicación";
-            dgvListadoProd.Columns[8].Width = 100;
-            dgvListadoProd.Columns[9].Width = 50;
-            dgvListadoProd.Columns[10].Width = 50;
-            dgvListadoProd.Columns[10].HeaderText = "Código";
+            dgvListadoProd.Columns[8].Width = 140;
+            dgvListadoProd.Columns[8].HeaderText = "Fecha Vencimiento";
+            dgvListadoProd.Columns[9].Width = 80;
+            dgvListadoProd.Columns[10].HeaderText = "Est.";
+            dgvListadoProd.Columns[10].Width = 20;
+            dgvListadoProd.Columns[11].HeaderText = "Código";
+            dgvListadoProd.Columns[11].Width = 50;
         }
         private void Limpiar()
         {
@@ -172,17 +175,19 @@ namespace UI
             try
             {
                 bool respuesta = false;
-                if (cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtStock.Text == string.Empty)
+                DateTime hoy = DateTime.Now;
+                if (dateTFecha.Value >= hoy.AddMonths(2) || cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtStock.Text == string.Empty)
                 {
-                    this.MensajeError("Falta ingresar algunos datos");
+                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
                     errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
                     errorProvider1.SetError(txtNombre, "Ingresar nombre");
+                    errorProvider1.SetError(dateTFecha, "Fecha de vencimiento superior o igual a 2 meses de la fecha actual");
                 }
                 else
                 {
                     //int codigoCategoria, string codigoBarra, string nombre, decimal precioVenta, int stock, string descripcion, string ubicacion, string imagen
                     respuesta = bllProducto.Insertar(Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), txtNombre.Text.Trim(), 
-                                                    Convert.ToDecimal(txtPrecio.Text.Trim()), Convert.ToInt32(txtStock.Text.Trim()), txtDescripcion.Text.Trim(), txtUbicacion.Text, txtImagen.Text);
+                                                    Convert.ToDecimal(txtPrecio.Text.Trim()), Convert.ToInt32(txtStock.Text.Trim()), txtDescripcion.Text.Trim(), txtUbicacion.Text, dateTFecha.Value,txtImagen.Text);
                     if (respuesta == true)
                     {
                         this.MensajeOk("El producto fue registrado correctamente");
@@ -221,6 +226,7 @@ namespace UI
                 txtPrecio.Text = Convert.ToString(dgvListadoProd.CurrentRow.Cells["precioVenta"].Value);
                 txtDescripcion.Text = Convert.ToString(dgvListadoProd.CurrentRow.Cells["descripcion"].Value);
                 txtCodigoBarra.Text = Convert.ToString(dgvListadoProd.CurrentRow.Cells["codigoBarra"].Value);
+                dateTFecha.Value = Convert.ToDateTime(dgvListadoProd.CurrentRow.Cells["fechaVencimiento"].Value);
                 txtUbicacion.Text = Convert.ToString(dgvListadoProd.CurrentRow.Cells["ubicacion"].Value);
                 string imagen;
                 imagen = Convert.ToString(dgvListadoProd.CurrentRow.Cells["imagen"].Value);

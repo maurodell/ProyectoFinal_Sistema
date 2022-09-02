@@ -70,6 +70,8 @@ namespace UI
             this.label1 = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.dgvListadoProd = new System.Windows.Forms.DataGridView();
+            this.label11 = new System.Windows.Forms.Label();
+            this.dateTFecha = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
@@ -84,7 +86,7 @@ namespace UI
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(621, 1016);
+            this.btnActualizar.Location = new System.Drawing.Point(706, 1016);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(187, 54);
             this.btnActualizar.TabIndex = 8;
@@ -95,7 +97,7 @@ namespace UI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(270, 941);
+            this.label4.Location = new System.Drawing.Point(352, 953);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(280, 32);
             this.label4.TabIndex = 7;
@@ -104,14 +106,14 @@ namespace UI
             // txtCodigo
             // 
             this.txtCodigo.Enabled = false;
-            this.txtCodigo.Location = new System.Drawing.Point(276, 53);
+            this.txtCodigo.Location = new System.Drawing.Point(358, 53);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(225, 38);
             this.txtCodigo.TabIndex = 6;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(890, 1016);
+            this.btnCancelar.Location = new System.Drawing.Point(975, 1016);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(187, 54);
             this.btnCancelar.TabIndex = 5;
@@ -121,9 +123,9 @@ namespace UI
             // 
             // btnInsertar
             // 
-            this.btnInsertar.Location = new System.Drawing.Point(621, 1019);
+            this.btnInsertar.Location = new System.Drawing.Point(706, 1016);
             this.btnInsertar.Name = "btnInsertar";
-            this.btnInsertar.Size = new System.Drawing.Size(187, 51);
+            this.btnInsertar.Size = new System.Drawing.Size(187, 54);
             this.btnInsertar.TabIndex = 4;
             this.btnInsertar.Text = "Insertar";
             this.btnInsertar.UseVisualStyleBackColor = true;
@@ -139,7 +141,7 @@ namespace UI
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(276, 237);
+            this.txtNombre.Location = new System.Drawing.Point(358, 237);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(800, 38);
             this.txtNombre.TabIndex = 2;
@@ -155,6 +157,8 @@ namespace UI
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.dateTFecha);
+            this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.txtStock);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.txtPrecio);
@@ -191,7 +195,7 @@ namespace UI
             // 
             // txtStock
             // 
-            this.txtStock.Location = new System.Drawing.Point(275, 858);
+            this.txtStock.Location = new System.Drawing.Point(357, 790);
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(800, 38);
             this.txtStock.TabIndex = 26;
@@ -199,7 +203,7 @@ namespace UI
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(125, 861);
+            this.label10.Location = new System.Drawing.Point(202, 793);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(122, 32);
             this.label10.TabIndex = 25;
@@ -207,7 +211,7 @@ namespace UI
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(275, 754);
+            this.txtPrecio.Location = new System.Drawing.Point(357, 717);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(800, 38);
             this.txtPrecio.TabIndex = 24;
@@ -215,7 +219,7 @@ namespace UI
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(40, 757);
+            this.label9.Location = new System.Drawing.Point(117, 720);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(207, 32);
             this.label9.TabIndex = 23;
@@ -239,7 +243,7 @@ namespace UI
             // 
             // panelCodigo
             // 
-            this.panelCodigo.Location = new System.Drawing.Point(276, 489);
+            this.panelCodigo.Location = new System.Drawing.Point(358, 489);
             this.panelCodigo.Name = "panelCodigo";
             this.panelCodigo.Size = new System.Drawing.Size(800, 190);
             this.panelCodigo.TabIndex = 20;
@@ -247,7 +251,7 @@ namespace UI
             // BtnGuardar
             // 
             this.BtnGuardar.Enabled = false;
-            this.BtnGuardar.Location = new System.Drawing.Point(729, 402);
+            this.BtnGuardar.Location = new System.Drawing.Point(811, 402);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(348, 54);
             this.BtnGuardar.TabIndex = 19;
@@ -257,7 +261,7 @@ namespace UI
             // 
             // btnGenerar
             // 
-            this.btnGenerar.Location = new System.Drawing.Point(275, 402);
+            this.btnGenerar.Location = new System.Drawing.Point(357, 402);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(348, 54);
             this.btnGenerar.TabIndex = 18;
@@ -267,7 +271,7 @@ namespace UI
             // 
             // txtCodigoBarra
             // 
-            this.txtCodigoBarra.Location = new System.Drawing.Point(275, 327);
+            this.txtCodigoBarra.Location = new System.Drawing.Point(357, 327);
             this.txtCodigoBarra.Name = "txtCodigoBarra";
             this.txtCodigoBarra.Size = new System.Drawing.Size(800, 38);
             this.txtCodigoBarra.TabIndex = 17;
@@ -275,7 +279,7 @@ namespace UI
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(29, 330);
+            this.label8.Location = new System.Drawing.Point(106, 330);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(218, 32);
             this.label8.TabIndex = 16;
@@ -320,7 +324,7 @@ namespace UI
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(72, 155);
+            this.label5.Location = new System.Drawing.Point(149, 155);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(175, 32);
             this.label5.TabIndex = 10;
@@ -329,7 +333,7 @@ namespace UI
             // cmbCategoria
             // 
             this.cmbCategoria.FormattingEnabled = true;
-            this.cmbCategoria.Location = new System.Drawing.Point(276, 152);
+            this.cmbCategoria.Location = new System.Drawing.Point(358, 152);
             this.cmbCategoria.Name = "cmbCategoria";
             this.cmbCategoria.Size = new System.Drawing.Size(800, 39);
             this.cmbCategoria.TabIndex = 9;
@@ -337,7 +341,7 @@ namespace UI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(96, 237);
+            this.label2.Location = new System.Drawing.Point(173, 237);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(151, 32);
             this.label2.TabIndex = 0;
@@ -475,6 +479,22 @@ namespace UI
             this.dgvListadoProd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoProd_CellContentClick);
             this.dgvListadoProd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoProd_CellDoubleClick);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(29, 868);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(295, 32);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "Fecha Vencimiento (*)";
+            // 
+            // dateTFecha
+            // 
+            this.dateTFecha.Location = new System.Drawing.Point(357, 868);
+            this.dateTFecha.Name = "dateTFecha";
+            this.dateTFecha.Size = new System.Drawing.Size(800, 38);
+            this.dateTFecha.TabIndex = 28;
+            // 
             // frmProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -538,5 +558,7 @@ namespace UI
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DateTimePicker dateTFecha;
+        private System.Windows.Forms.Label label11;
     }
 }
