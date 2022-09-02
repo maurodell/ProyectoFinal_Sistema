@@ -29,7 +29,7 @@ namespace BLL
 
         public bool Crear(BECategoria Parametro)
         {
-            return false;
+            throw new NotImplementedException();
         }
         public bool Insertar(string nombre, string descripcion)
         {

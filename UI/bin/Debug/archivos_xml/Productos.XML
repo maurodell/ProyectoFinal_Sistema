@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<productos>
+  <producto codigo="1">
+    <codigoCategoria>2</codigoCategoria>
+    <codigoBarra>124214</codigoBarra>
+    <nombre>Agua Sin gas</nombre>
+    <precioVenta>110</precioVenta>
+    <stock>100</stock>
+    <descripcion>Producto de Bon aqua - De Coca Cola x 500ml</descripcion>
+    <ubicacion>U23 - Fondo</ubicacion>
+    <imagen>aguaMineral.jpg</imagen>
+    <estado>1</estado>
+  </producto>
+</productos>

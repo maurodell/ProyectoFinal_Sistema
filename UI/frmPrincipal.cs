@@ -106,5 +106,13 @@ namespace UI
         {
 
         }
+
+        private void artToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProducto frmProducto = new frmProducto();
+            frmProducto.MdiParent = this;
+            frmProducto.Show();
+            frmProducto.Size = new Size(1370, 560);
+        }
     }
 }

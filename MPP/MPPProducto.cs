@@ -18,17 +18,86 @@ namespace MPP
         private string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\Productos.XML";
         public bool Alta(int Parametro)
         {
-            throw new NotImplementedException();
+            try
+            {
+                XDocument documento = XDocument.Load(path);
+
+                var consulta = from producto in documento.Descendants("producto")
+                               where producto.Attribute("codigo").Value == Parametro.ToString()
+                               select producto;
+
+                foreach (XElement EModifcar in consulta)
+                {
+                    EModifcar.Element("estado").Value = "1";
+                }
+
+                documento.Save(path);
+                return true;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool Baja(int Parametro)
         {
-            throw new NotImplementedException();
+            try
+            {
+                XDocument documento = XDocument.Load(path);
+
+                var consulta = from producto in documento.Descendants("producto")
+                               where producto.Attribute("codigo").Value == Parametro.ToString()
+                               select producto;
+
+                foreach (XElement EModifcar in consulta)
+                {
+                    EModifcar.Element("estado").Value = "0";
+                }
+
+                documento.Save(path);
+                return true;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
         }
 
         public List<BEProducto> Buscar(string Parametro)
         {
-            throw new NotImplementedException();
+            try
+            {
+                BEProducto productBuscar;
+                List<BEProducto> listaProductosDevolver = new List<BEProducto>();
+
+                XDocument documento = XDocument.Load(path);
+
+                var consulta = from producto in documento.Descendants("producto")
+                               where producto.Element("nombre").Value.Contains(Parametro)
+                               select producto;
+
+                foreach (XElement EModifcar in consulta)
+                {
+                    productBuscar = new BEProducto();
+                    productBuscar.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
+                    productBuscar.codigoCategoria = Convert.ToInt32(EModifcar.Element("codigoCategoria").Value);
+                    productBuscar.codigoBarra = EModifcar.Element("codigoBarra").Value;
+                    productBuscar.nombre = EModifcar.Element("nombre").Value;
+                    productBuscar.precioVenta = Convert.ToDecimal(EModifcar.Element("precioVenta").Value);
+                    productBuscar.stock = Convert.ToInt32(EModifcar.Element("stock").Value);
+                    productBuscar.descripcion = EModifcar.Element("descripcion").Value;
+                    productBuscar.imagen = EModifcar.Element("imagen").Value;
+                    productBuscar.estado = Convert.ToBoolean(EModifcar.Element("estado").Value);
+
+                    listaProductosDevolver.Add(productBuscar);
+                }
+                return listaProductosDevolver;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool Crear(BEProducto Parametro)
@@ -69,7 +138,22 @@ namespace MPP
 
         public bool Eliminar(int Parametro)
         {
-            throw new NotImplementedException();
+            try
+            {
+                XDocument documento = XDocument.Load(path);
+
+                var consulta = from producto in documento.Descendants("producto")
+                               where producto.Attribute("codigo").Value == Parametro.ToString()
+                               select producto;
+                consulta.Remove();
+
+                documento.Save(path);
+                return true;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
         }
 
         public List<BEProducto> Listar()
@@ -151,9 +235,57 @@ namespace MPP
             }
         }
 
-        public bool Modificar(BEProducto Parametro, string parametro2)
+        public bool Modificar(BEProducto Parametro, string nombreAnterior)
         {
-            throw new NotImplementedException();
+            try
+            {
+                XDocument documento = XDocument.Load(path);
+
+                var consulta = from producto in documento.Descendants("producto")
+                               where producto.Attribute("codigo").Value == Parametro.Codigo.ToString()
+                               select producto;
+                if (Parametro.nombre != nombreAnterior)
+                {
+                    if (VerificarExistencia(Parametro.nombre))
+                    {
+                        foreach (XElement EModifcar in consulta)
+                        {
+                            EModifcar.Element("nombre").Value = Parametro.nombre;
+                            EModifcar.Element("codigoCategoria").Value = Convert.ToString(Parametro.codigoCategoria);
+                            EModifcar.Element("codigoBarra").Value = Parametro.codigoBarra;
+                            EModifcar.Element("precioVenta").Value = Convert.ToString(Parametro.precioVenta);
+                            EModifcar.Element("stock").Value = Convert.ToString(Parametro.stock);
+                            EModifcar.Element("descripcion").Value = Parametro.descripcion;
+                            EModifcar.Element("imagen").Value = Parametro.imagen;
+                        }
+                        documento.Save(path);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    foreach (XElement EModifcar in consulta)
+                    {
+                        EModifcar.Element("codigoCategoria").Value = Convert.ToString(Parametro.codigoCategoria);
+                        EModifcar.Element("codigoBarra").Value = Parametro.codigoBarra;
+                        EModifcar.Element("precioVenta").Value = Convert.ToString(Parametro.precioVenta);
+                        EModifcar.Element("stock").Value = Convert.ToString(Parametro.stock);
+                        EModifcar.Element("descripcion").Value = Parametro.descripcion;
+                        EModifcar.Element("imagen").Value = Parametro.imagen;
+                    }
+
+                    documento.Save(path);
+                    return true;
+                }
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
         }
         bool VerificarExistencia(string nombre)
         {

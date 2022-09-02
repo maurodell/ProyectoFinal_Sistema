@@ -3,7 +3,7 @@
   <categoria codigo="1">
     <nombre>Limpieza</nombre>
     <descripcion>Productos para la limpieza de las cocinas, baño, exterior, interior.</descripcion>
-    <estado>0</estado>
+    <estado>1</estado>
   </categoria>
   <categoria codigo="2">
     <nombre>Bebidas sin alcohol</nombre>

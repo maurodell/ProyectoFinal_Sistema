@@ -201,6 +201,7 @@ namespace MPP
                     catBuscar.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
                     catBuscar.nombre = EModifcar.Element("nombre").Value;
                     catBuscar.descripcion = EModifcar.Element("descripcion").Value;
+                    catBuscar.estado = Convert.ToBoolean(EModifcar.Element("estado").Value);
 
                     listaCategoriaDevolver.Add(catBuscar);
                 }
