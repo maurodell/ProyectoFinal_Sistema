@@ -11,3 +11,5 @@ C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solució
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\BLL\obj\Debug\BLL.csproj.CopyComplete
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\BLL\obj\Debug\BLL.dll
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\BLL\obj\Debug\BLL.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\BLL\bin\Debug\Seguridad.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\BLL\bin\Debug\Seguridad.pdb

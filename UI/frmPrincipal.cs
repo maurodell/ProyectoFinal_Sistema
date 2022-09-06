@@ -114,5 +114,21 @@ namespace UI
             frmProducto.Show();
             frmProducto.Size = new Size(1370, 560);
         }
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUsuario frmUsuarios = new frmUsuario();
+            frmUsuarios.MdiParent = this;
+            frmUsuarios.Show();
+            frmUsuarios.Size = new Size(1370, 560);
+        }
+
+        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRol frmRol = new frmRol();
+            frmRol.MdiParent = this;
+            frmRol.Show();
+            frmRol.Size = new Size(830, 560);
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace BLL
         {
             return mppCategoria.ListarTodos();
         }
-        public List<BECategoria> Buscar(String Parametro)
+        public List<BECategoria> Buscar(string Parametro)
         {
             return mppCategoria.Buscar(Parametro);
         }

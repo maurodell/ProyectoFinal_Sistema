@@ -71,6 +71,7 @@ namespace UI
         {
             try
             {
+                dgvListadoCat.DataSource = null;
                 dgvListadoCat.DataSource = bllCategoria.Buscar(txtBuscar.Text);
                 this.Formato();
                 lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoCat.Rows.Count);

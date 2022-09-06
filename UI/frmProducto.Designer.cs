@@ -40,6 +40,8 @@ namespace UI
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dateTFecha = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
             this.txtStock = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
@@ -70,8 +72,6 @@ namespace UI
             this.label1 = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.dgvListadoProd = new System.Windows.Forms.DataGridView();
-            this.label11 = new System.Windows.Forms.Label();
-            this.dateTFecha = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
@@ -192,6 +192,22 @@ namespace UI
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Mantenimiento";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dateTFecha
+            // 
+            this.dateTFecha.Location = new System.Drawing.Point(357, 868);
+            this.dateTFecha.Name = "dateTFecha";
+            this.dateTFecha.Size = new System.Drawing.Size(800, 38);
+            this.dateTFecha.TabIndex = 28;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(29, 868);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(295, 32);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "Fecha Vencimiento (*)";
             // 
             // txtStock
             // 
@@ -478,22 +494,6 @@ namespace UI
             this.dgvListadoProd.TabIndex = 0;
             this.dgvListadoProd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoProd_CellContentClick);
             this.dgvListadoProd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoProd_CellDoubleClick);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(29, 868);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(295, 32);
-            this.label11.TabIndex = 27;
-            this.label11.Text = "Fecha Vencimiento (*)";
-            // 
-            // dateTFecha
-            // 
-            this.dateTFecha.Location = new System.Drawing.Point(357, 868);
-            this.dateTFecha.Name = "dateTFecha";
-            this.dateTFecha.Size = new System.Drawing.Size(800, 38);
-            this.dateTFecha.TabIndex = 28;
             // 
             // frmProducto
             // 

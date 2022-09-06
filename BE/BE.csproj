@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BECategoria.cs" />
     <Compile Include="BEProducto.cs" />
+    <Compile Include="BERol.cs" />
     <Compile Include="BEUsuario.cs" />
     <Compile Include="Entidad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

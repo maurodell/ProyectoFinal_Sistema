@@ -89,7 +89,7 @@ namespace MPP
                     productBuscar.descripcion = EModifcar.Element("descripcion").Value;
                     productBuscar.fechaVencimiento = Convert.ToDateTime(EModifcar.Element("fechaVencimiento").Value);
                     productBuscar.imagen = EModifcar.Element("imagen").Value;
-                    productBuscar.estado = Convert.ToBoolean(EModifcar.Element("estado").Value);
+                    productBuscar.estado = Convert.ToBoolean(Convert.ToInt32(EModifcar.Element("estado").Value));
 
                     listaProductosDevolver.Add(productBuscar);
                 }

@@ -89,7 +89,7 @@ namespace MPP
                     usuarioBuscar.telefono = EModifcar.Element("telefono").Value;
                     usuarioBuscar.email = EModifcar.Element("email").Value;
                     usuarioBuscar.clave = EModifcar.Element("clave").Value;
-                    usuarioBuscar.estado = Convert.ToBoolean(EModifcar.Element("estado").Value);
+                    usuarioBuscar.estado = Convert.ToBoolean(Convert.ToInt32(EModifcar.Element("estado").Value));
 
                     listaUsuariosDevolver.Add(usuarioBuscar);
                 }
@@ -120,15 +120,23 @@ namespace MPP
                                                 new XElement("clave", Parametro.clave),
                                                 new XElement("estado", 1)));
 
-                if (VerificarExistencia(Parametro.email))
+                if (VerificarDNI(Parametro.documento))
                 {
-                    crear.Save(path);
-                    return true;
+                    if (VerificarExistencia(Parametro.email))
+                    {
+                        crear.Save(path);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
                     return false;
                 }
+
             }
             catch (XmlException ex)
             {
@@ -186,7 +194,6 @@ namespace MPP
                             };
                             usuarios.Add(usuario);
                         }
-
                     }
                 }
                 return usuarios;
@@ -242,7 +249,12 @@ namespace MPP
                 var consulta = from usuario in documento.Descendants("usuario")
                                where usuario.Attribute("codigo").Value == Parametro.Codigo.ToString()
                                select usuario;
-                if (Parametro.email != emailAnterior)
+                
+                //Busca en el usuario por ID para luego comprobar si hay que cambiar el DNI
+                BEUsuario userXML = ListarTodos().Find(x=> x.documento == Parametro.documento);
+
+                //Verifica si existe el DNI, si existe retona false, sino existe true.
+                if (VerificarDNI(Parametro.documento))
                 {
                     if (VerificarExistencia(emailAnterior))
                     {
@@ -254,31 +266,53 @@ namespace MPP
                             EModifcar.Element("tipoDocumento").Value = Parametro.tipoDocumento;
                             EModifcar.Element("documento").Value = Parametro.documento;
                             EModifcar.Element("telefono").Value = Parametro.telefono;
-                            EModifcar.Element("clave").Value = Convert.ToString(Parametro.clave);
                         }
                         documento.Save(path);
                         return true;
                     }
                     else
                     {
-                        return false;
+                        foreach (XElement EModifcar in consulta)
+                        {
+                            EModifcar.Element("nombre").Value = Parametro.nombre;
+                            EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
+                            EModifcar.Element("tipoDocumento").Value = Parametro.tipoDocumento;
+                            EModifcar.Element("documento").Value = Parametro.documento;
+                            EModifcar.Element("telefono").Value = Parametro.telefono;
+                        }
+
+                        documento.Save(path);
+                        return true;
                     }
                 }
                 else
                 {
-                    foreach (XElement EModifcar in consulta)
+                    if (VerificarExistencia(emailAnterior))
                     {
-                        EModifcar.Element("nombre").Value = Parametro.nombre;
-                        EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
-                        EModifcar.Element("tipoDocumento").Value = Parametro.tipoDocumento;
-                        EModifcar.Element("documento").Value = Parametro.documento;
-                        EModifcar.Element("telefono").Value = Parametro.telefono;
-                        EModifcar.Element("clave").Value = Convert.ToString(Parametro.clave);
+                        foreach (XElement EModifcar in consulta)
+                        {
+                            EModifcar.Element("email").Value = Parametro.email;
+                            EModifcar.Element("nombre").Value = Parametro.nombre;
+                            EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
+                            EModifcar.Element("telefono").Value = Parametro.telefono;
+                        }
+                        documento.Save(path);
+                        return true;
                     }
+                    else
+                    {
+                        foreach (XElement EModifcar in consulta)
+                        {
+                            EModifcar.Element("nombre").Value = Parametro.nombre;
+                            EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
+                            EModifcar.Element("telefono").Value = Parametro.telefono;
+                        }
 
-                    documento.Save(path);
-                    return true;
+                        documento.Save(path);
+                        return true;
+                    }
                 }
+
             }
             catch (XmlException ex)
             {
@@ -288,13 +322,31 @@ namespace MPP
         bool VerificarExistencia(string email)
         {
             bool resp = true;
-            List<BEUsuario> usuarios = Listar();
+            List<BEUsuario> usuarios = ListarTodos();
 
             if (usuarios.Count() > 0)
             {
                 foreach (BEUsuario item in usuarios)
                 {
                     if (item.email == email)
+                    {
+                        resp = false;
+                        break;
+                    }
+                }
+            }
+            return resp;
+        }
+        bool VerificarDNI(string documento)
+        {
+            bool resp = true;
+            List<BEUsuario> usuarios = ListarTodos();
+
+            if (usuarios.Count() > 0)
+            {
+                foreach (BEUsuario item in usuarios)
+                {
+                    if (item.documento == documento)
                     {
                         resp = false;
                         break;
