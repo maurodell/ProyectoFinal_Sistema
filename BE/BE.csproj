@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BECategoria.cs" />
+    <Compile Include="BEPersona.cs" />
     <Compile Include="BEProducto.cs" />
     <Compile Include="BERol.cs" />
     <Compile Include="BEUsuario.cs" />

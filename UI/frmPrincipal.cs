@@ -176,5 +176,12 @@ namespace UI
                 Application.Exit();
             }
         }
+
+        private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProveedor FrmProveedor = new frmProveedor();
+            FrmProveedor.MdiParent = this;
+            FrmProveedor.Show();
+        }
     }
 }

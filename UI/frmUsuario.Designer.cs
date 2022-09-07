@@ -39,6 +39,7 @@ namespace UI
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnMostrarClave = new System.Windows.Forms.Button();
             this.txtReClave = new System.Windows.Forms.TextBox();
             this.txtClave = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -66,7 +67,6 @@ namespace UI
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCat = new System.Windows.Forms.TabPage();
             this.dgvListadoUser = new System.Windows.Forms.DataGridView();
-            this.btnMostrarClave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -174,6 +174,15 @@ namespace UI
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Acceso";
+            // 
+            // btnMostrarClave
+            // 
+            this.btnMostrarClave.Location = new System.Drawing.Point(1067, 197);
+            this.btnMostrarClave.Name = "btnMostrarClave";
+            this.btnMostrarClave.Size = new System.Drawing.Size(75, 69);
+            this.btnMostrarClave.TabIndex = 6;
+            this.btnMostrarClave.Text = "X";
+            this.btnMostrarClave.UseVisualStyleBackColor = true;
             // 
             // txtReClave
             // 
@@ -380,7 +389,7 @@ namespace UI
             // lblTotalReg
             // 
             this.lblTotalReg.AutoSize = true;
-            this.lblTotalReg.Location = new System.Drawing.Point(1744, 1087);
+            this.lblTotalReg.Location = new System.Drawing.Point(3147, 1085);
             this.lblTotalReg.Name = "lblTotalReg";
             this.lblTotalReg.Size = new System.Drawing.Size(93, 32);
             this.lblTotalReg.TabIndex = 1;
@@ -434,15 +443,6 @@ namespace UI
             this.dgvListadoUser.TabIndex = 0;
             this.dgvListadoUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoUser_CellContentClick);
             this.dgvListadoUser.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoUser_CellDoubleClick);
-            // 
-            // btnMostrarClave
-            // 
-            this.btnMostrarClave.Location = new System.Drawing.Point(1067, 197);
-            this.btnMostrarClave.Name = "btnMostrarClave";
-            this.btnMostrarClave.Size = new System.Drawing.Size(75, 69);
-            this.btnMostrarClave.TabIndex = 6;
-            this.btnMostrarClave.Text = "X";
-            this.btnMostrarClave.UseVisualStyleBackColor = true;
             // 
             // frmUsuario
             // 
