@@ -351,7 +351,7 @@ namespace UI
                     {
                         if (Convert.ToBoolean(row.Cells[0].Value))
                         {
-                            codigo = Convert.ToInt32(row.Cells[4].Value);
+                            codigo = Convert.ToInt32(row.Cells[9].Value);
                             flag = bllUsuario.Alta(codigo);
                         }
                     }

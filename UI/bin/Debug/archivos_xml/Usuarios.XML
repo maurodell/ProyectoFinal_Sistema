@@ -2,22 +2,12 @@
 <usuarios>
   <usuario codigo="1">
     <codigoRol>1</codigoRol>
-    <nombre>Mau</nombre>
-    <tipoDocumento>PASAPORTE</tipoDocumento>
-    <documento>3229017278</documento>
-    <telefono>123456</telefono>
-    <email>dellolio@gmail.com</email>
-    <clave></clave>
-    <estado>1</estado>
-  </usuario>
-  <usuario codigo="2">
-    <codigoRol>2</codigoRol>
-    <nombre>Ana Laura</nombre>
+    <nombre>admin</nombre>
     <tipoDocumento>DNI</tipoDocumento>
-    <documento>123456</documento>
-    <telefono>123456</telefono>
-    <email>anadsa</email>
-    <clave>Hnz3IfXZ6zY=</clave>
+    <documento>11111</documento>
+    <telefono></telefono>
+    <email>admin@admin.com</email>
+    <clave>rUvj1G+ybfI=</clave>
     <estado>1</estado>
   </usuario>
 </usuarios>
