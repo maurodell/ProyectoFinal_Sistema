@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLL;
-
+using BE;
 namespace UI
 {
     public partial class frmLogin : Form
@@ -41,8 +41,14 @@ namespace UI
                     }
                     else
                     {
-                        frmPrincipal frmPrincipal = new frmPrincipal();
-                        frmPrincipal.Show();
+                        BEUsuario beUsuario = bllLogin.GetUsuario();
+                        frmPrincipal FrmPrincipal = new frmPrincipal();
+                        FrmPrincipal.codigoUsuario = beUsuario.Codigo;
+                        FrmPrincipal.Nombre = beUsuario.nombre;
+                        FrmPrincipal.codigoRolUsuario = beUsuario.codigoRol;
+                        FrmPrincipal.Estado = beUsuario.estado;
+                        FrmPrincipal.Email = beUsuario.email;
+                        FrmPrincipal.Show();
                         this.Hide();
                     }
                 }

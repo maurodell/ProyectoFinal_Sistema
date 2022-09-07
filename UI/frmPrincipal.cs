@@ -13,6 +13,12 @@ namespace UI
     public partial class frmPrincipal : Form
     {
         private int childFormNumber = 0;
+        public int codigoUsuario;
+        public int codigoRolUsuario;
+        public string Nombre;
+        public string Email;
+        public string Rol;
+        public bool Estado;
 
         public frmPrincipal()
         {
@@ -104,7 +110,32 @@ namespace UI
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
+            LoginInferior.Text = "Usuario: "+this.Nombre+"  -  Email: "+this.Email;
 
+            switch (codigoRolUsuario)
+            {
+                case 1:
+                    MenuAlmacen.Enabled = true;
+                    MenuAcceso.Enabled = true;
+                    MenuConsulta.Enabled = true;
+                    MenuIngresos.Enabled = true;
+                    MenuVentas.Enabled = true;
+                    break;
+                case 2:
+                    MenuAlmacen.Enabled = false;
+                    MenuAcceso.Enabled = false;
+                    MenuConsulta.Enabled = true;
+                    MenuIngresos.Enabled = false;
+                    MenuVentas.Enabled = true;
+                    break;
+                case 3:
+                    MenuAlmacen.Enabled = false;
+                    MenuAcceso.Enabled = false;
+                    MenuConsulta.Enabled = true;
+                    MenuIngresos.Enabled = false;
+                    MenuVentas.Enabled = false;
+                    break;
+            }
         }
 
         private void artToolStripMenuItem_Click(object sender, EventArgs e)
@@ -129,6 +160,21 @@ namespace UI
             frmRol.MdiParent = this;
             frmRol.Show();
             frmRol.Size = new Size(830, 560);
+        }
+
+        private void frmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult opcion;
+            opcion = MessageBox.Show("Esta seguro que desea salir del sistema?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (opcion.Equals(DialogResult.OK))
+            {
+                Application.Exit();
+            }
         }
     }
 }
