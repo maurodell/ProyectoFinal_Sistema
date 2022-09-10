@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IEntidad.cs" />
+    <Compile Include="ILocalizacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IRepositorio.cs" />
   </ItemGroup>

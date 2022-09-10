@@ -47,13 +47,12 @@ namespace UI
         private void Limpiar()
         {
             txtBuscar.Clear();
-            txtNombre.Clear();
+            txtRSocial.Clear();
             txtCodigo.Clear();
-            txtClave.Clear();
-            txtDocumento.Clear();
+            txtDomicilio.Clear();
             txtEmail.Clear();
-            txtReClave.Clear();
             txtTelefono.Clear();
+            txtProvincia.Clear();
             btnInsertar.Visible = true;
             btnActualizar.Visible = false;
             txtCodigo.Visible = false;
@@ -62,9 +61,6 @@ namespace UI
             dgvListadoProveedor.Columns[0].Visible = false;
             btnEliminar.Visible = false;
             chkSeleccionar.Checked = false;
-
-            txtClave.Enabled = true;
-            txtReClave.Visible = true;
         }
         private void MensajeError(string mensaje)
         {
@@ -95,6 +91,41 @@ namespace UI
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             this.Buscar();
+        }
+
+        private void btnInsertar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool respuesta = false;
+                if (txtRSocial.Text == string.Empty || txtCuit.Text == string.Empty || txtDomicilio.Text == string.Empty || txtProvincia.Text == string.Empty || cmbCondicion.Text == string.Empty)
+                {
+                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
+                    errorProvider1.SetError(cmbCondicion, "Seleccionar condición frente al IVA");
+                    errorProvider1.SetError(txtRSocial, "Ingresar Razón Social");
+                    errorProvider1.SetError(txtCuit, "Ingresar CUIT");
+                    errorProvider1.SetError(txtDomicilio, "Ingresar domicilio del proveedor");
+                    errorProvider1.SetError(txtProvincia, "Ingresar Provincia");
+                }
+                else
+                {
+                    respuesta = bllPersona.Crear(cmbCondicion.Text.Trim(), txtRSocial.Text.Trim(), txtProvincia.Text.Trim(), txtCuit.Text.Trim(),
+                                                    txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim());
+                    if (respuesta == true)
+                    {
+                        this.MensajeOk("El proveedor fue registrado correctamente");
+                        this.Listar();
+                    }
+                    else
+                    {
+                        this.MensajeError("El proveedor no se pudo registrar");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
         }
     }
 }

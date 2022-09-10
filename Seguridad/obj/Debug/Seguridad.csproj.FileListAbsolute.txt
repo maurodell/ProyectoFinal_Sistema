@@ -3,4 +3,3 @@ C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solució
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.csproj.CoreCompileInputs.cache
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.dll
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.pdb
-C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.csproj.AssemblyReference.cache

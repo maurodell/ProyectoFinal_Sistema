@@ -37,16 +37,17 @@ namespace UI
             dgvListadoUser.Columns[1].Width = 50;
             dgvListadoUser.Columns[2].Width = 100;
             dgvListadoUser.Columns[3].HeaderText = "Tipo Doc.";
-            dgvListadoUser.Columns[3].Width = 80;
+            dgvListadoUser.Columns[3].Width = 50;
 
             dgvListadoUser.Columns[4].Width = 100;
             dgvListadoUser.Columns[5].Width = 100;
-            dgvListadoUser.Columns[6].Width = 200;
-            dgvListadoUser.Columns[7].Width = 150;
-            dgvListadoUser.Columns[8].HeaderText = "Estado";
-            dgvListadoUser.Columns[8].Width = 50;
-            dgvListadoUser.Columns[9].HeaderText = "Código";
+            dgvListadoUser.Columns[6].HeaderText = "Estado";
+            dgvListadoUser.Columns[6].Width = 50;
+            dgvListadoUser.Columns[7].HeaderText = "Código";
+            dgvListadoUser.Columns[7].Width = 50;
+            dgvListadoUser.Columns[8].Width = 150;
             dgvListadoUser.Columns[9].Width = 100;
+            dgvListadoUser.Columns[10].Width = 150;
         }
         private void Limpiar()
         {
@@ -141,7 +142,7 @@ namespace UI
                     }
                     else
                     {
-                        respuesta = bllUsuario.Crear(Convert.ToInt32(cmbRol.SelectedValue), txtNombre.Text.Trim(), cmbTipoDoc.Text.Trim(),
+                        respuesta = bllUsuario.Crear(Convert.ToInt32(cmbRol.SelectedValue), txtNombre.Text.Trim(), cmbTipoDoc.Text.Trim(), txtDomicilio.Text.Trim(),
                                                         txtDocumento.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), txtClave.Text.Trim());
                         if (respuesta == true)
                         {
@@ -211,7 +212,7 @@ namespace UI
                 else
                 {
                     respuesta = bllUsuario.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), Convert.ToInt32(cmbRol.SelectedValue), txtNombre.Text.Trim(), cmbTipoDoc.Text.Trim(),
-                                                        txtDocumento.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), EmailNombreAnterior);
+                                                        txtDomicilio.Text.Trim(), txtDocumento.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), EmailNombreAnterior);
                     if (respuesta == true)
                     {
                         this.MensajeOk("Usuario actualizado correctamente");

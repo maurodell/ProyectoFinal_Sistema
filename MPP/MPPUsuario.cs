@@ -86,6 +86,7 @@ namespace MPP
                     usuarioBuscar.nombre = EModifcar.Element("nombre").Value;
                     usuarioBuscar.tipoDocumento = EModifcar.Element("tipoDocumento").Value;
                     usuarioBuscar.documento = EModifcar.Element("documento").Value;
+                    usuarioBuscar.domicilio = EModifcar.Element("domicilio").Value;
                     usuarioBuscar.telefono = EModifcar.Element("telefono").Value;
                     usuarioBuscar.email = EModifcar.Element("email").Value;
                     usuarioBuscar.clave = EModifcar.Element("clave").Value;
@@ -115,6 +116,7 @@ namespace MPP
                                                 new XElement("nombre", Parametro.nombre),
                                                 new XElement("tipoDocumento", Parametro.tipoDocumento),
                                                 new XElement("documento", Parametro.documento),
+                                                new XElement("domicilio", Parametro.domicilio),
                                                 new XElement("telefono", Parametro.telefono),
                                                 new XElement("email", Parametro.email),
                                                 new XElement("clave", Parametro.clave),
@@ -187,6 +189,7 @@ namespace MPP
                                 nombre = Convert.ToString(item["nombre"]),
                                 tipoDocumento = Convert.ToString(item["tipoDocumento"]),
                                 documento = Convert.ToString(item["documento"]),
+                                domicilio = Convert.ToString(item["domicilio"]),
                                 telefono = Convert.ToString(item["telefono"]),
                                 email = Convert.ToString(item["email"]),
                                 clave = Convert.ToString(item["clave"]),
@@ -224,6 +227,7 @@ namespace MPP
                             nombre = Convert.ToString(item["nombre"]),
                             tipoDocumento = Convert.ToString(item["tipoDocumento"]),
                             documento = Convert.ToString(item["documento"]),
+                            domicilio = Convert.ToString(item["domicilio"]),
                             telefono = Convert.ToString(item["telefono"]),
                             email = Convert.ToString(item["email"]),
                             clave = Convert.ToString(item["clave"]),
@@ -265,6 +269,7 @@ namespace MPP
                             EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
                             EModifcar.Element("tipoDocumento").Value = Parametro.tipoDocumento;
                             EModifcar.Element("documento").Value = Parametro.documento;
+                            EModifcar.Element("domicilio").Value = Parametro.domicilio;
                             EModifcar.Element("telefono").Value = Parametro.telefono;
                         }
                         documento.Save(path);
@@ -278,6 +283,7 @@ namespace MPP
                             EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
                             EModifcar.Element("tipoDocumento").Value = Parametro.tipoDocumento;
                             EModifcar.Element("documento").Value = Parametro.documento;
+                            EModifcar.Element("domicilio").Value = Parametro.domicilio;
                             EModifcar.Element("telefono").Value = Parametro.telefono;
                         }
 
@@ -294,6 +300,7 @@ namespace MPP
                             EModifcar.Element("email").Value = Parametro.email;
                             EModifcar.Element("nombre").Value = Parametro.nombre;
                             EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
+                            EModifcar.Element("domicilio").Value = Parametro.domicilio;
                             EModifcar.Element("telefono").Value = Parametro.telefono;
                         }
                         documento.Save(path);
@@ -305,6 +312,7 @@ namespace MPP
                         {
                             EModifcar.Element("nombre").Value = Parametro.nombre;
                             EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
+                            EModifcar.Element("domicilio").Value = Parametro.domicilio;
                             EModifcar.Element("telefono").Value = Parametro.telefono;
                         }
 

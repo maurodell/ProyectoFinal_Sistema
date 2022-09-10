@@ -33,7 +33,7 @@ namespace BLL
             return mppUsuario.Buscar(Parametro);
         }
         public bool Crear(int codigoRol, string nombre, string tipoDocumento, 
-                            string documento, string telefono, string email, string clave)
+                            string documento, string domicilio, string telefono, string email, string clave)
         {
             Encriptado encriptar = new Encriptado();
 
@@ -42,6 +42,7 @@ namespace BLL
             usuario.nombre = nombre;
             usuario.tipoDocumento = tipoDocumento;
             usuario.documento = documento;
+            usuario.domicilio = domicilio;
             usuario.telefono = telefono;
             usuario.email = email;
 
@@ -73,7 +74,7 @@ namespace BLL
             throw new NotImplementedException();
         }
         public bool Modificar(int codigo, int codigoRol, string nombre, string tipoDocumento,
-                            string documento, string telefono, string email, string emailAnterior)
+                            string documento, string domicilio, string telefono, string email, string emailAnterior)
         {
             usuario = new BEUsuario();
             usuario.Codigo = codigo;
@@ -81,6 +82,7 @@ namespace BLL
             usuario.nombre = nombre;
             usuario.tipoDocumento = tipoDocumento;
             usuario.documento = documento;
+            usuario.domicilio = domicilio;
             usuario.telefono = telefono;
             usuario.email = email;
 

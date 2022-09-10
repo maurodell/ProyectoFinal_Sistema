@@ -45,6 +45,7 @@
     <Compile Include="MPPLogin.cs" />
     <Compile Include="MPPPersona.cs" />
     <Compile Include="MPPProducto.cs" />
+    <Compile Include="MPPProveedor.cs" />
     <Compile Include="MPPRol.cs" />
     <Compile Include="MPPUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -38,6 +38,8 @@ namespace UI
             this.btnInsertar = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txtDomicilio = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnMostrarClave = new System.Windows.Forms.Button();
             this.txtReClave = new System.Windows.Forms.TextBox();
@@ -135,6 +137,8 @@ namespace UI
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.txtDomicilio);
+            this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.txtTelefono);
             this.tabPage2.Controls.Add(this.label3);
@@ -156,8 +160,24 @@ namespace UI
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(3482, 1150);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Mantenimiento";
+            this.tabPage2.Text = "Gestión";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // txtDomicilio
+            // 
+            this.txtDomicilio.Location = new System.Drawing.Point(304, 627);
+            this.txtDomicilio.Name = "txtDomicilio";
+            this.txtDomicilio.Size = new System.Drawing.Size(802, 38);
+            this.txtDomicilio.TabIndex = 22;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(136, 630);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(132, 32);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Domicilio";
             // 
             // groupBox1
             // 
@@ -505,5 +525,7 @@ namespace UI
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnMostrarClave;
+        private System.Windows.Forms.TextBox txtDomicilio;
+        private System.Windows.Forms.Label label8;
     }
 }
