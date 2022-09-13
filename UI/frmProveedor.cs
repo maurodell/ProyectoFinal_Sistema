@@ -10,15 +10,15 @@ namespace UI
         public frmProveedor()
         {
             InitializeComponent();
-            bllPersona = new BLLPersona();
+            bllProveedores = new BLLProveedor();
         }
-        BLLPersona bllPersona;
+        BLLProveedor bllProveedores;
         private void Listar()
         {
             try
             {
                 dgvListadoProveedor.DataSource = null;
-                dgvListadoProveedor.DataSource = bllPersona.ListarProveedor();
+                dgvListadoProveedor.DataSource = bllProveedores.Listar();
                 this.Formato();
                 this.Limpiar();
                 lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoProveedor.Rows.Count);
@@ -74,7 +74,8 @@ namespace UI
         {
             try
             {
-                dgvListadoProveedor.DataSource = bllPersona.BuscarProveedor(txtBuscar.Text);
+                dgvListadoProveedor.DataSource = null;
+                dgvListadoProveedor.DataSource = bllProveedores.Buscar(txtBuscar.Text);
                 this.Formato();
                 lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoProveedor.Rows.Count);
             }
@@ -109,7 +110,7 @@ namespace UI
                 }
                 else
                 {
-                    respuesta = bllPersona.Crear(cmbCondicion.Text.Trim(), txtRSocial.Text.Trim(), txtProvincia.Text.Trim(), txtCuit.Text.Trim(),
+                    respuesta = bllProveedores.Crear(cmbCondicion.Text.Trim(), txtRSocial.Text.Trim(), Convert.ToInt32(txtCuit.Text.Trim()), txtProvincia.Text.Trim(),
                                                     txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim());
                     if (respuesta == true)
                     {
@@ -126,6 +127,11 @@ namespace UI
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

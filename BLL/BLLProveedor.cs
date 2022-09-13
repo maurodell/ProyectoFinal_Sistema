@@ -63,7 +63,7 @@ namespace BLL
 
         public List<BEProveedor> ListarTodos()
         {
-            return mppProveedor.ListarTodos();
+            throw new NotImplementedException();
         }
 
         public bool Modificar(BEProveedor Parametro, string parametro2)

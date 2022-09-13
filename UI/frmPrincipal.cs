@@ -182,6 +182,7 @@ namespace UI
             frmProveedor FrmProveedor = new frmProveedor();
             FrmProveedor.MdiParent = this;
             FrmProveedor.Show();
+            FrmProveedor.Size = new Size(1370, 560);
         }
     }
 }

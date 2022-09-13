@@ -219,9 +219,9 @@ namespace UI
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(298, 719);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(305, 32);
+            this.label8.Size = new System.Drawing.Size(341, 32);
             this.label8.TabIndex = 24;
-            this.label8.Text = "Condición frente al IVA";
+            this.label8.Text = "Condición frente al IVA (*)";
             // 
             // txtCuit
             // 
@@ -311,6 +311,7 @@ namespace UI
             this.btnActualizar.TabIndex = 8;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // label4
             // 

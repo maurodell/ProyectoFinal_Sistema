@@ -137,45 +137,6 @@ namespace MPP
                 {
                     foreach (DataRow item in DS.Tables[0].Rows)
                     {
-                        string estado = item["estado"].ToString(); //-->listo los que tengan el estado en true
-                        if (estado.Equals("1"))
-                        {
-                            BEProveedor proveedor = new BEProveedor
-                            {
-                                Codigo = Convert.ToInt32(item["codigo"]),
-                                condicion = Convert.ToString(item["condicion"]),
-                                razonSocial = Convert.ToString(item["razonSocial"]),
-                                provincia = Convert.ToString(item["provincia"]),
-                                cuit = Convert.ToInt32(item["cuit"]),
-                                domicilio = Convert.ToString(item["domicilio"]),
-                                telefono = Convert.ToString(item["telefono"]),
-                                email = Convert.ToString(item["email"])
-                            };
-                            proveedores.Add(proveedor);
-                        }
-                    }
-                }
-                return proveedores;
-            }
-            catch (XmlException)
-            {
-                throw new XmlException();
-            }
-        }
-
-        public List<BEProveedor> ListarTodos()
-        {
-            try
-            {
-                DataSet DS = new DataSet();
-                DS.ReadXml(pathProveedores);
-
-                List<BEProveedor> proveedores = new List<BEProveedor>();
-
-                if (DS.Tables.Count > 0)
-                {
-                    foreach (DataRow item in DS.Tables[0].Rows)
-                    {
                         BEProveedor proveedor = new BEProveedor
                         {
                             Codigo = Convert.ToInt32(item["codigo"]),
@@ -196,6 +157,11 @@ namespace MPP
             {
                 throw new XmlException();
             }
+        }
+
+        public List<BEProveedor> ListarTodos()
+        {
+            throw new NotImplementedException();
         }
 
         public bool Modificar(BEProveedor Parametro, string emailAnterior)

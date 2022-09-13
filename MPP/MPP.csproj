@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="MPPCategoria.cs" />
     <Compile Include="MPPLogin.cs" />
-    <Compile Include="MPPPersona.cs" />
+    <Compile Include="MPPCliente.cs" />
     <Compile Include="MPPProducto.cs" />
     <Compile Include="MPPProveedor.cs" />
     <Compile Include="MPPRol.cs" />
