@@ -85,6 +85,8 @@ namespace UI
             this.dgvListadoProveedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListadoProveedor.Size = new System.Drawing.Size(3431, 850);
             this.dgvListadoProveedor.TabIndex = 0;
+            this.dgvListadoProveedor.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoProveedor_CellContentClick);
+            this.dgvListadoProveedor.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoProveedor_CellDoubleClick);
             // 
             // Seleccionar
             // 
@@ -122,12 +124,13 @@ namespace UI
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(1241, 1075);
+            this.btnEliminar.Location = new System.Drawing.Point(312, 1075);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(342, 50);
+            this.btnEliminar.Size = new System.Drawing.Size(339, 50);
             this.btnEliminar.TabIndex = 8;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // chkSeleccionar
             // 
@@ -138,6 +141,7 @@ namespace UI
             this.chkSeleccionar.TabIndex = 5;
             this.chkSeleccionar.Text = "Seleccionar";
             this.chkSeleccionar.UseVisualStyleBackColor = true;
+            this.chkSeleccionar.CheckedChanged += new System.EventHandler(this.chkSeleccionar_CheckedChanged);
             // 
             // btnBuscar
             // 
@@ -213,6 +217,7 @@ namespace UI
             this.cmbCondicion.Name = "cmbCondicion";
             this.cmbCondicion.Size = new System.Drawing.Size(802, 39);
             this.cmbCondicion.TabIndex = 25;
+            this.cmbCondicion.Text = "Monotributista";
             // 
             // label8
             // 
@@ -305,7 +310,7 @@ namespace UI
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(449, 1012);
+            this.btnActualizar.Location = new System.Drawing.Point(621, 1012);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(187, 51);
             this.btnActualizar.TabIndex = 8;
@@ -338,6 +343,7 @@ namespace UI
             this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnInsertar
             // 

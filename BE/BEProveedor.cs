@@ -10,7 +10,7 @@ namespace BE
     {
         public string condicion { get; set; }
         public string razonSocial { get; set; }
-        public int cuit { get; set; }
+        public string cuit { get; set; }
         public string provincia { get; set; }
     }
 }

@@ -113,7 +113,7 @@ namespace MPP
                                                 new XAttribute("codigo", (cantidadPart + 1)),
                                                 new XElement("codigoCategoria", Parametro.codigoCategoria),
                                                 new XElement("codigoBarra", Parametro.codigoBarra),
-                                                new XElement("nombre", Parametro.nombre), //para pasar el código del juego que se agrega último
+                                                new XElement("nombre", Parametro.nombre),
                                                 new XElement("precioVenta", Parametro.precioVenta),
                                                 new XElement("stock", Parametro.stock),
                                                 new XElement("descripcion", Parametro.descripcion),

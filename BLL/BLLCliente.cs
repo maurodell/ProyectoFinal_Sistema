@@ -14,23 +14,23 @@ namespace BLL
     {
         public BLLCliente()
         {
-            mppPersonas = new MPPCliente();
+            mppCliente = new MPPCliente();
         }
-        MPPCliente mppPersonas;
-        BECliente persona;
+        MPPCliente mppCliente;
+        BECliente cliente;
 
         public bool Crear(string nombre, string tipoDocumento,
                             string documento, string domicilio, string telefono, string email)
         {
-            persona = new BECliente();
-            persona.nombre = nombre;
-            persona.tipoDocumento = tipoDocumento;
-            persona.documento = documento;
-            persona.domicilio = domicilio;
-            persona.telefono = telefono;
-            persona.email = email;
+            cliente = new BECliente();
+            cliente.nombre = nombre;
+            cliente.tipoDocumento = tipoDocumento;
+            cliente.documento = documento;
+            cliente.domicilio = domicilio;
+            cliente.telefono = telefono;
+            cliente.email = email;
 
-            return mppPersonas.Crear(persona);
+            return mppCliente.Crear(cliente);
         }
 
         public bool Baja(int Parametro)
@@ -46,24 +46,24 @@ namespace BLL
         public bool Modificar(int codigo, string nombre, string tipoDocumento,
                             string documento, string domicilio, string telefono, string email, string emailAnterior)
         {
-            persona = new BECliente();
-            persona.Codigo = codigo;
-            persona.nombre = nombre;
-            persona.tipoDocumento = tipoDocumento;
-            persona.documento = documento;
-            persona.domicilio = domicilio;
-            persona.telefono = telefono;
-            persona.email = email;
+            cliente = new BECliente();
+            cliente.Codigo = codigo;
+            cliente.nombre = nombre;
+            cliente.tipoDocumento = tipoDocumento;
+            cliente.documento = documento;
+            cliente.domicilio = domicilio;
+            cliente.telefono = telefono;
+            cliente.email = email;
 
-            return mppPersonas.Modificar(persona, emailAnterior);
+            return mppCliente.Modificar(cliente, emailAnterior);
         }
         public bool Eliminar(int Parametro)
         {
-            return mppPersonas.Eliminar(Parametro);
+            return mppCliente.Eliminar(Parametro);
         }
         public List<BECliente> Listar()
         {
-            return mppPersonas.Listar();
+            return mppCliente.Listar();
         }
 
         public List<BECliente> ListarTodos()
@@ -73,7 +73,7 @@ namespace BLL
 
         public List<BECliente> Buscar(string Parametro)
         {
-            return mppPersonas.Buscar(Parametro);
+            return mppCliente.Buscar(Parametro);
         }
         public bool Crear(BECliente Parametro)
         {

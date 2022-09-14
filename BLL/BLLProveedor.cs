@@ -36,7 +36,7 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
-        public bool Crear(string condicion, string razonSocial, int cuit,
+        public bool Crear(string condicion, string razonSocial, string cuit,
                     string provincia, string domicilio, string telefono, string email)
         {
             proveedor = new BEProveedor();
@@ -70,10 +70,11 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
-        public bool Modificar(string condicion, string razonSocial, int cuit,
-                    string provincia, string domicilio, string telefono, string email, string emailAnterior)
+        public bool Modificar(int codigo, string condicion, string razonSocial, string cuit,
+                    string provincia, string domicilio, string telefono, string email, string cuitAnterior)
         {
             proveedor = new BEProveedor();
+            proveedor.Codigo = codigo;
             proveedor.condicion = condicion;
             proveedor.razonSocial = razonSocial;
             proveedor.cuit = cuit;
@@ -82,7 +83,7 @@ namespace BLL
             proveedor.telefono = telefono;
             proveedor.email = email;
 
-            return mppProveedor.Modificar(proveedor, emailAnterior);
+            return mppProveedor.Modificar(proveedor, cuitAnterior);
         }
     }
 }

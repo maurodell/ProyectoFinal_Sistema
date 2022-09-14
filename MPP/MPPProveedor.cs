@@ -45,7 +45,7 @@ namespace MPP
                     proveedorBuscar.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
                     proveedorBuscar.condicion = EModifcar.Element("condicion").Value;
                     proveedorBuscar.razonSocial = EModifcar.Element("razonSocial").Value;
-                    proveedorBuscar.cuit = Convert.ToInt32(EModifcar.Element("cuit").Value);
+                    proveedorBuscar.cuit = EModifcar.Element("cuit").Value;
                     proveedorBuscar.provincia = EModifcar.Element("provincia").Value;
                     proveedorBuscar.domicilio = EModifcar.Element("domicilio").Value;
                     proveedorBuscar.telefono = EModifcar.Element("telefono").Value;
@@ -82,15 +82,8 @@ namespace MPP
 
                     if (VerificarCUIT(Parametro.cuit))
                     {
-                        if (VerificarExistencia(Parametro.email))
-                        {
-                            crear.Save(pathProveedores);
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        crear.Save(pathProveedores);
+                        return true;
                     }
                     else
                     {
@@ -143,7 +136,7 @@ namespace MPP
                             condicion = Convert.ToString(item["condicion"]),
                             razonSocial = Convert.ToString(item["razonSocial"]),
                             provincia = Convert.ToString(item["provincia"]),
-                            cuit = Convert.ToInt32(item["cuit"]),
+                            cuit = Convert.ToString(item["cuit"]),
                             domicilio = Convert.ToString(item["domicilio"]),
                             telefono = Convert.ToString(item["telefono"]),
                             email = Convert.ToString(item["email"])
@@ -164,7 +157,7 @@ namespace MPP
             throw new NotImplementedException();
         }
 
-        public bool Modificar(BEProveedor Parametro, string emailAnterior)
+        public bool Modificar(BEProveedor Parametro, string cuitAnterior)
         {
             try
             {
@@ -174,73 +167,35 @@ namespace MPP
                                where proveedor.Attribute("codigo").Value == Parametro.Codigo.ToString()
                                select proveedor;
 
-                //Busca en el usuario por ID para luego comprobar si hay que cambiar el DNI
-                BEProveedor userXML = ListarTodos().Find(x => x.cuit == Parametro.cuit);
-
-                //Verifica si existe el DNI, si existe retona false(va por el else), y luego en ambos casos verifica si existe el email.
-                if (VerificarCUIT(Parametro.cuit))
+                //Verifica si existe el CUIT, si existe retona false(va por el else), y luego en ambos casos verifica si existe el email.
+                if (VerificarCUIT(cuitAnterior))
                 {
-                    if (VerificarExistencia(emailAnterior))
+                    foreach (XElement EModifcar in consulta)
                     {
-                        foreach (XElement EModifcar in consulta)
-                        {
-                            EModifcar.Element("email").Value = Parametro.email;
-                            EModifcar.Element("condicion").Value = Parametro.condicion;
-                            EModifcar.Element("razonSocial").Value = Parametro.razonSocial;
-                            EModifcar.Element("provincia").Value = Parametro.provincia;
-                            EModifcar.Element("cuit").Value = Convert.ToString(Parametro.cuit);
-                            EModifcar.Element("domicilio").Value = Parametro.domicilio;
-                            EModifcar.Element("telefono").Value = Parametro.telefono;
-                        }
-                        documento.Save(pathProveedores);
-                        return true;
+                        EModifcar.Element("email").Value = Parametro.email;
+                        EModifcar.Element("condicion").Value = Parametro.condicion;
+                        EModifcar.Element("razonSocial").Value = Parametro.razonSocial;
+                        EModifcar.Element("provincia").Value = Parametro.provincia;
+                        EModifcar.Element("cuit").Value = Convert.ToString(Parametro.cuit);
+                        EModifcar.Element("domicilio").Value = Parametro.domicilio;
+                        EModifcar.Element("telefono").Value = Parametro.telefono;
                     }
-                    else
-                    {
-                        foreach (XElement EModifcar in consulta)
-                        {
-                            EModifcar.Element("condicion").Value = Parametro.condicion;
-                            EModifcar.Element("razonSocial").Value = Parametro.razonSocial;
-                            EModifcar.Element("provincia").Value = Parametro.provincia;
-                            EModifcar.Element("cuit").Value = Convert.ToString(Parametro.cuit);
-                            EModifcar.Element("domicilio").Value = Parametro.domicilio;
-                            EModifcar.Element("telefono").Value = Parametro.telefono;
-                        }
-
-                        documento.Save(pathProveedores);
-                        return true;
-                    }
+                    documento.Save(pathProveedores);
+                    return true;
                 }
                 else
                 {
-                    if (VerificarExistencia(emailAnterior))
+                    foreach (XElement EModifcar in consulta)
                     {
-                        foreach (XElement EModifcar in consulta)
-                        {
-                            EModifcar.Element("email").Value = Parametro.email;
-                            EModifcar.Element("condicion").Value = Parametro.condicion;
-                            EModifcar.Element("razonSocial").Value = Parametro.razonSocial;
-                            EModifcar.Element("provincia").Value = Parametro.provincia;
-                            EModifcar.Element("domicilio").Value = Parametro.domicilio;
-                            EModifcar.Element("telefono").Value = Parametro.telefono;
-                        }
-                        documento.Save(pathProveedores);
-                        return true;
+                        EModifcar.Element("email").Value = Parametro.email;
+                        EModifcar.Element("condicion").Value = Parametro.condicion;
+                        EModifcar.Element("razonSocial").Value = Parametro.razonSocial;
+                        EModifcar.Element("provincia").Value = Parametro.provincia;
+                        EModifcar.Element("domicilio").Value = Parametro.domicilio;
+                        EModifcar.Element("telefono").Value = Parametro.telefono;
                     }
-                    else
-                    {
-                        foreach (XElement EModifcar in consulta)
-                        {
-                            EModifcar.Element("condicion").Value = Parametro.condicion;
-                            EModifcar.Element("razonSocial").Value = Parametro.razonSocial;
-                            EModifcar.Element("provincia").Value = Parametro.provincia;
-                            EModifcar.Element("domicilio").Value = Parametro.domicilio;
-                            EModifcar.Element("telefono").Value = Parametro.telefono;
-                        }
-
-                        documento.Save(pathProveedores);
-                        return true;
-                    }
+                    documento.Save(pathProveedores);
+                    return true;
                 }
 
             }
@@ -252,7 +207,7 @@ namespace MPP
         bool VerificarExistencia(string email)
         {
             bool resp = true;
-            List<BEProveedor> proveedores = ListarTodos();
+            List<BEProveedor> proveedores = Listar();
 
             if (proveedores.Count() > 0)
             {
@@ -267,10 +222,10 @@ namespace MPP
             }
             return resp;
         }
-        bool VerificarCUIT(int cuit)
+        bool VerificarCUIT(string cuit)
         {
             bool resp = true;
-            List<BEProveedor> proveedores = ListarTodos();
+            List<BEProveedor> proveedores = Listar();
 
             if (proveedores.Count() > 0)
             {

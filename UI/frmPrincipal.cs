@@ -184,5 +184,21 @@ namespace UI
             FrmProveedor.Show();
             FrmProveedor.Size = new Size(1370, 560);
         }
+
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCliente FrmCliente = new frmCliente();
+            FrmCliente.MdiParent = this;
+            FrmCliente.Show();
+            FrmCliente.Size = new Size(950, 560);
+        }
+
+        private void comprasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCompra FrmCompra = new frmCompra();
+            FrmCompra.MdiParent = this;
+            FrmCompra.Show();
+            FrmCompra.Size = new Size(1370, 560);
+        }
     }
 }

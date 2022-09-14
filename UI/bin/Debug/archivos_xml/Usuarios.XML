@@ -4,8 +4,8 @@
     <codigoRol>1</codigoRol>
     <nombre>admin</nombre>
     <tipoDocumento>DNI</tipoDocumento>
-    <documento>11111</documento>
-	<domicilio>Iriondo 310</domicilio>
+    <documento></documento>
+    <domicilio>11111</domicilio>
     <telefono></telefono>
     <email>admin@admin.com</email>
     <clave>rUvj1G+ybfI=</clave>

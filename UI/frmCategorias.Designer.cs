@@ -302,7 +302,7 @@ namespace UI
             this.ClientSize = new System.Drawing.Size(2208, 1232);
             this.Controls.Add(this.tabControl1);
             this.Name = "frmCategorias";
-            this.Text = "frmCategorias";
+            this.Text = "Categorias";
             this.Load += new System.EventHandler(this.frmCategorias_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabCat.ResumeLayout(false);
