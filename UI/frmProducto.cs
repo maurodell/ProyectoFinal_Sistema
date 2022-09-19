@@ -176,12 +176,15 @@ namespace UI
             {
                 bool respuesta = false;
                 DateTime hoy = DateTime.Now;
-                if (dateTFecha.Value >= hoy.AddMonths(2) || cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtStock.Text == string.Empty)
+                //evaluar los meses q se cargar dateTFecha.Value >= hoy.AddMonths(2) || 
+                if (cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtStock.Text == string.Empty)
                 {
                     this.MensajeError("Algunos de los datos faltan o son incorrectos");
                     errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
                     errorProvider1.SetError(txtNombre, "Ingresar nombre");
                     errorProvider1.SetError(dateTFecha, "Fecha de vencimiento superior o igual a 2 meses de la fecha actual");
+                    errorProvider1.SetError(txtPrecio, "El precio es necesario");
+                    errorProvider1.SetError(txtStock, "El estoy es necesario");
                 }
                 else
                 {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{5F7E6249-454E-42DA-ADA5-A99060230EF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI_Main", "UI\UI_Main.csproj", "{5F7E6249-454E-42DA-ADA5-A99060230EF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seguridad", "Seguridad\Seguridad.csproj", "{28B9B645-35F5-4D99-9B2B-0D3D8E65A08F}"
 EndProject

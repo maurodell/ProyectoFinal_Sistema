@@ -11,11 +11,13 @@ using System.Data;
 using System.IO;
 using System.Reflection;
 
+
 namespace MPP
 {
     public class MPPCompra : IRepositorio<BECompra>
     {
         private string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\Compras.XML";
+        MPPProducto mppProducto = new MPPProducto();
         public bool Alta(int Parametro)
         {
             XDocument documento = XDocument.Load(path);
@@ -64,7 +66,7 @@ namespace MPP
                 XDocument documento = XDocument.Load(path);
 
                 var consulta = from compra in documento.Descendants("compra")
-                               where compra.Element("nombre").Value.Contains(Parametro) || compra.Element("nroComprobante").Value == Parametro
+                               where compra.Element("razonSocial").Value.Contains(Parametro) || compra.Element("nroComprobante").Value.Contains(Parametro)
                                select compra;
 
                 foreach (XElement EModifcar in consulta)
@@ -75,6 +77,7 @@ namespace MPP
                     compraBuscar.codigoUsuario = Convert.ToInt32(EModifcar.Element("codigoUsuario").Value);
                     compraBuscar.tipoComprobante = EModifcar.Element("tipoComprobante").Value;
                     compraBuscar.nroComprobante = EModifcar.Element("nroComprobante").Value;
+                    compraBuscar.puntoVenta = EModifcar.Element("puntoVenta").Value;
                     compraBuscar.fecha = Convert.ToDateTime(EModifcar.Element("fecha").Value);
                     compraBuscar.impuesto = Convert.ToDecimal(EModifcar.Element("impuesto").Value);
                     compraBuscar.total = Convert.ToDecimal(EModifcar.Element("total").Value);
@@ -107,6 +110,7 @@ namespace MPP
                                                 new XElement("codigoUsuario", Parametro.codigoUsuario),
                                                 new XElement("tipoComprobante", Parametro.tipoComprobante),
                                                 new XElement("nroComprobante", Parametro.nroComprobante),
+                                                new XElement("puntoVenta", Parametro.puntoVenta),
                                                 new XElement("fecha", Parametro.fecha),
                                                 new XElement("impuesto", Parametro.impuesto),
                                                 new XElement("total", Parametro.total),
@@ -129,7 +133,10 @@ namespace MPP
                 throw ex;
             }
         }
-
+        public Detalle CrearDetalle(Detalle detalle)
+        {
+            return null;
+        }
         public bool Eliminar(int Parametro)
         {
             throw new NotImplementedException();
@@ -158,6 +165,7 @@ namespace MPP
                                 codigoUsuario = Convert.ToInt32(item["codigoUsuario"]),
                                 tipoComprobante = Convert.ToString(item["tipoComprobante"]),
                                 nroComprobante = Convert.ToString(item["nroComprobante"]),
+                                puntoVenta = Convert.ToString(item["puntoVenta"]),
                                 fecha = Convert.ToDateTime(item["fecha"]),
                                 impuesto = Convert.ToDecimal(item["impuesto"]),
                                 total = Convert.ToDecimal(item["total"]),
@@ -198,6 +206,7 @@ namespace MPP
                             codigoUsuario = Convert.ToInt32(item["codigoUsuario"]),
                             tipoComprobante = Convert.ToString(item["tipoComprobante"]),
                             nroComprobante = Convert.ToString(item["nroComprobante"]),
+                            puntoVenta = Convert.ToString(item["puntoVenta"]),
                             fecha = Convert.ToDateTime(item["fecha"]),
                             impuesto = Convert.ToDecimal(item["impuesto"]),
                             total = Convert.ToDecimal(item["total"]),
@@ -245,6 +254,23 @@ namespace MPP
                 {
                     return false;
                 }
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
+        }
+        public BEProducto BuscarProductoCodBarra(string codBarra)
+        {
+            try
+            {
+                //Me traigo la lista de productos
+                BEProducto producto = mppProducto.Listar().Find(x=>(x.codigoBarra.Equals(codBarra)));
+                //verifico que me devuelva un producto
+                if(producto != null)
+                    return producto;
+
+                return null;
             }
             catch (XmlException ex)
             {

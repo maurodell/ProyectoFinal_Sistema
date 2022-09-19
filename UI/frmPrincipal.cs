@@ -198,7 +198,7 @@ namespace UI
             frmCompra FrmCompra = new frmCompra();
             FrmCompra.MdiParent = this;
             FrmCompra.Show();
-            FrmCompra.Size = new Size(1370, 560);
+            FrmCompra.Size = new Size(1370, 660);
         }
     }
 }

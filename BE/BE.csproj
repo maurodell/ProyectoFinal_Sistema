@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BEAdministrador.cs" />
     <Compile Include="BECategoria.cs" />
     <Compile Include="BECliente.cs" />
     <Compile Include="BECompra.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="BEProveedor.cs" />
     <Compile Include="BERol.cs" />
     <Compile Include="BEUsuario.cs" />
+    <Compile Include="BEVendedor.cs" />
     <Compile Include="Detalle.cs" />
     <Compile Include="Entidad.cs" />
     <Compile Include="Localizacion.cs" />

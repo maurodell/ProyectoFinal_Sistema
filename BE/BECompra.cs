@@ -11,13 +11,14 @@ namespace BE
         public int codigoProveedor { get; set; }
         public int codigoUsuario { get; set; }
         public string tipoComprobante { get; set; }
+        public string puntoVenta { get; set; }
         public string nroComprobante { get; set; }
         public DateTime fecha { get; set; }
         public decimal impuesto { get; set; }
         public decimal total { get; set; }
         public string estadoActual { get; set; }
         public bool estado { get; set; }
-        public Detalle detalle { get; set; }
+        public List<Detalle> detalles { get; set; }
 
     }
 }

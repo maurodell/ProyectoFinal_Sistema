@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLL;
 using BE;
+using UI.Utils;
 namespace UI
 {
     public partial class frmLogin : Form
@@ -48,6 +49,9 @@ namespace UI
                         FrmPrincipal.codigoRolUsuario = beUsuario.codigoRol;
                         FrmPrincipal.Estado = beUsuario.estado;
                         FrmPrincipal.Email = beUsuario.email;
+
+                        VariablesCompra.codigoUsuario = beUsuario.Codigo;//se neceista para registrar el ingreso
+
                         FrmPrincipal.Show();
                         this.Hide();
                     }
