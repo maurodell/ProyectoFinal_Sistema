@@ -50,6 +50,7 @@
     <Compile Include="BERol.cs" />
     <Compile Include="BEUsuario.cs" />
     <Compile Include="BEVendedor.cs" />
+    <Compile Include="BEVenta.cs" />
     <Compile Include="Detalle.cs" />
     <Compile Include="Entidad.cs" />
     <Compile Include="Localizacion.cs" />

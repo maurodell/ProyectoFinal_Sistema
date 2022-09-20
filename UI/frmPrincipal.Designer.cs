@@ -120,14 +120,14 @@ namespace UI
             // proveedoresToolStripMenuItem
             // 
             this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
-            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(350, 54);
             this.proveedoresToolStripMenuItem.Text = "Proveedores";
             this.proveedoresToolStripMenuItem.Click += new System.EventHandler(this.proveedoresToolStripMenuItem_Click);
             // 
             // comprasToolStripMenuItem
             // 
             this.comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
-            this.comprasToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.comprasToolStripMenuItem.Size = new System.Drawing.Size(350, 54);
             this.comprasToolStripMenuItem.Text = "Compras";
             this.comprasToolStripMenuItem.Click += new System.EventHandler(this.comprasToolStripMenuItem_Click);
             // 
@@ -143,15 +143,16 @@ namespace UI
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(289, 54);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // ventasToolStripMenuItem1
             // 
             this.ventasToolStripMenuItem1.Name = "ventasToolStripMenuItem1";
-            this.ventasToolStripMenuItem1.Size = new System.Drawing.Size(289, 54);
+            this.ventasToolStripMenuItem1.Size = new System.Drawing.Size(448, 54);
             this.ventasToolStripMenuItem1.Text = "Ventas";
+            this.ventasToolStripMenuItem1.Click += new System.EventHandler(this.ventasToolStripMenuItem1_Click);
             // 
             // MenuAcceso
             // 

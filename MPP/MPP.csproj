@@ -49,6 +49,7 @@
     <Compile Include="MPPProveedor.cs" />
     <Compile Include="MPPRol.cs" />
     <Compile Include="MPPUsuario.cs" />
+    <Compile Include="MPPVenta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

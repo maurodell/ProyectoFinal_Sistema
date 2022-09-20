@@ -146,7 +146,7 @@ namespace UI
             this.tabPage2.Location = new System.Drawing.Point(10, 48);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(2412, 1150);
+            this.tabPage2.Size = new System.Drawing.Size(2414, 1150);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Gestión";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -289,9 +289,9 @@ namespace UI
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(22, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(234, 32);
+            this.label1.Size = new System.Drawing.Size(259, 32);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Buscar Categoría";
+            this.label1.Text = "Buscar por apellido";
             // 
             // txtBuscar
             // 

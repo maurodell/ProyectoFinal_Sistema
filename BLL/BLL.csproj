@@ -49,6 +49,7 @@
     <Compile Include="BLLProveedor.cs" />
     <Compile Include="BLLRol.cs" />
     <Compile Include="BLLUsuario.cs" />
+    <Compile Include="BLLVenta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

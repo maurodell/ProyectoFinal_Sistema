@@ -141,7 +141,17 @@ namespace MPP
         {
             throw new NotImplementedException();
         }
+        public void ActualizarStock(BECompra detalle)
+        {
+            int stock, codProducto;
+            foreach (Detalle item in detalle.detalles){
+                stock = item.cantidad;
+                codProducto = item.Codigo;
 
+                mppProducto.ActualizarStock(stock, codProducto);
+            }
+
+        }
         public List<BECompra> Listar()
         {
             try

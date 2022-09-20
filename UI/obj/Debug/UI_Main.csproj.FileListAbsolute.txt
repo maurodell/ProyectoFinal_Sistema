@@ -48,3 +48,4 @@ C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solució
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\UI\obj\Debug\UI_Main.csproj.CopyComplete
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\UI\obj\Debug\UI.exe
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\UI\obj\Debug\UI.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución\Sistemas_Sale_Point\UI\obj\Debug\UI.frmVenta.resources

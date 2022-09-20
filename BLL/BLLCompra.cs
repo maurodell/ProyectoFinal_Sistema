@@ -44,7 +44,22 @@ namespace BLL
         public bool Crear(int codigoProveedor, int codigoUsuario, string tipoComprobante, string nroComprobante, string puntoVenta, DateTime fecha, decimal impuesto, 
                             decimal total, DataTable detalles)
         {
+            List<Detalle> listaDetalle = new List<Detalle>();
+
             beCompra = new BECompra();
+
+            for (int i=0; i<detalles.Rows.Count; i++)
+            {
+                detalle = new Detalle();
+                detalle.codigoAsociado = Convert.ToInt32(detalles.Rows[i]["codigoUsuario"]);
+                detalle.codigoProducto = Convert.ToInt32(detalles.Rows[i]["codigoProducto"]);
+                detalle.cantidad = Convert.ToInt32(detalles.Rows[i]["cantidad"]);
+                detalle.precio = Convert.ToInt32(detalles.Rows[i]["precio"]);
+                listaDetalle.Add(detalle);
+            }
+            beCompra.codigoProveedor = codigoProveedor;
+            beCompra.codigoUsuario = codigoUsuario;
+            //falta completar
 
             return mppCompra.Crear(beCompra);
         }

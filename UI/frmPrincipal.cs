@@ -200,5 +200,13 @@ namespace UI
             FrmCompra.Show();
             FrmCompra.Size = new Size(1370, 660);
         }
+
+        private void ventasToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmVenta FrmVenta = new frmVenta();
+            FrmVenta.MdiParent = this;
+            FrmVenta.Show();
+            FrmVenta.Size = new Size(1370, 660);
+        }
     }
 }
