@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLLBackUp.cs" />
     <Compile Include="BLLCategoria.cs" />
     <Compile Include="BLLCompra.cs" />
     <Compile Include="BLLLogin.cs" />
     <Compile Include="BLLCliente.cs" />
+    <Compile Include="BLLPermiso.cs" />
     <Compile Include="BLLProducto.cs" />
     <Compile Include="BLLProveedor.cs" />
     <Compile Include="BLLProvincia.cs" />

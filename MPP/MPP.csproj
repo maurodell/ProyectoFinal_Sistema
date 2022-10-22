@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MPPBackUp.cs" />
     <Compile Include="MPPCategoria.cs" />
     <Compile Include="MPPCompra.cs" />
     <Compile Include="MPPLogin.cs" />
     <Compile Include="MPPCliente.cs" />
+    <Compile Include="MPPPermiso.cs" />
     <Compile Include="MPPProducto.cs" />
     <Compile Include="MPPProveedor.cs" />
     <Compile Include="MPPRol.cs" />

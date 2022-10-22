@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BLL;
+using BE;
 
 namespace UI
 {
@@ -14,7 +16,7 @@ namespace UI
     {
         private int childFormNumber = 0;
         public int codigoUsuario;
-        public int codigoRolUsuario;
+        public int codigoRolUsuario = 0;
         public string Nombre;
         public string Email;
         public string Rol;
@@ -23,8 +25,9 @@ namespace UI
         public frmPrincipal()
         {
             InitializeComponent();
+            bllPermiso = new BLLPermiso();
         }
-
+        BLLPermiso bllPermiso;
         private void ShowNewForm(object sender, EventArgs e)
         {
             Form childForm = new Form();
@@ -112,32 +115,49 @@ namespace UI
         {
             LoginInferior.Text = "Usuario: "+this.Nombre+"  -  Email: "+this.Email;
 
-            switch (codigoRolUsuario)
+            //compruebo que el usuario esta logueado
+            if(codigoRolUsuario > 0)
             {
-                case 1:
-                    MenuAlmacen.Enabled = true;
-                    MenuAcceso.Enabled = true;
-                    MenuConsulta.Enabled = true;
-                    MenuIngresos.Enabled = true;
-                    MenuVentas.Enabled = true;
-                    break;
-                case 2:
-                    MenuAlmacen.Enabled = false;
-                    MenuAcceso.Enabled = false;
-                    MenuConsulta.Enabled = true;
-                    MenuIngresos.Enabled = false;
-                    MenuVentas.Enabled = true;
-                    break;
-                case 3:
-                    MenuAlmacen.Enabled = false;
-                    MenuAcceso.Enabled = false;
-                    MenuConsulta.Enabled = true;
-                    MenuIngresos.Enabled = false;
-                    MenuVentas.Enabled = false;
-                    break;
+                MessageBox.Show("Usuario logueado");
+                ValidarPermisos(codigoRolUsuario);
             }
         }
-
+        public void ValidarPermisos(int codigoRolUsuario)
+        {
+            IList<BEComponente> rol = null;
+            rol = bllPermiso.TraerPermisosTodos(codigoRolUsuario);
+            HabilitarMenu(rol);
+        }
+        private void HabilitarMenu(IList<BEComponente> rol)
+        {
+            this.menuStock.Enabled = ConsultarPermiso(this.menuStock.Name, rol);
+            this.submenuCategoria.Enabled = ConsultarPermiso(this.submenuCategoria.Name, rol);
+            this.submenuProducto.Enabled = ConsultarPermiso(this.submenuProducto.Name, rol);
+            this.menuIngresos.Enabled = ConsultarPermiso(this.menuIngresos.Name, rol);
+            this.submenuCompras.Enabled = ConsultarPermiso(this.submenuCompras.Name, rol);
+            this.submenuProveedores.Enabled = ConsultarPermiso(this.submenuProveedores.Name, rol);
+            this.menuVentas.Enabled = ConsultarPermiso(this.menuVentas.Name, rol);
+            this.submenuClientes.Enabled = ConsultarPermiso(this.submenuClientes.Name, rol);
+            this.submenuVentas.Enabled = ConsultarPermiso(this.submenuVentas.Name, rol);
+            this.menuAcceso.Enabled = ConsultarPermiso(this.menuAcceso.Name, rol);
+            this.submenuRoles.Enabled = ConsultarPermiso(this.submenuRoles.Name, rol);
+            this.submenuPermisos.Enabled = ConsultarPermiso(this.submenuPermisos.Name, rol);
+            this.submenuUsuarios.Enabled = ConsultarPermiso(this.submenuUsuarios.Name, rol);
+            this.menuConsulta.Enabled = ConsultarPermiso(this.menuConsulta.Name, rol);
+            this.submenuConsultasVentas.Enabled = ConsultarPermiso(this.submenuConsultasVentas.Name, rol);
+            this.submenuConsultasCompras.Enabled = ConsultarPermiso(this.submenuConsultasCompras.Name, rol);
+            this.menuBackUp.Enabled = ConsultarPermiso(this.menuBackUp.Name, rol);
+            this.submenuNuevoBackUp.Enabled = ConsultarPermiso(this.submenuNuevoBackUp.Name, rol);
+            this.submenuRestore.Enabled = ConsultarPermiso(this.submenuRestore.Name, rol);
+        }
+        private bool ConsultarPermiso(string nombreMenu, IList<BEComponente> rol)
+        {
+            foreach (var item in rol)
+            {
+                if (item._nombre.Equals(nombreMenu)) return true;
+            }
+            return false;
+        }
         private void artToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmProducto frmProducto = new frmProducto();
@@ -207,6 +227,20 @@ namespace UI
             FrmVenta.MdiParent = this;
             FrmVenta.Show();
             FrmVenta.Size = new Size(1370, 660);
+        }
+
+        private void permisosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAgregarPermisosRol FrmAgregarPermisos = new frmAgregarPermisosRol();
+            FrmAgregarPermisos.MdiParent = this;
+            FrmAgregarPermisos.Show();
+        }
+
+        private void nuevoBackUpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBackup FrmBackup = new frmBackup();
+            FrmBackup.MdiParent = this;
+            FrmBackup.Show();
         }
     }
 }

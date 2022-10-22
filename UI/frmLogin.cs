@@ -42,6 +42,7 @@ namespace UI
                     }
                     else
                     {
+                        //completos las variables del frmPrincipal para habilitar los permisos(menus) pasando referencia los datos del usuario.
                         BEUsuario beUsuario = bllLogin.GetUsuario();
                         frmPrincipal FrmPrincipal = new frmPrincipal();
                         FrmPrincipal.codigoUsuario = beUsuario.Codigo;
@@ -61,6 +62,11 @@ namespace UI
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

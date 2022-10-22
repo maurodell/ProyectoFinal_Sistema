@@ -10,4 +10,9 @@
     <descripcion>El rol del vendedor es el del Cajero.</descripcion>
     <estado>1</estado>
   </rol>
+  <rol codigo="3">
+    <nombre>Repositor</nombre>
+    <descripcion>Se encarga de realizar las reposiciones en el deposito y en las gondolas.</descripcion>
+    <estado>1</estado>
+  </rol>
 </roles>
