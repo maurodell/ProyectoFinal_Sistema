@@ -47,6 +47,7 @@
     <Compile Include="BECompra.cs" />
     <Compile Include="BEProducto.cs" />
     <Compile Include="BEProveedor.cs" />
+    <Compile Include="BEProvincia.cs" />
     <Compile Include="BERol.cs" />
     <Compile Include="BEUsuario.cs" />
     <Compile Include="BEVendedor.cs" />

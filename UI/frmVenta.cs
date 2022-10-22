@@ -102,9 +102,14 @@ namespace UI
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
+        private void ListarCondicion()
+        {
+            cmbComprobante.DataSource = Enum.GetValues(typeof(Comprobantes));
+        }
         private void frmVenta_Load(object sender, EventArgs e)
         {
             this.Listar();
+            this.ListarCondicion();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -112,4 +117,5 @@ namespace UI
             this.Buscar();
         }
     }
+    enum Comprobantes { Exento, No_responsable, Consumidor_Final, Responsable_Inscripto, No_categorizado }
 }

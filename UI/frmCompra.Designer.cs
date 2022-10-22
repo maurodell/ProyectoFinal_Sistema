@@ -37,6 +37,7 @@ namespace UI
             this.btnInsertar = new System.Windows.Forms.Button();
             this.txtCodProveedor = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.panelProducto = new System.Windows.Forms.Panel();
@@ -82,7 +83,6 @@ namespace UI
             this.label5 = new System.Windows.Forms.Label();
             this.txtBuscarProve = new System.Windows.Forms.TextBox();
             this.dgvListadoCompra = new System.Windows.Forms.DataGridView();
-            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -160,6 +160,15 @@ namespace UI
             this.tabPage2.Text = "Gestión";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(146, 1273);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(561, 51);
+            this.btnEliminar.TabIndex = 10;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label15);
@@ -199,7 +208,7 @@ namespace UI
             this.panelProducto.Controls.Add(this.btnBuscarPanel);
             this.panelProducto.Controls.Add(this.txtBuscarProducPanel);
             this.panelProducto.Controls.Add(this.label14);
-            this.panelProducto.Location = new System.Drawing.Point(1248, 342);
+            this.panelProducto.Location = new System.Drawing.Point(280, 182);
             this.panelProducto.Name = "panelProducto";
             this.panelProducto.Size = new System.Drawing.Size(2893, 773);
             this.panelProducto.TabIndex = 22;
@@ -624,15 +633,6 @@ namespace UI
             this.dgvListadoCompra.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListadoCompra.Size = new System.Drawing.Size(3495, 1031);
             this.dgvListadoCompra.TabIndex = 0;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Location = new System.Drawing.Point(146, 1273);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(561, 51);
-            this.btnEliminar.TabIndex = 10;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
             // 
             // frmCompra
             // 

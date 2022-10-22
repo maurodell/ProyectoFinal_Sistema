@@ -11,4 +11,15 @@
     <clave>rUvj1G+ybfI=</clave>
     <estado>1</estado>
   </usuario>
+  <usuario codigo="2">
+    <codigoRol>2</codigoRol>
+    <nombre>vendedor</nombre>
+    <tipoDocumento>DNI</tipoDocumento>
+    <documento>sss</documento>
+    <domicilio>sss</domicilio>
+    <telefono>ss</telefono>
+    <email>vendedor</email>
+    <clave>rUvj1G+ybfI=</clave>
+    <estado>1</estado>
+  </usuario>
 </usuarios>

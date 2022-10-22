@@ -172,16 +172,10 @@ namespace UI
             // cmbComprobante
             // 
             this.cmbComprobante.FormattingEnabled = true;
-            this.cmbComprobante.Items.AddRange(new object[] {
-            "Recibo",
-            "Factura A",
-            "Factura B",
-            "Factura C"});
             this.cmbComprobante.Location = new System.Drawing.Point(267, 132);
             this.cmbComprobante.Name = "cmbComprobante";
             this.cmbComprobante.Size = new System.Drawing.Size(316, 39);
             this.cmbComprobante.TabIndex = 5;
-            this.cmbComprobante.Text = "Factura A";
             // 
             // txtNombreProveedor
             // 
