@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<clientes>
+  <cliente codigo="1">
+    <nombre>Mauro</nombre>
+    <tipoDocumento>CUIT</tipoDocumento>
+    <documento>123456</documento>
+    <domicilio>sdsdas</domicilio>
+    <telefono>123456</telefono>
+    <email>emial</email>
+  </cliente>
+</clientes>

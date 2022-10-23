@@ -8,7 +8,6 @@ namespace BE
 {
     public class BEBackup : Entidad
     {
-        public string direccion { get; set; }
         public string nombreUsuario { get; set; }
         public int codigoUsuario { get; set; }
         public DateTime fecha { get; set; }

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<productos>
+  <producto codigo="1">
+    <codigoCategoria>2</codigoCategoria>
+    <codigoBarra>123456</codigoBarra>
+    <nombre>agua</nombre>
+    <precioVenta>10</precioVenta>
+    <stock>2</stock>
+    <descripcion></descripcion>
+    <ubicacion>a1</ubicacion>
+    <fechaVencimiento>2022-09-17T19:22:13.5527604-03:00</fechaVencimiento>
+    <imagen></imagen>
+    <estado>1</estado>
+  </producto>
+</productos>

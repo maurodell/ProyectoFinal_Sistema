@@ -20,6 +20,7 @@ namespace UI
             bllLogin = new BLLLogin();
         }
         BLLLogin bllLogin;
+        public BEUsuario beUsuario;
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -43,7 +44,7 @@ namespace UI
                     else
                     {
                         //completos las variables del frmPrincipal para habilitar los permisos(menus) pasando referencia los datos del usuario.
-                        BEUsuario beUsuario = bllLogin.GetUsuario();
+                        beUsuario = bllLogin.GetUsuario();
                         frmPrincipal FrmPrincipal = new frmPrincipal();
                         FrmPrincipal.codigoUsuario = beUsuario.Codigo;
                         FrmPrincipal.Nombre = beUsuario.nombre;

@@ -15,9 +15,20 @@ namespace BLL
             mppBackUp = new MPPBackUp();
         }
         MPPBackUp mppBackUp;
+        BEBackup backup;
         public List<BEBackup> Listar()
         {
             return mppBackUp.Listar();
+        }
+        public bool Crear(int codigoUsuario, string nombreUsuario)
+        {
+            DateTime hoy = DateTime.Today;
+
+            backup = new BEBackup();
+            backup.fecha = hoy;
+            backup.codigoUsuario = codigoUsuario;
+            backup.nombreUsuario = nombreUsuario;
+            return mppBackUp.Crear(backup);
         }
     }
 }

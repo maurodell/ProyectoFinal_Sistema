@@ -33,7 +33,6 @@ namespace MPP
                             {
                                 Codigo = Convert.ToInt32(item["codigo"]),
                                 nombreUsuario = Convert.ToString(item["nombreusuario"]),
-                                direccion = Convert.ToString(item["direccion"]),
                                 codigoUsuario = Convert.ToInt32(item["codigousuario"]),
                                 fecha = Convert.ToDateTime(item["fecha"])
                             };
@@ -45,6 +44,27 @@ namespace MPP
             catch (XmlException)
             {
                 throw new XmlException();
+            }
+        }
+        public bool Crear(BEBackup Parametro)
+        {
+            try
+            {
+                List<BEBackup> backup = Listar();
+                int cantidad = backup.Count();
+
+                XDocument crear = XDocument.Load(pathBack);
+                crear.Element("backs").Add(new XElement("back",
+                                                new XAttribute("codigo", (cantidad+1)),
+                                                new XElement("nombreusuario", Parametro.nombreUsuario),
+                                                new XElement("codigousuario", Parametro.codigoUsuario),
+                                                new XElement("fecha", Parametro.fecha)));
+                crear.Save(pathBack);
+                return true;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
             }
         }
     }

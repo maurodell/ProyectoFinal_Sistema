@@ -118,7 +118,6 @@ namespace UI
             //compruebo que el usuario esta logueado
             if(codigoRolUsuario > 0)
             {
-                MessageBox.Show("Usuario logueado");
                 ValidarPermisos(codigoRolUsuario);
             }
         }
