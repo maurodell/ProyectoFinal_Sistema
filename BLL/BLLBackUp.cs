@@ -30,5 +30,9 @@ namespace BLL
             backup.nombreUsuario = nombreUsuario;
             return mppBackUp.Crear(backup);
         }
+        public bool Restore(int codigoBack)
+        {
+            return mppBackUp.Restore(codigoBack);
+        }
     }
 }

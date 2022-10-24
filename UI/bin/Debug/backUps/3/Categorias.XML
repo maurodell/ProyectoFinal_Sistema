@@ -10,4 +10,9 @@
     <descripcion>Gaseosas, Aguas, Jugos, Jugos Naturales, Aguas con gases.</descripcion>
     <estado>1</estado>
   </categoria>
+  <categoria codigo="3">
+    <nombre>Alimentos embutidos</nombre>
+    <descripcion>Alimentos embutidos varios</descripcion>
+    <estado>1</estado>
+  </categoria>
 </categorias>

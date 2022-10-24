@@ -34,6 +34,7 @@ namespace UI
             this.label1 = new System.Windows.Forms.Label();
             this.btnRestore = new System.Windows.Forms.Button();
             this.chkSeleccionar = new System.Windows.Forms.CheckBox();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,8 +52,11 @@ namespace UI
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Seleccionar});
             this.dataGridView1.Location = new System.Drawing.Point(35, 110);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -60,13 +64,14 @@ namespace UI
             this.dataGridView1.RowTemplate.Height = 40;
             this.dataGridView1.Size = new System.Drawing.Size(1547, 459);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(29, 56);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(558, 80);
+            this.label1.Size = new System.Drawing.Size(223, 32);
             this.label1.TabIndex = 2;
             this.label1.Text = "Listado Back-Up";
             // 
@@ -78,6 +83,7 @@ namespace UI
             this.btnRestore.TabIndex = 3;
             this.btnRestore.Text = "Restore";
             this.btnRestore.UseVisualStyleBackColor = true;
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
             // chkSeleccionar
             // 
@@ -88,6 +94,14 @@ namespace UI
             this.chkSeleccionar.TabIndex = 4;
             this.chkSeleccionar.Text = "Seleccionar";
             this.chkSeleccionar.UseVisualStyleBackColor = true;
+            this.chkSeleccionar.CheckedChanged += new System.EventHandler(this.chkSeleccionar_CheckedChanged);
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.MinimumWidth = 12;
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.ReadOnly = true;
             // 
             // frmBackup
             // 
@@ -115,5 +129,6 @@ namespace UI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRestore;
         private System.Windows.Forms.CheckBox chkSeleccionar;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
     }
 }

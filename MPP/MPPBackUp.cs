@@ -10,12 +10,16 @@ using System.Xml;
 using System.Data;
 using System.IO;
 using System.Reflection;
+using Microsoft.VisualBasic.Devices;
 
 namespace MPP
 {
     public class MPPBackUp
     {
+        Computer thisComputer = new Computer();
         private string pathBack = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\listadoBackUp" + "\\ListadoBackUp.XML";
+        private string directorioDestino = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml";
+        private string directorioOrigen = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\backUps";
         public List<BEBackup> Listar()
         {
             try
@@ -66,6 +70,34 @@ namespace MPP
             {
                 throw ex;
             }
+        }
+        public bool Restore(int codigoBack)
+        {
+            try
+            {
+                string directorio = "\\" + codigoBack.ToString();
+                //elimino los archivos del directorio para eliminarlo
+                string[] files = Directory.GetFiles(directorioDestino);
+                foreach (string file in files)
+                {
+                    File.Delete(file);
+                }
+                Directory.Delete(directorioDestino);
+                thisComputer.FileSystem.CreateDirectory(directorioDestino);
+                if (Directory.Exists(directorioDestino))
+                {
+                    thisComputer.FileSystem.CopyDirectory(String.Concat(directorioOrigen, directorio), directorioDestino);
+                    return true;
+                }
+                //tengo que ir a la carpeta y buscar por código de backup, copiar la carpeta y llevar el contenido a la carpeta 
+                //donde estan los archivos que se usan en el sistema, pero antes tengo que borrarlas.
+                return false;
+            }
+            catch (ArgumentException ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }
