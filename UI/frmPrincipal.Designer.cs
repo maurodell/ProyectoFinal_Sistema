@@ -65,6 +65,7 @@ namespace UI
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.LoginInferior = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.administrarUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -89,6 +90,7 @@ namespace UI
             this.menuStrip.Size = new System.Drawing.Size(1685, 58);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
+            this.menuStrip.Validated += new System.EventHandler(this.menuStrip_Validated);
             // 
             // menuStock
             // 
@@ -164,7 +166,8 @@ namespace UI
             this.menuAcceso.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.submenuRoles,
             this.submenuUsuarios,
-            this.submenuPermisos});
+            this.submenuPermisos,
+            this.administrarUsuariosToolStripMenuItem});
             this.menuAcceso.Name = "menuAcceso";
             this.menuAcceso.Size = new System.Drawing.Size(149, 48);
             this.menuAcceso.Text = "Accesos";
@@ -223,14 +226,14 @@ namespace UI
             // submenuNuevoBackUp
             // 
             this.submenuNuevoBackUp.Name = "submenuNuevoBackUp";
-            this.submenuNuevoBackUp.Size = new System.Drawing.Size(448, 54);
+            this.submenuNuevoBackUp.Size = new System.Drawing.Size(284, 54);
             this.submenuNuevoBackUp.Text = "Nuevo";
             this.submenuNuevoBackUp.Click += new System.EventHandler(this.nuevoBackUpToolStripMenuItem_Click);
             // 
             // submenuRestore
             // 
             this.submenuRestore.Name = "submenuRestore";
-            this.submenuRestore.Size = new System.Drawing.Size(448, 54);
+            this.submenuRestore.Size = new System.Drawing.Size(284, 54);
             this.submenuRestore.Text = "Restore";
             // 
             // helpMenu
@@ -337,6 +340,13 @@ namespace UI
             this.LoginInferior.Size = new System.Drawing.Size(205, 41);
             this.LoginInferior.Text = "Proyecto Final";
             // 
+            // administrarUsuariosToolStripMenuItem
+            // 
+            this.administrarUsuariosToolStripMenuItem.Name = "administrarUsuariosToolStripMenuItem";
+            this.administrarUsuariosToolStripMenuItem.Size = new System.Drawing.Size(454, 54);
+            this.administrarUsuariosToolStripMenuItem.Text = "Administrar usuarios";
+            this.administrarUsuariosToolStripMenuItem.Click += new System.EventHandler(this.administrarUsuariosToolStripMenuItem_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -400,6 +410,7 @@ namespace UI
         private System.Windows.Forms.ToolStripMenuItem menuBackUp;
         private System.Windows.Forms.ToolStripMenuItem submenuNuevoBackUp;
         private System.Windows.Forms.ToolStripMenuItem submenuRestore;
+        private System.Windows.Forms.ToolStripMenuItem administrarUsuariosToolStripMenuItem;
     }
 }
 

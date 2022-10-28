@@ -74,7 +74,7 @@ namespace MPP
 
                 XDocument documento = XDocument.Load(path);
 
-                var consulta = from producto in documento.Descendants("producto")
+                var consulta = from producto in documento.Descendants("usuario")
                                where producto.Element("nombre").Value.Contains(Parametro)
                                select producto;
 
@@ -101,7 +101,38 @@ namespace MPP
                 throw ex;
             }
         }
+        public BEUsuario BuscarUsuario(string Parametro)
+        {
+            try
+            {
+                BEUsuario usuarioBuscar = new BEUsuario(); ;
 
+                XDocument documento = XDocument.Load(path);
+
+                var consulta = from producto in documento.Descendants("usuario")
+                               where producto.Element("email").Value.Contains(Parametro)
+                               select producto;
+
+                foreach (XElement EModifcar in consulta)
+                {
+                    usuarioBuscar.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
+                    usuarioBuscar.codigoRol = Convert.ToInt32(EModifcar.Element("codigoRol").Value);
+                    usuarioBuscar.nombre = EModifcar.Element("nombre").Value;
+                    usuarioBuscar.tipoDocumento = EModifcar.Element("tipoDocumento").Value;
+                    usuarioBuscar.documento = EModifcar.Element("documento").Value;
+                    usuarioBuscar.domicilio = EModifcar.Element("domicilio").Value;
+                    usuarioBuscar.telefono = EModifcar.Element("telefono").Value;
+                    usuarioBuscar.email = EModifcar.Element("email").Value;
+                    usuarioBuscar.clave = EModifcar.Element("clave").Value;
+                    usuarioBuscar.estado = Convert.ToBoolean(Convert.ToInt32(EModifcar.Element("estado").Value));
+                }
+                return usuarioBuscar;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
+        }
         public bool Crear(BEUsuario Parametro)
         {
             try

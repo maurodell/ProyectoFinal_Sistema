@@ -4,10 +4,6 @@
     <codigorol>2</codigorol>
     <codigomenu>101</codigomenu>
   </rolpermiso>
-  <rolpermiso codigo="4">
-    <codigorol>3</codigorol>
-    <codigomenu>100</codigomenu>
-  </rolpermiso>
   <rolpermiso codigo="5">
     <codigorol>1</codigorol>
     <codigomenu>100</codigomenu>
@@ -43,5 +39,29 @@
   <rolpermiso codigo="13">
     <codigorol>1</codigorol>
     <codigomenu>103</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="14">
+    <codigorol>1</codigorol>
+    <codigomenu>102</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="15">
+    <codigorol>1</codigorol>
+    <codigomenu>105</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="16">
+    <codigorol>1</codigorol>
+    <codigomenu>104</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="17">
+    <codigorol>1</codigorol>
+    <codigomenu>106</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="18">
+    <codigorol>1</codigorol>
+    <codigomenu>107</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="19">
+    <codigorol>3</codigorol>
+    <codigomenu>100</codigomenu>
   </rolpermiso>
 </permisos>

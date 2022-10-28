@@ -15,7 +15,7 @@ namespace UI
     public partial class frmPrincipal : Form
     {
         private int childFormNumber = 0;
-        public int codigoUsuario;
+        public int codigoUsuario = 0;
         public int codigoRolUsuario = 0;
         public string Nombre;
         public string Email;
@@ -26,8 +26,11 @@ namespace UI
         {
             InitializeComponent();
             bllPermiso = new BLLPermiso();
+            bllUsuario = new BLLUsuario();
         }
         BLLPermiso bllPermiso;
+        BEUsuario beUsuario;
+        BLLUsuario bllUsuario;
         private void ShowNewForm(object sender, EventArgs e)
         {
             Form childForm = new Form();
@@ -123,12 +126,14 @@ namespace UI
         }
         public void ValidarPermisos(int codigoRolUsuario)
         {
+            beUsuario = bllUsuario.BuscarUsuario(Email);
             IList<BEComponente> rol = null;
-            rol = bllPermiso.TraerPermisosTodos(codigoRolUsuario);
+            rol = bllPermiso.TraerRolesPorUsuario(beUsuario);
             HabilitarMenu(rol);
         }
         private void HabilitarMenu(IList<BEComponente> rol)
         {
+
             this.menuStock.Enabled = ConsultarPermiso(this.menuStock.Name, rol);
             this.submenuCategoria.Enabled = ConsultarPermiso(this.submenuCategoria.Name, rol);
             this.submenuProducto.Enabled = ConsultarPermiso(this.submenuProducto.Name, rol);
@@ -148,12 +153,17 @@ namespace UI
             this.menuBackUp.Enabled = ConsultarPermiso(this.menuBackUp.Name, rol);
             this.submenuNuevoBackUp.Enabled = ConsultarPermiso(this.submenuNuevoBackUp.Name, rol);
             this.submenuRestore.Enabled = ConsultarPermiso(this.submenuRestore.Name, rol);
+
         }
         private bool ConsultarPermiso(string nombreMenu, IList<BEComponente> rol)
         {
-            foreach (var item in rol)
+
+            foreach (var rolUser in rol)
             {
-                if (item._nombre.Equals(nombreMenu)) return true;
+                foreach (var menu in rolUser.ObjenerHijos)
+                {
+                    if (menu._nombre.Equals(nombreMenu)) return true;
+                }
             }
             return false;
         }
@@ -240,6 +250,18 @@ namespace UI
             frmBackup FrmBackup = new frmBackup();
             FrmBackup.MdiParent = this;
             FrmBackup.Show();
+        }
+
+        private void menuStrip_Validated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void administrarUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAdministrarUsuarioPermisos FrmAdminPermisos = new frmAdministrarUsuarioPermisos();
+            FrmAdminPermisos.MdiParent = this;
+            FrmAdminPermisos.Show();
         }
     }
 }

@@ -2,10 +2,10 @@
 <usuarios>
   <usuario codigo="1">
     <codigoRol>1</codigoRol>
-    <nombre>admin</nombre>
+    <nombre>adminMauro</nombre>
     <tipoDocumento>DNI</tipoDocumento>
     <documento></documento>
-    <domicilio>11111</domicilio>
+    <domicilio></domicilio>
     <telefono></telefono>
     <email>admin</email>
     <clave>rUvj1G+ybfI=</clave>

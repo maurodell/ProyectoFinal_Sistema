@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<usuariosroles>
+  <usuariorol codigo="1">
+    <codigoUsuario>1</codigoUsuario>
+    <codigoRol>1</codigoRol>
+  </usuariorol>
+  <usuariorol codigo="2">
+    <codigoUsuario>1</codigoUsuario>
+    <codigoRol>2</codigoRol>
+  </usuariorol>
+</usuariosroles>

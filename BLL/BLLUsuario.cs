@@ -32,6 +32,10 @@ namespace BLL
         {
             return mppUsuario.Buscar(Parametro);
         }
+        public BEUsuario BuscarUsuario(string Parametro)
+        {
+            return mppUsuario.BuscarUsuario(Parametro);
+        }
         public bool Crear(int codigoRol, string nombre, string tipoDocumento, 
                             string documento, string domicilio, string telefono, string email, string clave)
         {

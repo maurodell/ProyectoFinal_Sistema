@@ -13,6 +13,7 @@ namespace BE
         public BEFamillia()
         {
             _hijos = new List<BEComponente>();
+            _tipo = 1;
         }
 
         public override void AgregarHijo(BEComponente componente)

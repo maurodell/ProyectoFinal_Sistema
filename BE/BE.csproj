@@ -60,6 +60,7 @@
     <Compile Include="DTO\DTOMenu.cs" />
     <Compile Include="DTO\DTOPermisosMenuPorRol.cs" />
     <Compile Include="DTO\DTORolMenu.cs" />
+    <Compile Include="DTO\DTOUsuarioRol.cs" />
     <Compile Include="Entidad.cs" />
     <Compile Include="Localizacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

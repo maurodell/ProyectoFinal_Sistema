@@ -10,7 +10,11 @@ C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solució
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 1\Sistemas_Sale_Point\Abstraccion\obj\Debug\Abstraccion.pdb
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Abstraccion\bin\Debug\Abstraccion.dll
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Abstraccion\bin\Debug\Abstraccion.pdb
-C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Abstraccion\obj\Debug\Abstraccion.csproj.AssemblyReference.cache
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Abstraccion\obj\Debug\Abstraccion.csproj.CoreCompileInputs.cache
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Abstraccion\obj\Debug\Abstraccion.dll
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Abstraccion\obj\Debug\Abstraccion.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 3\Sistemas_Sale_Point\Abstraccion\bin\Debug\Abstraccion.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 3\Sistemas_Sale_Point\Abstraccion\bin\Debug\Abstraccion.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 3\Sistemas_Sale_Point\Abstraccion\obj\Debug\Abstraccion.csproj.CoreCompileInputs.cache
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 3\Sistemas_Sale_Point\Abstraccion\obj\Debug\Abstraccion.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 3\Sistemas_Sale_Point\Abstraccion\obj\Debug\Abstraccion.pdb

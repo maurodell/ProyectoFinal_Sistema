@@ -82,15 +82,16 @@ namespace MPP
                 {
                     File.Delete(file);
                 }
+                //Elimino el directorio
                 Directory.Delete(directorioDestino);
+                //Creo un nuevo directorio
                 thisComputer.FileSystem.CreateDirectory(directorioDestino);
+                //Si el directorio existe copia el directorio con el código que se quiere hacer el restore.
                 if (Directory.Exists(directorioDestino))
                 {
                     thisComputer.FileSystem.CopyDirectory(String.Concat(directorioOrigen, directorio), directorioDestino);
                     return true;
                 }
-                //tengo que ir a la carpeta y buscar por código de backup, copiar la carpeta y llevar el contenido a la carpeta 
-                //donde estan los archivos que se usan en el sistema, pero antes tengo que borrarlas.
                 return false;
             }
             catch (ArgumentException ex)

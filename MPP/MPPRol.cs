@@ -102,7 +102,39 @@ namespace MPP
                 throw ex;
             }
         }
+        public BERol BuscarPorCodigo(int codigoRol)
+        {
+            try
+            {
+                if (codigoRol.Equals(""))
+                {
+                    return null;
+                }
+                else
+                {
+                    BERol rolBuscar = new BERol();
+                    XDocument documento = XDocument.Load(path);
 
+                    var consulta = from rol in documento.Descendants("rol")
+                                   where rol.Attribute("codigo").Value == codigoRol.ToString()
+                                   select rol;
+
+                    foreach (XElement EModifcar in consulta)
+                    {
+                        rolBuscar.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
+                        rolBuscar.nombre = EModifcar.Element("nombre").Value;
+                        rolBuscar.descripcion = EModifcar.Element("descripcion").Value;
+                        rolBuscar.estado = Convert.ToBoolean(Convert.ToInt32(EModifcar.Element("estado").Value));
+                    }
+                    return rolBuscar;
+                }
+
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
+        }
         public bool Crear(BERol Parametro)
         {
             try
@@ -166,7 +198,7 @@ namespace MPP
                 {
                     foreach (DataRow item in DS.Tables[0].Rows)
                     {
-                        string estado = item["estado"].ToString(); //-->listo los que tengan el estado en true
+                        string estado = item["estado"].ToString(); //-->voy a listar los que tengan el estado en true
                         if (estado.Equals("1"))
                         {
                             BERol rol = new BERol

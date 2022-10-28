@@ -33,9 +33,21 @@ namespace BLL
         {
             return mppPermiso.GuardarFamilia(beFamilia);
         }
-        public bool ExisteMenu(string nombreMenu)
+        public bool ExisteRolEnUsuario(int codigoUsuario, int codigoRol)
         {
-            return mppPermiso.ExisteMenu(nombreMenu);
+            return mppPermiso.ExisteRolEnUsuario(codigoUsuario, codigoRol);
+        }
+        public bool AgregarRol(int codigoUsuario, int codigoRol)
+        {
+            return mppPermiso.AgregarRol(codigoUsuario, codigoRol);
+        }
+        public IList<BEComponente> TraerRolesPorUsuario(BEUsuario usuario)
+        {
+            return mppPermiso.TraerRolesPorUsuario(usuario);
+        }
+        public BEComponente TraerRol(int codigoRol)
+        {
+            return mppPermiso.TraerRol(codigoRol);
         }
     }
 }

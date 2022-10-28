@@ -8,6 +8,10 @@ namespace BE
 {
     public class BEPermiso : BEComponente
     {
+        public BEPermiso()
+        {
+            _tipo = 0;
+        }
         public override IList<BEComponente> ObjenerHijos
         {
             get { return new List<BEComponente>(); }

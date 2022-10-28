@@ -10,7 +10,11 @@ C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solució
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 1\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.pdb
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Seguridad\bin\Debug\Seguridad.dll
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Seguridad\bin\Debug\Seguridad.pdb
-C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.csproj.AssemblyReference.cache
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.csproj.CoreCompileInputs.cache
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.dll
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 2\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 3\Sistemas_Sale_Point\Seguridad\bin\Debug\Seguridad.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 3\Sistemas_Sale_Point\Seguridad\bin\Debug\Seguridad.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 3\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.csproj.CoreCompileInputs.cache
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 3\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 3\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.pdb

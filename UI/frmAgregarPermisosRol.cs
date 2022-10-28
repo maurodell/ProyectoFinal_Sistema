@@ -17,6 +17,7 @@ namespace UI
         BLLPermiso bllPermiso;
         BLLRol bllRol;
         BEFamillia beFamilia;
+        frmPrincipal principalMenu;
         private void LlenarCmbMenus()
         {
             this.cmbMenus.DataSource = null;
@@ -131,6 +132,7 @@ namespace UI
                 if (bllPermiso.GuardarFamilia(beFamilia))
                 {
                     MessageBox.Show("Permisos guardados correctamente");
+                    ActualizarTabControls();
                 }
                 else
                 {
@@ -141,6 +143,12 @@ namespace UI
             {
                 throw ex;
             }
+        }
+        //Ver la forma de actualizar en tiempo real el tab de menu
+        private void ActualizarTabControls()
+        {
+            principalMenu = new frmPrincipal();
+            principalMenu.ValidarPermisos(beFamilia._codigo);
         }
     }
 }
