@@ -82,7 +82,6 @@ namespace MPP
                 {
                     usuarioBuscar = new BEUsuario();
                     usuarioBuscar.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
-                    usuarioBuscar.codigoRol = Convert.ToInt32(EModifcar.Element("codigoRol").Value);
                     usuarioBuscar.nombre = EModifcar.Element("nombre").Value;
                     usuarioBuscar.tipoDocumento = EModifcar.Element("tipoDocumento").Value;
                     usuarioBuscar.documento = EModifcar.Element("documento").Value;
@@ -116,7 +115,6 @@ namespace MPP
                 foreach (XElement EModifcar in consulta)
                 {
                     usuarioBuscar.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
-                    usuarioBuscar.codigoRol = Convert.ToInt32(EModifcar.Element("codigoRol").Value);
                     usuarioBuscar.nombre = EModifcar.Element("nombre").Value;
                     usuarioBuscar.tipoDocumento = EModifcar.Element("tipoDocumento").Value;
                     usuarioBuscar.documento = EModifcar.Element("documento").Value;
@@ -143,7 +141,6 @@ namespace MPP
                 XDocument crear = XDocument.Load(path);
                 crear.Element("usuarios").Add(new XElement("usuario",
                                                 new XAttribute("codigo", (cantidadPart + 1)),
-                                                new XElement("codigoRol", Parametro.codigoRol),
                                                 new XElement("nombre", Parametro.nombre),
                                                 new XElement("tipoDocumento", Parametro.tipoDocumento),
                                                 new XElement("documento", Parametro.documento),
@@ -216,7 +213,6 @@ namespace MPP
                             BEUsuario usuario = new BEUsuario
                             {
                                 Codigo = Convert.ToInt32(item["codigo"]),
-                                codigoRol = Convert.ToInt32(item["codigoRol"]),
                                 nombre = Convert.ToString(item["nombre"]),
                                 tipoDocumento = Convert.ToString(item["tipoDocumento"]),
                                 documento = Convert.ToString(item["documento"]),
@@ -254,7 +250,6 @@ namespace MPP
                         BEUsuario usuario = new BEUsuario
                         {
                             Codigo = Convert.ToInt32(item["codigo"]),
-                            codigoRol = Convert.ToInt32(item["codigoRol"]),
                             nombre = Convert.ToString(item["nombre"]),
                             tipoDocumento = Convert.ToString(item["tipoDocumento"]),
                             documento = Convert.ToString(item["documento"]),
@@ -297,7 +292,6 @@ namespace MPP
                         {
                             EModifcar.Element("email").Value = Parametro.email;
                             EModifcar.Element("nombre").Value = Parametro.nombre;
-                            EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
                             EModifcar.Element("tipoDocumento").Value = Parametro.tipoDocumento;
                             EModifcar.Element("documento").Value = Parametro.documento;
                             EModifcar.Element("domicilio").Value = Parametro.domicilio;
@@ -311,7 +305,6 @@ namespace MPP
                         foreach (XElement EModifcar in consulta)
                         {
                             EModifcar.Element("nombre").Value = Parametro.nombre;
-                            EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
                             EModifcar.Element("tipoDocumento").Value = Parametro.tipoDocumento;
                             EModifcar.Element("documento").Value = Parametro.documento;
                             EModifcar.Element("domicilio").Value = Parametro.domicilio;
@@ -330,7 +323,6 @@ namespace MPP
                         {
                             EModifcar.Element("email").Value = Parametro.email;
                             EModifcar.Element("nombre").Value = Parametro.nombre;
-                            EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
                             EModifcar.Element("domicilio").Value = Parametro.domicilio;
                             EModifcar.Element("telefono").Value = Parametro.telefono;
                         }
@@ -342,7 +334,6 @@ namespace MPP
                         foreach (XElement EModifcar in consulta)
                         {
                             EModifcar.Element("nombre").Value = Parametro.nombre;
-                            EModifcar.Element("codigoRol").Value = Convert.ToString(Parametro.codigoRol);
                             EModifcar.Element("domicilio").Value = Parametro.domicilio;
                             EModifcar.Element("telefono").Value = Parametro.telefono;
                         }

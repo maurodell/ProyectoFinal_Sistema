@@ -1,18 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <usuarios>
   <usuario codigo="1">
-    <codigoRol>1</codigoRol>
     <nombre>adminMauro</nombre>
     <tipoDocumento>DNI</tipoDocumento>
-    <documento></documento>
-    <domicilio></domicilio>
-    <telefono></telefono>
+    <documento>32290172</documento>
+    <domicilio>rioja 123</domicilio>
+    <telefono>2134567</telefono>
     <email>admin</email>
     <clave>rUvj1G+ybfI=</clave>
     <estado>1</estado>
   </usuario>
   <usuario codigo="2">
-    <codigoRol>2</codigoRol>
     <nombre>vendedor</nombre>
     <tipoDocumento>DNI</tipoDocumento>
     <documento>sss</documento>

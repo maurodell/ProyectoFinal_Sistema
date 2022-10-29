@@ -147,7 +147,7 @@ namespace UI
         private void ActualizarTabControls()
         {
             principalMenu = new frmPrincipal();
-            principalMenu.ValidarPermisos(beFamilia._codigo);
+            principalMenu.ValidarPermisos();
         }
 
         private void btnQuitarPerm_Click(object sender, EventArgs e)

@@ -41,7 +41,6 @@ namespace MPP
                 foreach (XElement EModifcar in consulta)
                 {
                     usuarioBuscar.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
-                    usuarioBuscar.codigoRol = Convert.ToInt32(EModifcar.Element("codigoRol").Value);
                     usuarioBuscar.nombre = EModifcar.Element("nombre").Value;
                     usuarioBuscar.tipoDocumento = EModifcar.Element("tipoDocumento").Value;
                     usuarioBuscar.documento = EModifcar.Element("documento").Value;

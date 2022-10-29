@@ -48,7 +48,6 @@ namespace UI
                         frmPrincipal FrmPrincipal = new frmPrincipal();
                         FrmPrincipal.codigoUsuario = beUsuario.Codigo;
                         FrmPrincipal.Nombre = beUsuario.nombre;
-                        FrmPrincipal.codigoRolUsuario = beUsuario.codigoRol;
                         FrmPrincipal.Estado = beUsuario.estado;
                         FrmPrincipal.Email = beUsuario.email;
 

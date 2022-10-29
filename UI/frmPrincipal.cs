@@ -16,7 +16,6 @@ namespace UI
     {
         private int childFormNumber = 0;
         public int codigoUsuario = 0;
-        public int codigoRolUsuario = 0;
         public string Nombre;
         public string Email;
         public string Rol;
@@ -119,12 +118,12 @@ namespace UI
             LoginInferior.Text = "Usuario: "+this.Nombre+"  -  Email: "+this.Email;
 
             //compruebo que el usuario esta logueado
-            if(codigoRolUsuario > 0)
+            if(Email != null)
             {
-                ValidarPermisos(codigoRolUsuario);
+                ValidarPermisos();
             }
         }
-        public void ValidarPermisos(int codigoRolUsuario)
+        public void ValidarPermisos()
         {
             beUsuario = bllUsuario.BuscarUsuario(Email);
             IList<BEComponente> rol = null;

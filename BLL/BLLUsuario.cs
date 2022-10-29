@@ -36,13 +36,12 @@ namespace BLL
         {
             return mppUsuario.BuscarUsuario(Parametro);
         }
-        public bool Crear(int codigoRol, string nombre, string tipoDocumento, 
+        public bool Crear(string nombre, string tipoDocumento, 
                             string documento, string domicilio, string telefono, string email, string clave)
         {
             Encriptado encriptar = new Encriptado();
 
             usuario = new BEUsuario();
-            usuario.codigoRol = codigoRol;
             usuario.nombre = nombre;
             usuario.tipoDocumento = tipoDocumento;
             usuario.documento = documento;
@@ -77,12 +76,11 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
-        public bool Modificar(int codigo, int codigoRol, string nombre, string tipoDocumento,
+        public bool Modificar(int codigo, string nombre, string tipoDocumento,
                             string documento, string domicilio, string telefono, string email, string emailAnterior)
         {
             usuario = new BEUsuario();
             usuario.Codigo = codigo;
-            usuario.codigoRol = codigoRol;
             usuario.nombre = nombre;
             usuario.tipoDocumento = tipoDocumento;
             usuario.documento = documento;

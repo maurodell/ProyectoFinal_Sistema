@@ -33,21 +33,19 @@ namespace UI
         private void Formato()
         {
             dgvListadoUser.Columns[0].Visible = false;
-            dgvListadoUser.Columns[1].HeaderText = "Cód. Rol";
-            dgvListadoUser.Columns[1].Width = 50;
-            dgvListadoUser.Columns[2].Width = 100;
-            dgvListadoUser.Columns[3].HeaderText = "Tipo Doc.";
-            dgvListadoUser.Columns[3].Width = 50;
+            dgvListadoUser.Columns[1].Width = 100;
+            dgvListadoUser.Columns[2].HeaderText = "Tipo Doc.";
+            dgvListadoUser.Columns[2].Width = 50;
 
+            dgvListadoUser.Columns[3].Width = 100;
             dgvListadoUser.Columns[4].Width = 100;
-            dgvListadoUser.Columns[5].Width = 100;
-            dgvListadoUser.Columns[6].HeaderText = "Estado";
+            dgvListadoUser.Columns[5].HeaderText = "Estado";
+            dgvListadoUser.Columns[5].Width = 50;
+            dgvListadoUser.Columns[6].HeaderText = "Código";
             dgvListadoUser.Columns[6].Width = 50;
-            dgvListadoUser.Columns[7].HeaderText = "Código";
-            dgvListadoUser.Columns[7].Width = 50;
-            dgvListadoUser.Columns[8].Width = 150;
-            dgvListadoUser.Columns[9].Width = 100;
-            dgvListadoUser.Columns[10].Width = 150;
+            dgvListadoUser.Columns[7].Width = 150;
+            dgvListadoUser.Columns[8].Width = 100;
+            dgvListadoUser.Columns[9].Width = 150;
         }
         private void Limpiar()
         {
@@ -56,6 +54,7 @@ namespace UI
             txtCodigo.Clear();
             txtClave.Clear();
             txtDocumento.Clear();
+            txtDomicilio.Clear();
             txtEmail.Clear();
             txtReClave.Clear();
             txtTelefono.Clear();
@@ -94,24 +93,9 @@ namespace UI
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
-        private void CargarRol() 
-        {
-            try
-            {
-                cmbRol.DataSource = null;
-                cmbRol.DataSource = bllRol.Listar();
-                cmbRol.ValueMember = "codigo";
-                cmbRol.DisplayMember = "nombre";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message+ex.StackTrace);
-            }
-        }
         private void frmUsuario_Load(object sender, EventArgs e)
         {
             this.Listar();
-            this.CargarRol();
             txtCodigo.Visible = false; 
         }
 
@@ -125,10 +109,9 @@ namespace UI
             try
             {
                 bool respuesta = false;
-                if (cmbRol.Text == string.Empty || txtEmail.Text == string.Empty || txtNombre.Text == string.Empty || txtClave.Text == string.Empty)
+                if (txtEmail.Text == string.Empty || txtNombre.Text == string.Empty || txtClave.Text == string.Empty)
                 {
                     this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                    errorProvider1.SetError(cmbRol, "Seleccionar un Rol");
                     errorProvider1.SetError(txtNombre, "Ingresar nombre");
                     errorProvider1.SetError(txtEmail, "Ingresar Email");
                     errorProvider1.SetError(txtClave, "Ingresar Clave \nRepetirla en el siguiente campo");
@@ -142,7 +125,7 @@ namespace UI
                     }
                     else
                     {
-                        respuesta = bllUsuario.Crear(Convert.ToInt32(cmbRol.SelectedValue), txtNombre.Text.Trim(), cmbTipoDoc.Text.Trim(), txtDomicilio.Text.Trim(),
+                        respuesta = bllUsuario.Crear(txtNombre.Text.Trim(), cmbTipoDoc.Text.Trim(), txtDomicilio.Text.Trim(),
                                                         txtDocumento.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), txtClave.Text.Trim());
                         if (respuesta == true)
                         {
@@ -180,10 +163,10 @@ namespace UI
                 EmailNombreAnterior = Convert.ToString(dgvListadoUser.CurrentRow.Cells["email"].Value);
                 txtEmail.Text = Convert.ToString(dgvListadoUser.CurrentRow.Cells["email"].Value);
                 txtNombre.Text = Convert.ToString(dgvListadoUser.CurrentRow.Cells["nombre"].Value);
-                cmbRol.SelectedValue = Convert.ToInt32(dgvListadoUser.CurrentRow.Cells["codigoRol"].Value);
                 txtDocumento.Text = Convert.ToString(dgvListadoUser.CurrentRow.Cells["documento"].Value);
                 cmbTipoDoc.Text = Convert.ToString(dgvListadoUser.CurrentRow.Cells["tipoDocumento"].Value);
                 txtTelefono.Text = Convert.ToString(dgvListadoUser.CurrentRow.Cells["telefono"].Value);
+                txtDomicilio.Text = Convert.ToString(dgvListadoUser.CurrentRow.Cells["domicilio"].Value);
 
                 tabControl1.SelectedIndex = 1;
                 txtCodigo.Visible = true;
@@ -201,18 +184,17 @@ namespace UI
             try
             {
                 bool respuesta = false;
-                if (txtCodigo.Text == string.Empty || cmbRol.Text == string.Empty || txtEmail.Text == string.Empty || txtNombre.Text == string.Empty)
+                if (txtCodigo.Text == string.Empty || txtEmail.Text == string.Empty || txtNombre.Text == string.Empty)
                 {
                     this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                    errorProvider1.SetError(cmbRol, "Seleccionar un Rol");
                     errorProvider1.SetError(txtNombre, "Ingresar nombre");
                     errorProvider1.SetError(txtEmail, "Ingresar Email");
                     errorProvider1.SetError(txtCodigo, "Falta Código!");
                 }
                 else
                 {
-                    respuesta = bllUsuario.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), Convert.ToInt32(cmbRol.SelectedValue), txtNombre.Text.Trim(), cmbTipoDoc.Text.Trim(),
-                                                        txtDomicilio.Text.Trim(), txtDocumento.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), EmailNombreAnterior);
+                    respuesta = bllUsuario.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), txtNombre.Text.Trim(), cmbTipoDoc.Text.Trim(),
+                                                        txtDocumento.Text.Trim(), txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), EmailNombreAnterior);
                     if (respuesta == true)
                     {
                         this.MensajeOk("Usuario actualizado correctamente");

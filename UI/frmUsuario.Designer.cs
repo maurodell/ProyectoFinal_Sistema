@@ -54,8 +54,6 @@ namespace UI
             this.txtDocumento = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.cmbRol = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnEliminar = new System.Windows.Forms.Button();
@@ -146,8 +144,6 @@ namespace UI
             this.tabPage2.Controls.Add(this.txtDocumento);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.cmbRol);
-            this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.btnActualizar);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.txtCodigo);
@@ -188,9 +184,9 @@ namespace UI
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Location = new System.Drawing.Point(1580, 153);
+            this.groupBox1.Location = new System.Drawing.Point(1581, 238);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1176, 512);
+            this.groupBox1.Size = new System.Drawing.Size(1176, 427);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Acceso";
@@ -305,23 +301,6 @@ namespace UI
             this.label6.Size = new System.Drawing.Size(223, 32);
             this.label6.TabIndex = 11;
             this.label6.Text = "Tipo Documento";
-            // 
-            // cmbRol
-            // 
-            this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Location = new System.Drawing.Point(302, 153);
-            this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(802, 39);
-            this.cmbRol.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(172, 156);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 32);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Rol (*)";
             // 
             // label2
             // 
@@ -509,8 +488,6 @@ namespace UI
         private System.Windows.Forms.Button btnInsertar;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbRol;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtReClave;
         private System.Windows.Forms.TextBox txtClave;
