@@ -184,13 +184,32 @@ namespace UI
             var rol = (BERol)cmbRol.SelectedItem;
             if (bllPermiso.AgregarRol(beUsuario.Codigo, rol.Codigo))
             {
-                MessageBox.Show("El guardodo fue correcto");
+                MessageBox.Show("El guardado fue correcto");
             }
             else
             {
                 MessageBox.Show("Algo salió mal!");
             }
 
+        }
+
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            bool respuesta = false;
+            var nodoRol = treeViewUserRol.SelectedNode;
+            if (beUsuario != null)
+            {
+                respuesta = bllPermiso.QuitarRolAUsuario(beUsuario.Codigo, nodoRol.Text);
+                if (respuesta)
+                {
+                    MostrarPermisos(true);
+                    MessageBox.Show("El rol fue eliminado");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un usuario");
+            }
         }
     }
 }

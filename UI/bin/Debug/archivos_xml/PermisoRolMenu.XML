@@ -1,67 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <permisos>
-  <rolpermiso codigo="3">
-    <codigorol>2</codigorol>
-    <codigomenu>101</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="5">
-    <codigorol>1</codigorol>
-    <codigomenu>100</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="6">
-    <codigorol>1</codigorol>
-    <codigomenu>101</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="7">
-    <codigorol>1</codigorol>
-    <codigomenu>109</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="8">
-    <codigorol>1</codigorol>
-    <codigomenu>110</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="9">
-    <codigorol>1</codigorol>
-    <codigomenu>111</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="10">
-    <codigorol>1</codigorol>
-    <codigomenu>112</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="11">
-    <codigorol>1</codigorol>
-    <codigomenu>116</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="12">
-    <codigorol>1</codigorol>
-    <codigomenu>117</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="13">
-    <codigorol>1</codigorol>
-    <codigomenu>103</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="14">
-    <codigorol>1</codigorol>
-    <codigomenu>102</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="15">
-    <codigorol>1</codigorol>
-    <codigomenu>105</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="16">
-    <codigorol>1</codigorol>
-    <codigomenu>104</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="17">
-    <codigorol>1</codigorol>
-    <codigomenu>106</codigomenu>
-  </rolpermiso>
-  <rolpermiso codigo="18">
-    <codigorol>1</codigorol>
-    <codigomenu>107</codigomenu>
-  </rolpermiso>
   <rolpermiso codigo="19">
     <codigorol>3</codigorol>
     <codigomenu>100</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="20">
+    <codigorol>1</codigorol>
+    <codigomenu>100</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="21">
+    <codigorol>1</codigorol>
+    <codigomenu>101</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="22">
+    <codigorol>1</codigorol>
+    <codigomenu>109</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="23">
+    <codigorol>1</codigorol>
+    <codigomenu>110</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="24">
+    <codigorol>1</codigorol>
+    <codigomenu>112</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="25">
+    <codigorol>1</codigorol>
+    <codigomenu>116</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="26">
+    <codigorol>1</codigorol>
+    <codigomenu>111</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="27">
+    <codigorol>1</codigorol>
+    <codigomenu>117</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="28">
+    <codigorol>2</codigorol>
+    <codigomenu>101</codigomenu>
+  </rolpermiso>
+  <rolpermiso codigo="29">
+    <codigorol>2</codigorol>
+    <codigomenu>113</codigomenu>
   </rolpermiso>
 </permisos>

@@ -136,19 +136,34 @@ namespace UI
                 }
                 else
                 {
-                    MessageBox.Show("Algo salio mal, los permisos no se pudieron guardar \n Contactar al provedor del sistema.");
+                    MessageBox.Show("Algo salio mal, los permisos no se pudieron guardar " +
+                                    "\n Contactar al provedor del sistema.");
                 }
             }
             catch (Exception ex)
-            {
-                throw ex;
-            }
+            { }
         }
         //Ver la forma de actualizar en tiempo real el tab de menu
         private void ActualizarTabControls()
         {
             principalMenu = new frmPrincipal();
             principalMenu.ValidarPermisos(beFamilia._codigo);
+        }
+
+        private void btnQuitarPerm_Click(object sender, EventArgs e)
+        {
+            var rol = (BERol)cmbListadoRoles.SelectedItem;
+            var nodo = treeViewPermisos.SelectedNode;
+            bool respuesta = bllPermiso.QuitarPermisoRol(rol.Codigo, nodo.Text);
+            if (respuesta)
+            {
+                MostrarPermisos(true);
+                MessageBox.Show("El permiso se quito de forma correcta");
+            }
+            else
+            {
+                MessageBox.Show("Algo salió mal, el permido no pudo ser quitado");
+            }
         }
     }
 }

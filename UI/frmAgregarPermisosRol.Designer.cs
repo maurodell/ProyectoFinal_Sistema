@@ -147,6 +147,7 @@ namespace UI
             this.btnQuitarPerm.TabIndex = 7;
             this.btnQuitarPerm.Text = "Quitar";
             this.btnQuitarPerm.UseVisualStyleBackColor = true;
+            this.btnQuitarPerm.Click += new System.EventHandler(this.btnQuitarPerm_Click);
             // 
             // frmAgregarPermisosRol
             // 

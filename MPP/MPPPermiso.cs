@@ -399,5 +399,69 @@ namespace MPP
 
             return resultado;
         }
+        public bool QuitarPermisoRol(int codigoRol, string nombreMenu)
+        {
+            try
+            {
+                int codigoMenu = DevolverCodigoMenu(nombreMenu);//busca el codigo del menu según su nombre.
+
+                XDocument path = XDocument.Load(pathPermisoRolMenu);
+
+                var resultado = from menu in path.Descendants("rolpermiso")
+                                where menu.Element("codigorol").Value == codigoRol.ToString() && menu.Element("codigomenu").Value == codigoMenu.ToString()
+                                select menu;
+                resultado.Remove();
+                path.Save(pathPermisoRolMenu);
+
+                return true;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
+        }
+        public int DevolverCodigoMenu(string nombreMenu)
+        {
+            XDocument path = XDocument.Load(pathMenus);
+
+            var resultado = from menu in path.Descendants("rol")
+                            where menu.Element("nombreMenu").Value == nombreMenu.ToString()
+                            select menu.Attribute("codigo");
+
+            int codigo = 0;
+            foreach (var item in resultado)
+            {
+                codigo = Convert.ToInt32(item.Value);
+            }
+
+            return codigo;
+        }
+        public bool QuitarRolAUsuario(int codigoUsuario, string nombreRol)
+        {
+
+            try
+            {
+                mppRol = new MPPRol();
+                int codigoRol = 0;
+                foreach (var item in mppRol.Buscar(nombreRol))
+                {
+                    codigoRol = item.Codigo;
+                }
+
+                XDocument path = XDocument.Load(pathUsuarioyRol);
+
+                var resultado = from rolDeUsuario in path.Descendants("usuariorol")
+                                where rolDeUsuario.Element("codigoRol").Value == codigoRol.ToString() && rolDeUsuario.Element("codigoUsuario").Value == codigoUsuario.ToString()
+                                select rolDeUsuario;
+                resultado.Remove();
+                path.Save(pathUsuarioyRol);
+
+                return true;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

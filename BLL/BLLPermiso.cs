@@ -49,5 +49,13 @@ namespace BLL
         {
             return mppPermiso.TraerRol(codigoRol);
         }
+        public bool QuitarPermisoRol(int codigoRol, string nombreMenu)
+        {
+            return mppPermiso.QuitarPermisoRol(codigoRol, nombreMenu);
+        }
+        public bool QuitarRolAUsuario(int codigoUsuario, string nombreRol)
+        {
+            return mppPermiso.QuitarRolAUsuario(codigoUsuario, nombreRol);
+        }
     }
 }

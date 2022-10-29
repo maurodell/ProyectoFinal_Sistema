@@ -4,8 +4,4 @@
     <codigoUsuario>1</codigoUsuario>
     <codigoRol>1</codigoRol>
   </usuariorol>
-  <usuariorol codigo="2">
-    <codigoUsuario>1</codigoUsuario>
-    <codigoRol>2</codigoRol>
-  </usuariorol>
 </usuariosroles>
