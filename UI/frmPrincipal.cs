@@ -261,6 +261,7 @@ namespace UI
             frmAdministrarUsuarioPermisos FrmAdminPermisos = new frmAdministrarUsuarioPermisos();
             FrmAdminPermisos.MdiParent = this;
             FrmAdminPermisos.Show();
+            FrmAdminPermisos.Size = new Size(600, 580);
         }
     }
 }

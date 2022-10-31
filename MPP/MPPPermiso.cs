@@ -258,13 +258,15 @@ namespace MPP
             }
             return true;
         }
-        public bool AgregarRol(int codigoUsuario, int codigoRol)
+        public bool AgregarRol(int codigoUsuario, List<BEComponente> listaRoles)
         {
             try
             {
+                LimpiarRolDeUsuario(codigoUsuario);
                 //TRAE EL ÚLTIMO CÓDIGO DEL PERMISO INGRESADO PARA PASAR POR CÓDIGO AL CREAR EL NUEVO PERMISO
                 //------------------
                 int nroCodigo = 0;
+
                 XDocument documento = XDocument.Load(pathUsuarioyRol);
 
                 var consulta = from rolPermiso in documento.Descendants("usuariorol")
@@ -278,13 +280,17 @@ namespace MPP
                 //------------------
                 XDocument crear = XDocument.Load(pathUsuarioyRol);
 
-                nroCodigo++;
-                crear.Element("usuariosroles").Add(new XElement("usuariorol",
-                                                new XAttribute("codigo", nroCodigo),
-                                                new XElement("codigoUsuario", codigoUsuario),
-                                                new XElement("codigoRol", codigoRol)));
-                
-                crear.Save(pathUsuarioyRol);
+                foreach (var item in listaRoles)
+                {
+                    nroCodigo++;
+                    crear.Element("usuariosroles").Add(new XElement("usuariorol",
+                                                    new XAttribute("codigo", nroCodigo),
+                                                    new XElement("codigoUsuario", codigoUsuario),
+                                                    new XElement("codigoRol", item._codigo)));
+
+                    crear.Save(pathUsuarioyRol);
+                }
+
                 return true;
             }
             catch (XmlException ex)
@@ -293,20 +299,23 @@ namespace MPP
                 throw ex;
             }
         }
-        public bool ExisteMenu(string nombreMenu)
+        public void LimpiarRolDeUsuario(int codigoUsuario)
         {
-            List<DTOMenu> menus = CargarSubMenu().ToList();
-
-
-            foreach (var item in menus) 
+            try
             {
-                if (item.nombreMenu.Equals(nombreMenu))
-                {
-                    return true;
-                }
-            }
+                XDocument documento = XDocument.Load(pathUsuarioyRol);
 
-            return false;
+                var consulta = from rolPermiso in documento.Descendants("usuariorol")
+                               where rolPermiso.Element("codigoUsuario").Value == codigoUsuario.ToString()
+                               select rolPermiso;
+                consulta.Remove();
+
+                documento.Save(pathUsuarioyRol);
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
         }
         public IList<BEComponente> TraerRolesPorUsuario(BEUsuario usuario)
         {

@@ -86,6 +86,9 @@ namespace UI
         }
         public void MostrarPermisosAgregados(List<BEComponente> listaRoles)
         {
+            //limpio la lista de permisos del usuario para no agregar permisos ya agregados.
+            beUsuario.listaPermisos.Clear();
+
             //Tengo que traerme los roles con sus permisos y listarlo al usuario
             if (listaRoles.Count > 0)
             {
@@ -181,8 +184,8 @@ namespace UI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            var rol = (BERol)cmbRol.SelectedItem;
-            if (bllPermiso.AgregarRol(beUsuario.Codigo, rol.Codigo))
+            List<BEComponente> list = beUsuario.Permisos;
+            if (bllPermiso.AgregarRol(beUsuario.Codigo, list))
             {
                 MessageBox.Show("El guardado fue correcto");
             }

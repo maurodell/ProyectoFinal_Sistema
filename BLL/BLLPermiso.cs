@@ -37,9 +37,9 @@ namespace BLL
         {
             return mppPermiso.ExisteRolEnUsuario(codigoUsuario, codigoRol);
         }
-        public bool AgregarRol(int codigoUsuario, int codigoRol)
+        public bool AgregarRol(int codigoUsuario, List<BEComponente> listaRoles)
         {
-            return mppPermiso.AgregarRol(codigoUsuario, codigoRol);
+            return mppPermiso.AgregarRol(codigoUsuario, listaRoles);
         }
         public IList<BEComponente> TraerRolesPorUsuario(BEUsuario usuario)
         {
