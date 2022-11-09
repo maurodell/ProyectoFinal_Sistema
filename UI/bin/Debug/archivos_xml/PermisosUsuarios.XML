@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<permisos>
+  <permiso codigo="5">
+    <codigoUsuario>1</codigoUsuario>
+    <codigoPermiso>2</codigoPermiso>
+  </permiso>
+  <permiso codigo="6">
+    <codigoUsuario>1</codigoUsuario>
+    <codigoPermiso>3</codigoPermiso>
+  </permiso>
+  <permiso codigo="7">
+    <codigoUsuario>3</codigoUsuario>
+    <codigoPermiso>3</codigoPermiso>
+  </permiso>
+  <permiso codigo="8">
+    <codigoUsuario>3</codigoUsuario>
+    <codigoPermiso>9</codigoPermiso>
+  </permiso>
+  <permiso codigo="9">
+    <codigoUsuario>4</codigoUsuario>
+    <codigoPermiso>2</codigoPermiso>
+  </permiso>
+  <permiso codigo="10">
+    <codigoUsuario>4</codigoUsuario>
+    <codigoPermiso>12</codigoPermiso>
+  </permiso>
+</permisos>

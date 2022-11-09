@@ -17,45 +17,57 @@ namespace BLL
             mppPermiso = new MPPPermiso();
         }
         MPPPermiso mppPermiso;
-        public List<BEPermiso> ListarMenu()
+        public Array TraerTodosLosPermisos()
         {
-            return mppPermiso.ListarMenu();
+            return mppPermiso.TraerTodosLosPermisos();
         }
-        public IList<BEComponente> TraerPermisosTodos(int codigoRol)
+        public IList<BEPermiso> TraerTodosPermisosConNombre()
         {
-            return mppPermiso.TraerPermisosTodos(codigoRol);
+            return mppPermiso.TraerTodosPermisosConNombre();
+        }
+        public IList<BEFamillia> TraerTodosRolesFamilia()
+        {
+            return mppPermiso.TraerTodosRolesFamilia();
+        }
+        public bool GuardarComponente(BEComponente componente, bool tipo)
+        {
+            return mppPermiso.GuardarComponente(componente, tipo);
+        }
+        public bool BorrarRol(BEComponente componente)
+        {
+            return mppPermiso.BorrarRol(componente);
+        }
+        public void CompletarRolDeUsuario(BEUsuario beUsuario)
+        {
+            mppPermiso.CompletarRolDeUsuario(beUsuario);
+        }
+        public void CompletarPermisos(BEComponente componente)
+        {
+            mppPermiso.CompletarPermisos(componente);
+        }
+        public IList<BEComponente> TraerPermisosTodos2(int codigoRol)
+        {
+            return mppPermiso.TraerPermisosTodos2(codigoRol);
         }
         public bool Existe(BEComponente componente, int codigo)
         {
             return mppPermiso.Existe(componente, codigo);
         }
+        public bool ExistePermisosUsuario(BEUsuario beUsuario, int codigo)
+        {
+            return mppPermiso.ExistePermisosUsuario(beUsuario, codigo);
+        }
+        public bool GuardarPermisos(BEUsuario usuario)
+        {
+            return mppPermiso.GuardarPermisos(usuario);
+        }
         public bool GuardarFamilia(BEFamillia beFamilia)
         {
             return mppPermiso.GuardarFamilia(beFamilia);
         }
-        public bool ExisteRolEnUsuario(int codigoUsuario, int codigoRol)
+        public bool ExisteRolEnUsuario2(BEUsuario beUsuario, int codigoRol)
         {
-            return mppPermiso.ExisteRolEnUsuario(codigoUsuario, codigoRol);
-        }
-        public bool AgregarRol(int codigoUsuario, List<BEComponente> listaRoles)
-        {
-            return mppPermiso.AgregarRol(codigoUsuario, listaRoles);
-        }
-        public IList<BEComponente> TraerRolesPorUsuario(BEUsuario usuario)
-        {
-            return mppPermiso.TraerRolesPorUsuario(usuario);
-        }
-        public BEComponente TraerRol(int codigoRol)
-        {
-            return mppPermiso.TraerRol(codigoRol);
-        }
-        public bool QuitarPermisoRol(int codigoRol, string nombreMenu)
-        {
-            return mppPermiso.QuitarPermisoRol(codigoRol, nombreMenu);
-        }
-        public bool QuitarRolAUsuario(int codigoUsuario, string nombreRol)
-        {
-            return mppPermiso.QuitarRolAUsuario(codigoUsuario, nombreRol);
+            return mppPermiso.ExisteRolEnUsuario2(beUsuario, codigoRol);
         }
     }
 }

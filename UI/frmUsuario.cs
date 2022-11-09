@@ -11,10 +11,9 @@ namespace UI
         {
             InitializeComponent();
             bllUsuario = new BLLUsuario();
-            bllRol = new BLLRol();
         }
         BLLUsuario bllUsuario;
-        BLLRol bllRol;
+
         private void Listar()
         {
             try

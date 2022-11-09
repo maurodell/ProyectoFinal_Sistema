@@ -16,146 +16,292 @@ namespace MPP
 {
     public class MPPPermiso
     {
-        private string pathMenus = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\Menus.XML";
-        private string pathPermisoRolMenu = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\PermisoRolMenu.XML";
-        private string pathUsuarioyRol = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\UsuarioyRol.XML";
-        MPPRol mppRol;
-        public List<BEPermiso> ListarMenu()
+        private string pathPermisos = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\Permisos.XML";
+        private string pathPermisoPermiso = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\PermisosPermisos.XML";
+        private string pathPermisosUsuarios = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\PermisosUsuarios.XML";
+        public Array TraerTodosLosPermisos()
         {
-            DataSet DS = new DataSet();
-            DS.ReadXml(pathMenus);
-
-            List<BEPermiso> menus = new List<BEPermiso>();
-
-            if (DS.Tables.Count > 0)
-            {
-                foreach (DataRow item in DS.Tables[0].Rows)
-                {
-                    BEPermiso menu = new BEPermiso
-                    {
-                        _codigo = Convert.ToInt32(item["codigo"]),
-                        _nombre = Convert.ToString(item["nombreMenu"])
-                    };
-
-                    menus.Add(menu);
-                }
-            }
-            return menus;
+            return Enum.GetValues(typeof(BEMenuPermisos));
         }
-        public IList<BEComponente> TraerPermisosTodos(int codigoRol)
+        public IList<BEPermiso> TraerTodosPermisosConNombre()
         {
-            List<DTOPermisosMenuPorRol> listaMenuPorRol = new List<DTOPermisosMenuPorRol>();
+            List<BEPermiso> listaPermisos = new List<BEPermiso>();
+            XDocument path = XDocument.Load(pathPermisos);
+            var consulta = from permisosPatente in path.Descendants("permiso")
+                            where permisosPatente.Element("menu").Value != "null"
+                            select new 
+                            {
+                                codigo = Convert.ToInt32(permisosPatente.Attribute("codigo").Value),
+                                nombre = Convert.ToString(permisosPatente.Element("nombre").Value),
+                                permiso = Convert.ToString(permisosPatente.Element("menu").Value)
+                            };
+
+            foreach (var item in consulta)
+            {
+                BEPermiso bePerm = new BEPermiso();
+                bePerm._codigo = item.codigo;
+                bePerm._nombre = item.nombre;
+                bePerm.Permiso = (BEMenuPermisos)Enum.Parse(typeof(BEMenuPermisos), item.permiso);
+                listaPermisos.Add(bePerm);
+            }
+            return listaPermisos;
+        }
+        public IList<BEFamillia> TraerTodosRolesFamilia()
+        {
+            List<BEFamillia> listaFamilias = new List<BEFamillia>();
+            XDocument path = XDocument.Load(pathPermisos);
+            var consulta = from permisosPatente in path.Descendants("permiso")
+                           where permisosPatente.Element("menu").Value.Equals("null")
+                           select new
+                           {
+                               codigo = Convert.ToInt32(permisosPatente.Attribute("codigo").Value),
+                               nombre = Convert.ToString(permisosPatente.Element("nombre").Value)
+                           };
+
+            foreach (var item in consulta)
+            {
+                BEFamillia bePerm = new BEFamillia();
+                bePerm._codigo = item.codigo;
+                bePerm._nombre = item.nombre;
+                listaFamilias.Add(bePerm);
+            }
+            return listaFamilias;
+        }
+        public bool GuardarComponente(BEComponente componente, bool tipo)
+        {
+            //Busco el último codigo y le sumo uno
+            //------------------
+            int nroCodigo = 0;
+            XDocument documento = XDocument.Load(pathPermisos);
+
+            var consulta = from rolPermiso in documento.Descendants("permiso")
+                           orderby rolPermiso.Element("codigo") descending
+                           select rolPermiso;
+
+            foreach (XElement EModifcar in consulta)
+            {
+                nroCodigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
+            }
+            //------------------
+
+            XDocument crear = XDocument.Load(pathPermisos);
+
+            nroCodigo++;
+            if (tipo)
+            {
+                crear.Element("permisos").Add(new XElement("permiso",
+                                                new XAttribute("codigo", nroCodigo),
+                                                new XElement("nombre", componente._nombre),
+                                                new XElement("menu", "null")));
+            }
+            else
+            {
+                crear.Element("permisos").Add(new XElement("permiso",
+                                    new XAttribute("codigo", nroCodigo),
+                                    new XElement("nombre", componente._nombre),
+                                    new XElement("menu", componente.Permiso)));
+            }
+
+            crear.Save(pathPermisos);
+            return true;
+        }
+        public IList<BEComponente> TraerPermisosTodos2(int codigoRol)
+        {
             List<BEComponente> listaBEComponentes = new List<BEComponente>();
             BEComponente comp;
             if (!String.IsNullOrEmpty(codigoRol.ToString()))
             {
-                var consulta2 = from rolMenu in CargarPermisosRolMenu(codigoRol)
-                                join
-                                nombreMenu in CargarSubMenu()
-                                on rolMenu.codigoMenu equals nombreMenu.codigo
-                                select new
-                                {
-                                    codigoRol = rolMenu.codigoRol,
-                                    codigoMenu = nombreMenu.codigo,
-                                    nombreMenu = nombreMenu.nombreMenu
-                                };
+                IList<DTOPermisoPermiso> lista = ConsultaPermisoPermiso(codigoRol);
 
-                DTOPermisosMenuPorRol permisos;
-                foreach (var item in consulta2)
+                foreach (var item in lista)
                 {
-                    permisos = new DTOPermisosMenuPorRol();
-                    permisos._codigoRol = item.codigoRol;
-                    permisos._codigoMenu = item.codigoMenu;
-                    permisos._nombreMenu = item.nombreMenu;
-                    listaMenuPorRol.Add(permisos);
+                    var consulta = from permisoRol in ConsultaPermiso1(item.codigoRol)
+                                    join
+                                    permisoPermiso in ConsultaPermiso1(item.codigoPermiso)
+                                    on item.codigoPermiso equals permisoPermiso.codigo
+                                    select new
+                                    {
+                                        codigoRol = permisoRol.codigo,
+                                        codigoMenu = permisoPermiso.codigo,
+                                        nombreMenu = permisoPermiso.nombre,
+                                        nombrePermiso = permisoPermiso.menu
+                                    };
+
+                    foreach (var x in consulta)
+                    {
+                        if (String.IsNullOrEmpty(x.nombrePermiso))
+                        {
+                            comp = new BEFamillia();
+                            comp._codigo = x.codigoRol;
+                            comp._nombre = x.nombreMenu;
+                        }
+                        else
+                        {
+                            comp = new BEPermiso();
+                            comp._codigo = x.codigoMenu;
+                            comp._nombre = x.nombreMenu;
+                            comp.Permiso = (BEMenuPermisos)Enum.Parse(typeof(BEMenuPermisos),x.nombrePermiso);
+                        }
+
+                        listaBEComponentes.Add(comp);
+                    }
                 }
 
-                foreach (var item in listaMenuPorRol)
-                {
-                    comp = new BEPermiso();
-                    comp._codigo = item._codigoMenu;
-                    comp._nombre = item._nombreMenu;
-                    listaBEComponentes.Add(comp);
-                }
             }
             return listaBEComponentes;
         }
-        public BEComponente TraerRol(int codigoRol)
+        public IList<DTOPermisoPermiso> ConsultaPermisoPermiso(int codigoPermiso)
         {
-            BEComponente rolConPermisos = new BEFamillia();
-            BEComponente permisos = new BEPermiso();
-            BERol rolBuscado = mppRol.BuscarPorCodigo(codigoRol);
-            if (rolBuscado != null) 
-            { 
-                rolConPermisos._codigo = rolBuscado.Codigo;
-                rolConPermisos._nombre = rolBuscado.nombre;
-            }
-            List<BEComponente> permisosRol = TraerPermisosTodos(codigoRol).ToList();
-
-            if (permisosRol != null)
-            {
-                foreach (var item in permisosRol)
-                {
-                    permisos._codigo = item._codigo;
-                    permisos._nombre = item._nombre;
-                    rolConPermisos.AgregarHijo(permisos);
-                }
-            }
-            return rolConPermisos;
-        }
-        public IEnumerable<DTORolMenu> CargarPermisosRolMenu(int codigoRol)
-        {
-            XDocument path = XDocument.Load(pathPermisoRolMenu);
-
-            var resultado = from rolPermiso in path.Descendants("rolpermiso")
-                            where rolPermiso.Element("codigorol").Value == codigoRol.ToString()
-                            select new DTORolMenu
+            XDocument path = XDocument.Load(pathPermisoPermiso);
+            List<DTOPermisoPermiso> listaPermisoPermiso = new List<DTOPermisoPermiso>();
+            var resultado = from rolPermiso in path.Descendants("permiso")
+                            where rolPermiso.Element("codigoRol").Value == codigoPermiso.ToString()
+                            select new
                             {
-                                codigoRol = Convert.ToInt32(rolPermiso.Element("codigorol").Value),
-                                codigoMenu = Convert.ToInt32(rolPermiso.Element("codigomenu").Value)
+                                codigoRol = Convert.ToInt32(rolPermiso.Element("codigoRol").Value),
+                                codigoPermiso = Convert.ToInt32(rolPermiso.Element("codigoMenu").Value)
                             };
-
-            return resultado;
+            DTOPermisoPermiso objPermiso = null;
+            foreach (var item in resultado)
+            {
+                objPermiso = new DTOPermisoPermiso();
+                objPermiso.codigoRol = item.codigoRol;
+                objPermiso.codigoPermiso = item.codigoPermiso;
+                listaPermisoPermiso.Add(objPermiso);
+            }
+            return listaPermisoPermiso;
         }
-        public IEnumerable<DTOMenu> CargarSubMenu()
+        public IEnumerable<DTOPermiso> ConsultaPermiso1(int codigoFamilia)
         {
-            XDocument path = XDocument.Load(pathMenus);
+            XDocument path = XDocument.Load(pathPermisos);
 
-            var resultado = from usuarioRol in path.Descendants("rol")
-                            select new DTOMenu
+            var resultado = from rolPermiso in path.Descendants("permiso")
+                            where rolPermiso.Attribute("codigo").Value == codigoFamilia.ToString()
+                            select new DTOPermiso
                             {
-                                codigo = Convert.ToInt32(usuarioRol.Attribute("codigo").Value),
-                                nombreMenu = Convert.ToString(usuarioRol.Element("nombreMenu").Value)
+                                codigo = Convert.ToInt32(rolPermiso.Attribute("codigo").Value),
+                                nombre = Convert.ToString(rolPermiso.Element("nombre").Value),
+                                menu = Convert.ToString(rolPermiso.Element("menu").Value)
                             };
 
             return resultado;
         }
         public bool Existe(BEComponente componente, int codigo)
         {
-            bool existe = false;
+            bool flag = false;
+            foreach (var item in componente.ObjenerHijos)
+            {
+                if (item._codigo.Equals(codigo))
+                {
+                    flag = true;
+                }
+            }
+            return flag;
+        }
+        public bool ExistePermisosUsuario(BEUsuario beUsuario, int codigo)
+        {
+            bool flag = false;
+            foreach (var familia in beUsuario.listaPermisos)
+            {
+                if (familia.ObjenerHijos.Count > 0)
+                {
+                    foreach (var permiso in familia.ObjenerHijos)
+                    {
+                        if (permiso._codigo.Equals(codigo))
+                        {
+                            flag = true;
+                        }
+                    }
+                }
+                else
+                {
+                    if (familia._codigo.Equals(codigo))
+                    {
+                        flag = true;
+                    }
+                }
+
+            }
+            return flag;
+        }
+        public bool ExistePermisosUsuario2(BEComponente componente, int codigo)
+        {
+            bool flag = false;
             if (componente._codigo.Equals(codigo))
             {
-                existe = true;
+                flag = true;
             }
             else
             {
                 foreach (var item in componente.ObjenerHijos)
                 {
-                    existe = Existe(item, codigo);
-                    if (existe)
+                    flag = ExistePermisosUsuario2(item, codigo);
+                    if (flag)
                     {
                         return true;
                     }
                 }
             }
 
-            return existe;
+            return flag;
+        }
+        public bool GuardarPermisos(BEUsuario usuario)
+        {
+            try
+            {
+                bool limpiar = LimpiarPermisosUsuario(usuario.Codigo);
+                if (limpiar)
+                {
+                    //TRAE EL ÚLTIMO CÓDIGO DEL PERMISO INGRESADO PARA PASAR POR CÓDIGO AL CREAR EL NUEVO PERMISO
+                    //------------------
+                    int nroCodigo = 0;
+                    XDocument documento = XDocument.Load(pathPermisosUsuarios);
+
+                    var consulta2 = from rolPermiso in documento.Descendants("permiso")
+                                   orderby rolPermiso.Element("codigo") descending
+                                   select rolPermiso;
+
+                    foreach (XElement EModifcar in consulta2)
+                    {
+                        nroCodigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
+                    }
+                    //------------------
+
+                    XDocument crear = XDocument.Load(pathPermisosUsuarios);
+                    foreach (var item in usuario.listaPermisos)
+                    {
+                        nroCodigo++;
+                        crear.Element("permisos").Add(new XElement("permiso",
+                                                        new XAttribute("codigo", nroCodigo),
+                                                        new XElement("codigoUsuario", usuario.Codigo),
+                                                        new XElement("codigoPermiso", item._codigo)));
+                    }
+                    crear.Save(pathPermisosUsuarios);
+                    return true;
+                }
+                return false;
+            }
+                catch (XmlException ex)
+            {
+                throw ex;
+            }
         }
         public bool GuardarFamilia(BEFamillia beFamilia)
         {
             try
             {
-                bool limpiar = LimpiarPermisosRolMenu(beFamilia);
+                IList<BEComponente> lista = TraerPermisosTodos2(beFamilia._codigo);
+                bool limpiar = false;
+                if (lista.Count()>0)
+                {
+                    limpiar = LimpiarPermisosRolMenu(beFamilia);
+                }
+                else
+                {
+                    //rol creado sin roles persistidos
+                    limpiar = true;
+                }
+                
                 bool creacion = CrearPermisosEnRol(beFamilia);
                 if (limpiar && creacion)
                 {
@@ -172,14 +318,33 @@ namespace MPP
         {
             try
             {
-                XDocument documento = XDocument.Load(pathPermisoRolMenu);
+                XDocument documento = XDocument.Load(pathPermisoPermiso);
 
-                var consulta = from rolPermiso in documento.Descendants("rolpermiso")
-                               where rolPermiso.Element("codigorol").Value == rol._codigo.ToString()
+                var consulta = from rolPermiso in documento.Descendants("permiso")
+                               where rolPermiso.Element("codigoRol").Value == rol._codigo.ToString()
                                select rolPermiso;
                 consulta.Remove();
 
-                documento.Save(pathPermisoRolMenu);
+                documento.Save(pathPermisoPermiso);
+                return true;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
+        }
+        public bool LimpiarPermisosUsuario(int codigoUsuario)
+        {
+            try
+            {
+                XDocument documento = XDocument.Load(pathPermisosUsuarios);
+
+                var consulta = from rolPermiso in documento.Descendants("permiso")
+                               where rolPermiso.Element("codigoUsuario").Value == codigoUsuario.ToString()
+                               select rolPermiso;
+
+                consulta.Remove();
+                documento.Save(pathPermisosUsuarios);
                 return true;
             }
             catch (XmlException ex)
@@ -194,9 +359,9 @@ namespace MPP
                 //TRAE EL ÚLTIMO CÓDIGO DEL PERMISO INGRESADO PARA PASAR POR CÓDIGO AL CREAR EL NUEVO PERMISO
                 //------------------
                 int nroCodigo = 0;
-                XDocument documento = XDocument.Load(pathPermisoRolMenu);
+                XDocument documento = XDocument.Load(pathPermisoPermiso);
 
-                var consulta = from rolPermiso in documento.Descendants("rolpermiso")
+                var consulta = from rolPermiso in documento.Descendants("permiso")
                                orderby rolPermiso.Element("codigo") descending
                                select rolPermiso;
 
@@ -206,16 +371,16 @@ namespace MPP
                 }
                 //------------------
 
-                XDocument crear = XDocument.Load(pathPermisoRolMenu);
+                XDocument crear = XDocument.Load(pathPermisoPermiso);
                 foreach (var item in rol.ObjenerHijos)
                 {
                     nroCodigo++;
-                    crear.Element("permisos").Add(new XElement("rolpermiso",
+                    crear.Element("permisopermiso").Add(new XElement("permiso",
                                                     new XAttribute("codigo", nroCodigo),
-                                                    new XElement("codigorol", rol._codigo),
-                                                    new XElement("codigomenu", item._codigo)));
+                                                    new XElement("codigoRol", rol._codigo),
+                                                    new XElement("codigoMenu", item._codigo)));
                 }
-                crear.Save(pathPermisoRolMenu);
+                crear.Save(pathPermisoPermiso);
                 return true;
             }
             catch (XmlException ex)
@@ -223,249 +388,119 @@ namespace MPP
                 throw ex;
             }
         }
-        public List<DTORolMenu> ListaRolConMenu()
+        public bool ExisteRolEnUsuario2(BEUsuario beUsuario, int codigoRol)
         {
-            DataSet DS = new DataSet();
-            DS.ReadXml(pathPermisoRolMenu);
-
-            List<DTORolMenu> permisosDeRol = new List<DTORolMenu>();
-
-            if (DS.Tables.Count > 0)
+            foreach (var item in beUsuario.listaPermisos)
             {
-                foreach (DataRow item in DS.Tables[0].Rows)
+                if (item._codigo.Equals(codigoRol))
                 {
-                    DTORolMenu permisos = new DTORolMenu
+                    return true;
+                }
+            }
+            return false;
+        }
+        public void CompletarRolDeUsuario(BEUsuario beUsuario)
+        {
+            XDocument path = XDocument.Load(pathPermisos);
+            BEComponente permisos = null;
+            foreach (var item in ConsultaPermisosUsuario(beUsuario.Codigo))
+            {
+                var resultado = from rolPermiso in path.Descendants("permiso")
+                                where rolPermiso.Attribute("codigo").Value == item.codigoPermiso.ToString()
+                                select new DTOPermiso
+                                {
+                                    codigo = Convert.ToInt32(rolPermiso.Attribute("codigo").Value),
+                                    nombre = Convert.ToString(rolPermiso.Element("nombre").Value),
+                                    menu = Convert.ToString(rolPermiso.Element("menu").Value)
+                                };
+
+                foreach (var x in resultado)
+                {
+                    if (x.menu.Equals("null"))
                     {
-                        codigoRol = Convert.ToInt32(item["codigorol"]),
-                        codigoMenu = Convert.ToInt32(item["codigomenu"])
-                    };
+                        permisos = new BEFamillia();
+                        permisos._codigo = x.codigo;
+                        permisos._nombre = x.nombre;
 
-                    permisosDeRol.Add(permisos);
+                        var listaPermisos = TraerPermisosTodos2(permisos._codigo);
+                        foreach (var menu in listaPermisos)
+                        {
+                            permisos.AgregarHijo(menu);
+                        }
+                    }
+                    else
+                    {
+                        permisos = new BEPermiso();
+                        permisos._codigo = x.codigo;
+                        permisos._nombre = x.nombre;
+                        permisos.Permiso = (BEMenuPermisos)Enum.Parse(typeof(BEMenuPermisos),x.menu);
+                    }
+                    beUsuario.Permisos.Add(permisos);
                 }
             }
-            return permisosDeRol;
+
         }
-        public bool ExisteRolEnUsuario(int codigoUsuario, int codigoRol)
+        public void CompletarPermisos(BEComponente rol)
         {
-            List<DTOUsuarioRol> listaRoles = ConsultarUsuarioyRol(codigoUsuario).ToList();
-
-            foreach (var item in listaRoles)
+            rol.VaciarHijos();
+            foreach (var item in TraerPermisosTodos2(rol._codigo))
             {
-                if (item.codigoRol.Equals(codigoRol))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        public bool AgregarRol(int codigoUsuario, List<BEComponente> listaRoles)
-        {
-            try
-            {
-                LimpiarRolDeUsuario(codigoUsuario);
-                //TRAE EL ÚLTIMO CÓDIGO DEL PERMISO INGRESADO PARA PASAR POR CÓDIGO AL CREAR EL NUEVO PERMISO
-                //------------------
-                int nroCodigo = 0;
-
-                XDocument documento = XDocument.Load(pathUsuarioyRol);
-
-                var consulta = from rolPermiso in documento.Descendants("usuariorol")
-                               orderby rolPermiso.Element("codigo") descending
-                               select rolPermiso;
-
-                foreach (XElement EModifcar in consulta)
-                {
-                    nroCodigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
-                }
-                //------------------
-                XDocument crear = XDocument.Load(pathUsuarioyRol);
-
-                foreach (var item in listaRoles)
-                {
-                    nroCodigo++;
-                    crear.Element("usuariosroles").Add(new XElement("usuariorol",
-                                                    new XAttribute("codigo", nroCodigo),
-                                                    new XElement("codigoUsuario", codigoUsuario),
-                                                    new XElement("codigoRol", item._codigo)));
-
-                    crear.Save(pathUsuarioyRol);
-                }
-
-                return true;
-            }
-            catch (XmlException ex)
-            {
-
-                throw ex;
+                rol.AgregarHijo(item);
             }
         }
-        public void LimpiarRolDeUsuario(int codigoUsuario)
+        private List<DTOPermisoPermiso> ConsultaPermisosUsuario(int codigoUsuario)
         {
-            try
-            {
-                XDocument documento = XDocument.Load(pathUsuarioyRol);
+            XDocument documento = XDocument.Load(pathPermisosUsuarios);
+            List<DTOPermisoPermiso> listaPermisosUsuario = new List<DTOPermisoPermiso>();
 
-                var consulta = from rolPermiso in documento.Descendants("usuariorol")
-                               where rolPermiso.Element("codigoUsuario").Value == codigoUsuario.ToString()
-                               select rolPermiso;
-                consulta.Remove();
-
-                documento.Save(pathUsuarioyRol);
-            }
-            catch (XmlException ex)
-            {
-                throw ex;
-            }
-        }
-        public IList<BEComponente> TraerRolesPorUsuario(BEUsuario usuario)
-        {
-            //Tengo que traer todo los permisos que tiene el usuario por los roles.
-            List<DTOUsuarioRol> listaMenuPorRol = new List<DTOUsuarioRol>();
-
-            DTOUsuarioRol userRol;
-            mppRol = new MPPRol();
-
-            //Primero busco la lista en la lista UsuarioyRol los roles por código de usuario para traerme el rol
-            //y hago un join con la lista de PermisoRolMenu, para traerme el código de rol con código de menu.
-            var consulta = from usuariorol in ConsultarUsuarioyRol(usuario.Codigo)
-                            join
-                            codigorol in ListaRolConMenu()
-                            on usuariorol.codigoRol equals codigorol.codigoRol
-                            select new
-                            {
-                                codigoUsuario = usuariorol.codigoUsuario,
-                                codigoRol = codigorol.codigoRol,
-                                codigoMenu = codigorol.codigoMenu
-                            };
-
+            var consulta = from permisos in documento.Descendants("permiso")
+                           where permisos.Element("codigoUsuario").Value == codigoUsuario.ToString()
+                           select new DTOPermisoPermiso
+                           {
+                               codigoRol = Convert.ToInt32(permisos.Element("codigoUsuario").Value),
+                               codigoPermiso = Convert.ToInt32(permisos.Element("codigoPermiso").Value)
+                           };
 
             foreach (var item in consulta)
             {
-                userRol = new DTOUsuarioRol();
-                userRol.codigoUsuario = item.codigoUsuario;
-                userRol.codigoRol = item.codigoRol;
-                userRol.codigoMenu = item.codigoMenu;
-                listaMenuPorRol.Add(userRol);
+                listaPermisosUsuario.Add(item);
             }
 
-            //Después me traigo los nombre de menu según corresponda al usuario.
-            var consulta2 = from nombreMenu in CargarSubMenu()
-                            join
-                            usuarioConRol in listaMenuPorRol
-                            on nombreMenu.codigo equals usuarioConRol.codigoMenu
-                            select new
-                            {
-                                codigoRol = usuarioConRol.codigoRol,
-                                codigoMenu = nombreMenu.codigo,
-                                nombreMenu = nombreMenu.nombreMenu,
-                            };
-
-            var roles = from rolUsuario in ConsultarUsuarioyRol(usuario.Codigo)
-                        join
-                        rol in mppRol.Listar()
-                        on rolUsuario.codigoRol equals rol.Codigo
-                        select new
-                        {
-                            codigoRol = rol.Codigo,
-                            nombreRol = rol.nombre
-                        };
-
-            BEComponente familia;
-            BEComponente permiso;
-            List<BEComponente> listaRoles = new List<BEComponente>();
-
-            foreach (var item in roles)
+            return listaPermisosUsuario;
+        }
+        public bool BorrarRol(BEComponente beFamilia)
+        {
+            try
             {
-                familia = new BEFamillia();
-                familia._codigo = item.codigoRol;
-                familia._nombre = item.nombreRol;
-
-                foreach (var item2 in consulta2)
+                bool flag = false;
+                if (!flag)
                 {
-                    if(item.codigoRol == item2.codigoRol)
+                    if (beFamilia._tipo.Equals(1))
                     {
-                        permiso = new BEPermiso();
-                        permiso._codigo = item2.codigoMenu;
-                        permiso._nombre = item2.nombreMenu;
-                        familia.AgregarHijo(permiso);
+                        XDocument documento = XDocument.Load(pathPermisoPermiso);//borra el rol con los permisos del xml permisopermiso
+
+                        var consulta = from rolPermiso in documento.Descendants("permiso")
+                                       where rolPermiso.Element("codigoRol").Value == beFamilia._codigo.ToString()
+                                       select rolPermiso;
+                        consulta.Remove();
+
+                        documento.Save(pathPermisoPermiso);
                     }
+
+
+                    //--------------------------------
+
+                    XDocument documento2 = XDocument.Load(pathPermisos);//borra el rol del xml permiso
+
+                    var consulta2 = from rolPermiso in documento2.Descendants("permiso")
+                                   where rolPermiso.Attribute("codigo").Value == beFamilia._codigo.ToString()
+                                   select rolPermiso;
+                    consulta2.Remove();
+
+                    documento2.Save(pathPermisos);
+                    flag = true;
                 }
-                listaRoles.Add(familia);
-            }
-            return listaRoles;
-        }
-        public IEnumerable<DTOUsuarioRol> ConsultarUsuarioyRol(int codigoUsuario)
-        {
-            XDocument path = XDocument.Load(pathUsuarioyRol);
-
-            var resultado = from usuarioRol in path.Descendants("usuariorol")
-                            where usuarioRol.Element("codigoUsuario").Value == codigoUsuario.ToString()
-                            select new DTOUsuarioRol
-                            {
-                                codigoUsuario = Convert.ToInt32(usuarioRol.Element("codigoUsuario").Value),
-                                codigoRol = Convert.ToInt32(usuarioRol.Element("codigoRol").Value)
-                            };
-
-            return resultado;
-        }
-        public bool QuitarPermisoRol(int codigoRol, string nombreMenu)
-        {
-            try
-            {
-                int codigoMenu = DevolverCodigoMenu(nombreMenu);//busca el codigo del menu según su nombre.
-
-                XDocument path = XDocument.Load(pathPermisoRolMenu);
-
-                var resultado = from menu in path.Descendants("rolpermiso")
-                                where menu.Element("codigorol").Value == codigoRol.ToString() && menu.Element("codigomenu").Value == codigoMenu.ToString()
-                                select menu;
-                resultado.Remove();
-                path.Save(pathPermisoRolMenu);
-
-                return true;
-            }
-            catch (XmlException ex)
-            {
-                throw ex;
-            }
-        }
-        public int DevolverCodigoMenu(string nombreMenu)
-        {
-            XDocument path = XDocument.Load(pathMenus);
-
-            var resultado = from menu in path.Descendants("rol")
-                            where menu.Element("nombreMenu").Value == nombreMenu.ToString()
-                            select menu.Attribute("codigo");
-
-            int codigo = 0;
-            foreach (var item in resultado)
-            {
-                codigo = Convert.ToInt32(item.Value);
-            }
-
-            return codigo;
-        }
-        public bool QuitarRolAUsuario(int codigoUsuario, string nombreRol)
-        {
-
-            try
-            {
-                mppRol = new MPPRol();
-                int codigoRol = 0;
-                foreach (var item in mppRol.Buscar(nombreRol))
-                {
-                    codigoRol = item.Codigo;
-                }
-
-                XDocument path = XDocument.Load(pathUsuarioyRol);
-
-                var resultado = from rolDeUsuario in path.Descendants("usuariorol")
-                                where rolDeUsuario.Element("codigoRol").Value == codigoRol.ToString() && rolDeUsuario.Element("codigoUsuario").Value == codigoUsuario.ToString()
-                                select rolDeUsuario;
-                resultado.Remove();
-                path.Save(pathUsuarioyRol);
-
-                return true;
+                return flag;
             }
             catch (XmlException ex)
             {

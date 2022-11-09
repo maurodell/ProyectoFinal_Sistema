@@ -127,41 +127,40 @@ namespace UI
         {
             beUsuario = bllUsuario.BuscarUsuario(Email);
             IList<BEComponente> rol = null;
-            rol = bllPermiso.TraerRolesPorUsuario(beUsuario);
+            bllPermiso.CompletarRolDeUsuario(beUsuario);
             HabilitarMenu(rol);
         }
         private void HabilitarMenu(IList<BEComponente> rol)
         {
 
-            this.menuStock.Enabled = ConsultarPermiso(this.menuStock.Name, rol);
-            this.submenuCategoria.Enabled = ConsultarPermiso(this.submenuCategoria.Name, rol);
-            this.submenuProducto.Enabled = ConsultarPermiso(this.submenuProducto.Name, rol);
-            this.menuIngresos.Enabled = ConsultarPermiso(this.menuIngresos.Name, rol);
-            this.submenuCompras.Enabled = ConsultarPermiso(this.submenuCompras.Name, rol);
-            this.submenuProveedores.Enabled = ConsultarPermiso(this.submenuProveedores.Name, rol);
-            this.menuVentas.Enabled = ConsultarPermiso(this.menuVentas.Name, rol);
-            this.submenuClientes.Enabled = ConsultarPermiso(this.submenuClientes.Name, rol);
-            this.submenuVentas.Enabled = ConsultarPermiso(this.submenuVentas.Name, rol);
-            this.menuAcceso.Enabled = ConsultarPermiso(this.menuAcceso.Name, rol);
-            this.submenuRoles.Enabled = ConsultarPermiso(this.submenuRoles.Name, rol);
-            this.submenuPermisos.Enabled = ConsultarPermiso(this.submenuPermisos.Name, rol);
-            this.submenuUsuarios.Enabled = ConsultarPermiso(this.submenuUsuarios.Name, rol);
-            this.menuConsulta.Enabled = ConsultarPermiso(this.menuConsulta.Name, rol);
-            this.submenuConsultasVentas.Enabled = ConsultarPermiso(this.submenuConsultasVentas.Name, rol);
-            this.submenuConsultasCompras.Enabled = ConsultarPermiso(this.submenuConsultasCompras.Name, rol);
-            this.menuBackUp.Enabled = ConsultarPermiso(this.menuBackUp.Name, rol);
-            this.submenuNuevoBackUp.Enabled = ConsultarPermiso(this.submenuNuevoBackUp.Name, rol);
-            this.submenuRestore.Enabled = ConsultarPermiso(this.submenuRestore.Name, rol);
+            this.menuStock.Enabled = ConsultarPermiso(this.menuStock.Name);
+            this.submenuCategoria.Enabled = ConsultarPermiso(this.submenuCategoria.Name);
+            this.submenuProducto.Enabled = ConsultarPermiso(this.submenuProducto.Name);
+            this.menuIngresos.Enabled = ConsultarPermiso(this.menuIngresos.Name);
+            this.submenuCompras.Enabled = ConsultarPermiso(this.submenuCompras.Name);
+            this.submenuProveedores.Enabled = ConsultarPermiso(this.submenuProveedores.Name);
+            this.menuVentas.Enabled = ConsultarPermiso(this.menuVentas.Name);
+            this.submenuClientes.Enabled = ConsultarPermiso(this.submenuClientes.Name);
+            this.submenuVentas.Enabled = ConsultarPermiso(this.submenuVentas.Name);
+            this.menuAcceso.Enabled = ConsultarPermiso(this.menuAcceso.Name);
+            this.submenuPermisos.Enabled = ConsultarPermiso(this.submenuPermisos.Name);
+            this.submenuUsuarios.Enabled = ConsultarPermiso(this.submenuUsuarios.Name);
+            this.menuConsulta.Enabled = ConsultarPermiso(this.menuConsulta.Name);
+            this.submenuConsultasVentas.Enabled = ConsultarPermiso(this.submenuConsultasVentas.Name);
+            this.submenuConsultasCompras.Enabled = ConsultarPermiso(this.submenuConsultasCompras.Name);
+            this.menuBackUp.Enabled = ConsultarPermiso(this.menuBackUp.Name);
+            this.submenuNuevoBackUp.Enabled = ConsultarPermiso(this.submenuNuevoBackUp.Name);
+            this.submenuRestore.Enabled = ConsultarPermiso(this.submenuRestore.Name);
 
         }
-        private bool ConsultarPermiso(string nombreMenu, IList<BEComponente> rol)
+        private bool ConsultarPermiso(string nombreMenu)
         {
 
-            foreach (var rolUser in rol)
+            foreach (var rolUser in beUsuario.Permisos)
             {
                 foreach (var menu in rolUser.ObjenerHijos)
                 {
-                    if (menu._nombre.Equals(nombreMenu)) return true;
+                    if (menu.Permiso.ToString().Equals(nombreMenu)) return true;
                 }
             }
             return false;
@@ -180,14 +179,6 @@ namespace UI
             frmUsuarios.MdiParent = this;
             frmUsuarios.Show();
             frmUsuarios.Size = new Size(1370, 560);
-        }
-
-        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmRol frmRol = new frmRol();
-            frmRol.MdiParent = this;
-            frmRol.Show();
-            frmRol.Size = new Size(830, 560);
         }
 
         private void frmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
@@ -242,6 +233,7 @@ namespace UI
             frmAgregarPermisosRol FrmAgregarPermisos = new frmAgregarPermisosRol();
             FrmAgregarPermisos.MdiParent = this;
             FrmAgregarPermisos.Show();
+            FrmAgregarPermisos.Size = new Size(800, 500);
         }
 
         private void nuevoBackUpToolStripMenuItem_Click(object sender, EventArgs e)

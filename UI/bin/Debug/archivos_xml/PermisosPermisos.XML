@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<permisopermiso>
+  <permiso codigo="6">
+    <codigoRol>3</codigoRol>
+    <codigoMenu>1</codigoMenu>
+  </permiso>
+  <permiso codigo="7">
+    <codigoRol>3</codigoRol>
+    <codigoMenu>10</codigoMenu>
+  </permiso>
+  <permiso codigo="8">
+    <codigoRol>3</codigoRol>
+    <codigoMenu>11</codigoMenu>
+  </permiso>
+  <permiso codigo="9">
+    <codigoRol>12</codigoRol>
+    <codigoMenu>8</codigoMenu>
+  </permiso>
+  <permiso codigo="10">
+    <codigoRol>12</codigoRol>
+    <codigoMenu>1</codigoMenu>
+  </permiso>
+  <permiso codigo="11">
+    <codigoRol>12</codigoRol>
+    <codigoMenu>9</codigoMenu>
+  </permiso>
+  <permiso codigo="12">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>1</codigoMenu>
+  </permiso>
+  <permiso codigo="13">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>4</codigoMenu>
+  </permiso>
+  <permiso codigo="14">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>8</codigoMenu>
+  </permiso>
+  <permiso codigo="15">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>9</codigoMenu>
+  </permiso>
+  <permiso codigo="16">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>14</codigoMenu>
+  </permiso>
+  <permiso codigo="17">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>15</codigoMenu>
+  </permiso>
+</permisopermiso>

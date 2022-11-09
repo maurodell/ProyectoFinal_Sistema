@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<permisos>
+  <permiso codigo="1">
+    <nombre>Stock</nombre>
+    <menu>menuStock</menu>
+  </permiso>
+  <permiso codigo="2">
+    <nombre>Administrador</nombre>
+    <menu>null</menu>
+  </permiso>
+  <permiso codigo="3">
+    <nombre>Vendedor</nombre>
+    <menu>null</menu>
+  </permiso>
+  <permiso codigo="4">
+    <nombre>Categorias de Stock</nombre>
+    <menu>submenuCategoria</menu>
+  </permiso>
+  <permiso codigo="8">
+    <nombre>Acceso</nombre>
+    <menu>menuAcceso</menu>
+  </permiso>
+  <permiso codigo="9">
+    <nombre>Roles submenu Acceso</nombre>
+    <menu>submenuRoles</menu>
+  </permiso>
+  <permiso codigo="10">
+    <nombre>Venta</nombre>
+    <menu>menuVentas</menu>
+  </permiso>
+  <permiso codigo="11">
+    <nombre>Cliente submenu venta</nombre>
+    <menu>submenuClientes</menu>
+  </permiso>
+  <permiso codigo="12">
+    <nombre>AdminSuper</nombre>
+    <menu>null</menu>
+  </permiso>
+  <permiso codigo="14">
+    <nombre>Usuarios submenu Acceso</nombre>
+    <menu>submenuUsuarios</menu>
+  </permiso>
+  <permiso codigo="15">
+    <nombre>Permisos submenu Acceso</nombre>
+    <menu>submenuPermisos</menu>
+  </permiso>
+</permisos>

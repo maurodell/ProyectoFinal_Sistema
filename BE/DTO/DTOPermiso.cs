@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BE
+namespace BE.DTO
 {
-    public class BERol : Entidad
+    public class DTOPermiso
     {
+        public int codigo { get; set; }
         public string nombre { get; set; }
-        public string descripcion { get; set; }
-        public bool estado { get; set; }
+        public string menu { get; set; }
     }
 }

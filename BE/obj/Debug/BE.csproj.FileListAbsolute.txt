@@ -43,3 +43,21 @@ C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solució
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4\Sistemas_Sale_Point\BE\obj\Debug\BE.csproj.CopyComplete
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4\Sistemas_Sale_Point\BE\obj\Debug\BE.dll
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4\Sistemas_Sale_Point\BE\obj\Debug\BE.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4 - copia\Sistemas_Sale_Point\BE\bin\Debug\BE.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4 - copia\Sistemas_Sale_Point\BE\bin\Debug\BE.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4 - copia\Sistemas_Sale_Point\BE\bin\Debug\Abstraccion.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4 - copia\Sistemas_Sale_Point\BE\bin\Debug\Abstraccion.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4 - copia\Sistemas_Sale_Point\BE\obj\Debug\BE.csproj.AssemblyReference.cache
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4 - copia\Sistemas_Sale_Point\BE\obj\Debug\BE.csproj.CoreCompileInputs.cache
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4 - copia\Sistemas_Sale_Point\BE\obj\Debug\BE.csproj.CopyComplete
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4 - copia\Sistemas_Sale_Point\BE\obj\Debug\BE.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 4 - copia\Sistemas_Sale_Point\BE\obj\Debug\BE.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BE\bin\Debug\BE.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BE\bin\Debug\BE.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BE\bin\Debug\Abstraccion.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BE\bin\Debug\Abstraccion.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BE\obj\Debug\BE.csproj.AssemblyReference.cache
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BE\obj\Debug\BE.csproj.CoreCompileInputs.cache
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BE\obj\Debug\BE.csproj.CopyComplete
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BE\obj\Debug\BE.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BE\obj\Debug\BE.pdb

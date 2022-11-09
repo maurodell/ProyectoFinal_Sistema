@@ -38,12 +38,15 @@ namespace UI
             this.treeViewUserRol = new System.Windows.Forms.TreeView();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
+            this.btnAsignarPermiso = new System.Windows.Forms.Button();
+            this.cmbPermisos = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(78, 92);
+            this.label1.Location = new System.Drawing.Point(53, 93);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(266, 32);
             this.label1.TabIndex = 0;
@@ -52,14 +55,14 @@ namespace UI
             // cmbUser
             // 
             this.cmbUser.FormattingEnabled = true;
-            this.cmbUser.Location = new System.Drawing.Point(84, 139);
+            this.cmbUser.Location = new System.Drawing.Point(53, 140);
             this.cmbUser.Name = "cmbUser";
-            this.cmbUser.Size = new System.Drawing.Size(385, 39);
+            this.cmbUser.Size = new System.Drawing.Size(493, 39);
             this.cmbUser.TabIndex = 1;
             // 
             // btnConfigUser
             // 
-            this.btnConfigUser.Location = new System.Drawing.Point(84, 219);
+            this.btnConfigUser.Location = new System.Drawing.Point(53, 220);
             this.btnConfigUser.Name = "btnConfigUser";
             this.btnConfigUser.Size = new System.Drawing.Size(217, 56);
             this.btnConfigUser.TabIndex = 2;
@@ -69,7 +72,7 @@ namespace UI
             // 
             // btnAgregarRol
             // 
-            this.btnAgregarRol.Location = new System.Drawing.Point(84, 574);
+            this.btnAgregarRol.Location = new System.Drawing.Point(53, 578);
             this.btnAgregarRol.Name = "btnAgregarRol";
             this.btnAgregarRol.Size = new System.Drawing.Size(217, 56);
             this.btnAgregarRol.TabIndex = 5;
@@ -80,15 +83,15 @@ namespace UI
             // cmbRol
             // 
             this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Location = new System.Drawing.Point(84, 494);
+            this.cmbRol.Location = new System.Drawing.Point(53, 495);
             this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(385, 39);
+            this.cmbRol.Size = new System.Drawing.Size(493, 39);
             this.cmbRol.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(78, 447);
+            this.label2.Location = new System.Drawing.Point(53, 448);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(227, 32);
             this.label2.TabIndex = 3;
@@ -103,7 +106,7 @@ namespace UI
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(604, 1056);
+            this.btnGuardar.Location = new System.Drawing.Point(1226, 1056);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(217, 56);
             this.btnGuardar.TabIndex = 7;
@@ -113,7 +116,7 @@ namespace UI
             // 
             // btnQuitar
             // 
-            this.btnQuitar.Location = new System.Drawing.Point(1226, 1056);
+            this.btnQuitar.Location = new System.Drawing.Point(604, 1056);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(217, 56);
             this.btnQuitar.TabIndex = 8;
@@ -121,11 +124,41 @@ namespace UI
             this.btnQuitar.UseVisualStyleBackColor = true;
             this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
+            // btnAsignarPermiso
+            // 
+            this.btnAsignarPermiso.Location = new System.Drawing.Point(53, 936);
+            this.btnAsignarPermiso.Name = "btnAsignarPermiso";
+            this.btnAsignarPermiso.Size = new System.Drawing.Size(217, 56);
+            this.btnAsignarPermiso.TabIndex = 11;
+            this.btnAsignarPermiso.Text = "Asignar";
+            this.btnAsignarPermiso.UseVisualStyleBackColor = true;
+            this.btnAsignarPermiso.Click += new System.EventHandler(this.btnAsignarPermiso_Click);
+            // 
+            // cmbPermisos
+            // 
+            this.cmbPermisos.FormattingEnabled = true;
+            this.cmbPermisos.Location = new System.Drawing.Point(53, 859);
+            this.cmbPermisos.Name = "cmbPermisos";
+            this.cmbPermisos.Size = new System.Drawing.Size(487, 39);
+            this.cmbPermisos.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(53, 812);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(272, 32);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Listado de Permisos";
+            // 
             // frmAdministrarUsuarioPermisos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1488, 1144);
+            this.Controls.Add(this.btnAsignarPermiso);
+            this.Controls.Add(this.cmbPermisos);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnQuitar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.treeViewUserRol);
@@ -154,5 +187,8 @@ namespace UI
         private System.Windows.Forms.TreeView treeViewUserRol;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnQuitar;
+        private System.Windows.Forms.Button btnAsignarPermiso;
+        private System.Windows.Forms.ComboBox cmbPermisos;
+        private System.Windows.Forms.Label label3;
     }
 }

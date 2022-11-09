@@ -14,6 +14,7 @@ namespace BE
         public abstract void AgregarHijo(BEComponente componente);
         public abstract IList<BEComponente> ObjenerHijos { get; }
         public abstract void VaciarHijos();
+        public BEMenuPermisos Permiso { get; set; }
 
         public override string ToString()
         {

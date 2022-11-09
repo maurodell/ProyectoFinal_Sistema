@@ -20,4 +20,24 @@
     <clave>rUvj1G+ybfI=</clave>
     <estado>1</estado>
   </usuario>
+  <usuario codigo="3">
+    <nombre>Lucia</nombre>
+    <tipoDocumento>DNI</tipoDocumento>
+    <documento>iriondo 310</documento>
+    <domicilio>32290172</domicilio>
+    <telefono>432134</telefono>
+    <email>lucia123</email>
+    <clave>rUvj1G+ybfI=</clave>
+    <estado>1</estado>
+  </usuario>
+  <usuario codigo="4">
+    <nombre>Mauro</nombre>
+    <tipoDocumento>DNI</tipoDocumento>
+    <documento></documento>
+    <domicilio>32290172</domicilio>
+    <telefono>3412345678</telefono>
+    <email>mauro@gmail.com</email>
+    <clave>rUvj1G+ybfI=</clave>
+    <estado>1</estado>
+  </usuario>
 </usuarios>

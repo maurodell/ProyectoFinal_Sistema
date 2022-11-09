@@ -10,6 +10,7 @@ namespace BE.DTO
     {
         public int _codigoRol { get; set; }
         public int _codigoMenu { get; set; }
-        public string _nombreMenu { get; set; }
+        public string _nombre { get; set; }
+        public string _nombrePermiso { get; set; }
     }
 }

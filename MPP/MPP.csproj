@@ -50,7 +50,6 @@
     <Compile Include="MPPPermiso.cs" />
     <Compile Include="MPPProducto.cs" />
     <Compile Include="MPPProveedor.cs" />
-    <Compile Include="MPPRol.cs" />
     <Compile Include="MPPUsuario.cs" />
     <Compile Include="MPPVenta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,10 +62,6 @@
     <ProjectReference Include="..\BE\BE.csproj">
       <Project>{279b445d-c44f-4c41-b2c7-7a656817f01d}</Project>
       <Name>BE</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{9589c0b2-3d73-4eef-b7e0-81ffad2d2440}</Project>
-      <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Seguridad\Seguridad.csproj">
       <Project>{28b9b645-35f5-4d99-9b2b-0d3d8e65a08f}</Project>
