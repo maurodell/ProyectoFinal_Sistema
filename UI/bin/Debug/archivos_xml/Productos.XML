@@ -5,7 +5,7 @@
     <codigoBarra>111</codigoBarra>
     <nombre>Blem</nombre>
     <precioVenta>234</precioVenta>
-    <stock>15</stock>
+    <stock>16</stock>
     <descripcion></descripcion>
     <ubicacion>A1</ubicacion>
     <fechaVencimiento>2022-11-10T20:40:25.1789082-03:00</fechaVencimiento>
@@ -17,7 +17,7 @@
     <codigoBarra>1222122</codigoBarra>
     <nombre>Agua BonAqua</nombre>
     <precioVenta>344</precioVenta>
-    <stock>3</stock>
+    <stock>5</stock>
     <descripcion></descripcion>
     <ubicacion>A1</ubicacion>
     <fechaVencimiento>01/01/0001 0:00:00</fechaVencimiento>

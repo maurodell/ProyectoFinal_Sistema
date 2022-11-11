@@ -130,8 +130,7 @@ namespace UI
             errorProvider1.Clear();
 
             dgvListadoCompra.Columns[0].Visible = false;
-            btnActivar.Visible = false;
-            btnDesactivar.Visible = false;
+            btnAnular.Visible = false;
             chkSeleccionar.Checked = false;
         }
         private void MensajeError(string mensaje)
@@ -163,27 +162,27 @@ namespace UI
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
-        private void BuscarProductoCodBarra()
-        {
-            try
-            {
-                dgvListadoCompra.DataSource = null;
-                if (txtBuscarComprobante.Text != null)
-                {
-                    MensajeError("No puede ingresar 2 parametros a buscar");
-                }
-                else
-                {
-                    dgvListadoCompra.DataSource = bllCompra.BuscarProductoCodBarra(txtCodBarra.Text);
-                }
-                this.Formato();
-                lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoCompra.Rows.Count);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + ex.StackTrace);
-            }
-        }
+        //private void BuscarProductoCodBarra()
+        //{
+        //    try
+        //    {
+        //        dgvListadoCompra.DataSource = null;
+        //        if (txtBuscarComprobante.Text != null)
+        //        {
+        //            MensajeError("No puede ingresar 2 parametros a buscar");
+        //        }
+        //        else
+        //        {
+        //            dgvListadoCompra.DataSource = bllCompra.BuscarProductoCodBarra(txtCodBarra.Text);
+        //        }
+        //        this.Formato();
+        //        lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoCompra.Rows.Count);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message + ex.StackTrace);
+        //    }
+        //}
         private void frmCompra_Load(object sender, EventArgs e)
         {
             this.Listar();
@@ -372,12 +371,6 @@ namespace UI
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
-
-        private void btnDesactivar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (dgvDetalle.SelectedRows.Count > 0)
@@ -398,6 +391,7 @@ namespace UI
             this.Limpiar();
             tabControl1.SelectedIndex = 0;
             btnInsertar.Enabled = true;
+            btnEliminar.Enabled = true;
         }
 
         private void dgvListadoCompra_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -426,6 +420,84 @@ namespace UI
             tabControl1.SelectedIndex = 1;
             this.CalcularTotales();
             btnInsertar.Enabled = false;
+            btnEliminar.Enabled = false;
+        }
+
+        private void dgvListadoCompra_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex.Equals(dgvListadoCompra.Columns["Seleccionar"].Index))
+            {
+                DataGridViewCheckBoxCell chkEliminar = (DataGridViewCheckBoxCell)dgvListadoCompra.Rows[e.RowIndex].Cells["Seleccionar"];
+                chkEliminar.Value = !Convert.ToBoolean(chkEliminar.Value);//Determino si esta o no esta marcado el checkBox(Documentacion DataGridView)
+            }
+        }
+
+        private void chkSeleccionar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSeleccionar.Checked)
+            {
+                dgvListadoCompra.Columns[0].Visible = true;
+                btnAnular.Visible = true;
+
+                dgvListadoCompra.DataSource = null;
+                dgvListadoCompra.DataSource = bllCompra.ListarTodos();
+            }
+            else
+            {
+                dgvListadoCompra.Columns[0].Visible = false;
+                btnAnular.Visible = false;
+
+                dgvListadoCompra.DataSource = null;
+                dgvListadoCompra.DataSource = bllCompra.Listar();
+            }
+        }
+
+        private void btnAnular_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult opcion;
+                opcion = MessageBox.Show("Esta seguro que desea anular el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (opcion.Equals(DialogResult.OK))
+                {
+                    int codigo;
+                    int estado;
+                    bool flag = false;
+                    foreach (DataGridViewRow row in dgvListadoCompra.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            estado = Convert.ToInt32(row.Cells[9].Value);
+                            if (estado.Equals(1))
+                            {
+                                codigo = Convert.ToInt32(row.Cells[10].Value);
+                                flag = bllCompra.Baja(codigo);
+                            }
+                            else
+                            {
+                                MensajeError("Imposible anular la compra dado que ya está dada de baja.");
+                            }
+
+                        }
+                    }
+
+                    if (flag)
+                    {
+                        this.MensajeOk("La compra fue dada de baja correctamente");
+                        this.Limpiar();
+                        this.Listar();
+                    }
+
+                    else
+                    {
+                        this.MensajeError("Algo salío mal al dar de baja la compra");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
         }
     }
 }

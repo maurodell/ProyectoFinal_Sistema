@@ -34,17 +34,16 @@ namespace UI
             this.label13 = new System.Windows.Forms.Label();
             this.txtPuntoVenta = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnBuscarProv = new System.Windows.Forms.Button();
+            this.btnBuscarCliente = new System.Windows.Forms.Button();
             this.txtAlicuota = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtNumComprob = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbComprobante = new System.Windows.Forms.ComboBox();
-            this.txtNombreProveedor = new System.Windows.Forms.TextBox();
+            this.txtNombreCliente = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnDesactivar = new System.Windows.Forms.Button();
-            this.btnActivar = new System.Windows.Forms.Button();
+            this.btnAnular = new System.Windows.Forms.Button();
             this.chkSeleccionar = new System.Windows.Forms.CheckBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,7 +51,7 @@ namespace UI
             this.lblTotalReg = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.txtCodProveedor = new System.Windows.Forms.TextBox();
+            this.txtCodCliente = new System.Windows.Forms.TextBox();
             this.tabCat = new System.Windows.Forms.TabPage();
             this.dgvListadoCompra = new System.Windows.Forms.DataGridView();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -126,14 +125,15 @@ namespace UI
             this.label8.TabIndex = 13;
             this.label8.Text = "Punto Venta (*)";
             // 
-            // btnBuscarProv
+            // btnBuscarCliente
             // 
-            this.btnBuscarProv.Location = new System.Drawing.Point(1451, 50);
-            this.btnBuscarProv.Name = "btnBuscarProv";
-            this.btnBuscarProv.Size = new System.Drawing.Size(225, 51);
-            this.btnBuscarProv.TabIndex = 10;
-            this.btnBuscarProv.Text = "Buscar";
-            this.btnBuscarProv.UseVisualStyleBackColor = true;
+            this.btnBuscarCliente.Location = new System.Drawing.Point(1451, 50);
+            this.btnBuscarCliente.Name = "btnBuscarCliente";
+            this.btnBuscarCliente.Size = new System.Drawing.Size(225, 51);
+            this.btnBuscarCliente.TabIndex = 10;
+            this.btnBuscarCliente.Text = "Buscar";
+            this.btnBuscarCliente.UseVisualStyleBackColor = true;
+            this.btnBuscarCliente.Click += new System.EventHandler(this.btnBuscarCliente_Click);
             // 
             // txtAlicuota
             // 
@@ -177,13 +177,13 @@ namespace UI
             this.cmbComprobante.Size = new System.Drawing.Size(316, 39);
             this.cmbComprobante.TabIndex = 5;
             // 
-            // txtNombreProveedor
+            // txtNombreCliente
             // 
-            this.txtNombreProveedor.Enabled = false;
-            this.txtNombreProveedor.Location = new System.Drawing.Point(436, 56);
-            this.txtNombreProveedor.Name = "txtNombreProveedor";
-            this.txtNombreProveedor.Size = new System.Drawing.Size(968, 38);
-            this.txtNombreProveedor.TabIndex = 4;
+            this.txtNombreCliente.Enabled = false;
+            this.txtNombreCliente.Location = new System.Drawing.Point(436, 56);
+            this.txtNombreCliente.Name = "txtNombreCliente";
+            this.txtNombreCliente.Size = new System.Drawing.Size(968, 38);
+            this.txtNombreCliente.TabIndex = 4;
             // 
             // label6
             // 
@@ -203,23 +203,14 @@ namespace UI
             this.label2.TabIndex = 0;
             this.label2.Text = "Cliente (*)";
             // 
-            // btnDesactivar
+            // btnAnular
             // 
-            this.btnDesactivar.Location = new System.Drawing.Point(840, 1264);
-            this.btnDesactivar.Name = "btnDesactivar";
-            this.btnDesactivar.Size = new System.Drawing.Size(342, 50);
-            this.btnDesactivar.TabIndex = 7;
-            this.btnDesactivar.Text = "Desactivar";
-            this.btnDesactivar.UseVisualStyleBackColor = true;
-            // 
-            // btnActivar
-            // 
-            this.btnActivar.Location = new System.Drawing.Point(441, 1265);
-            this.btnActivar.Name = "btnActivar";
-            this.btnActivar.Size = new System.Drawing.Size(341, 50);
-            this.btnActivar.TabIndex = 6;
-            this.btnActivar.Text = "Activar";
-            this.btnActivar.UseVisualStyleBackColor = true;
+            this.btnAnular.Location = new System.Drawing.Point(441, 1265);
+            this.btnAnular.Name = "btnAnular";
+            this.btnAnular.Size = new System.Drawing.Size(341, 50);
+            this.btnAnular.TabIndex = 6;
+            this.btnAnular.Text = "Anular";
+            this.btnAnular.UseVisualStyleBackColor = true;
             // 
             // chkSeleccionar
             // 
@@ -272,16 +263,16 @@ namespace UI
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.txtPuntoVenta);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.btnBuscarProv);
+            this.groupBox1.Controls.Add(this.btnBuscarCliente);
             this.groupBox1.Controls.Add(this.txtAlicuota);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.txtCodigo);
             this.groupBox1.Controls.Add(this.txtNumComprob);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.cmbComprobante);
-            this.groupBox1.Controls.Add(this.txtNombreProveedor);
+            this.groupBox1.Controls.Add(this.txtNombreCliente);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.txtCodProveedor);
+            this.groupBox1.Controls.Add(this.txtCodCliente);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(44, 33);
             this.groupBox1.Name = "groupBox1";
@@ -299,18 +290,17 @@ namespace UI
             this.txtCodigo.TabIndex = 6;
             this.txtCodigo.Visible = false;
             // 
-            // txtCodProveedor
+            // txtCodCliente
             // 
-            this.txtCodProveedor.Enabled = false;
-            this.txtCodProveedor.Location = new System.Drawing.Point(216, 56);
-            this.txtCodProveedor.Name = "txtCodProveedor";
-            this.txtCodProveedor.Size = new System.Drawing.Size(194, 38);
-            this.txtCodProveedor.TabIndex = 2;
+            this.txtCodCliente.Enabled = false;
+            this.txtCodCliente.Location = new System.Drawing.Point(216, 56);
+            this.txtCodCliente.Name = "txtCodCliente";
+            this.txtCodCliente.Size = new System.Drawing.Size(194, 38);
+            this.txtCodCliente.TabIndex = 2;
             // 
             // tabCat
             // 
-            this.tabCat.Controls.Add(this.btnDesactivar);
-            this.tabCat.Controls.Add(this.btnActivar);
+            this.tabCat.Controls.Add(this.btnAnular);
             this.tabCat.Controls.Add(this.chkSeleccionar);
             this.tabCat.Controls.Add(this.btnBuscar);
             this.tabCat.Controls.Add(this.label1);
@@ -414,7 +404,7 @@ namespace UI
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(1840, 54);
+            this.label15.Location = new System.Drawing.Point(1889, 57);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(47, 69);
             this.label15.TabIndex = 23;
@@ -559,7 +549,7 @@ namespace UI
             // 
             this.txtCodBarra.Location = new System.Drawing.Point(254, 73);
             this.txtCodBarra.Name = "txtCodBarra";
-            this.txtCodBarra.Size = new System.Drawing.Size(1465, 38);
+            this.txtCodBarra.Size = new System.Drawing.Size(1580, 38);
             this.txtCodBarra.TabIndex = 1;
             // 
             // label3
@@ -631,17 +621,16 @@ namespace UI
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtPuntoVenta;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnBuscarProv;
+        private System.Windows.Forms.Button btnBuscarCliente;
         private System.Windows.Forms.TextBox txtAlicuota;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtNumComprob;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbComprobante;
-        private System.Windows.Forms.TextBox txtNombreProveedor;
+        private System.Windows.Forms.TextBox txtNombreCliente;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnDesactivar;
-        private System.Windows.Forms.Button btnActivar;
+        private System.Windows.Forms.Button btnAnular;
         private System.Windows.Forms.CheckBox chkSeleccionar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Label label1;
@@ -649,7 +638,7 @@ namespace UI
         private System.Windows.Forms.Label lblTotalReg;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.TextBox txtCodProveedor;
+        private System.Windows.Forms.TextBox txtCodCliente;
         private System.Windows.Forms.TabPage tabCat;
         private System.Windows.Forms.DataGridView dgvListadoCompra;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;

@@ -56,4 +56,8 @@
     <nombre>Proveedores submenu Ingresos</nombre>
     <menu>submenuProveedores</menu>
   </permiso>
+  <permiso codigo="20">
+    <nombre>Ventas submenu Ventas</nombre>
+    <menu>submenuVentas</menu>
+  </permiso>
 </permisos>

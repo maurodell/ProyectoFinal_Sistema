@@ -64,4 +64,8 @@
     <codigoRol>2</codigoRol>
     <codigoMenu>19</codigoMenu>
   </permiso>
+  <permiso codigo="31">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>20</codigoMenu>
+  </permiso>
 </permisopermiso>

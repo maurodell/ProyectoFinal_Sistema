@@ -67,8 +67,7 @@ namespace UI
             this.cmbComprobante = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.btnDesactivar = new System.Windows.Forms.Button();
-            this.btnActivar = new System.Windows.Forms.Button();
+            this.btnAnular = new System.Windows.Forms.Button();
             this.chkSeleccionar = new System.Windows.Forms.CheckBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -465,24 +464,15 @@ namespace UI
             this.Seleccionar.Name = "Seleccionar";
             this.Seleccionar.ReadOnly = true;
             // 
-            // btnDesactivar
+            // btnAnular
             // 
-            this.btnDesactivar.Location = new System.Drawing.Point(840, 1264);
-            this.btnDesactivar.Name = "btnDesactivar";
-            this.btnDesactivar.Size = new System.Drawing.Size(342, 50);
-            this.btnDesactivar.TabIndex = 7;
-            this.btnDesactivar.Text = "Desactivar";
-            this.btnDesactivar.UseVisualStyleBackColor = true;
-            this.btnDesactivar.Click += new System.EventHandler(this.btnDesactivar_Click);
-            // 
-            // btnActivar
-            // 
-            this.btnActivar.Location = new System.Drawing.Point(441, 1265);
-            this.btnActivar.Name = "btnActivar";
-            this.btnActivar.Size = new System.Drawing.Size(341, 50);
-            this.btnActivar.TabIndex = 6;
-            this.btnActivar.Text = "Activar";
-            this.btnActivar.UseVisualStyleBackColor = true;
+            this.btnAnular.Location = new System.Drawing.Point(441, 1265);
+            this.btnAnular.Name = "btnAnular";
+            this.btnAnular.Size = new System.Drawing.Size(341, 50);
+            this.btnAnular.TabIndex = 6;
+            this.btnAnular.Text = "Anular";
+            this.btnAnular.UseVisualStyleBackColor = true;
+            this.btnAnular.Click += new System.EventHandler(this.btnAnular_Click);
             // 
             // chkSeleccionar
             // 
@@ -493,6 +483,7 @@ namespace UI
             this.chkSeleccionar.TabIndex = 5;
             this.chkSeleccionar.Text = "Seleccionar";
             this.chkSeleccionar.UseVisualStyleBackColor = true;
+            this.chkSeleccionar.CheckedChanged += new System.EventHandler(this.chkSeleccionar_CheckedChanged);
             // 
             // btnBuscar
             // 
@@ -541,8 +532,7 @@ namespace UI
             // 
             // tabCat
             // 
-            this.tabCat.Controls.Add(this.btnDesactivar);
-            this.tabCat.Controls.Add(this.btnActivar);
+            this.tabCat.Controls.Add(this.btnAnular);
             this.tabCat.Controls.Add(this.chkSeleccionar);
             this.tabCat.Controls.Add(this.btnBuscar);
             this.tabCat.Controls.Add(this.label1);
@@ -574,6 +564,7 @@ namespace UI
             this.dgvListadoCompra.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListadoCompra.Size = new System.Drawing.Size(3495, 1031);
             this.dgvListadoCompra.TabIndex = 0;
+            this.dgvListadoCompra.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCompra_CellContentClick);
             this.dgvListadoCompra.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCompra_CellDoubleClick);
             // 
             // frmCompra
@@ -609,8 +600,7 @@ namespace UI
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabCat;
-        private System.Windows.Forms.Button btnDesactivar;
-        private System.Windows.Forms.Button btnActivar;
+        private System.Windows.Forms.Button btnAnular;
         private System.Windows.Forms.CheckBox chkSeleccionar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Label label1;

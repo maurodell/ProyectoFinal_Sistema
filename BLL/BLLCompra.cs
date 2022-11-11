@@ -21,7 +21,7 @@ namespace BLL
         Detalle detalle;
         public bool Alta(int Parametro)
         {
-            return mppCompra.Alta(Parametro);
+            throw new NotImplementedException();
         }
 
         public bool Baja(int Parametro)
@@ -69,12 +69,6 @@ namespace BLL
             beCompra.total = total;
 
             return mppCompra.Crear(beCompra);
-        }
-        public bool CrearDetalle()
-        {
-            detalle = new Detalle();
-
-            return false;
         }
         
         public BECompra CargarCompra(int codigoCompra)

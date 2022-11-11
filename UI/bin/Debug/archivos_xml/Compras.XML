@@ -22,4 +22,15 @@
     <estadoActual>Activo</estadoActual>
     <estado>1</estado>
   </compra>
+  <compra codigo="3">
+    <codigoUsuario>1</codigoUsuario>
+    <tipoComprobante>Factura A</tipoComprobante>
+    <nroComprobante>4433</nroComprobante>
+    <puntoVenta>0000</puntoVenta>
+    <fecha>2022-11-11T18:33:12.6540217-03:00</fecha>
+    <impuesto>21</impuesto>
+    <total>702.00</total>
+    <estadoActual>Anulado</estadoActual>
+    <estado>0</estado>
+  </compra>
 </compras>

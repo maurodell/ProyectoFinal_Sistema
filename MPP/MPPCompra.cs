@@ -23,20 +23,7 @@ namespace MPP
         MPPProducto mppProducto = new MPPProducto();
         public bool Alta(int Parametro)
         {
-            XDocument documento = XDocument.Load(path);
-
-            var consulta = from compra in documento.Descendants("compra")
-                           where compra.Attribute("codigo").Value == Parametro.ToString()
-                           select compra;
-
-            foreach (XElement EModifcar in consulta)
-            {
-                EModifcar.Element("estadoActual").Value = "Activo";
-                EModifcar.Element("estado").Value = "1";
-            }
-
-            documento.Save(path);
-            return true;
+            throw new NotImplementedException();
         }
 
         public bool Baja(int Parametro)
@@ -53,14 +40,16 @@ namespace MPP
                 EModifcar.Element("estadoActual").Value = "Anulado";
                 EModifcar.Element("estado").Value = "0";
             }
-
+            
             documento.Save(path);
+            BECompra compraActualizar = CargarCompra(Parametro);//cargo la compra con el id que mandó
+            ActualizarStock(compraActualizar, false);//luego lo paso para actualizar
             return true;
         }
 
         public List<BECompra> Buscar(string Parametro)
         {
-            //va a buscar por nroComprobante o por nombre de proveedor.
+            //va a buscar por nroComprobante de la compra
             try
             {
                 BECompra compraBuscar;
@@ -140,7 +129,7 @@ namespace MPP
                                                         new XElement("importe", item.importe)));
                         crearDetalle.Save(pathDetalle);
                     }
-                    if (ActualizarStock(Parametro))
+                    if (ActualizarStock(Parametro, true))
                     {
                         crear.Save(path);
                         return true;
@@ -231,21 +220,22 @@ namespace MPP
         {
             throw new NotImplementedException();
         }
-        public bool ActualizarStock(BECompra detalle)
+        public bool ActualizarStock(BECompra detalle, bool tipo)
         {
             int stock, codProducto;
             bool flag = false;
+            //si tipo es true, entonces resta stock porque es un insert y si es false es una anulación de la compra lo que suma el stock
             foreach (Detalle item in detalle.detalles)
             {
                 stock = item.cantidad;
                 codProducto = item.codigoProducto;
 
-                flag = ActualizarProductoStock(stock, codProducto);
+                flag = ActualizarProductoStock(stock, codProducto, tipo);
                 if (!flag) return flag;
             }
             return flag;
         }
-        public bool ActualizarProductoStock(int stock, int codigoProducto)
+        public bool ActualizarProductoStock(int stock, int codigoProducto, bool tipo)
         {
             try
             {
@@ -255,18 +245,33 @@ namespace MPP
                                where producto.Attribute("codigo").Value == codigoProducto.ToString()
                                select producto;
                 bool flag = false;
-                foreach (XElement EModifcar in consulta)
+                if (tipo)
                 {
-                    int stockActual = Convert.ToInt32(EModifcar.Element("stock").Value);
-                    if (stockActual > stock)
+                    foreach (XElement EModifcar in consulta)
                     {
-                        stockActual -= stock;
-                        EModifcar.Element("stock").Value = stockActual.ToString();
-                        flag = true;
+                        int stockActual = Convert.ToInt32(EModifcar.Element("stock").Value);
+                        if (stockActual > stock)
+                        {
+                            stockActual -= stock;
+                            EModifcar.Element("stock").Value = stockActual.ToString();
+                            flag = true;
+                        }
                     }
-
-
                 }
+                else
+                {
+                    foreach (XElement EModifcar in consulta)
+                    {
+                        int stockActual = Convert.ToInt32(EModifcar.Element("stock").Value);
+                        if (stockActual > stock)
+                        {
+                            stockActual += stock;
+                            EModifcar.Element("stock").Value = stockActual.ToString();
+                            flag = true;
+                        }
+                    }
+                }
+
                 documento.Save(pathProducto);
                 return flag;
             }

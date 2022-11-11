@@ -27,4 +27,13 @@
     <cantidad>1</cantidad>
     <importe>344</importe>
   </detalle>
+  <detalle codigo="4">
+    <codigoCompra>3</codigoCompra>
+    <codigoProducto>1</codigoProducto>
+    <nombreProducto>Blem</nombreProducto>
+    <codigoBarra>111</codigoBarra>
+    <precio>234</precio>
+    <cantidad>3</cantidad>
+    <importe>702</importe>
+  </detalle>
 </detallecompra>

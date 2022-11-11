@@ -62,9 +62,9 @@ namespace UI
         private void Limpiar()
         {
             txtBuscarComprobante.Clear();
-            txtCodProveedor.Clear();
+            txtCodCliente.Clear();
             txtCodigo.Clear();
-            txtCodProveedor.Clear();
+            txtCodCliente.Clear();
             txtNumComprob.Clear();
             txtPuntoVenta.Text = "0000";
             dtDetalle.Clear();
@@ -76,8 +76,7 @@ namespace UI
             errorProvider1.Clear();
 
             dgvListadoCompra.Columns[0].Visible = false;
-            btnActivar.Visible = false;
-            btnDesactivar.Visible = false;
+            btnAnular.Visible = false;
             chkSeleccionar.Checked = false;
         }
         private void MensajeError(string mensaje)
@@ -115,6 +114,14 @@ namespace UI
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             this.Buscar();
+        }
+
+        private void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            frmBuscarClientes FrmBuscarClientes = new frmBuscarClientes();
+            FrmBuscarClientes.ShowDialog();
+            txtCodCliente.Text = Convert.ToString(VariableCliente.codigoCliente);
+            txtNombreCliente.Text = VariableCliente.nombreCliente;
         }
     }
     enum Comprobantes { Exento, No_responsable, Consumidor_Final, Responsable_Inscripto, No_categorizado }

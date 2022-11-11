@@ -30,7 +30,7 @@ namespace BLL
 
         public List<BEVenta> Buscar(string Parametro)
         {
-            throw new NotImplementedException();
+            return mppVenta.Buscar(Parametro);
         }
 
         public bool Crear(BEVenta Parametro)
@@ -45,7 +45,7 @@ namespace BLL
 
         public List<BEVenta> Listar()
         {
-            throw new NotImplementedException();
+            return mppVenta.Listar();
         }
 
         public List<BEVenta> ListarTodos()
