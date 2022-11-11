@@ -35,7 +35,6 @@ namespace UI
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnInsertar = new System.Windows.Forms.Button();
-            this.txtCodProveedor = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -61,15 +60,12 @@ namespace UI
             this.label13 = new System.Windows.Forms.Label();
             this.txtPuntoVenta = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnBuscarProv = new System.Windows.Forms.Button();
             this.txtAlicuota = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtNumComprob = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbComprobante = new System.Windows.Forms.ComboBox();
-            this.txtNombreProveedor = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnDesactivar = new System.Windows.Forms.Button();
             this.btnActivar = new System.Windows.Forms.Button();
@@ -80,8 +76,6 @@ namespace UI
             this.lblTotalReg = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCat = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtBuscarProve = new System.Windows.Forms.TextBox();
             this.dgvListadoCompra = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -111,9 +105,9 @@ namespace UI
             // txtCodigo
             // 
             this.txtCodigo.Enabled = false;
-            this.txtCodigo.Location = new System.Drawing.Point(3201, 129);
+            this.txtCodigo.Location = new System.Drawing.Point(3288, 76);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(200, 38);
+            this.txtCodigo.Size = new System.Drawing.Size(118, 38);
             this.txtCodigo.TabIndex = 6;
             this.txtCodigo.Visible = false;
             // 
@@ -125,6 +119,7 @@ namespace UI
             this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnInsertar
             // 
@@ -135,14 +130,6 @@ namespace UI
             this.btnInsertar.Text = "Insertar";
             this.btnInsertar.UseVisualStyleBackColor = true;
             this.btnInsertar.Click += new System.EventHandler(this.btnInsertar_Click);
-            // 
-            // txtCodProveedor
-            // 
-            this.txtCodProveedor.Enabled = false;
-            this.txtCodProveedor.Location = new System.Drawing.Point(216, 56);
-            this.txtCodProveedor.Name = "txtCodProveedor";
-            this.txtCodProveedor.Size = new System.Drawing.Size(194, 38);
-            this.txtCodProveedor.TabIndex = 2;
             // 
             // tabPage2
             // 
@@ -168,6 +155,7 @@ namespace UI
             this.btnEliminar.TabIndex = 10;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // groupBox2
             // 
@@ -183,9 +171,9 @@ namespace UI
             this.groupBox2.Controls.Add(this.btnExplorarProd);
             this.groupBox2.Controls.Add(this.txtCodBarra);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(44, 268);
+            this.groupBox2.Location = new System.Drawing.Point(44, 212);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(3445, 973);
+            this.groupBox2.Size = new System.Drawing.Size(3445, 1021);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detalle";
@@ -194,7 +182,7 @@ namespace UI
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(1840, 54);
+            this.label15.Location = new System.Drawing.Point(1920, 57);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(47, 69);
             this.label15.TabIndex = 23;
@@ -219,6 +207,7 @@ namespace UI
             this.dgvProductoPanel.AllowUserToAddRows = false;
             this.dgvProductoPanel.AllowUserToDeleteRows = false;
             this.dgvProductoPanel.AllowUserToOrderColumns = true;
+            this.dgvProductoPanel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductoPanel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductoPanel.Location = new System.Drawing.Point(88, 172);
             this.dgvProductoPanel.Name = "dgvProductoPanel";
@@ -275,10 +264,10 @@ namespace UI
             this.dgvDetalle.RowHeadersWidth = 102;
             this.dgvDetalle.RowTemplate.Height = 40;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalle.Size = new System.Drawing.Size(2149, 777);
+            this.dgvDetalle.Size = new System.Drawing.Size(2149, 833);
             this.dgvDetalle.TabIndex = 21;
+            this.dgvDetalle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellContentClick);
             this.dgvDetalle.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellEndEdit);
-            this.dgvDetalle.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvDetalle_RowsRemoved);
             // 
             // label12
             // 
@@ -345,7 +334,7 @@ namespace UI
             // 
             this.txtCodBarra.Location = new System.Drawing.Point(254, 73);
             this.txtCodBarra.Name = "txtCodBarra";
-            this.txtCodBarra.Size = new System.Drawing.Size(1465, 38);
+            this.txtCodBarra.Size = new System.Drawing.Size(1614, 38);
             this.txtCodBarra.TabIndex = 1;
             this.txtCodBarra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodBarra_KeyDown);
             // 
@@ -364,27 +353,23 @@ namespace UI
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.txtPuntoVenta);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.btnBuscarProv);
             this.groupBox1.Controls.Add(this.txtAlicuota);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.txtCodigo);
             this.groupBox1.Controls.Add(this.txtNumComprob);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.cmbComprobante);
-            this.groupBox1.Controls.Add(this.txtNombreProveedor);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.txtCodProveedor);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(44, 33);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(3439, 196);
+            this.groupBox1.Size = new System.Drawing.Size(3439, 148);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cabecera";
             // 
             // dateFecha
             // 
-            this.dateFecha.Location = new System.Drawing.Point(2172, 50);
+            this.dateFecha.Location = new System.Drawing.Point(2328, 70);
             this.dateFecha.Name = "dateFecha";
             this.dateFecha.Size = new System.Drawing.Size(472, 38);
             this.dateFecha.TabIndex = 16;
@@ -392,7 +377,7 @@ namespace UI
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(2020, 50);
+            this.label13.Location = new System.Drawing.Point(2176, 70);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(130, 32);
             this.label13.TabIndex = 15;
@@ -400,7 +385,7 @@ namespace UI
             // 
             // txtPuntoVenta
             // 
-            this.txtPuntoVenta.Location = new System.Drawing.Point(834, 132);
+            this.txtPuntoVenta.Location = new System.Drawing.Point(834, 67);
             this.txtPuntoVenta.Name = "txtPuntoVenta";
             this.txtPuntoVenta.Size = new System.Drawing.Size(247, 38);
             this.txtPuntoVenta.TabIndex = 14;
@@ -409,26 +394,16 @@ namespace UI
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(607, 135);
+            this.label8.Location = new System.Drawing.Point(607, 70);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(208, 32);
             this.label8.TabIndex = 13;
             this.label8.Text = "Punto Venta (*)";
             // 
-            // btnBuscarProv
-            // 
-            this.btnBuscarProv.Location = new System.Drawing.Point(1451, 50);
-            this.btnBuscarProv.Name = "btnBuscarProv";
-            this.btnBuscarProv.Size = new System.Drawing.Size(225, 51);
-            this.btnBuscarProv.TabIndex = 10;
-            this.btnBuscarProv.Text = "Buscar";
-            this.btnBuscarProv.UseVisualStyleBackColor = true;
-            this.btnBuscarProv.Click += new System.EventHandler(this.btnBuscarProv_Click);
-            // 
             // txtAlicuota
             // 
             this.txtAlicuota.Enabled = false;
-            this.txtAlicuota.Location = new System.Drawing.Point(2413, 132);
+            this.txtAlicuota.Location = new System.Drawing.Point(3023, 73);
             this.txtAlicuota.Name = "txtAlicuota";
             this.txtAlicuota.Size = new System.Drawing.Size(231, 38);
             this.txtAlicuota.TabIndex = 12;
@@ -437,7 +412,7 @@ namespace UI
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(2225, 135);
+            this.label9.Location = new System.Drawing.Point(2835, 76);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(170, 32);
             this.label9.TabIndex = 11;
@@ -445,7 +420,7 @@ namespace UI
             // 
             // txtNumComprob
             // 
-            this.txtNumComprob.Location = new System.Drawing.Point(1472, 132);
+            this.txtNumComprob.Location = new System.Drawing.Point(1472, 67);
             this.txtNumComprob.Name = "txtNumComprob";
             this.txtNumComprob.Size = new System.Drawing.Size(678, 38);
             this.txtNumComprob.TabIndex = 7;
@@ -453,7 +428,7 @@ namespace UI
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1132, 135);
+            this.label7.Location = new System.Drawing.Point(1132, 70);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(330, 32);
             this.label7.TabIndex = 6;
@@ -467,38 +442,21 @@ namespace UI
             "Factura A",
             "Factura B",
             "Factura C"});
-            this.cmbComprobante.Location = new System.Drawing.Point(267, 132);
+            this.cmbComprobante.Location = new System.Drawing.Point(267, 67);
             this.cmbComprobante.Name = "cmbComprobante";
             this.cmbComprobante.Size = new System.Drawing.Size(316, 39);
             this.cmbComprobante.TabIndex = 5;
             this.cmbComprobante.Text = "Factura A";
             this.cmbComprobante.SelectionChangeCommitted += new System.EventHandler(this.cmbComprobante_SelectionChangeCommitted);
             // 
-            // txtNombreProveedor
-            // 
-            this.txtNombreProveedor.Enabled = false;
-            this.txtNombreProveedor.Location = new System.Drawing.Point(436, 56);
-            this.txtNombreProveedor.Name = "txtNombreProveedor";
-            this.txtNombreProveedor.Size = new System.Drawing.Size(968, 38);
-            this.txtNombreProveedor.TabIndex = 4;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(23, 135);
+            this.label6.Location = new System.Drawing.Point(23, 70);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(223, 32);
             this.label6.TabIndex = 3;
             this.label6.Text = "Comprobante (*)";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(182, 32);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Proveedor (*)";
             // 
             // Seleccionar
             // 
@@ -515,6 +473,7 @@ namespace UI
             this.btnDesactivar.TabIndex = 7;
             this.btnDesactivar.Text = "Desactivar";
             this.btnDesactivar.UseVisualStyleBackColor = true;
+            this.btnDesactivar.Click += new System.EventHandler(this.btnDesactivar_Click);
             // 
             // btnActivar
             // 
@@ -537,7 +496,7 @@ namespace UI
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(1815, 86);
+            this.btnBuscar.Location = new System.Drawing.Point(1557, 86);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(193, 49);
             this.btnBuscar.TabIndex = 4;
@@ -558,7 +517,7 @@ namespace UI
             // 
             this.txtBuscarComprobante.Location = new System.Drawing.Point(22, 92);
             this.txtBuscarComprobante.Name = "txtBuscarComprobante";
-            this.txtBuscarComprobante.Size = new System.Drawing.Size(773, 38);
+            this.txtBuscarComprobante.Size = new System.Drawing.Size(1466, 38);
             this.txtBuscarComprobante.TabIndex = 2;
             // 
             // lblTotalReg
@@ -582,8 +541,6 @@ namespace UI
             // 
             // tabCat
             // 
-            this.tabCat.Controls.Add(this.label5);
-            this.tabCat.Controls.Add(this.txtBuscarProve);
             this.tabCat.Controls.Add(this.btnDesactivar);
             this.tabCat.Controls.Add(this.btnActivar);
             this.tabCat.Controls.Add(this.chkSeleccionar);
@@ -599,22 +556,6 @@ namespace UI
             this.tabCat.TabIndex = 0;
             this.tabCat.Text = "Listado";
             this.tabCat.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(961, 42);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(467, 32);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Buscar Por Razón Social Proveedor";
-            // 
-            // txtBuscarProve
-            // 
-            this.txtBuscarProve.Location = new System.Drawing.Point(961, 92);
-            this.txtBuscarProve.Name = "txtBuscarProve";
-            this.txtBuscarProve.Size = new System.Drawing.Size(773, 38);
-            this.txtBuscarProve.TabIndex = 8;
             // 
             // dgvListadoCompra
             // 
@@ -633,6 +574,7 @@ namespace UI
             this.dgvListadoCompra.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListadoCompra.Size = new System.Drawing.Size(3495, 1031);
             this.dgvListadoCompra.TabIndex = 0;
+            this.dgvListadoCompra.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCompra_CellDoubleClick);
             // 
             // frmCompra
             // 
@@ -667,8 +609,6 @@ namespace UI
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabCat;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtBuscarProve;
         private System.Windows.Forms.Button btnDesactivar;
         private System.Windows.Forms.Button btnActivar;
         private System.Windows.Forms.CheckBox chkSeleccionar;
@@ -683,18 +623,14 @@ namespace UI
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnInsertar;
-        private System.Windows.Forms.TextBox txtCodProveedor;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtAlicuota;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtNumComprob;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbComprobante;
-        private System.Windows.Forms.TextBox txtNombreProveedor;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnBuscarProv;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;

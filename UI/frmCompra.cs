@@ -21,6 +21,11 @@ namespace UI
         BLLProducto BLLProducto;
         private DataTable dtDetalle;
         private BEProducto producto;
+        private int codigoProducto;
+        private string codigoBarra;
+        private string nombre;
+        private decimal precio;
+        private int posicion;
         private void Listar()
         {
             try
@@ -39,8 +44,8 @@ namespace UI
         private void CrearDgvDetalle()
         {
             this.dtDetalle.Columns.Add("codigoProducto", Type.GetType("System.Int32"));
-            this.dtDetalle.Columns.Add("codigo", Type.GetType("System.String"));
-            this.dtDetalle.Columns.Add("producto", Type.GetType("System.String"));
+            this.dtDetalle.Columns.Add("codigoBarra", Type.GetType("System.String"));
+            this.dtDetalle.Columns.Add("nombreProducto", Type.GetType("System.String"));
             this.dtDetalle.Columns.Add("cantidad", Type.GetType("System.Int32"));
             this.dtDetalle.Columns.Add("precio", Type.GetType("System.Decimal"));
             this.dtDetalle.Columns.Add("importe", Type.GetType("System.Decimal"));
@@ -66,58 +71,54 @@ namespace UI
         private void Formato()
         {
             dgvListadoCompra.Columns[0].Visible = false;
-            dgvListadoCompra.Columns[1].HeaderText = "Proveedor";
-            dgvListadoCompra.Columns[1].Width = 100;
-            dgvListadoCompra.Columns[2].HeaderText = "Usuario";
+            dgvListadoCompra.Columns[1].HeaderText = "Código Usuario";
+            dgvListadoCompra.Columns[1].Width = 50;
+            dgvListadoCompra.Columns[2].HeaderText = "Tipo Comprobante";
             dgvListadoCompra.Columns[2].Width = 100;
-            dgvListadoCompra.Columns[3].HeaderText = "Tipo Comprobante";
+            dgvListadoCompra.Columns[3].HeaderText = "Punto De venta";
             dgvListadoCompra.Columns[3].Width = 80;
-            dgvListadoCompra.Columns[4].HeaderText = "Punto De venta";
+            dgvListadoCompra.Columns[4].HeaderText = "Nro. Comprobante";
             dgvListadoCompra.Columns[4].Width = 100;
-            dgvListadoCompra.Columns[5].HeaderText = "Nro. Comprobante";
+            dgvListadoCompra.Columns[5].HeaderText = "Fecha";
             dgvListadoCompra.Columns[5].Width = 100;
-            dgvListadoCompra.Columns[6].HeaderText = "Fecha";
+            dgvListadoCompra.Columns[6].HeaderText = "Impuesto";
             dgvListadoCompra.Columns[6].Width = 150;
-            dgvListadoCompra.Columns[7].HeaderText = "Impuesto";
+            dgvListadoCompra.Columns[7].HeaderText = "Total";
             dgvListadoCompra.Columns[7].Width = 100;
-            dgvListadoCompra.Columns[8].HeaderText = "Total";
+            dgvListadoCompra.Columns[8].HeaderText = "Estado Actual";
             dgvListadoCompra.Columns[8].Width = 100;
             dgvListadoCompra.Columns[9].Width = 100;
-            dgvListadoCompra.Columns[9].HeaderText = "Estado Actual";
-            dgvListadoCompra.Columns[10].Visible = false;
-            dgvListadoCompra.Columns[10].HeaderText = "Estado";
-            dgvListadoCompra.Columns[11].HeaderText = "Código";
-            dgvListadoCompra.Columns[11].Width = 100;
+            dgvListadoCompra.Columns[9].HeaderText = "Estado";
+            dgvListadoCompra.Columns[9].Visible = false;
+            dgvListadoCompra.Columns[10].HeaderText = "Código";
+            dgvListadoCompra.Columns[10].Width = 40;
         }
         private void FormatoProductoPanel()
         {
-            //dgvProductoPanel.Columns[0].Visible = false;
-            ////dgvProductoPanel.Columns[1].Visible = false;
-            //dgvProductoPanel.Columns[1].HeaderText = "Categoría";
-            //dgvProductoPanel.Columns[1].Width = 50;
-            //dgvProductoPanel.Columns[2].HeaderText = "Código Barra";
-            //dgvProductoPanel.Columns[2].Width = 50;
-            //dgvProductoPanel.Columns[3].Width = 100;
-            //dgvProductoPanel.Columns[4].Width = 60;
-            //dgvProductoPanel.Columns[4].HeaderText = "Precio Venta";
-            //dgvProductoPanel.Columns[5].Width = 50;
-            //dgvProductoPanel.Columns[6].Width = 150;
-            //dgvProductoPanel.Columns[6].HeaderText = "Descripción";
-            //dgvProductoPanel.Columns[7].Width = 50;
-            //dgvProductoPanel.Columns[7].HeaderText = "Ubicación";
-            //dgvProductoPanel.Columns[8].Width = 140;
-            //dgvProductoPanel.Columns[8].HeaderText = "Fecha Vencimiento";
-            //dgvProductoPanel.Columns[9].Width = 80;
-            //dgvProductoPanel.Columns[10].HeaderText = "Código";
-            //dgvProductoPanel.Columns[10].Width = 20;
+            dgvProductoPanel.Columns[0].HeaderText = "Código Categ.";
+            dgvProductoPanel.Columns[0].Width = 50;
+            dgvProductoPanel.Columns[1].HeaderText = "Código Barra";
+            dgvProductoPanel.Columns[1].Width = 50;
+            dgvProductoPanel.Columns[2].Width = 100;
+            dgvProductoPanel.Columns[3].Width = 60;
+            dgvProductoPanel.Columns[3].HeaderText = "Precio";
+            dgvProductoPanel.Columns[4].Width = 50;
+            dgvProductoPanel.Columns[5].Width = 140;
+            dgvProductoPanel.Columns[5].HeaderText = "Descripción";
+            dgvProductoPanel.Columns[6].Width = 50;
+            dgvProductoPanel.Columns[6].HeaderText = "Ubicación";
+            dgvProductoPanel.Columns[6].Width = 80;
+            dgvProductoPanel.Columns[7].Width = 140;
+            dgvProductoPanel.Columns[7].HeaderText = "Fecha Vencimiento";
+            dgvProductoPanel.Columns[8].Width = 80;
+            dgvProductoPanel.Columns[9].Width = 20;
+            dgvProductoPanel.Columns[10].HeaderText = "Código";
+            dgvProductoPanel.Columns[10].Width = 50;
         }
         private void Limpiar()
         {
             txtBuscarComprobante.Clear();
-            txtBuscarProve.Clear();
-            txtCodProveedor.Clear();
             txtCodigo.Clear();
-            txtCodProveedor.Clear();
             txtNumComprob.Clear();
             txtPuntoVenta.Text = "0000";
             dtDetalle.Clear();
@@ -135,11 +136,11 @@ namespace UI
         }
         private void MensajeError(string mensaje)
         {
-            MessageBox.Show(mensaje, "Categorias", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(mensaje, "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void MensajeOk(string mensaje)
         {
-            MessageBox.Show(mensaje, "Categorias", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(mensaje, "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void Buscar()
         {
@@ -149,13 +150,10 @@ namespace UI
                 if (txtBuscarComprobante.Text != null)
                 {
                     dgvListadoCompra.DataSource = bllCompra.Buscar(txtBuscarComprobante.Text);
-                }else if (txtBuscarComprobante.Text != null && txtBuscarProve.Text != null)
-                {
-                    MensajeError("No puede ingresar 2 parametros a buscar");
                 }
                 else
                 {
-                    dgvListadoCompra.DataSource = bllCompra.Buscar(txtBuscarProve.Text);
+                    MessageBox.Show("Debe ingresar un número de comprobante de compra");
                 }
                 this.Formato();
                 lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoCompra.Rows.Count);
@@ -196,14 +194,6 @@ namespace UI
         {
             this.Buscar();
         }
-        private void btnBuscarProv_Click(object sender, EventArgs e)
-        {
-            frmBuscarProveedor FrmBuscarProveedor = new frmBuscarProveedor();
-            FrmBuscarProveedor.ShowDialog();
-            txtCodProveedor.Text = Convert.ToString(VariablesCompra.codigoProveedor);
-            txtNombreProveedor.Text = VariablesCompra.razonSocial;
-        }
-
         private void cmbComprobante_SelectionChangeCommitted(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
@@ -270,8 +260,8 @@ namespace UI
             {
                 DataRow fila = dtDetalle.NewRow();
                 fila["codigoProducto"] = codigoProducto;
-                fila["codigo"] = codigoBarra;
-                fila["producto"] = nombre;
+                fila["codigoBarra"] = codigoBarra;
+                fila["nombreProducto"] = nombre;
                 fila["cantidad"] = 1;
                 fila["precio"] = precio;
                 fila["importe"] = precio;
@@ -304,6 +294,8 @@ namespace UI
         private void btnExplorarProd_Click(object sender, EventArgs e)
         {
             panelProducto.Visible = true;
+            dgvProductoPanel.DataSource = BLLProducto.Listar();
+            this.FormatoProductoPanel();
         }
 
         private void btnCerrarPanel_Click(object sender, EventArgs e)
@@ -315,7 +307,7 @@ namespace UI
         {
             try 
             {
-                dgvProductoPanel.DataSource = BLLProducto.Buscar(txtBuscarProducPanel.Text);
+                dgvProductoPanel.DataSource = BLLProducto.Buscar(txtBuscarProducPanel.Text.Trim());
                 this.FormatoProductoPanel();
             }
             catch (Exception ex)
@@ -326,10 +318,6 @@ namespace UI
 
         private void dgvProductoPanel_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int codigoProducto;
-            string codigoBarra;
-            string nombre;
-            decimal precio;
             codigoProducto = Convert.ToInt32(dgvProductoPanel.CurrentRow.Cells["codigo"].Value);
             codigoBarra = Convert.ToString(dgvProductoPanel.CurrentRow.Cells["codigoBarra"].Value);
             nombre = Convert.ToString(dgvProductoPanel.CurrentRow.Cells["nombre"].Value);
@@ -349,26 +337,21 @@ namespace UI
 
         }
 
-        private void dgvDetalle_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            this.CalcularTotales();
-        }
-
         private void btnInsertar_Click(object sender, EventArgs e)
         {
             try
             {
                 bool respuesta = false;
-                if (txtCodProveedor.Text == string.Empty || txtNumComprob.Text == string.Empty || dgvDetalle.Rows.Count == 0)
+                if (txtNumComprob.Text == string.Empty || dgvDetalle.Rows.Count == 0)
                 {
                     this.MensajeError("Falta ingresar algunos datos");
-                    errorProvider1.SetError(txtCodProveedor, "Ingresar código proveedor");
+
                     errorProvider1.SetError(txtNumComprob, "Ingresar número comprobante");
                     errorProvider1.SetError(dgvDetalle, "Debe ingresar al menos un producto");
                 }
                 else
                 {
-                    respuesta = bllCompra.Crear(Convert.ToInt32(txtCodProveedor.Text.Trim()), VariablesCompra.codigoUsuario, cmbComprobante.Text, txtNumComprob.Text, txtPuntoVenta.Text,
+                    respuesta = bllCompra.Crear(VariablesCompra.codigoUsuario, cmbComprobante.Text, txtNumComprob.Text, txtPuntoVenta.Text,
                                                 dateFecha.Value, Convert.ToDecimal(txtAlicuota.Text), Convert.ToDecimal(txtTotal.Text), dtDetalle);
                     if (respuesta == true)
                     {
@@ -378,7 +361,9 @@ namespace UI
                     }
                     else
                     {
-                        this.MensajeError("El registro no se pudo realizar");
+                        this.MensajeError("El registro no se pudo realizar\n" +
+                                            "Puede ser que el número de comprobante ya exísta.\n" +
+                                            "O el stock ingresado no alcance.");
                     }
                 }
             }
@@ -386,6 +371,61 @@ namespace UI
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
+        }
+
+        private void btnDesactivar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvDetalle.SelectedRows.Count > 0)
+            {
+                dgvDetalle.Rows.RemoveAt(posicion);
+                this.CalcularTotales();
+            }
+
+        }
+
+        private void dgvDetalle_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            posicion = dgvDetalle.CurrentRow.Index;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Limpiar();
+            tabControl1.SelectedIndex = 0;
+            btnInsertar.Enabled = true;
+        }
+
+        private void dgvListadoCompra_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.Limpiar();
+            int codigoCompra = Convert.ToInt32(dgvListadoCompra.CurrentRow.Cells["codigo"].Value);
+            BECompra compra = bllCompra.CargarCompra(codigoCompra);
+            cmbComprobante.SelectedItem = compra.tipoComprobante;
+            txtPuntoVenta.Text = compra.puntoVenta;
+            txtNumComprob.Text = compra.nroComprobante;
+            dateFecha.Value = compra.fecha;
+            txtCodigo.Visible = true;
+            txtCodigo.Text = Convert.ToString(compra.Codigo);
+
+            foreach (var item in compra.detalles)
+            {
+                DataRow fila = dtDetalle.NewRow();
+                fila["codigoProducto"] = item.codigoProducto;
+                fila["codigoBarra"] = item.codigoBarra;
+                fila["nombreProducto"] = item.nombreProducto;
+                fila["cantidad"] = item.cantidad;
+                fila["precio"] = item.precio;
+                fila["importe"] = item.importe;
+                this.dtDetalle.Rows.Add(fila);
+            }
+            tabControl1.SelectedIndex = 1;
+            this.CalcularTotales();
+            btnInsertar.Enabled = false;
         }
     }
 }

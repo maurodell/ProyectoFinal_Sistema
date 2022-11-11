@@ -238,30 +238,6 @@ namespace MPP
                 throw new XmlException();
             }
         }
-        public bool ActualizarStock(int stock, int codigoProducto)
-        {
-            try
-            {
-                BEProducto productoAActualizar= Listar().Find(x => x.Codigo == codigoProducto);
-
-                XDocument documento = XDocument.Load(path);
-
-                var consulta = from producto in documento.Descendants("producto")
-                               where producto.Attribute("codigo").Value == codigoProducto.ToString()
-                               select producto;
-
-                foreach (XElement EModifcar in consulta)
-                {
-                    EModifcar.Element("stock").Value = Convert.ToString(productoAActualizar.stock + stock);
-                }
-                documento.Save(path);
-                return true;
-            }
-            catch (XmlException ex)
-            {
-                throw ex;
-            }
-        }
         public bool Modificar(BEProducto Parametro, string nombreAnterior)
         {
             try

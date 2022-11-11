@@ -41,7 +41,7 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
-        public bool Crear(int codigoProveedor, int codigoUsuario, string tipoComprobante, string nroComprobante, string puntoVenta, DateTime fecha, decimal impuesto, 
+        public bool Crear(int codigoUsuario, string tipoComprobante, string nroComprobante, string puntoVenta, DateTime fecha, decimal impuesto, 
                             decimal total, DataTable detalles)
         {
             List<Detalle> listaDetalle = new List<Detalle>();
@@ -51,15 +51,22 @@ namespace BLL
             for (int i=0; i<detalles.Rows.Count; i++)
             {
                 detalle = new Detalle();
-                detalle.codigoAsociado = Convert.ToInt32(detalles.Rows[i]["codigoUsuario"]);
+                detalle.codigoBarra = Convert.ToInt32(detalles.Rows[i]["codigoBarra"]);
                 detalle.codigoProducto = Convert.ToInt32(detalles.Rows[i]["codigoProducto"]);
+                detalle.nombreProducto = Convert.ToString(detalles.Rows[i]["nombreProducto"]);
                 detalle.cantidad = Convert.ToInt32(detalles.Rows[i]["cantidad"]);
                 detalle.precio = Convert.ToInt32(detalles.Rows[i]["precio"]);
+                detalle.importe = Convert.ToInt32(detalles.Rows[i]["importe"]);
                 listaDetalle.Add(detalle);
             }
-            beCompra.codigoProveedor = codigoProveedor;
             beCompra.codigoUsuario = codigoUsuario;
-            //falta completar
+            beCompra.detalles = listaDetalle;
+            beCompra.tipoComprobante = tipoComprobante;
+            beCompra.nroComprobante = nroComprobante;
+            beCompra.puntoVenta = puntoVenta;
+            beCompra.fecha = fecha;
+            beCompra.impuesto = impuesto;
+            beCompra.total = total;
 
             return mppCompra.Crear(beCompra);
         }
@@ -68,6 +75,11 @@ namespace BLL
             detalle = new Detalle();
 
             return false;
+        }
+        
+        public BECompra CargarCompra(int codigoCompra)
+        {
+            return mppCompra.CargarCompra(codigoCompra);
         }
         public bool Eliminar(int Parametro)
         {

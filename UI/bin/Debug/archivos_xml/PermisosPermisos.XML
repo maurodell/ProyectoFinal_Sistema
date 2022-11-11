@@ -1,17 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <permisopermiso>
-  <permiso codigo="6">
-    <codigoRol>3</codigoRol>
-    <codigoMenu>1</codigoMenu>
-  </permiso>
-  <permiso codigo="7">
-    <codigoRol>3</codigoRol>
-    <codigoMenu>10</codigoMenu>
-  </permiso>
-  <permiso codigo="8">
-    <codigoRol>3</codigoRol>
-    <codigoMenu>11</codigoMenu>
-  </permiso>
   <permiso codigo="9">
     <codigoRol>12</codigoRol>
     <codigoMenu>8</codigoMenu>
@@ -24,28 +12,56 @@
     <codigoRol>12</codigoRol>
     <codigoMenu>9</codigoMenu>
   </permiso>
-  <permiso codigo="12">
+  <permiso codigo="18">
+    <codigoRol>3</codigoRol>
+    <codigoMenu>1</codigoMenu>
+  </permiso>
+  <permiso codigo="19">
+    <codigoRol>3</codigoRol>
+    <codigoMenu>10</codigoMenu>
+  </permiso>
+  <permiso codigo="20">
+    <codigoRol>3</codigoRol>
+    <codigoMenu>11</codigoMenu>
+  </permiso>
+  <permiso codigo="21">
+    <codigoRol>3</codigoRol>
+    <codigoMenu>16</codigoMenu>
+  </permiso>
+  <permiso codigo="22">
+    <codigoRol>3</codigoRol>
+    <codigoMenu>4</codigoMenu>
+  </permiso>
+  <permiso codigo="23">
     <codigoRol>2</codigoRol>
     <codigoMenu>1</codigoMenu>
   </permiso>
-  <permiso codigo="13">
+  <permiso codigo="24">
     <codigoRol>2</codigoRol>
     <codigoMenu>4</codigoMenu>
   </permiso>
-  <permiso codigo="14">
+  <permiso codigo="25">
     <codigoRol>2</codigoRol>
     <codigoMenu>8</codigoMenu>
   </permiso>
-  <permiso codigo="15">
-    <codigoRol>2</codigoRol>
-    <codigoMenu>9</codigoMenu>
-  </permiso>
-  <permiso codigo="16">
+  <permiso codigo="26">
     <codigoRol>2</codigoRol>
     <codigoMenu>14</codigoMenu>
   </permiso>
-  <permiso codigo="17">
+  <permiso codigo="27">
     <codigoRol>2</codigoRol>
     <codigoMenu>15</codigoMenu>
+  </permiso>
+  <permiso codigo="28">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>17</codigoMenu>
+  </permiso>
+  <permiso codigo="29">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>18</codigoMenu>
+  </permiso>
+  <permiso codigo="30">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>19</codigoMenu>
   </permiso>
 </permisopermiso>

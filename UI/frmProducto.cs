@@ -13,6 +13,7 @@ namespace UI
         private string rutaOrigen;
         private string rutaDestino;
         private string Directorio = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\imagenes\\";
+        private string Directorio2 = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\imagenes";
         private string nombreAnterior;
         public frmProducto()
         {
@@ -68,10 +69,11 @@ namespace UI
             dgvListadoProd.Columns[8].Width = 140;
             dgvListadoProd.Columns[8].HeaderText = "Fecha Vencimiento";
             dgvListadoProd.Columns[9].Width = 80;
-            dgvListadoProd.Columns[10].HeaderText = "Est.";
+            dgvListadoProd.Columns[9].HeaderText = "Imagen";
             dgvListadoProd.Columns[10].Width = 20;
-            dgvListadoProd.Columns[11].HeaderText = "Código";
+            dgvListadoProd.Columns[10].HeaderText = "Est.";
             dgvListadoProd.Columns[11].Width = 50;
+            dgvListadoProd.Columns[11].HeaderText = "Código";
         }
         private void Limpiar()
         {
@@ -150,7 +152,15 @@ namespace UI
         {
             BarcodeLib.Barcode codigoBarra = new BarcodeLib.Barcode();
             codigoBarra.IncludeLabel = true;
-            panelCodigo.BackgroundImage = codigoBarra.Encode(BarcodeLib.TYPE.CODE128, txtCodigoBarra.Text, Color.Black, Color.White, 300, 76);
+            if (!String.IsNullOrEmpty(txtCodigoBarra.Text))
+            {
+                panelCodigo.BackgroundImage = codigoBarra.Encode(BarcodeLib.TYPE.CODE128, txtCodigoBarra.Text, Color.Black, Color.White, 300, 76);
+            }
+            else
+            {
+                this.MensajeError("Debe completar el campo, Código de Barra!");
+            }
+
             BtnGuardar.Enabled = true;
 
         }
@@ -177,28 +187,30 @@ namespace UI
                 bool respuesta = false;
                 DateTime hoy = DateTime.Now;
                 //evaluar los meses q se cargar dateTFecha.Value >= hoy.AddMonths(2) || 
-                if (cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtStock.Text == string.Empty)
+                if (cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtStock.Text == string.Empty || txtUbicacion.Text == string.Empty || txtCodigoBarra.Text == string.Empty)
                 {
                     this.MensajeError("Algunos de los datos faltan o son incorrectos");
                     errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
                     errorProvider1.SetError(txtNombre, "Ingresar nombre");
                     errorProvider1.SetError(dateTFecha, "Fecha de vencimiento superior o igual a 2 meses de la fecha actual");
                     errorProvider1.SetError(txtPrecio, "El precio es necesario");
-                    errorProvider1.SetError(txtStock, "El estoy es necesario");
+                    errorProvider1.SetError(txtStock, "Stock es necesario");
+                    errorProvider1.SetError(txtUbicacion, "Debe completar la ubicación del producto en el deposito");
+                    errorProvider1.SetError(txtCodigoBarra, "Debe completar el código de barra, este puede ser scaneado");
                 }
                 else
                 {
-                    //int codigoCategoria, string codigoBarra, string nombre, decimal precioVenta, int stock, string descripcion, string ubicacion, string imagen
                     respuesta = bllProducto.Insertar(Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), txtNombre.Text.Trim(), 
                                                     Convert.ToDecimal(txtPrecio.Text.Trim()), Convert.ToInt32(txtStock.Text.Trim()), txtDescripcion.Text.Trim(), txtUbicacion.Text, dateTFecha.Value,txtImagen.Text);
                     if (respuesta == true)
                     {
-                        this.MensajeOk("El producto fue registrado correctamente");
                         if (txtImagen.Text != string.Empty)
                         {
                             this.rutaDestino = this.Directorio + txtImagen.Text;
                             File.Copy(rutaOrigen, rutaDestino);
+
                         }
+                        this.MensajeOk("El producto fue registrado correctamente");
                         this.Listar();
                     }
                     else
@@ -357,18 +369,18 @@ namespace UI
                     {
                         if (Convert.ToBoolean(row.Cells[0].Value))
                         {
-                            codigo = Convert.ToInt32(row.Cells[10].Value);
-                            imagen = Convert.ToString(row.Cells[8].Value);
+                            codigo = Convert.ToInt32(row.Cells[11].Value);
+                            imagen = Convert.ToString(row.Cells[9].Value);
                             flag = bllProducto.Eliminar(codigo);
                         }
                     }
 
                     //entra en el while hasta que se libere el processor System.IO en caso que la imagen se haya actualizado o se recién guardado.
-                    while (!estaListoParaUsar(this.Directorio + imagen)) { }
+                    //while (!estaListoParaUsar(this.Directorio + imagen)) { }
                     if (flag)
                     {
                         File.Delete(this.Directorio + imagen);
-                        this.MensajeOk("La categoría fue eliminada correctamente");
+                        this.MensajeOk("El producto fue eliminado correctamente");
                         this.Limpiar();
                         this.Listar();
                     }
@@ -398,7 +410,7 @@ namespace UI
                     {
                         if (Convert.ToBoolean(row.Cells[0].Value))
                         {
-                            codigo = Convert.ToInt32(row.Cells[10].Value);
+                            codigo = Convert.ToInt32(row.Cells[11].Value);
                             flag = bllProducto.Baja(codigo);
                         }
                     }
@@ -436,7 +448,7 @@ namespace UI
                     {
                         if (Convert.ToBoolean(row.Cells[0].Value))
                         {
-                            codigo = Convert.ToInt32(row.Cells[10].Value);
+                            codigo = Convert.ToInt32(row.Cells[11].Value);
                             flag = bllProducto.Alta(codigo);
                         }
                     }

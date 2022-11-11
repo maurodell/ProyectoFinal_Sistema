@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<detallecompra>
+  <detalle codigo="1">
+    <codigoCompra>1</codigoCompra>
+    <codigoProducto>1</codigoProducto>
+    <nombreProducto>Blem</nombreProducto>
+    <codigoBarra>111</codigoBarra>
+    <precio>234</precio>
+    <cantidad>1</cantidad>
+    <importe>234</importe>
+  </detalle>
+  <detalle codigo="1">
+    <codigoCompra>1</codigoCompra>
+    <codigoProducto>2</codigoProducto>
+    <nombreProducto>Agua BonAqua</nombreProducto>
+    <codigoBarra>1222122</codigoBarra>
+    <precio>344</precio>
+    <cantidad>1</cantidad>
+    <importe>344</importe>
+  </detalle>
+  <detalle codigo="3">
+    <codigoCompra>2</codigoCompra>
+    <codigoProducto>2</codigoProducto>
+    <nombreProducto>Agua BonAqua</nombreProducto>
+    <codigoBarra>1222122</codigoBarra>
+    <precio>344</precio>
+    <cantidad>1</cantidad>
+    <importe>344</importe>
+  </detalle>
+</detallecompra>

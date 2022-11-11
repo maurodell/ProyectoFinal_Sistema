@@ -18,7 +18,6 @@ namespace BE
         submenuClientes,
         submenuVentas,
         menuAcceso,
-        submenuRoles,
         submenuPermisos,
         submenuUsuarios,
         menuConsulta,

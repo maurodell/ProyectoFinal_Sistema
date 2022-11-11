@@ -86,7 +86,7 @@ namespace UI
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(706, 985);
+            this.btnActualizar.Location = new System.Drawing.Point(706, 1016);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(187, 54);
             this.btnActualizar.TabIndex = 8;
@@ -295,11 +295,11 @@ namespace UI
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(106, 330);
+            this.label8.Location = new System.Drawing.Point(77, 330);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(218, 32);
+            this.label8.Size = new System.Drawing.Size(247, 32);
             this.label8.TabIndex = 16;
-            this.label8.Text = "Código de barra";
+            this.label8.Text = "Código de barra(*)";
             // 
             // picBox
             // 

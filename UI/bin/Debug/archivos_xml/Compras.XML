@@ -1,3 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <compras>
+  <compra codigo="1">
+    <codigoUsuario>1</codigoUsuario>
+    <tipoComprobante>Factura A</tipoComprobante>
+    <nroComprobante>12333</nroComprobante>
+    <puntoVenta>0000</puntoVenta>
+    <fecha>2022-11-10T23:10:44.5754904-03:00</fecha>
+    <impuesto>21</impuesto>
+    <total>578.00</total>
+    <estadoActual>Activo</estadoActual>
+    <estado>1</estado>
+  </compra>
+  <compra codigo="2">
+    <codigoUsuario>1</codigoUsuario>
+    <tipoComprobante>Factura A</tipoComprobante>
+    <nroComprobante>33333</nroComprobante>
+    <puntoVenta>0000</puntoVenta>
+    <fecha>2022-11-10T23:10:44.5754904-03:00</fecha>
+    <impuesto>21</impuesto>
+    <total>344.00</total>
+    <estadoActual>Activo</estadoActual>
+    <estado>1</estado>
+  </compra>
 </compras>

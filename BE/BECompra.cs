@@ -8,7 +8,6 @@ namespace BE
 {
     public class BECompra : Entidad
     {
-        public int codigoProveedor { get; set; }
         public int codigoUsuario { get; set; }
         public string tipoComprobante { get; set; }
         public string puntoVenta { get; set; }

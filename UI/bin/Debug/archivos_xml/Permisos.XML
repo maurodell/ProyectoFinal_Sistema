@@ -20,10 +20,6 @@
     <nombre>Acceso</nombre>
     <menu>menuAcceso</menu>
   </permiso>
-  <permiso codigo="9">
-    <nombre>Roles submenu Acceso</nombre>
-    <menu>submenuRoles</menu>
-  </permiso>
   <permiso codigo="10">
     <nombre>Venta</nombre>
     <menu>menuVentas</menu>
@@ -43,5 +39,21 @@
   <permiso codigo="15">
     <nombre>Permisos submenu Acceso</nombre>
     <menu>submenuPermisos</menu>
+  </permiso>
+  <permiso codigo="16">
+    <nombre>Producto submenu stock</nombre>
+    <menu>submenuProducto</menu>
+  </permiso>
+  <permiso codigo="17">
+    <nombre>Ingresos</nombre>
+    <menu>menuIngresos</menu>
+  </permiso>
+  <permiso codigo="18">
+    <nombre>Compras submenu Ingresos</nombre>
+    <menu>submenuCompras</menu>
+  </permiso>
+  <permiso codigo="19">
+    <nombre>Proveedores submenu Ingresos</nombre>
+    <menu>submenuProveedores</menu>
   </permiso>
 </permisos>
