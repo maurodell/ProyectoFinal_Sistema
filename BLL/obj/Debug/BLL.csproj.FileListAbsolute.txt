@@ -103,3 +103,18 @@ C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solució
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BLL\obj\Debug\BLL.csproj.CopyComplete
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BLL\obj\Debug\BLL.dll
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\BLL\obj\Debug\BLL.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\bin\Debug\BLL.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\bin\Debug\BLL.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\bin\Debug\Abstraccion.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\bin\Debug\BE.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\bin\Debug\MPP.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\bin\Debug\Seguridad.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\bin\Debug\Abstraccion.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\bin\Debug\BE.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\bin\Debug\MPP.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\bin\Debug\Seguridad.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\obj\Debug\BLL.csproj.CopyComplete
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\obj\Debug\BLL.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\BLL\obj\Debug\BLL.pdb

@@ -105,11 +105,23 @@
     <Compile Include="frmBuscarClientes.Designer.cs">
       <DependentUpon>frmBuscarClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmBuscarCompraPorFechas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBuscarCompraPorFechas.Designer.cs">
+      <DependentUpon>frmBuscarCompraPorFechas.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBuscarProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmBuscarProveedor.Designer.cs">
       <DependentUpon>frmBuscarProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscarVentasPorFechas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBuscarVentasPorFechas.Designer.cs">
+      <DependentUpon>frmBuscarVentasPorFechas.cs</DependentUpon>
     </Compile>
     <Compile Include="frmCategorias.cs">
       <SubType>Form</SubType>
@@ -181,8 +193,14 @@
     <EmbeddedResource Include="frmBuscarClientes.resx">
       <DependentUpon>frmBuscarClientes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscarCompraPorFechas.resx">
+      <DependentUpon>frmBuscarCompraPorFechas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBuscarProveedor.resx">
       <DependentUpon>frmBuscarProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscarVentasPorFechas.resx">
+      <DependentUpon>frmBuscarVentasPorFechas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCategorias.resx">
       <DependentUpon>frmCategorias.cs</DependentUpon>

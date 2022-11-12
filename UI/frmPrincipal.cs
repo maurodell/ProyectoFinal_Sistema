@@ -255,5 +255,20 @@ namespace UI
             FrmAdminPermisos.Show();
             FrmAdminPermisos.Size = new Size(600, 580);
         }
+        private void submenuConsultasVentas_Click(object sender, EventArgs e)
+        {
+            frmBuscarVentasPorFechas BuscarFechasVentas = new frmBuscarVentasPorFechas();
+            BuscarFechasVentas.MdiParent = this;
+            BuscarFechasVentas.Show();
+            BuscarFechasVentas.Size = new Size(1370, 580);
+        }
+
+        private void submenuConsultasCompras_Click(object sender, EventArgs e)
+        {
+            frmBuscarCompraPorFechas BuscarFechasCompras = new frmBuscarCompraPorFechas();
+            BuscarFechasCompras.MdiParent = this;
+            BuscarFechasCompras.Show();
+            BuscarFechasCompras.Size = new Size(1370, 580);
+        }
     }
 }

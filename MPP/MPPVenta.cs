@@ -213,6 +213,47 @@ namespace MPP
                 throw ex;
             }
         }
+        public List<BEVenta> ListarPorFecha(DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                XDocument documento = XDocument.Load(path);
+
+                var consulta = from venta in documento.Descendants("venta")
+                               where Convert.ToDateTime(venta.Element("fecha").Value) >= Convert.ToDateTime(fechaInicio.ToString("dd/MM/yyyy"))
+                               && Convert.ToDateTime(venta.Element("fecha").Value) <= Convert.ToDateTime(fechaFin.ToString("dd/MM/yyyy"))
+                               select venta;
+                //------------------------
+
+                List<BEVenta> ventas = new List<BEVenta>();
+
+
+                foreach (XElement EModifcar in consulta)
+                {
+                    BEVenta venta = new BEVenta
+                    {
+                        Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value),
+                        codigoUsuario = Convert.ToInt32(EModifcar.Element("codigoUsuario").Value),
+                        codigoCliente = Convert.ToInt32(EModifcar.Element("codigoCliente").Value),
+                        tipoComprobante = Convert.ToString(EModifcar.Element("tipoComprobante").Value),
+                        nroComprobante = Convert.ToString(EModifcar.Element("nroComprobante").Value),
+                        puntoVenta = Convert.ToString(EModifcar.Element("puntoVenta").Value),
+                        fecha = Convert.ToDateTime(EModifcar.Element("fecha").Value),
+                        impuesto = Convert.ToDecimal(EModifcar.Element("impuesto").Value),
+                        total = Decimal.Parse(EModifcar.Element("total").Value),
+                        estadoActual = Convert.ToString(EModifcar.Element("estadoActual").Value),
+                        estado = Convert.ToBoolean(Convert.ToInt32(EModifcar.Element("estado").Value))
+                    };
+                    ventas.Add(venta);
+                }
+
+                return ventas;
+            }
+            catch (XmlException)
+            {
+                throw new XmlException();
+            }
+        }
         public List<BEVenta> Listar()
         {
             try

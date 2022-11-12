@@ -101,3 +101,16 @@ C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solució
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\MPP\obj\Debug\MPP.csproj.CopyComplete
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\MPP\obj\Debug\MPP.dll
 C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - composite 5\Sistemas_Sale_Point\MPP\obj\Debug\MPP.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\bin\Debug\MPP.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\bin\Debug\MPP.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\bin\Debug\Abstraccion.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\bin\Debug\BE.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\bin\Debug\Seguridad.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\bin\Debug\Abstraccion.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\bin\Debug\BE.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\bin\Debug\Seguridad.pdb
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\obj\Debug\MPP.csproj.AssemblyReference.cache
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\obj\Debug\MPP.csproj.CoreCompileInputs.cache
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\obj\Debug\MPP.csproj.CopyComplete
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\obj\Debug\MPP.dll
+C:\Users\mdo\Desktop\Analista Programador\3 año\Trabajo Final\Proyecto\Solución - Final - 1\Sistemas_Sale_Point\MPP\obj\Debug\MPP.pdb

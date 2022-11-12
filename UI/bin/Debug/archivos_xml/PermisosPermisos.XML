@@ -68,4 +68,12 @@
     <codigoRol>2</codigoRol>
     <codigoMenu>20</codigoMenu>
   </permiso>
+  <permiso codigo="32">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>21</codigoMenu>
+  </permiso>
+  <permiso codigo="33">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>22</codigoMenu>
+  </permiso>
 </permisopermiso>

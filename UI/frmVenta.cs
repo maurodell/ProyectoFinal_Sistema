@@ -180,6 +180,7 @@ namespace UI
         {
             txtBuscarComprobante.Clear();
             txtCodCliente.Clear();
+            txtNombreCliente.Clear();
             txtCodigo.Clear();
             txtCodCliente.Clear();
             txtNumComprob.Clear();

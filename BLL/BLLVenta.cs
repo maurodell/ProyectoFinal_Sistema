@@ -60,7 +60,7 @@ namespace BLL
             beVenta.tipoComprobante = tipoComprobante;
             beVenta.nroComprobante = nroComprobante;
             beVenta.puntoVenta = puntoVenta;
-            beVenta.fecha = fecha;
+            beVenta.fecha = Convert.ToDateTime(fecha.ToString("dd/MM/yyyy"));
             beVenta.impuesto = impuesto;
             beVenta.total = total;
 
@@ -71,8 +71,11 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
-
-        public List<BEVenta> Listar()
+        public List<BEVenta> ListarPorFecha(DateTime fechaInicio, DateTime fechaFin)
+        {
+            return mppVenta.ListarPorFecha(fechaInicio, fechaFin);
+        }
+            public List<BEVenta> Listar()
         {
             return mppVenta.Listar();
         }

@@ -5,7 +5,7 @@
     <codigoBarra>111</codigoBarra>
     <nombre>Blem</nombre>
     <precioVenta>234</precioVenta>
-    <stock>4</stock>
+    <stock>0</stock>
     <descripcion></descripcion>
     <ubicacion>A1</ubicacion>
     <fechaVencimiento>2022-11-10T20:40:25.1789082-03:00</fechaVencimiento>
@@ -17,7 +17,7 @@
     <codigoBarra>1222122</codigoBarra>
     <nombre>Agua BonAqua</nombre>
     <precioVenta>344</precioVenta>
-    <stock>1</stock>
+    <stock>0</stock>
     <descripcion></descripcion>
     <ubicacion>A1</ubicacion>
     <fechaVencimiento>01/01/0001 0:00:00</fechaVencimiento>
@@ -41,7 +41,7 @@
     <codigoBarra>000111</codigoBarra>
     <nombre>Agua Saborizada</nombre>
     <precioVenta>90</precioVenta>
-    <stock>1</stock>
+    <stock>0</stock>
     <descripcion>Agua bonaqua de varios sabores</descripcion>
     <ubicacion>Q1</ubicacion>
     <fechaVencimiento>2029-07-13T11:51:00</fechaVencimiento>

@@ -36,4 +36,52 @@
     <estadoActual>Anulado</estadoActual>
     <estado>0</estado>
   </venta>
+  <venta codigo="4">
+    <codigoUsuario>1</codigoUsuario>
+    <codigoCliente>2</codigoCliente>
+    <tipoComprobante>Exento</tipoComprobante>
+    <nroComprobante>1234</nroComprobante>
+    <puntoVenta>0000</puntoVenta>
+    <fecha>2022-11-11T00:00:00</fecha>
+    <impuesto>21</impuesto>
+    <total>234.00</total>
+    <estadoActual>Activo</estadoActual>
+    <estado>1</estado>
+  </venta>
+  <venta codigo="5">
+    <codigoUsuario>1</codigoUsuario>
+    <codigoCliente>2</codigoCliente>
+    <tipoComprobante>Exento</tipoComprobante>
+    <nroComprobante>111123</nroComprobante>
+    <puntoVenta>0000</puntoVenta>
+    <fecha>2022-09-07T00:00:00</fecha>
+    <impuesto>21</impuesto>
+    <total>234.00</total>
+    <estadoActual>Activo</estadoActual>
+    <estado>1</estado>
+  </venta>
+  <venta codigo="6">
+    <codigoUsuario>1</codigoUsuario>
+    <codigoCliente>1</codigoCliente>
+    <tipoComprobante>Exento</tipoComprobante>
+    <nroComprobante>123444</nroComprobante>
+    <puntoVenta>0000</puntoVenta>
+    <fecha>2022-10-12T00:00:00</fecha>
+    <impuesto>21</impuesto>
+    <total>234.00</total>
+    <estadoActual>Activo</estadoActual>
+    <estado>1</estado>
+  </venta>
+  <venta codigo="7">
+    <codigoUsuario>1</codigoUsuario>
+    <codigoCliente>2</codigoCliente>
+    <tipoComprobante>Exento</tipoComprobante>
+    <nroComprobante>13123123</nroComprobante>
+    <puntoVenta>0000</puntoVenta>
+    <fecha>2022-11-10T00:00:00</fecha>
+    <impuesto>21</impuesto>
+    <total>668.00</total>
+    <estadoActual>Activo</estadoActual>
+    <estado>1</estado>
+  </venta>
 </ventas>

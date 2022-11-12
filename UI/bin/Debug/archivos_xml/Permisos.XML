@@ -60,4 +60,12 @@
     <nombre>Ventas submenu Ventas</nombre>
     <menu>submenuVentas</menu>
   </permiso>
+  <permiso codigo="21">
+    <nombre>Consultas</nombre>
+    <menu>menuConsulta</menu>
+  </permiso>
+  <permiso codigo="22">
+    <nombre>Consultas Ventas</nombre>
+    <menu>submenuConsultasVentas</menu>
+  </permiso>
 </permisos>
