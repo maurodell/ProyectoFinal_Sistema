@@ -42,8 +42,6 @@ namespace UI
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dateTFecha = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtStock = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtUbicacion = new System.Windows.Forms.TextBox();
@@ -133,7 +131,7 @@ namespace UI
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(1795, 234);
+            this.txtDescripcion.Location = new System.Drawing.Point(1791, 156);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(800, 163);
@@ -149,7 +147,7 @@ namespace UI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1590, 237);
+            this.label3.Location = new System.Drawing.Point(1586, 159);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(164, 32);
             this.label3.TabIndex = 1;
@@ -159,8 +157,6 @@ namespace UI
             // 
             this.tabPage2.Controls.Add(this.dateTFecha);
             this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.txtStock);
-            this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.txtPrecio);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.txtUbicacion);
@@ -209,22 +205,6 @@ namespace UI
             this.label11.TabIndex = 27;
             this.label11.Text = "Fecha Vencimiento (*)";
             // 
-            // txtStock
-            // 
-            this.txtStock.Location = new System.Drawing.Point(357, 790);
-            this.txtStock.Name = "txtStock";
-            this.txtStock.Size = new System.Drawing.Size(800, 38);
-            this.txtStock.TabIndex = 26;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(202, 793);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(122, 32);
-            this.label10.TabIndex = 25;
-            this.label10.Text = "Stock (*)";
-            // 
             // txtPrecio
             // 
             this.txtPrecio.Location = new System.Drawing.Point(357, 717);
@@ -243,7 +223,7 @@ namespace UI
             // 
             // txtUbicacion
             // 
-            this.txtUbicacion.Location = new System.Drawing.Point(1795, 153);
+            this.txtUbicacion.Location = new System.Drawing.Point(357, 793);
             this.txtUbicacion.Name = "txtUbicacion";
             this.txtUbicacion.Size = new System.Drawing.Size(800, 38);
             this.txtUbicacion.TabIndex = 22;
@@ -251,7 +231,7 @@ namespace UI
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1573, 155);
+            this.label7.Location = new System.Drawing.Point(147, 795);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(177, 32);
             this.label7.TabIndex = 21;
@@ -303,16 +283,16 @@ namespace UI
             // 
             // picBox
             // 
-            this.picBox.Location = new System.Drawing.Point(1795, 502);
+            this.picBox.Location = new System.Drawing.Point(1791, 428);
             this.picBox.Name = "picBox";
-            this.picBox.Size = new System.Drawing.Size(800, 601);
+            this.picBox.Size = new System.Drawing.Size(800, 670);
             this.picBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBox.TabIndex = 14;
             this.picBox.TabStop = false;
             // 
             // btnCargarImagen
             // 
-            this.btnCargarImagen.Location = new System.Drawing.Point(2633, 428);
+            this.btnCargarImagen.Location = new System.Drawing.Point(2641, 347);
             this.btnCargarImagen.Name = "btnCargarImagen";
             this.btnCargarImagen.Size = new System.Drawing.Size(208, 55);
             this.btnCargarImagen.TabIndex = 13;
@@ -323,7 +303,7 @@ namespace UI
             // txtImagen
             // 
             this.txtImagen.Enabled = false;
-            this.txtImagen.Location = new System.Drawing.Point(1795, 428);
+            this.txtImagen.Location = new System.Drawing.Point(1795, 356);
             this.txtImagen.Name = "txtImagen";
             this.txtImagen.Size = new System.Drawing.Size(800, 38);
             this.txtImagen.TabIndex = 12;
@@ -331,7 +311,7 @@ namespace UI
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1641, 431);
+            this.label6.Location = new System.Drawing.Point(1641, 359);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(109, 32);
             this.label6.TabIndex = 11;
@@ -554,8 +534,6 @@ namespace UI
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtUbicacion;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtStock;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DateTimePicker dateTFecha;

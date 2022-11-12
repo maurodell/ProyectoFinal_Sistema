@@ -84,7 +84,6 @@ namespace UI
             txtDescripcion.Clear();
             txtImagen.Clear();
             txtPrecio.Clear();
-            txtStock.Clear();
             txtUbicacion.Clear();
             picBox.Image = null;
             panelCodigo.BackgroundImage = null;
@@ -187,21 +186,20 @@ namespace UI
                 bool respuesta = false;
                 DateTime hoy = DateTime.Now;
                 //evaluar los meses q se cargar dateTFecha.Value >= hoy.AddMonths(2) || 
-                if (cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtStock.Text == string.Empty || txtUbicacion.Text == string.Empty || txtCodigoBarra.Text == string.Empty)
+                if (cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtUbicacion.Text == string.Empty || txtCodigoBarra.Text == string.Empty)
                 {
                     this.MensajeError("Algunos de los datos faltan o son incorrectos");
                     errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
                     errorProvider1.SetError(txtNombre, "Ingresar nombre");
                     errorProvider1.SetError(dateTFecha, "Fecha de vencimiento superior o igual a 2 meses de la fecha actual");
                     errorProvider1.SetError(txtPrecio, "El precio es necesario");
-                    errorProvider1.SetError(txtStock, "Stock es necesario");
                     errorProvider1.SetError(txtUbicacion, "Debe completar la ubicación del producto en el deposito");
                     errorProvider1.SetError(txtCodigoBarra, "Debe completar el código de barra, este puede ser scaneado");
                 }
                 else
                 {
                     respuesta = bllProducto.Insertar(Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), txtNombre.Text.Trim(), 
-                                                    Convert.ToDecimal(txtPrecio.Text.Trim()), Convert.ToInt32(txtStock.Text.Trim()), txtDescripcion.Text.Trim(), txtUbicacion.Text, dateTFecha.Value,txtImagen.Text);
+                                                    Convert.ToDecimal(txtPrecio.Text.Trim()), txtDescripcion.Text.Trim(), txtUbicacion.Text, dateTFecha.Value,txtImagen.Text);
                     if (respuesta == true)
                     {
                         if (txtImagen.Text != string.Empty)
@@ -237,7 +235,6 @@ namespace UI
                 cmbCategoria.SelectedValue = Convert.ToInt32(dgvListadoProd.CurrentRow.Cells["codigoCategoria"].Value);
                 this.nombreAnterior = Convert.ToString(dgvListadoProd.CurrentRow.Cells["nombre"].Value);
                 txtNombre.Text = Convert.ToString(dgvListadoProd.CurrentRow.Cells["nombre"].Value);
-                txtStock.Text = Convert.ToString(dgvListadoProd.CurrentRow.Cells["stock"].Value);
                 txtPrecio.Text = Convert.ToString(dgvListadoProd.CurrentRow.Cells["precioVenta"].Value);
                 txtDescripcion.Text = Convert.ToString(dgvListadoProd.CurrentRow.Cells["descripcion"].Value);
                 txtCodigoBarra.Text = Convert.ToString(dgvListadoProd.CurrentRow.Cells["codigoBarra"].Value);
@@ -269,7 +266,7 @@ namespace UI
             try
             {
                 bool respuesta = false;
-                if (cmbCategoria.Text == string.Empty && txtNombre.Text == string.Empty && txtPrecio.Text == string.Empty && txtStock.Text == string.Empty)
+                if (cmbCategoria.Text == string.Empty && txtNombre.Text == string.Empty && txtPrecio.Text == string.Empty)
                 {
                     this.MensajeError("Falta ingresar algunos datos");
                     errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
@@ -278,7 +275,7 @@ namespace UI
                 else
                 {
                     respuesta = bllProducto.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), this.nombreAnterior, Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), Convert.ToDecimal(txtPrecio.Text.Trim()),
-                                                    Convert.ToInt32(txtStock.Text.Trim()), txtNombre.Text.Trim(), txtDescripcion.Text.Trim(), txtUbicacion.Text, txtImagen.Text);
+                                                    txtNombre.Text.Trim(), txtDescripcion.Text.Trim(), txtUbicacion.Text, txtImagen.Text);
                     if (respuesta == true)
                     {
                         this.MensajeOk("El producto se actualizo correctamente");

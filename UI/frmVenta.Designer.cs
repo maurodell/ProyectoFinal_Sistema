@@ -211,6 +211,7 @@ namespace UI
             this.btnAnular.TabIndex = 6;
             this.btnAnular.Text = "Anular";
             this.btnAnular.UseVisualStyleBackColor = true;
+            this.btnAnular.Click += new System.EventHandler(this.btnAnular_Click);
             // 
             // chkSeleccionar
             // 
@@ -221,6 +222,7 @@ namespace UI
             this.chkSeleccionar.TabIndex = 5;
             this.chkSeleccionar.Text = "Seleccionar";
             this.chkSeleccionar.UseVisualStyleBackColor = true;
+            this.chkSeleccionar.CheckedChanged += new System.EventHandler(this.chkSeleccionar_CheckedChanged);
             // 
             // btnBuscar
             // 
@@ -332,6 +334,8 @@ namespace UI
             this.dgvListadoCompra.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListadoCompra.Size = new System.Drawing.Size(3495, 1031);
             this.dgvListadoCompra.TabIndex = 0;
+            this.dgvListadoCompra.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCompra_CellContentClick);
+            this.dgvListadoCompra.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCompra_CellDoubleClick);
             // 
             // Seleccionar
             // 
@@ -378,6 +382,7 @@ namespace UI
             this.btnEliminar.TabIndex = 10;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // groupBox2
             // 
@@ -418,9 +423,9 @@ namespace UI
             this.panelProducto.Controls.Add(this.btnBuscarPanel);
             this.panelProducto.Controls.Add(this.txtBuscarProducPanel);
             this.panelProducto.Controls.Add(this.label14);
-            this.panelProducto.Location = new System.Drawing.Point(1248, 342);
+            this.panelProducto.Location = new System.Drawing.Point(207, 150);
             this.panelProducto.Name = "panelProducto";
-            this.panelProducto.Size = new System.Drawing.Size(2893, 773);
+            this.panelProducto.Size = new System.Drawing.Size(2893, 774);
             this.panelProducto.TabIndex = 22;
             this.panelProducto.Visible = false;
             // 
@@ -429,6 +434,7 @@ namespace UI
             this.dgvProductoPanel.AllowUserToAddRows = false;
             this.dgvProductoPanel.AllowUserToDeleteRows = false;
             this.dgvProductoPanel.AllowUserToOrderColumns = true;
+            this.dgvProductoPanel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductoPanel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductoPanel.Location = new System.Drawing.Point(88, 172);
             this.dgvProductoPanel.Name = "dgvProductoPanel";
@@ -438,6 +444,7 @@ namespace UI
             this.dgvProductoPanel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductoPanel.Size = new System.Drawing.Size(2742, 564);
             this.dgvProductoPanel.TabIndex = 4;
+            this.dgvProductoPanel.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductoPanel_CellDoubleClick);
             // 
             // btnCerrarPanel
             // 
@@ -447,6 +454,7 @@ namespace UI
             this.btnCerrarPanel.TabIndex = 3;
             this.btnCerrarPanel.Text = "Cerrar";
             this.btnCerrarPanel.UseVisualStyleBackColor = true;
+            this.btnCerrarPanel.Click += new System.EventHandler(this.btnCerrarPanel_Click);
             // 
             // btnBuscarPanel
             // 
@@ -456,6 +464,7 @@ namespace UI
             this.btnBuscarPanel.TabIndex = 2;
             this.btnBuscarPanel.Text = "Buscar";
             this.btnBuscarPanel.UseVisualStyleBackColor = true;
+            this.btnBuscarPanel.Click += new System.EventHandler(this.btnBuscarPanel_Click);
             // 
             // txtBuscarProducPanel
             // 
@@ -484,6 +493,8 @@ namespace UI
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetalle.Size = new System.Drawing.Size(2149, 777);
             this.dgvDetalle.TabIndex = 21;
+            this.dgvDetalle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellContentClick);
+            this.dgvDetalle.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellEndEdit);
             // 
             // label12
             // 
@@ -544,6 +555,7 @@ namespace UI
             this.btnExplorarProd.TabIndex = 13;
             this.btnExplorarProd.Text = "Explorar";
             this.btnExplorarProd.UseVisualStyleBackColor = true;
+            this.btnExplorarProd.Click += new System.EventHandler(this.btnExplorarProd_Click);
             // 
             // txtCodBarra
             // 
@@ -551,6 +563,7 @@ namespace UI
             this.txtCodBarra.Name = "txtCodBarra";
             this.txtCodBarra.Size = new System.Drawing.Size(1580, 38);
             this.txtCodBarra.TabIndex = 1;
+            this.txtCodBarra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCodBarra_KeyDown);
             // 
             // label3
             // 
@@ -578,6 +591,7 @@ namespace UI
             this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnInsertar
             // 
@@ -587,6 +601,7 @@ namespace UI
             this.btnInsertar.TabIndex = 4;
             this.btnInsertar.Text = "Insertar";
             this.btnInsertar.UseVisualStyleBackColor = true;
+            this.btnInsertar.Click += new System.EventHandler(this.btnInsertar_Click);
             // 
             // frmVenta
             // 

@@ -14,11 +14,11 @@ namespace UI
         {
             InitializeComponent();
             bllCompra = new BLLCompra();
-            BLLProducto = new BLLProducto();
+            bllProducto = new BLLProducto();
             dtDetalle = new DataTable();
         }
         BLLCompra bllCompra;
-        BLLProducto BLLProducto;
+        BLLProducto bllProducto;
         private DataTable dtDetalle;
         private BEProducto producto;
         private int codigoProducto;
@@ -293,7 +293,7 @@ namespace UI
         private void btnExplorarProd_Click(object sender, EventArgs e)
         {
             panelProducto.Visible = true;
-            dgvProductoPanel.DataSource = BLLProducto.Listar();
+            dgvProductoPanel.DataSource = bllProducto.Listar();
             this.FormatoProductoPanel();
         }
 
@@ -306,7 +306,7 @@ namespace UI
         {
             try 
             {
-                dgvProductoPanel.DataSource = BLLProducto.Buscar(txtBuscarProducPanel.Text.Trim());
+                dgvProductoPanel.DataSource = bllProducto.Buscar(txtBuscarProducPanel.Text.Trim());
                 this.FormatoProductoPanel();
             }
             catch (Exception ex)
@@ -378,7 +378,6 @@ namespace UI
                 dgvDetalle.Rows.RemoveAt(posicion);
                 this.CalcularTotales();
             }
-
         }
 
         private void dgvDetalle_CellContentClick(object sender, DataGridViewCellEventArgs e)

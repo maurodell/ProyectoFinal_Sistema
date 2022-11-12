@@ -18,6 +18,6 @@ namespace BE
         public decimal total { get; set; }
         public string estadoActual { get; set; }
         public bool estado { get; set; }
-        public List<Detalle> detalles { get; set; }
+        public List<DetalleVenta> detalles { get; set; }
     }
 }

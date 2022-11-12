@@ -1,3 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <detalleventas>
+  <detalle codigo="1">
+    <codigoVenta>1</codigoVenta>
+    <codigoProducto>1</codigoProducto>
+    <nombreProducto>Blem</nombreProducto>
+    <stock>7</stock>
+    <codigoBarra>111</codigoBarra>
+    <precio>234</precio>
+    <descuento>0</descuento>
+    <cantidad>4</cantidad>
+    <importe>936</importe>
+  </detalle>
+  <detalle codigo="1">
+    <codigoVenta>1</codigoVenta>
+    <codigoProducto>2</codigoProducto>
+    <nombreProducto>Agua BonAqua</nombreProducto>
+    <stock>4</stock>
+    <codigoBarra>1222122</codigoBarra>
+    <precio>344</precio>
+    <descuento>0</descuento>
+    <cantidad>2</cantidad>
+    <importe>688</importe>
+  </detalle>
+  <detalle codigo="3">
+    <codigoVenta>2</codigoVenta>
+    <codigoProducto>2</codigoProducto>
+    <nombreProducto>Agua BonAqua</nombreProducto>
+    <stock>2</stock>
+    <codigoBarra>1222122</codigoBarra>
+    <precio>344</precio>
+    <descuento>0</descuento>
+    <cantidad>1</cantidad>
+    <importe>344</importe>
+  </detalle>
+  <detalle codigo="4">
+    <codigoVenta>3</codigoVenta>
+    <codigoProducto>1</codigoProducto>
+    <nombreProducto>Blem</nombreProducto>
+    <stock>3</stock>
+    <codigoBarra>111</codigoBarra>
+    <precio>234</precio>
+    <descuento>0</descuento>
+    <cantidad>1</cantidad>
+    <importe>234</importe>
+  </detalle>
 </detalleventas>

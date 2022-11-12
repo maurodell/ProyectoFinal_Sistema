@@ -8,4 +8,12 @@
     <telefono>123456</telefono>
     <email>emial</email>
   </cliente>
+  <cliente codigo="2">
+    <nombre>Ana</nombre>
+    <tipoDocumento>DNI</tipoDocumento>
+    <documento>32290172</documento>
+    <domicilio>Iriondo 310</domicilio>
+    <telefono>3412567833</telefono>
+    <email>ana@gmail.com</email>
+  </cliente>
 </clientes>

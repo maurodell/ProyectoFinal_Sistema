@@ -57,6 +57,7 @@
     <Compile Include="BEVendedor.cs" />
     <Compile Include="BEVenta.cs" />
     <Compile Include="Detalle.cs" />
+    <Compile Include="DetalleVenta.cs" />
     <Compile Include="DTO\DTOMenu.cs" />
     <Compile Include="DTO\DTOPermiso.cs" />
     <Compile Include="DTO\DTOPermisoPermiso.cs" />

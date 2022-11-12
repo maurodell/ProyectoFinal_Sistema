@@ -18,7 +18,11 @@ namespace MPP
         private string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\Venta.XML";
         private string pathVentaDetalle = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\VentaDetalle.XML";
 
+        //voy al xml para modificar el stock y consultarlo
         private string pathProducto = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\Productos.XML";
+
+        //lo utilizo para buscar los productos del detalle.
+        MPPProducto mppProducto = new MPPProducto();
         public bool Alta(int Parametro)
         {
             throw new NotImplementedException();
@@ -28,7 +32,7 @@ namespace MPP
         {
             XDocument documento = XDocument.Load(path);
 
-            var consulta = from venta in documento.Descendants("ventas")
+            var consulta = from venta in documento.Descendants("venta")
                            where venta.Attribute("codigo").Value == Parametro.ToString()
                            select venta;
 
@@ -40,7 +44,7 @@ namespace MPP
             }
 
             documento.Save(path);
-            BEVenta ventaActualizar = CargarCompra(Parametro);//cargo la compra con el id que mandó
+            BEVenta ventaActualizar = CargarVenta(Parametro);//cargo la venta con el id que mandó
             ActualizarStock(ventaActualizar, false);//luego lo paso para actualizar
             return true;
         }
@@ -109,7 +113,7 @@ namespace MPP
                                                 new XElement("estadoActual", "Activo"),
                                                 new XElement("estado", 1)));
 
-                List<Detalle> detalle = ListarDetalle();
+                List<DetalleVenta> detalle = ListarDetalle();
                 int cantidad = detalle.Count();
                 XDocument crearDetalle = null;
 
@@ -123,8 +127,10 @@ namespace MPP
                                                         new XElement("codigoVenta", codigoVentas),
                                                         new XElement("codigoProducto", item.codigoProducto),
                                                         new XElement("nombreProducto", item.nombreProducto),
+                                                        new XElement("stock", item.stock),
                                                         new XElement("codigoBarra", item.codigoBarra),
                                                         new XElement("precio", item.precio),
+                                                        new XElement("descuento", item.descuento),
                                                         new XElement("cantidad", item.cantidad),
                                                         new XElement("importe", item.importe)));
                         crearDetalle.Save(pathVentaDetalle);
@@ -155,8 +161,8 @@ namespace MPP
         {
             int stock, codProducto;
             bool flag = false;
-            //si tipo es true, entonces resta stock porque es un insert y si es false es una anulación de la compra lo que suma el stock
-            foreach (Detalle item in detalle.detalles)
+            //si tipo es true, entonces resta stock porque es una venta y si es false es una anulación de la venta por lo que suma el stock
+            foreach (DetalleVenta item in detalle.detalles)
             {
                 stock = item.cantidad;
                 codProducto = item.codigoProducto;
@@ -181,12 +187,10 @@ namespace MPP
                     foreach (XElement EModifcar in consulta)
                     {
                         int stockActual = Convert.ToInt32(EModifcar.Element("stock").Value);
-                        if (stockActual > stock)
-                        {
-                            stockActual -= stock;
-                            EModifcar.Element("stock").Value = stockActual.ToString();
-                            flag = true;
-                        }
+
+                        stockActual -= stock;
+                        EModifcar.Element("stock").Value = stockActual.ToString();
+                        flag = true;
                     }
                 }
                 else
@@ -194,12 +198,10 @@ namespace MPP
                     foreach (XElement EModifcar in consulta)
                     {
                         int stockActual = Convert.ToInt32(EModifcar.Element("stock").Value);
-                        if (stockActual > stock)
-                        {
-                            stockActual += stock;
-                            EModifcar.Element("stock").Value = stockActual.ToString();
-                            flag = true;
-                        }
+
+                        stockActual += stock;
+                        EModifcar.Element("stock").Value = stockActual.ToString();
+                        flag = true;
                     }
                 }
 
@@ -253,26 +255,28 @@ namespace MPP
                 throw new XmlException();
             }
         }
-        public List<Detalle> ListarDetalle()
+        public List<DetalleVenta> ListarDetalle()
         {
             try
             {
                 DataSet DS = new DataSet();
                 DS.ReadXml(pathVentaDetalle);
 
-                List<Detalle> detalles = new List<Detalle>();
+                List<DetalleVenta> detalles = new List<DetalleVenta>();
 
                 if (DS.Tables.Count > 0)
                 {
                     foreach (DataRow item in DS.Tables[0].Rows)
                     {
-                        Detalle detalle = new Detalle
+                        DetalleVenta detalle = new DetalleVenta
                         {
                             Codigo = Convert.ToInt32(item["codigo"]),
                             codigoBarra = Convert.ToInt32(item["codigoBarra"]),
                             codigoProducto = Convert.ToInt32(item["codigoProducto"]),
                             nombreProducto = Convert.ToString(item["nombreProducto"]),
+                            stock = Convert.ToInt32(item["stock"]),
                             precio = Convert.ToDecimal(item["precio"]),
+                            descuento = Convert.ToDecimal(item["descuento"]),
                             cantidad = Convert.ToInt32(item["cantidad"]),
                             importe = Convert.ToDecimal(item["importe"])
                         };
@@ -324,9 +328,9 @@ namespace MPP
                 throw new XmlException();
             }
         }
-        public List<Detalle> BuscarDetallePorVenta(int codigoVenta)
+        public List<DetalleVenta> BuscarDetallePorVenta(int codigoVenta)
         {
-            List<Detalle> listaDetalle = new List<Detalle>();
+            List<DetalleVenta> listaDetalle = new List<DetalleVenta>();
 
             XDocument path = XDocument.Load(pathVentaDetalle);
             var consulta = from detalle in path.Descendants("detalle")
@@ -338,27 +342,31 @@ namespace MPP
                                codigoProducto = Convert.ToInt32(detalle.Element("codigoProducto").Value),
                                nombreProducto = Convert.ToString(detalle.Element("nombreProducto").Value),
                                codigoBarra = Convert.ToInt32(detalle.Element("codigoBarra").Value),
+                               stock = Convert.ToInt32(detalle.Element("stock").Value),
                                precio = Convert.ToDecimal(detalle.Element("precio").Value),
+                               descuento = Convert.ToDecimal(detalle.Element("descuento").Value),
                                cantidad = Convert.ToInt32(detalle.Element("cantidad").Value),
                                importe = Convert.ToDecimal(detalle.Element("importe").Value)
                            };
-            Detalle detalleCompra;
+            DetalleVenta detalleCompra;
             foreach (var item in consulta)
             {
-                detalleCompra = new Detalle();
+                detalleCompra = new DetalleVenta();
                 detalleCompra.Codigo = item.codigo;
                 detalleCompra.codigoBarra = item.codigoBarra;
                 detalleCompra.codigoCompra = item.codigoCompra;
                 detalleCompra.codigoProducto = item.codigoProducto;
                 detalleCompra.nombreProducto = item.nombreProducto.ToString();
+                detalleCompra.stock = item.stock;
                 detalleCompra.cantidad = item.cantidad;
                 detalleCompra.precio = item.precio;
+                detalleCompra.descuento = item.descuento;
                 detalleCompra.importe = item.importe;
                 listaDetalle.Add(detalleCompra);
             }
             return listaDetalle;
         }
-        public BEVenta CargarCompra(int codigoVenta)
+        public BEVenta CargarVenta(int codigoVenta)
         {
             try
             {
@@ -416,6 +424,23 @@ namespace MPP
                 }
             }
             return resp;
+        }
+        public BEProducto BuscarProductoCodBarra(string codBarra)
+        {
+            try
+            {
+                //Me traigo la lista de productos
+                BEProducto producto = mppProducto.Listar().Find(x => (x.codigoBarra.Equals(codBarra)));
+                //verifico que me devuelva un producto y que ese producto tenga stock
+                if (producto != null && producto.stock > 0)
+                    return producto;
+
+                return null;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
         }
     }
 }

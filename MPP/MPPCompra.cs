@@ -43,7 +43,7 @@ namespace MPP
             
             documento.Save(path);
             BECompra compraActualizar = CargarCompra(Parametro);//cargo la compra con el id que mandó
-            ActualizarStock(compraActualizar, false);//luego lo paso para actualizar
+            ActualizarStock(compraActualizar, true);//luego lo paso para actualizar
             return true;
         }
 
@@ -129,7 +129,7 @@ namespace MPP
                                                         new XElement("importe", item.importe)));
                         crearDetalle.Save(pathDetalle);
                     }
-                    if (ActualizarStock(Parametro, true))
+                    if (ActualizarStock(Parametro, false))
                     {
                         crear.Save(path);
                         return true;
@@ -245,30 +245,27 @@ namespace MPP
                                where producto.Attribute("codigo").Value == codigoProducto.ToString()
                                select producto;
                 bool flag = false;
-                if (tipo)
+                if (tipo)//si ingresa al if es una anulación de una compra por lo que se descuenta el stock agregado
                 {
                     foreach (XElement EModifcar in consulta)
                     {
                         int stockActual = Convert.ToInt32(EModifcar.Element("stock").Value);
-                        if (stockActual > stock)
-                        {
-                            stockActual -= stock;
-                            EModifcar.Element("stock").Value = stockActual.ToString();
-                            flag = true;
-                        }
+
+                        stockActual -= stock;
+                        EModifcar.Element("stock").Value = stockActual.ToString();
+                        flag = true;
+
                     }
                 }
-                else
+                else//si ingresa al else es una compra
                 {
                     foreach (XElement EModifcar in consulta)
                     {
                         int stockActual = Convert.ToInt32(EModifcar.Element("stock").Value);
-                        if (stockActual > stock)
-                        {
-                            stockActual += stock;
-                            EModifcar.Element("stock").Value = stockActual.ToString();
-                            flag = true;
-                        }
+
+                        stockActual += stock;
+                        EModifcar.Element("stock").Value = stockActual.ToString();
+                        flag = true;
                     }
                 }
 

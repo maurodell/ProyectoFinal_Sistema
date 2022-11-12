@@ -9,7 +9,7 @@
     <cantidad>1</cantidad>
     <importe>234</importe>
   </detalle>
-  <detalle codigo="1">
+  <detalle codigo="2">
     <codigoCompra>1</codigoCompra>
     <codigoProducto>2</codigoProducto>
     <nombreProducto>Agua BonAqua</nombreProducto>
@@ -29,11 +29,20 @@
   </detalle>
   <detalle codigo="4">
     <codigoCompra>3</codigoCompra>
-    <codigoProducto>1</codigoProducto>
-    <nombreProducto>Blem</nombreProducto>
+    <codigoProducto>3</codigoProducto>
+    <nombreProducto>Paño</nombreProducto>
+    <codigoBarra>112233</codigoBarra>
+    <precio>300</precio>
+    <cantidad>10</cantidad>
+    <importe>3000</importe>
+  </detalle>
+  <detalle codigo="5">
+    <codigoCompra>3</codigoCompra>
+    <codigoProducto>4</codigoProducto>
+    <nombreProducto>Agua Saborizada</nombreProducto>
     <codigoBarra>111</codigoBarra>
-    <precio>234</precio>
-    <cantidad>3</cantidad>
-    <importe>702</importe>
+    <precio>90</precio>
+    <cantidad>1</cantidad>
+    <importe>90</importe>
   </detalle>
 </detallecompra>

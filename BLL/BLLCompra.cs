@@ -55,8 +55,8 @@ namespace BLL
                 detalle.codigoProducto = Convert.ToInt32(detalles.Rows[i]["codigoProducto"]);
                 detalle.nombreProducto = Convert.ToString(detalles.Rows[i]["nombreProducto"]);
                 detalle.cantidad = Convert.ToInt32(detalles.Rows[i]["cantidad"]);
-                detalle.precio = Convert.ToInt32(detalles.Rows[i]["precio"]);
-                detalle.importe = Convert.ToInt32(detalles.Rows[i]["importe"]);
+                detalle.precio = Convert.ToDecimal(detalles.Rows[i]["precio"]);
+                detalle.importe = Convert.ToDecimal(detalles.Rows[i]["importe"]);
                 listaDetalle.Add(detalle);
             }
             beCompra.codigoUsuario = codigoUsuario;
