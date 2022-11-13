@@ -33,25 +33,14 @@
     <estadoActual>Anulado</estadoActual>
     <estado>0</estado>
   </compra>
-  <compra codigo="3">
+  <compra codigo="4">
     <codigoUsuario>1</codigoUsuario>
     <tipoComprobante>Factura A</tipoComprobante>
-    <nroComprobante>0011</nroComprobante>
+    <nroComprobante>1122334455</nroComprobante>
     <puntoVenta>0000</puntoVenta>
-    <fecha>2022-11-12T11:42:11.9589843-03:00</fecha>
+    <fecha>2022-11-13T00:00:00</fecha>
     <impuesto>21</impuesto>
-    <total>3000.00</total>
-    <estadoActual>Anulado</estadoActual>
-    <estado>0</estado>
-  </compra>
-  <compra codigo="3">
-    <codigoUsuario>1</codigoUsuario>
-    <tipoComprobante>Factura A</tipoComprobante>
-    <nroComprobante>000111</nroComprobante>
-    <puntoVenta>0000</puntoVenta>
-    <fecha>2022-11-12T11:52:02.7719286-03:00</fecha>
-    <impuesto>21</impuesto>
-    <total>90.00</total>
+    <total>2340.00</total>
     <estadoActual>Activo</estadoActual>
     <estado>1</estado>
   </compra>

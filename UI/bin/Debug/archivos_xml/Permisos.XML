@@ -68,4 +68,20 @@
     <nombre>Consultas Ventas</nombre>
     <menu>submenuConsultasVentas</menu>
   </permiso>
+  <permiso codigo="23">
+    <nombre>Consultas Compras</nombre>
+    <menu>submenuConsultasCompras</menu>
+  </permiso>
+  <permiso codigo="24">
+    <nombre>BackUp</nombre>
+    <menu>menuBackUp</menu>
+  </permiso>
+  <permiso codigo="25">
+    <nombre>hacer backup</nombre>
+    <menu>submenuNuevoBackUp</menu>
+  </permiso>
+  <permiso codigo="26">
+    <nombre>hacer restore</nombre>
+    <menu>submenuRestore</menu>
+  </permiso>
 </permisos>

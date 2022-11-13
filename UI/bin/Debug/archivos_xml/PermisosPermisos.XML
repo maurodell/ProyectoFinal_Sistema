@@ -76,4 +76,20 @@
     <codigoRol>2</codigoRol>
     <codigoMenu>22</codigoMenu>
   </permiso>
+  <permiso codigo="34">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>23</codigoMenu>
+  </permiso>
+  <permiso codigo="35">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>24</codigoMenu>
+  </permiso>
+  <permiso codigo="36">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>25</codigoMenu>
+  </permiso>
+  <permiso codigo="37">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>26</codigoMenu>
+  </permiso>
 </permisopermiso>

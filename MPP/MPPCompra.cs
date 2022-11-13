@@ -93,7 +93,7 @@ namespace MPP
         {
             try
             {
-                List<BECompra> compra = Listar();
+                List<BECompra> compra = ListarTodos();
                 int cantidadPart = compra.Count();
                 int codigoCompra = (cantidadPart + 1);
                 XDocument crear = XDocument.Load(path);
@@ -275,6 +275,46 @@ namespace MPP
             catch (XmlException ex)
             {
                 throw ex;
+            }
+        }
+        public List<BECompra> ListarPorFecha(DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                XDocument documento = XDocument.Load(path);
+
+                var consulta = from comprasBuscar in documento.Descendants("compra")
+                               where Convert.ToDateTime(comprasBuscar.Element("fecha").Value) >= Convert.ToDateTime(fechaInicio.ToString("dd/MM/yyyy"))
+                               && Convert.ToDateTime(comprasBuscar.Element("fecha").Value) <= Convert.ToDateTime(fechaFin.ToString("dd/MM/yyyy"))
+                               select comprasBuscar;
+                //------------------------
+
+                List<BECompra> compras = new List<BECompra>();
+
+
+                foreach (XElement EModifcar in consulta)
+                {
+                    BECompra compra = new BECompra
+                    {
+                        Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value),
+                        codigoUsuario = Convert.ToInt32(EModifcar.Element("codigoUsuario").Value),
+                        tipoComprobante = Convert.ToString(EModifcar.Element("tipoComprobante").Value),
+                        nroComprobante = Convert.ToString(EModifcar.Element("nroComprobante").Value),
+                        puntoVenta = Convert.ToString(EModifcar.Element("puntoVenta").Value),
+                        fecha = Convert.ToDateTime(EModifcar.Element("fecha").Value),
+                        impuesto = Convert.ToDecimal(EModifcar.Element("impuesto").Value),
+                        total = Decimal.Parse(EModifcar.Element("total").Value),
+                        estadoActual = Convert.ToString(EModifcar.Element("estadoActual").Value),
+                        estado = Convert.ToBoolean(Convert.ToInt32(EModifcar.Element("estado").Value))
+                    };
+                    compras.Add(compra);
+                }
+
+                return compras;
+            }
+            catch (XmlException)
+            {
+                throw new XmlException();
             }
         }
         public List<Detalle> ListarDetalle()

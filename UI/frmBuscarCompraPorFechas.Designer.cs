@@ -121,6 +121,7 @@ namespace UI
             this.btnCerrar.TabIndex = 1;
             this.btnCerrar.Text = "x";
             this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // dgvDetalleVentaProd
             // 
@@ -145,6 +146,7 @@ namespace UI
             this.btnBuscar.TabIndex = 13;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // dateTimePHasta
             // 
@@ -195,6 +197,7 @@ namespace UI
             this.dgvListadoVenta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListadoVenta.Size = new System.Drawing.Size(3495, 1031);
             this.dgvListadoVenta.TabIndex = 8;
+            this.dgvListadoVenta.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoVenta_CellDoubleClick);
             // 
             // frmBuscarCompraPorFechas
             // 
