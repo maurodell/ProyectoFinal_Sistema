@@ -212,6 +212,28 @@ namespace MPP
                 throw ex;
             }
         }
+        public string BuscarNombreCategoria(int codigoCategoria)
+        {
+            try
+            {
+                string nombre = "";
+                XDocument documento = XDocument.Load(path);
+
+                var consulta = from categoria in documento.Descendants("categoria")
+                               where categoria.Attribute("codigo").Value == (codigoCategoria).ToString()
+                               select categoria;
+
+                foreach (XElement EModifcar in consulta)
+                {
+                    nombre = EModifcar.Element("nombre").Value;
+                }
+                return nombre;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
+        }
 
         public bool Modificar(BECategoria Parametro, string nombreAnterior)
         {

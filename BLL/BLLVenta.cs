@@ -33,7 +33,10 @@ namespace BLL
         {
             return mppVenta.Buscar(Parametro);
         }
-
+        public string BuscarCategoriaProducto(int codigoProducto)
+        {
+            return mppVenta.BuscarCategoriaProducto(codigoProducto);
+        }
         public bool Crear(int codigoCliente,int codigoUsuario, string tipoComprobante, string nroComprobante, string puntoVenta, DateTime fecha, decimal impuesto,
                             decimal total, DataTable detalles)
         {

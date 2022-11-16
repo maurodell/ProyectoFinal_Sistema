@@ -52,8 +52,8 @@ namespace UI
                         FrmPrincipal.Email = beUsuario.email;
 
                         VariablesCompra.codigoUsuario = beUsuario.Codigo;//se neceista para registrar el ingreso
-
                         FrmPrincipal.Show();
+                        FrmPrincipal.FormClosed += CerrarSesion;
                         this.Hide();
                     }
                 }
@@ -63,7 +63,13 @@ namespace UI
                 MessageBox.Show(ex.Message);
             }
         }
-
+        public void CerrarSesion(object sender, FormClosedEventArgs e)
+        {
+            txtClave.Clear();
+            txtEmail.Clear();
+            this.Show();
+            txtEmail.Focus();
+        }
         private void frmLogin_Load(object sender, EventArgs e)
         {
 

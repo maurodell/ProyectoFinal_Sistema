@@ -181,11 +181,6 @@ namespace UI
             frmUsuarios.Size = new Size(1370, 560);
         }
 
-        private void frmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult opcion;
@@ -260,7 +255,7 @@ namespace UI
             frmBuscarVentasPorFechas BuscarFechasVentas = new frmBuscarVentasPorFechas();
             BuscarFechasVentas.MdiParent = this;
             BuscarFechasVentas.Show();
-            BuscarFechasVentas.Size = new Size(1370, 580);
+            BuscarFechasVentas.Size = new Size(1370, 680);
         }
 
         private void submenuConsultasCompras_Click(object sender, EventArgs e)
@@ -268,7 +263,17 @@ namespace UI
             frmBuscarCompraPorFechas BuscarFechasCompras = new frmBuscarCompraPorFechas();
             BuscarFechasCompras.MdiParent = this;
             BuscarFechasCompras.Show();
-            BuscarFechasCompras.Size = new Size(1370, 580);
+            BuscarFechasCompras.Size = new Size(1370, 680);
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult opcion;
+            opcion = MessageBox.Show("Desea cerrar sesión?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (opcion.Equals(DialogResult.OK))
+            {
+                this.Close();
+            }
         }
     }
 }

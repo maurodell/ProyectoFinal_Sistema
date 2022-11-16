@@ -40,4 +40,14 @@
     <clave>rUvj1G+ybfI=</clave>
     <estado>1</estado>
   </usuario>
+  <usuario codigo="5">
+    <nombre>Ana</nombre>
+    <tipoDocumento>DNI</tipoDocumento>
+    <documento>lala</documento>
+    <domicilio>34615561</domicilio>
+    <telefono>1234444</telefono>
+    <email>ana</email>
+    <clave>rUvj1G+ybfI=</clave>
+    <estado>1</estado>
+  </usuario>
 </usuarios>

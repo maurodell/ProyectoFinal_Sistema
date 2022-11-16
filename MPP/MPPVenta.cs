@@ -18,11 +18,12 @@ namespace MPP
         private string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\Venta.XML";
         private string pathVentaDetalle = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\VentaDetalle.XML";
 
-        //voy al xml para modificar el stock y consultarlo
+        //voy al xml para modificar el stock y consultarlo. También se usa para buscar categoria de productos.
         private string pathProducto = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\Productos.XML";
 
         //lo utilizo para buscar los productos del detalle.
         MPPProducto mppProducto = new MPPProducto();
+        MPPCategoria mppCategoria = new MPPCategoria();
         public bool Alta(int Parametro)
         {
             throw new NotImplementedException();
@@ -91,7 +92,29 @@ namespace MPP
                 throw ex;
             }
         }
+        public string BuscarCategoriaProducto(int codigoProducto)
+        {
+            try
+            {
+                string nombreCategoria = "";
+                XDocument documento = XDocument.Load(pathProducto);
 
+                var consulta = from producto in documento.Descendants("producto")
+                               where producto.Attribute("codigo").Value == codigoProducto.ToString()
+                               select producto;
+
+                foreach (XElement EModifcar in consulta)
+                {
+                    int codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
+                    nombreCategoria = mppCategoria.BuscarNombreCategoria(codigo);
+                }
+                return nombreCategoria;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
+        }
         public bool Crear(BEVenta Parametro)
         {
             try

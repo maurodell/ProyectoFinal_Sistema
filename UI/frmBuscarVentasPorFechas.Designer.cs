@@ -29,6 +29,14 @@ namespace UI
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePDesde = new System.Windows.Forms.DateTimePicker();
@@ -44,9 +52,29 @@ namespace UI
             this.btnCerrar = new System.Windows.Forms.Button();
             this.dgvDetalleVentaProd = new System.Windows.Forms.DataGridView();
             this.dgvListadoVenta = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cantLbl = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.totalLbl = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.stockLbl = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.gananciaLblTotal = new System.Windows.Forms.Label();
+            this.gananciaLbl = new System.Windows.Forms.Label();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleVentaProd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListadoVenta)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -104,7 +132,7 @@ namespace UI
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.btnCerrar);
             this.panel1.Controls.Add(this.dgvDetalleVentaProd);
-            this.panel1.Location = new System.Drawing.Point(700, 139);
+            this.panel1.Location = new System.Drawing.Point(700, 138);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(2484, 1106);
             this.panel1.TabIndex = 7;
@@ -189,22 +217,192 @@ namespace UI
             this.dgvListadoVenta.AllowUserToOrderColumns = true;
             this.dgvListadoVenta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvListadoVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListadoVenta.Location = new System.Drawing.Point(44, 150);
+            this.dgvListadoVenta.Location = new System.Drawing.Point(45, 150);
             this.dgvListadoVenta.Name = "dgvListadoVenta";
             this.dgvListadoVenta.ReadOnly = true;
             this.dgvListadoVenta.RowHeadersWidth = 102;
             this.dgvListadoVenta.RowTemplate.Height = 40;
             this.dgvListadoVenta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvListadoVenta.Size = new System.Drawing.Size(3495, 1031);
+            this.dgvListadoVenta.Size = new System.Drawing.Size(3495, 788);
             this.dgvListadoVenta.TabIndex = 1;
             this.dgvListadoVenta.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCompra_CellDoubleClick);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.panel2.Controls.Add(this.cantLbl);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Location = new System.Drawing.Point(45, 986);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(324, 106);
+            this.panel2.TabIndex = 8;
+            // 
+            // cantLbl
+            // 
+            this.cantLbl.AutoSize = true;
+            this.cantLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cantLbl.Location = new System.Drawing.Point(29, 46);
+            this.cantLbl.Name = "cantLbl";
+            this.cantLbl.Size = new System.Drawing.Size(43, 46);
+            this.cantLbl.TabIndex = 1;
+            this.cantLbl.Text = "0";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(31, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(265, 32);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Cantidad de Ventas";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.panel3.Controls.Add(this.totalLbl);
+            this.panel3.Controls.Add(this.label9);
+            this.panel3.Location = new System.Drawing.Point(45, 1122);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(324, 106);
+            this.panel3.TabIndex = 9;
+            // 
+            // totalLbl
+            // 
+            this.totalLbl.AutoSize = true;
+            this.totalLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalLbl.Location = new System.Drawing.Point(29, 46);
+            this.totalLbl.Name = "totalLbl";
+            this.totalLbl.Size = new System.Drawing.Size(43, 46);
+            this.totalLbl.TabIndex = 1;
+            this.totalLbl.Text = "0";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(31, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(194, 32);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Total Ingresos";
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.panel4.Controls.Add(this.stockLbl);
+            this.panel4.Controls.Add(this.label8);
+            this.panel4.Location = new System.Drawing.Point(45, 1258);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(324, 106);
+            this.panel4.TabIndex = 10;
+            // 
+            // stockLbl
+            // 
+            this.stockLbl.AutoSize = true;
+            this.stockLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockLbl.Location = new System.Drawing.Point(29, 46);
+            this.stockLbl.Name = "stockLbl";
+            this.stockLbl.Size = new System.Drawing.Size(43, 46);
+            this.stockLbl.TabIndex = 1;
+            this.stockLbl.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(31, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(185, 32);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Stock movido";
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.panel5.Controls.Add(this.gananciaLblTotal);
+            this.panel5.Controls.Add(this.gananciaLbl);
+            this.panel5.Location = new System.Drawing.Point(45, 1394);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(324, 106);
+            this.panel5.TabIndex = 11;
+            // 
+            // gananciaLblTotal
+            // 
+            this.gananciaLblTotal.AutoSize = true;
+            this.gananciaLblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gananciaLblTotal.Location = new System.Drawing.Point(29, 46);
+            this.gananciaLblTotal.Name = "gananciaLblTotal";
+            this.gananciaLblTotal.Size = new System.Drawing.Size(43, 46);
+            this.gananciaLblTotal.TabIndex = 1;
+            this.gananciaLblTotal.Text = "0";
+            // 
+            // gananciaLbl
+            // 
+            this.gananciaLbl.AutoSize = true;
+            this.gananciaLbl.Location = new System.Drawing.Point(31, 0);
+            this.gananciaLbl.Name = "gananciaLbl";
+            this.gananciaLbl.Size = new System.Drawing.Size(209, 32);
+            this.gananciaLbl.TabIndex = 0;
+            this.gananciaLbl.Text = "Total Ganancia";
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(452, 973);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(2224, 527);
+            this.chart1.TabIndex = 12;
+            this.chart1.Text = "chart1";
+            title1.Alignment = System.Drawing.ContentAlignment.TopLeft;
+            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold);
+            title1.Name = "Title1";
+            title1.Text = "Productos Vendidos";
+            this.chart1.Titles.Add(title1);
+            // 
+            // chart2
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
+            this.chart2.Location = new System.Drawing.Point(2717, 973);
+            this.chart2.Name = "chart2";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            series2.IsValueShownAsLabel = true;
+            series2.LabelForeColor = System.Drawing.Color.White;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart2.Series.Add(series2);
+            this.chart2.Size = new System.Drawing.Size(823, 527);
+            this.chart2.TabIndex = 13;
+            this.chart2.Text = "chart2";
+            title2.Alignment = System.Drawing.ContentAlignment.TopLeft;
+            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold);
+            title2.Name = "Title1";
+            title2.Text = "Categoria Productos";
+            this.chart2.Titles.Add(title2);
             // 
             // frmBuscarVentasPorFechas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(3640, 1278);
+            this.ClientSize = new System.Drawing.Size(3640, 1553);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.chart2);
+            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.dateTimePHasta);
             this.Controls.Add(this.dateTimePDesde);
@@ -218,6 +416,16 @@ namespace UI
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleVentaProd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListadoVenta)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,5 +447,19 @@ namespace UI
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvListadoVenta;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label cantLbl;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label totalLbl;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label stockLbl;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label gananciaLblTotal;
+        private System.Windows.Forms.Label gananciaLbl;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
     }
 }

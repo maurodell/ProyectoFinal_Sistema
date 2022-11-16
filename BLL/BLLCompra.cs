@@ -37,6 +37,10 @@ namespace BLL
         {
             return mppCompra.BuscarProductoCodBarra(Parametro);
         }
+        public string BuscarCategoriaProducto(int codigoProducto)
+        {
+            return mppCompra.BuscarCategoriaProducto(codigoProducto);
+        }
         public bool Crear(BECompra Parametro)
         {
             throw new NotImplementedException();
