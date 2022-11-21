@@ -122,7 +122,7 @@ namespace MPP
                                                 new XElement("imagen", Parametro.imagen),
                                                 new XElement("estado", 1)));
 
-                if (VerificarExistencia(Parametro.nombre))
+                if (!VerificarExistencia(Parametro.nombre))
                 {
                     crear.Save(path);
                     return true;
@@ -171,7 +171,7 @@ namespace MPP
                 {
                     foreach (DataRow item in DS.Tables[0].Rows)
                     {
-                        string estado = item["estado"].ToString(); //-->listo los que tengan el estado en true
+                        string estado = item["estado"].ToString(); //-->va a listar los que tengan el estado en true
                         if (estado.Equals("1"))
                         {
                             BEProducto producto = new BEProducto
@@ -294,7 +294,7 @@ namespace MPP
         }
         bool VerificarExistencia(string nombre)
         {
-            bool resp = true;
+            bool resp = false;
             List<BEProducto> productos = Listar();
 
             if (productos.Count() > 0)
@@ -303,7 +303,7 @@ namespace MPP
                 {
                     if (item.nombre == nombre)
                     {
-                        resp = false;
+                        resp = true;
                         break;
                     }
                 }

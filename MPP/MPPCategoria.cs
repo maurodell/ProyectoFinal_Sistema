@@ -79,7 +79,7 @@ namespace MPP
                                                 new XElement("descripcion", Parametro.descripcion),
                                                 new XElement("estado", 1)));
                 
-                if(VerificarExistencia(Parametro.nombre))
+                if(!VerificarExistencia(Parametro.nombre))
                 {
                     crear.Save(path);
                     return true;
@@ -279,7 +279,7 @@ namespace MPP
         }
         bool VerificarExistencia(string nombre)
         {
-            bool resp = true;
+            bool resp = false;
             List<BECategoria> categorias = Listar();
 
             if (categorias.Count() > 0)
@@ -288,7 +288,7 @@ namespace MPP
                 {
                     if (item.nombre == nombre)
                     {
-                        resp = false;
+                        resp = true;
                         break;
                     }
                 }

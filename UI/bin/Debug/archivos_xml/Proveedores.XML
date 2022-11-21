@@ -2,11 +2,20 @@
 <proveedores>
   <proveedor codigo="1">
     <condicion>Responsable Inscripto</condicion>
-    <razonSocial>eeee</razonSocial>
-    <provincia>123</provincia>
-    <cuit>asd</cuit>
-    <domicilio>asd</domicilio>
-    <telefono>111111</telefono>
-    <email>sadas523</email>
+    <razonSocial>Tierras del Sur</razonSocial>
+    <provincia>Buenos Aires</provincia>
+    <cuit>12342445342</cuit>
+    <domicilio>Catamarca 2324</domicilio>
+    <telefono>34123432</telefono>
+    <email>tierras@gmail.com</email>
+  </proveedor>
+  <proveedor codigo="2">
+    <condicion>Responsable Inscripto</condicion>
+    <razonSocial>Vientos Aires</razonSocial>
+    <provincia>Córdoba</provincia>
+    <cuit>345123622</cuit>
+    <domicilio>Tucúman 123</domicilio>
+    <telefono>341242132</telefono>
+    <email>buenosvientos@gmail.com</email>
   </proveedor>
 </proveedores>

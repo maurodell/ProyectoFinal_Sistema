@@ -2,50 +2,14 @@
 <productos>
   <producto codigo="1">
     <codigoCategoria>1</codigoCategoria>
-    <codigoBarra>111</codigoBarra>
-    <nombre>Blem</nombre>
-    <precioVenta>234</precioVenta>
-    <stock>10</stock>
-    <descripcion></descripcion>
-    <ubicacion>A1</ubicacion>
-    <fechaVencimiento>2022-11-10T20:40:25.1789082-03:00</fechaVencimiento>
-    <imagen>blem2.jpg</imagen>
-    <estado>1</estado>
-  </producto>
-  <producto codigo="2">
-    <codigoCategoria>2</codigoCategoria>
-    <codigoBarra>1222122</codigoBarra>
-    <nombre>Agua BonAqua</nombre>
-    <precioVenta>344</precioVenta>
+    <codigoBarra>111000</codigoBarra>
+    <nombre>gancía</nombre>
+    <precioVenta>4500</precioVenta>
     <stock>0</stock>
-    <descripcion></descripcion>
-    <ubicacion>A1</ubicacion>
-    <fechaVencimiento>01/01/0001 0:00:00</fechaVencimiento>
-    <imagen>agua.jpg</imagen>
-    <estado>1</estado>
-  </producto>
-  <producto codigo="3">
-    <codigoCategoria>1</codigoCategoria>
-    <codigoBarra>112233</codigoBarra>
-    <nombre>Paño</nombre>
-    <precioVenta>300</precioVenta>
-    <stock>0</stock>
-    <descripcion></descripcion>
-    <ubicacion>A1</ubicacion>
-    <fechaVencimiento>2022-11-12T11:41:28.8908775-03:00</fechaVencimiento>
-    <imagen></imagen>
-    <estado>1</estado>
-  </producto>
-  <producto codigo="4">
-    <codigoCategoria>2</codigoCategoria>
-    <codigoBarra>000111</codigoBarra>
-    <nombre>Agua Saborizada</nombre>
-    <precioVenta>90</precioVenta>
-    <stock>0</stock>
-    <descripcion>Agua bonaqua de varios sabores</descripcion>
-    <ubicacion>Q1</ubicacion>
-    <fechaVencimiento>2029-07-13T11:51:00</fechaVencimiento>
-    <imagen></imagen>
+    <descripcion>Gancia Americano x 950ml</descripcion>
+    <ubicacion>S3</ubicacion>
+    <fechaVencimiento>26/08/2023 0:00:00</fechaVencimiento>
+    <imagen>gancia.JPG</imagen>
     <estado>1</estado>
   </producto>
 </productos>

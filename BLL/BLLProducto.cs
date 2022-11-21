@@ -46,7 +46,7 @@ namespace BLL
             BEproducto.stock = 0;
             BEproducto.descripcion = descripcion;
             BEproducto.ubicacion = ubicacion;
-            BEproducto.fechaVencimiento = fechaVencimiento;
+            BEproducto.fechaVencimiento = Convert.ToDateTime(fechaVencimiento.ToString("dd/MM/yyyy"));
             BEproducto.imagen = imagen;
 
             return mppProducto.Crear(BEproducto);
@@ -66,7 +66,8 @@ namespace BLL
         {
             return mppProducto.ListarTodos();
         }
-        public bool Modificar(int codigo, string nombreAnterior, int codigoCategoria, string codigoBarra, decimal precioVenta, string nombre, string descripcion, string ubicacion, string imagen)
+        public bool Modificar(int codigo, string nombreAnterior, int codigoCategoria, string codigoBarra, 
+                        decimal precioVenta, string nombre, string descripcion, string ubicacion, string imagen, DateTime fechaVencimiento)
         {
             BEproducto = new BEProducto();
             BEproducto.Codigo = codigo;
@@ -77,6 +78,7 @@ namespace BLL
             BEproducto.descripcion = descripcion;
             BEproducto.ubicacion = ubicacion;
             BEproducto.imagen = imagen;
+            BEproducto.fechaVencimiento = Convert.ToDateTime(fechaVencimiento.ToString("dd/MM/yyyy"));
 
             return mppProducto.Modificar(BEproducto, nombreAnterior);
         }

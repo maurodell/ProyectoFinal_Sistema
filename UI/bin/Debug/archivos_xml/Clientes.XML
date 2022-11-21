@@ -1,19 +1,3 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <clientes>
-  <cliente codigo="1">
-    <nombre>Mauro</nombre>
-    <tipoDocumento>CUIT</tipoDocumento>
-    <documento>123456</documento>
-    <domicilio>sdsdas</domicilio>
-    <telefono>123456</telefono>
-    <email>emial</email>
-  </cliente>
-  <cliente codigo="2">
-    <nombre>Ana</nombre>
-    <tipoDocumento>DNI</tipoDocumento>
-    <documento>32290172</documento>
-    <domicilio>Iriondo 310</domicilio>
-    <telefono>3412567833</telefono>
-    <email>ana@gmail.com</email>
-  </cliente>
 </clientes>

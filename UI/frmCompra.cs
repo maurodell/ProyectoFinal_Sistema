@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using BLL;
 using UI.Utils;
 using BE;
+using System.Text.RegularExpressions;
 
 namespace UI
 {
@@ -82,7 +83,7 @@ namespace UI
             dgvListadoCompra.Columns[5].HeaderText = "Fecha";
             dgvListadoCompra.Columns[5].Width = 100;
             dgvListadoCompra.Columns[6].HeaderText = "Impuesto";
-            dgvListadoCompra.Columns[6].Width = 150;
+            dgvListadoCompra.Columns[6].Width = 100;
             dgvListadoCompra.Columns[7].HeaderText = "Total";
             dgvListadoCompra.Columns[7].Width = 100;
             dgvListadoCompra.Columns[8].HeaderText = "Estado Actual";
@@ -91,7 +92,7 @@ namespace UI
             dgvListadoCompra.Columns[9].HeaderText = "Estado";
             dgvListadoCompra.Columns[9].Visible = false;
             dgvListadoCompra.Columns[10].HeaderText = "Código";
-            dgvListadoCompra.Columns[10].Width = 40;
+            dgvListadoCompra.Columns[10].Width = 60;
         }
         private void FormatoProductoPanel()
         {
@@ -162,27 +163,6 @@ namespace UI
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
-        //private void BuscarProductoCodBarra()
-        //{
-        //    try
-        //    {
-        //        dgvListadoCompra.DataSource = null;
-        //        if (txtBuscarComprobante.Text != null)
-        //        {
-        //            MensajeError("No puede ingresar 2 parametros a buscar");
-        //        }
-        //        else
-        //        {
-        //            dgvListadoCompra.DataSource = bllCompra.BuscarProductoCodBarra(txtCodBarra.Text);
-        //        }
-        //        this.Formato();
-        //        lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoCompra.Rows.Count);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message + ex.StackTrace);
-        //    }
-        //}
         private void frmCompra_Load(object sender, EventArgs e)
         {
             this.Listar();
@@ -273,7 +253,8 @@ namespace UI
         {
             decimal total = 0;
             decimal subtotal = 0;
-            if (dgvDetalle.Rows.Count == 0)//esta condición me aseguro que al eliminar un producto se actualice o no los totales y subtotales
+            //esta condición me aseguro que al eliminar un producto se actualice o no los totales y subtotales
+            if (dgvDetalle.Rows.Count == 0)
             {
                 total = 0;
             }
@@ -306,8 +287,18 @@ namespace UI
         {
             try 
             {
-                dgvProductoPanel.DataSource = bllProducto.Buscar(txtBuscarProducPanel.Text.Trim());
-                this.FormatoProductoPanel();
+                bool respuesta = Regex.IsMatch(txtBuscarProducPanel.Text, "^(?![a-zA-Z][a-zA-Z])");
+                if (respuesta)
+                {
+                    string texto = txtBuscarProducPanel.Text.Trim().ToLower();
+                    dgvProductoPanel.DataSource = bllProducto.Buscar(texto);
+                    this.FormatoProductoPanel();
+                }
+                else
+                {
+                    MessageBox.Show("Solo acepta caracteres", "ERROR");
+                }
+
             }
             catch (Exception ex)
             {
@@ -340,36 +331,59 @@ namespace UI
         {
             try
             {
-                bool respuesta = false;
-                if (txtNumComprob.Text == string.Empty || dgvDetalle.Rows.Count == 0)
+                if (UserRegex())
                 {
-                    this.MensajeError("Falta ingresar algunos datos");
-
-                    errorProvider1.SetError(txtNumComprob, "Ingresar número comprobante");
-                    errorProvider1.SetError(dgvDetalle, "Debe ingresar al menos un producto");
-                }
-                else
-                {
-                    respuesta = bllCompra.Crear(VariablesCompra.codigoUsuario, cmbComprobante.Text, txtNumComprob.Text, txtPuntoVenta.Text,
-                                                dateFecha.Value, Convert.ToDecimal(txtAlicuota.Text), Convert.ToDecimal(txtTotal.Text), dtDetalle);
-                    if (respuesta == true)
+                    bool respuesta = false;
+                    if (txtNumComprob.Text == string.Empty || dgvDetalle.Rows.Count == 0)
                     {
-                        this.MensajeOk("Fue registrado de forma correctamente");
-                        this.Limpiar();
-                        this.Listar();
+                        this.MensajeError("Falta ingresar algunos datos");
+
+                        errorProvider1.SetError(txtNumComprob, "Ingresar número comprobante");
+                        errorProvider1.SetError(dgvDetalle, "Debe ingresar al menos un producto");
                     }
                     else
                     {
-                        this.MensajeError("El registro no se pudo realizar\n" +
-                                            "Puede ser que el número de comprobante ya exísta.\n" +
-                                            "O el stock ingresado no alcance.");
+                        respuesta = bllCompra.Crear(VariablesCompra.codigoUsuario, cmbComprobante.Text, txtNumComprob.Text, txtPuntoVenta.Text,
+                                                    dateFecha.Value, Convert.ToDecimal(txtAlicuota.Text), Convert.ToDecimal(txtTotal.Text), dtDetalle);
+                        if (respuesta == true)
+                        {
+                            this.MensajeOk("Fue registrado de forma correctamente");
+                            this.Limpiar();
+                            this.Listar();
+                        }
+                        else
+                        {
+                            this.MensajeError("El registro no se pudo realizar\n" +
+                                                "Puede ser que el número de comprobante ya exísta.\n" +
+                                                "O el stock ingresado no alcance.");
+                        }
                     }
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
+        }
+        private bool UserRegex()
+        {
+            bool salida = true;
+            switch (true)
+            {
+                case bool _ when Regex.IsMatch(txtPuntoVenta.Text, "^(?![0-9]+$)"):
+                    MessageBox.Show("El punto de venta solo caracteres númericos", "ERROR");
+                    salida = false;
+                    break;
+                case bool _ when Regex.IsMatch(txtNumComprob.Text, "^(?![0-9]+$)"):
+                    MessageBox.Show("El número de comprobante solo acepta caracteres númericos", "ERROR");
+                    salida = false;
+                    break;
+
+                default:
+                    break;
+            }
+            return salida;
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {

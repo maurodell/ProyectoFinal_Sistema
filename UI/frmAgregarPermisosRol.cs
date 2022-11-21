@@ -38,64 +38,89 @@ namespace UI
         }
         private void btnConfigRol_Click(object sender, EventArgs e)
         {
-            btnQuitarPerm.Enabled = true;
-            var tmp = (BEFamillia)this.cmbListadoRoles.SelectedItem;
-            if (tmp != null)
+            try
             {
-                beFamilia = new BEFamillia();
-                beFamilia._codigo = tmp._codigo;
-                beFamilia._nombre = tmp._nombre;
+                btnQuitarPerm.Enabled = true;
+                var tmp = (BEFamillia)this.cmbListadoRoles.SelectedItem;
+                if (tmp != null)
+                {
+                    beFamilia = new BEFamillia();
+                    beFamilia._codigo = tmp._codigo;
+                    beFamilia._nombre = tmp._nombre;
 
-                MostrarPermisos(true);
+                    MostrarPermisos(true);
+                }
             }
+            catch (Exception)
+            {
+
+            }
+
 
         }
         public void MostrarPermisos(bool esRol)
         {
-            IList<BEComponente> rol = null;
-            if (esRol)
+            try
             {
-                //traigo los permisos del rol
-                rol = bllPermiso.TraerPermisosTodos2(beFamilia._codigo);
-
-                if (rol.Count > 0)
+                IList<BEComponente> rol = null;
+                if (esRol)
                 {
-                    foreach (var item in rol)
+                    //traigo los permisos del rol
+                    rol = bllPermiso.TraerPermisosTodos2(beFamilia._codigo);
+
+                    if (rol.Count > 0)
                     {
-                        beFamilia.AgregarHijo(item);
+                        foreach (var item in rol)
+                        {
+                            beFamilia.AgregarHijo(item);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ROL sin permisos");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("ROL sin permisos");
+                    rol = beFamilia.ObjenerHijos;
                 }
+
+                this.treeViewPermisos.Nodes.Clear();
+                TreeNode root = new TreeNode(beFamilia._nombre);
+                root.Tag = beFamilia;
+                this.treeViewPermisos.Nodes.Add(root);
+
+                foreach (var item in rol)
+                {
+                    MostrarTreeView(root, item);
+                }
+                treeViewPermisos.ExpandAll();
             }
-            else
+            catch (Exception)
             {
-                rol = beFamilia.ObjenerHijos;
+
             }
 
-            this.treeViewPermisos.Nodes.Clear();
-            TreeNode root = new TreeNode(beFamilia._nombre);
-            root.Tag = beFamilia;
-            this.treeViewPermisos.Nodes.Add(root);
-
-            foreach (var item in rol)
-            {
-                MostrarTreeView(root, item);
-            }
-            treeViewPermisos.ExpandAll();
         }
         public void MostrarTreeView(TreeNode tn, BEComponente componente)
         {
-            TreeNode nodo = new TreeNode(componente._nombre);
-            tn.Tag = componente;
-            tn.Nodes.Add(nodo);
-            if (componente.ObjenerHijos != null)
-                foreach (var item in componente.ObjenerHijos)
-                {  //funcion recursiva
-                    MostrarTreeView(nodo, item);
+            try
+            {
+                TreeNode nodo = new TreeNode(componente._nombre);
+                tn.Tag = componente;
+                tn.Nodes.Add(nodo);
+                if (componente.ObjenerHijos != null)
+                {
+                    foreach (var item in componente.ObjenerHijos)
+                    {  //funcion recursiva
+                        MostrarTreeView(nodo, item);
+                    }
                 }
+            }
+            catch (Exception)
+            {
+
+            }
         }
         private void frmAgregarPermisosRol_Load(object sender, EventArgs e)
         {
@@ -110,24 +135,32 @@ namespace UI
 
         private void btnAsignarMenu_Click(object sender, EventArgs e)
         {
-            if (beFamilia != null)
+            try
             {
-                var permiso = (BEPermiso)cmbPermisos.SelectedItem;
-                if (permiso != null)
+                if (beFamilia != null)
                 {
-                    bool existe = bllPermiso.Existe(beFamilia, permiso._codigo);
-                    if (existe)
+                    var permiso = (BEPermiso)cmbPermisos.SelectedItem;
+                    if (permiso != null)
                     {
-                        MessageBox.Show("El permiso ya fue agregado al Rol");
-                    }
-                    else
-                    {
-                        beFamilia.AgregarHijo(permiso);
-                        MostrarPermisos(false);
+                        bool existe = bllPermiso.Existe(beFamilia, permiso._codigo);
+                        if (existe)
+                        {
+                            MessageBox.Show("El permiso ya fue agregado al Rol");
+                        }
+                        else
+                        {
+                            beFamilia.AgregarHijo(permiso);
+                            MostrarPermisos(false);
+                        }
                     }
                 }
+                treeViewPermisos.ExpandAll();
             }
-            treeViewPermisos.ExpandAll();
+            catch (Exception)
+            {
+
+            }
+
         }
 
         private void btnGuardarPerm_Click(object sender, EventArgs e)
@@ -154,131 +187,171 @@ namespace UI
 
         private void btnQuitarPerm_Click(object sender, EventArgs e)
         {
-            if (beFamilia.ObjenerHijos.Count > 0)
+            try
             {
-                var nodo = treeViewPermisos.SelectedNode;
-
-                List<BEComponente> listaHijos = new List<BEComponente>(beFamilia.ObjenerHijos);
-                BEComponente eliminar = listaHijos.Find(x => x._nombre == nodo.Text);
-
-                listaHijos.Remove(eliminar);
-                beFamilia.VaciarHijos();
-
-                foreach (var item in listaHijos)
+                if (beFamilia.ObjenerHijos.Count > 0)
                 {
-                    beFamilia.AgregarHijo(item);
-                }
+                    var nodo = treeViewPermisos.SelectedNode;
 
-                MostrarPermisos(false);
+                    List<BEComponente> listaHijos = new List<BEComponente>(beFamilia.ObjenerHijos);
+                    BEComponente eliminar = listaHijos.Find(x => x._nombre == nodo.Text);
+
+                    listaHijos.Remove(eliminar);
+                    beFamilia.VaciarHijos();
+
+                    foreach (var item in listaHijos)
+                    {
+                        beFamilia.AgregarHijo(item);
+                    }
+
+                    MostrarPermisos(false);
+                }
+                else
+                {
+                    MessageBox.Show("Primero debe seleccionar un Rol");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Primero debe seleccionar un Rol");
+
             }
+
         }
 
         private void btnAgregarRol_Click(object sender, EventArgs e)
         {
-            BEFamillia bePermiso = new BEFamillia();
-            bePermiso._nombre = txtNombreRol.Text;
+            try
+            {
+                BEFamillia bePermiso = new BEFamillia();
+                bePermiso._nombre = txtNombreRol.Text;
 
-            bool respuesta = bllPermiso.GuardarComponente(bePermiso, true);
-            if (respuesta)
-            {
-                LlenarCmbGeneral();
-                MessageBox.Show("El rol se guardo de forma correcta.");
-                txtNombreRol.Clear();
+                bool respuesta = bllPermiso.GuardarComponente(bePermiso, true);
+                if (respuesta)
+                {
+                    LlenarCmbGeneral();
+                    MessageBox.Show("El rol se guardo de forma correcta.");
+                    txtNombreRol.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Algo salió mal.");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Algo salió mal.");
+
             }
+
         }
 
         private void btnAgregarMenu_Click(object sender, EventArgs e)
         {
-            BEPermiso bePermiso = new BEPermiso();
-            bePermiso._nombre = txtNombreMenu.Text;
-            bePermiso.Permiso = (BEMenuPermisos)this.cmbMenus.SelectedItem;
+            try
+            {
+                BEPermiso bePermiso = new BEPermiso();
+                bePermiso._nombre = txtNombreMenu.Text;
+                bePermiso.Permiso = (BEMenuPermisos)this.cmbMenus.SelectedItem;
 
-            bool respuesta = bllPermiso.GuardarComponente(bePermiso, false);
-            if (respuesta)
-            {
-                LlenarCmbGeneral();
-                MessageBox.Show("El permiso se guardo de forma correcta.");
-                txtNombreMenu.Clear();
+                bool respuesta = bllPermiso.GuardarComponente(bePermiso, false);
+                if (respuesta)
+                {
+                    LlenarCmbGeneral();
+                    MessageBox.Show("El permiso se guardo de forma correcta.");
+                    txtNombreMenu.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Algo salió mal.");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Algo salió mal.");
+
             }
+
         }
 
         private void btnBorrarRol_Click(object sender, EventArgs e)
         {
-            var tmp = (BEFamillia)this.cmbListadoRoles.SelectedItem;
-            BEComponente rol = null;
-            bool flag = false;
-            if (tmp != null)
+            try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Esta seguro que va a eliminar el rol?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (opcion.Equals(DialogResult.OK))
+                var tmp = (BEFamillia)this.cmbListadoRoles.SelectedItem;
+                BEComponente rol = null;
+                bool flag = false;
+                if (tmp != null)
                 {
-                    rol = new BEFamillia();
-                    rol._codigo = tmp._codigo;
-                    rol._nombre = tmp._nombre;
-                    flag = bllPermiso.BorrarRol(rol);
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Esta seguro que va a eliminar el rol?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion.Equals(DialogResult.OK))
+                    {
+                        rol = new BEFamillia();
+                        rol._codigo = tmp._codigo;
+                        rol._nombre = tmp._nombre;
+                        flag = bllPermiso.BorrarRol(rol);
 
-                    if (flag)
-                    {
-                        LlenarCmbGeneral();
-                        MessageBox.Show("El rol se borro de forma correcta");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Algo salió mal!");
+                        if (flag)
+                        {
+                            LlenarCmbGeneral();
+                            MessageBox.Show("El rol se borro de forma correcta");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Algo salió mal!");
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar un rol a eliminar");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Debe seleccionar un rol a eliminar");
+
             }
+
         }
 
         private void btnBorrarPermiso_Click(object sender, EventArgs e)
         {
-            var tmp = (BEPermiso)this.cmbPermisos.SelectedItem;
-            BEComponente permiso = null;
-            bool flag = false;
-            if (tmp != null)
+            try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Esta seguro que va a eliminar el permiso?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (opcion.Equals(DialogResult.OK))
+                var tmp = (BEPermiso)this.cmbPermisos.SelectedItem;
+                BEComponente permiso = null;
+                bool flag = false;
+                if (tmp != null)
                 {
-                    permiso = new BEPermiso();
-                    permiso._codigo = tmp._codigo;
-                    permiso._nombre = tmp._nombre;
-                    permiso.Permiso = tmp.Permiso;
-                    flag = bllPermiso.BorrarRol(permiso);
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Esta seguro que va a eliminar el permiso?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion.Equals(DialogResult.OK))
+                    {
+                        permiso = new BEPermiso();
+                        permiso._codigo = tmp._codigo;
+                        permiso._nombre = tmp._nombre;
+                        permiso.Permiso = tmp.Permiso;
+                        flag = bllPermiso.BorrarRol(permiso);
 
-                    if (flag)
-                    {
-                        LlenarCmbGeneral();
-                        MessageBox.Show("El permiso se borro de forma correcta");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Algo salió mal!");
+                        if (flag)
+                        {
+                            LlenarCmbGeneral();
+                            MessageBox.Show("El permiso se borro de forma correcta");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Algo salió mal!");
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar un rol a eliminar");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Debe seleccionar un rol a eliminar");
+
             }
+
         }
     }
 }

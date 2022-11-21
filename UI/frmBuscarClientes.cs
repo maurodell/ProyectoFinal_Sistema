@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using BLL;
 using UI.Utils;
+using System.Text.RegularExpressions;
 
 namespace UI
 {
@@ -46,9 +47,19 @@ namespace UI
         {
             try
             {
-                dgvListadoProveedor.DataSource = null;
-                dgvListadoProveedor.DataSource = bllCliente.Buscar(txtBuscar.Text);
-                this.Formato();
+                string nombre = txtBuscar.Text.ToLower();
+                bool respuesta = Regex.IsMatch(nombre, "^(?![a-zA-Z][a-zA-Z])");
+                if (respuesta)
+                {
+                    dgvListadoProveedor.DataSource = null;
+                    dgvListadoProveedor.DataSource = bllCliente.Buscar(nombre);
+                    this.Formato();
+                }
+                else
+                {
+                    MessageBox.Show("El nombre solo acepta caracteres", "ERROR");
+                }
+
             }
             catch (Exception ex)
             {

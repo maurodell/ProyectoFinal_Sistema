@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using BLL;
+using System.Text.RegularExpressions;
 
 namespace UI
 {
@@ -83,7 +84,7 @@ namespace UI
         {
             try
             {
-                dgvListadoUser.DataSource = bllUsuario.Buscar(txtBuscar.Text);
+                dgvListadoUser.DataSource = bllUsuario.Buscar(txtBuscar.Text.ToLower());
                 this.Formato();
                 lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoUser.Rows.Count);
             }
@@ -107,36 +108,38 @@ namespace UI
         {
             try
             {
-                bool respuesta = false;
-                if (txtEmail.Text == string.Empty || txtNombre.Text == string.Empty || txtClave.Text == string.Empty)
+                if (UserRegex())
                 {
-                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                    errorProvider1.SetError(txtNombre, "Ingresar nombre");
-                    errorProvider1.SetError(txtEmail, "Ingresar Email");
-                    errorProvider1.SetError(txtClave, "Ingresar Clave \nRepetirla en el siguiente campo");
-                }
-                else
-                {
-                    if (txtClave.Text != txtReClave.Text)
+                    bool respuesta = false;
+                    if (txtEmail.Text == string.Empty || txtNombre.Text == string.Empty || txtClave.Text == string.Empty)
                     {
-                        this.MensajeError("Las claves no coinciden");
-
+                        this.MensajeError("Algunos de los datos faltan o son incorrectos");
+                        errorProvider1.SetError(txtNombre, "Ingresar nombre");
+                        errorProvider1.SetError(txtEmail, "Ingresar Email");
+                        errorProvider1.SetError(txtClave, "Ingresar Clave \nRepetirla en el siguiente campo");
                     }
                     else
                     {
-                        respuesta = bllUsuario.Crear(txtNombre.Text.Trim(), cmbTipoDoc.Text.Trim(), txtDomicilio.Text.Trim(),
-                                                        txtDocumento.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), txtClave.Text.Trim());
-                        if (respuesta == true)
+                        if (txtClave.Text != txtReClave.Text)
                         {
-                            this.MensajeOk("El usuario fue registrado correctamente");
-                            this.Listar();
+                            this.MensajeError("Las claves no coinciden");
+
                         }
                         else
                         {
-                            this.MensajeError("El usuario no se pudo registrar");
+                            respuesta = bllUsuario.Crear(txtNombre.Text.Trim().ToLower(), cmbTipoDoc.Text.Trim(), txtDomicilio.Text.Trim(),
+                                                            txtDocumento.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), txtClave.Text.Trim());
+                            if (respuesta == true)
+                            {
+                                this.MensajeOk("El usuario fue registrado correctamente");
+                                this.Listar();
+                            }
+                            else
+                            {
+                                this.MensajeError("El usuario no se pudo registrar");
+                            }
                         }
                     }
-
                 }
             }
             catch (Exception ex)
@@ -182,36 +185,70 @@ namespace UI
         {
             try
             {
-                bool respuesta = false;
-                if (txtCodigo.Text == string.Empty || txtEmail.Text == string.Empty || txtNombre.Text == string.Empty)
+                if (UserRegex())
                 {
-                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                    errorProvider1.SetError(txtNombre, "Ingresar nombre");
-                    errorProvider1.SetError(txtEmail, "Ingresar Email");
-                    errorProvider1.SetError(txtCodigo, "Falta Código!");
-                }
-                else
-                {
-                    respuesta = bllUsuario.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), txtNombre.Text.Trim(), cmbTipoDoc.Text.Trim(),
-                                                        txtDocumento.Text.Trim(), txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), EmailNombreAnterior);
-                    if (respuesta == true)
+                    bool respuesta = false;
+                    if (txtCodigo.Text == string.Empty || txtEmail.Text == string.Empty || txtNombre.Text == string.Empty)
                     {
-                        this.MensajeOk("Usuario actualizado correctamente");
-                        this.Listar();
+                        this.MensajeError("Algunos de los datos faltan o son incorrectos");
+                        errorProvider1.SetError(txtNombre, "Ingresar nombre");
+                        errorProvider1.SetError(txtEmail, "Ingresar Email");
+                        errorProvider1.SetError(txtCodigo, "Falta Código!");
                     }
                     else
                     {
-                        this.MensajeError("El registro no se pudo realizar \n" +
-                                        "Controlar que el email de la categoría ya no exista");
+                        respuesta = bllUsuario.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), txtNombre.Text.Trim().ToLower(), cmbTipoDoc.Text.Trim(),
+                                                            txtDocumento.Text.Trim(), txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), EmailNombreAnterior);
+                        if (respuesta == true)
+                        {
+                            this.MensajeOk("Usuario actualizado correctamente");
+                            this.Listar();
+                        }
+                        else
+                        {
+                            this.MensajeError("El registro no se pudo realizar \n" +
+                                            "Controlar que el email de la categoría ya no exista");
+                        }
                     }
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
+        private bool UserRegex()
+        {
+            bool salida = true;
+            switch (true)
+            {
+                case bool _ when Regex.IsMatch(txtNombre.Text, "^(?![a-zA-Z][a-zA-Z])"):
+                    MessageBox.Show("El campo nombre solo acepta letras", "ERROR");
+                    salida = false;
+                    break;
+                case bool _ when Regex.IsMatch(txtDocumento.Text, "^(?![0-9]+$)"):
+                    MessageBox.Show("El campo documento solo acepta caracteres númericos", "ERROR");
+                    salida = false;
+                    break;
+                case bool _ when Regex.IsMatch(txtDomicilio.Text, "^[a-zA-Z0-9]+$"):
+                    MessageBox.Show("El campo domicilio solo acepta caracteres alfanúmericos", "ERROR");
+                    salida = false;
+                    break;
+                case bool _ when Regex.IsMatch(txtTelefono.Text, "^(?![0-9]+$)"):
+                    MessageBox.Show("El campo telefono solo acepta caracteres númericos", "ERROR");
+                    salida = false;
+                    break;
+                case bool _ when Regex.IsMatch(txtEmail.Text, "^([\\w-]+\\.)*?[\\w-]+@[\\w-]+\\.([\\w-]+\\.)*?[\\w]+$"):
+                    MessageBox.Show("El campo email debe ser valido", "ERROR");
+                    salida = false;
+                    break;
 
+                default:
+                    break;
+            }
+            return salida;
+        }
         private void dgvListadoUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex.Equals(dgvListadoUser.Columns["Seleccionar"].Index))
@@ -355,6 +392,18 @@ namespace UI
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            pbOcultar.BringToFront();
+            txtClave.PasswordChar = '\0';
+        }
+
+        private void pbOcultar_Click(object sender, EventArgs e)
+        {
+            pictureBox1.BringToFront();
+            txtClave.PasswordChar = '*';
         }
     }
 }

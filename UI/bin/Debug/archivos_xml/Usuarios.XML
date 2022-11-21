@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <usuarios>
   <usuario codigo="1">
-    <nombre>adminMauro</nombre>
+    <nombre>admin</nombre>
     <tipoDocumento>DNI</tipoDocumento>
-    <documento>32290172</documento>
-    <domicilio>rioja 123</domicilio>
-    <telefono>2134567</telefono>
-    <email>admin</email>
+    <documento>111111</documento>
+    <domicilio>no</domicilio>
+    <telefono>11111</telefono>
+    <email>admin@gmail.com</email>
     <clave>rUvj1G+ybfI=</clave>
     <estado>1</estado>
   </usuario>

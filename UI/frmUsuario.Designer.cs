@@ -41,7 +41,6 @@ namespace UI
             this.txtDomicilio = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnMostrarClave = new System.Windows.Forms.Button();
             this.txtReClave = new System.Windows.Forms.TextBox();
             this.txtClave = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -67,12 +66,16 @@ namespace UI
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCat = new System.Windows.Forms.TabPage();
             this.dgvListadoUser = new System.Windows.Forms.DataGridView();
+            this.pbOcultar = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabCat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListadoUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbOcultar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // errorProvider1
@@ -177,7 +180,8 @@ namespace UI
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnMostrarClave);
+            this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Controls.Add(this.pbOcultar);
             this.groupBox1.Controls.Add(this.txtReClave);
             this.groupBox1.Controls.Add(this.txtClave);
             this.groupBox1.Controls.Add(this.txtEmail);
@@ -190,15 +194,6 @@ namespace UI
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Acceso";
-            // 
-            // btnMostrarClave
-            // 
-            this.btnMostrarClave.Location = new System.Drawing.Point(1067, 197);
-            this.btnMostrarClave.Name = "btnMostrarClave";
-            this.btnMostrarClave.Size = new System.Drawing.Size(75, 69);
-            this.btnMostrarClave.TabIndex = 6;
-            this.btnMostrarClave.Text = "X";
-            this.btnMostrarClave.UseVisualStyleBackColor = true;
             // 
             // txtReClave
             // 
@@ -374,9 +369,9 @@ namespace UI
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(22, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(234, 32);
+            this.label1.Size = new System.Drawing.Size(315, 32);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Buscar Categoría";
+            this.label1.Text = "Buscar Nombre Usuario";
             // 
             // txtBuscar
             // 
@@ -443,6 +438,28 @@ namespace UI
             this.dgvListadoUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoUser_CellContentClick);
             this.dgvListadoUser.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoUser_CellDoubleClick);
             // 
+            // pbOcultar
+            // 
+            this.pbOcultar.Image = global::UI.Properties.Resources.ojoButtonCerrar;
+            this.pbOcultar.Location = new System.Drawing.Point(1060, 197);
+            this.pbOcultar.Name = "pbOcultar";
+            this.pbOcultar.Size = new System.Drawing.Size(80, 70);
+            this.pbOcultar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbOcultar.TabIndex = 6;
+            this.pbOcultar.TabStop = false;
+            this.pbOcultar.Click += new System.EventHandler(this.pbOcultar_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::UI.Properties.Resources.ojoButton;
+            this.pictureBox1.Location = new System.Drawing.Point(1060, 197);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 70);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // frmUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -461,6 +478,8 @@ namespace UI
             this.tabCat.ResumeLayout(false);
             this.tabCat.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListadoUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbOcultar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -501,8 +520,9 @@ namespace UI
         private System.Windows.Forms.TextBox txtDocumento;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btnMostrarClave;
         private System.Windows.Forms.TextBox txtDomicilio;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox pbOcultar;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

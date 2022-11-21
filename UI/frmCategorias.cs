@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using BLL;
+using System.Text.RegularExpressions;
 
 namespace UI
 {
@@ -72,7 +73,7 @@ namespace UI
             try
             {
                 dgvListadoCat.DataSource = null;
-                dgvListadoCat.DataSource = bllCategoria.Buscar(txtBuscar.Text);
+                dgvListadoCat.DataSource = bllCategoria.Buscar(txtBuscar.Text.ToLower());
                 this.Formato();
                 lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoCat.Rows.Count);
             }
@@ -98,17 +99,25 @@ namespace UI
                 }
                 else
                 {
-                    respuesta = bllCategoria.Insertar(txtNombre.Text.Trim(), txtDescripcion.Text.Trim());
-                    if (respuesta == true) 
+                    bool respuestaRegex = Regex.IsMatch(txtNombre.Text, "^(?![a-zA-Z][a-zA-Z])");
+                    if (!respuestaRegex)
                     {
-                        this.MensajeOk("La categoría fue registrada correctamente");
-                        this.Limpiar();
-                        this.Listar();
-                    }
-                    else
+                        respuesta = bllCategoria.Insertar(txtNombre.Text.Trim().ToLower(), txtDescripcion.Text.Trim());
+                        if (respuesta) 
+                        {
+                            this.MensajeOk("La categoría fue registrada correctamente");
+                            this.Limpiar();
+                            this.Listar();
+                        }
+                        else
+                        {
+                            this.MensajeError("El registro no se pudo realizar");
+                        }
+                    }else
                     {
-                        this.MensajeError("El registro no se pudo realizar");
+                        MessageBox.Show("El campo nombre solo acepta caracteres alfabéticos", "ERROR");
                     }
+
                 }
             }
             catch (Exception ex)
@@ -147,27 +156,36 @@ namespace UI
         {
             try
             {
-                bool respuesta = false;
-                if (txtNombre.Text == string.Empty)
+                bool respuesta1 = Regex.IsMatch(txtNombre.Text, @"^[a-zA-Z\s\p{L}]+$");
+                if (respuesta1)
                 {
-                    this.MensajeError("Falta ingresar el nombre");
-                    errorProvider1.SetError(txtNombre, "Ingresar nombre");
-                }
-                else
-                {
-                    respuesta = bllCategoria.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), CategoriaNombreAnterior, txtNombre.Text.Trim(), txtDescripcion.Text.Trim());
-                    if (respuesta == true)
+                    bool respuesta = false;
+                    if (txtNombre.Text == string.Empty)
                     {
-                        this.MensajeOk("La categoría fue actualizada correctamente");
-                        this.Limpiar();
-                        this.Listar();
+                        this.MensajeError("Falta ingresar el nombre");
+                        errorProvider1.SetError(txtNombre, "Ingresar nombre");
                     }
                     else
                     {
-                        this.MensajeError("El registro no se pudo realizar \n"+
-                                        "Controlar que el nombre de la categoría ya no exista");
+                        respuesta = bllCategoria.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), CategoriaNombreAnterior.ToLower(), txtNombre.Text.Trim(), txtDescripcion.Text.Trim());
+                        if (respuesta == true)
+                        {
+                            this.MensajeOk("La categoría fue actualizada correctamente");
+                            this.Limpiar();
+                            this.Listar();
+                        }
+                        else
+                        {
+                            this.MensajeError("El registro no se pudo realizar \n"+
+                                            "Controlar que el nombre de la categoría ya no exista");
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("El campo nombre solo acepta caracteres alfabéticos", "ERROR");
+                }
+
             }
             catch (Exception ex)
             {

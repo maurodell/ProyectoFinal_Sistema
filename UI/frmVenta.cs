@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using BLL;
 using UI.Utils;
 using BE;
+using System.Text.RegularExpressions;
 
 namespace UI
 {
@@ -294,8 +295,18 @@ namespace UI
         {
             try
             {
-                dgvProductoPanel.DataSource = bllProducto.Buscar(txtBuscarProducPanel.Text.Trim());
-                this.FormatoProductoPanel();
+                bool respuesta = Regex.IsMatch(txtBuscarProducPanel.Text, "^(?![a-zA-Z][a-zA-Z])");
+                if (respuesta)
+                {
+                    string texto = txtBuscarProducPanel.Text.Trim().ToLower();
+                    dgvProductoPanel.DataSource = bllProducto.Buscar(texto);
+                    this.FormatoProductoPanel();
+                }
+                else
+                {
+                    MessageBox.Show("Solo acepta caracteres", "ERROR");
+                }
+
             }
             catch (Exception ex)
             {
@@ -337,39 +348,61 @@ namespace UI
         {
             try
             {
-                bool respuesta = false;
-                if (txtNumComprob.Text == string.Empty || dgvDetalle.Rows.Count == 0 || txtNombreCliente.Text == string.Empty)
+                if (UserRegex())
                 {
-                    this.MensajeError("Falta ingresar algunos datos");
-
-                    errorProvider1.SetError(txtNumComprob, "Ingresar número comprobante");
-                    errorProvider1.SetError(dgvDetalle, "Debe ingresar al menos un producto");
-                    errorProvider1.SetError(txtNombreCliente, "Debe ingresar un cliente");
-                }
-                else
-                {
-                    respuesta = bllVenta.Crear(Convert.ToInt32(txtCodCliente.Text.Trim()), VariablesCompra.codigoUsuario, cmbComprobante.Text, txtNumComprob.Text, txtPuntoVenta.Text,
-                                                dateFecha.Value, Convert.ToDecimal(txtAlicuota.Text.Trim()), Convert.ToDecimal(txtTotal.Text), dtDetalle);
-                    if (respuesta == true)
+                    bool respuesta = false;
+                    if (txtNumComprob.Text == string.Empty || dgvDetalle.Rows.Count == 0 || txtNombreCliente.Text == string.Empty)
                     {
-                        this.MensajeOk("Fue registrado de forma correctamente");
-                        this.Limpiar();
-                        this.Listar();
+                        this.MensajeError("Falta ingresar algunos datos");
+
+                        errorProvider1.SetError(txtNumComprob, "Ingresar número comprobante");
+                        errorProvider1.SetError(dgvDetalle, "Debe ingresar al menos un producto");
+                        errorProvider1.SetError(txtNombreCliente, "Debe ingresar un cliente");
                     }
                     else
                     {
-                        this.MensajeError("El registro no se pudo realizar\n" +
-                                            "Puede ser que el número de comprobante ya exísta.\n" +
-                                            "O el stock ingresado no alcance.");
+                        respuesta = bllVenta.Crear(Convert.ToInt32(txtCodCliente.Text.Trim()), VariablesCompra.codigoUsuario, cmbComprobante.Text, txtNumComprob.Text, txtPuntoVenta.Text,
+                                                    dateFecha.Value, Convert.ToDecimal(txtAlicuota.Text.Trim()), Convert.ToDecimal(txtTotal.Text), dtDetalle);
+                        if (respuesta == true)
+                        {
+                            this.MensajeOk("Fue registrado de forma correctamente");
+                            this.Limpiar();
+                            this.Listar();
+                        }
+                        else
+                        {
+                            this.MensajeError("El registro no se pudo realizar\n" +
+                                                "Puede ser que el número de comprobante ya exísta.\n" +
+                                                "O el stock ingresado no alcance.");
+                        }
                     }
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
+        private bool UserRegex()
+        {
+            bool salida = true;
+            switch (true)
+            {
+                case bool _ when Regex.IsMatch(txtPuntoVenta.Text, "^(?![0-9]+$)"):
+                    MessageBox.Show("El punto de venta solo caracteres númericos", "ERROR");
+                    salida = false;
+                    break;
+                case bool _ when Regex.IsMatch(txtNumComprob.Text, "^(?![0-9]+$)"):
+                    MessageBox.Show("El número de comprobante solo acepta caracteres númericos", "ERROR");
+                    salida = false;
+                    break;
 
+                default:
+                    break;
+            }
+            return salida;
+        }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Limpiar();

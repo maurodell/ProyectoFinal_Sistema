@@ -289,9 +289,9 @@ namespace UI
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(22, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(259, 32);
+            this.label1.Size = new System.Drawing.Size(888, 80);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Buscar por apellido";
+            this.label1.Text = "Buscar Cliente por Nombre";
             // 
             // txtBuscar
             // 

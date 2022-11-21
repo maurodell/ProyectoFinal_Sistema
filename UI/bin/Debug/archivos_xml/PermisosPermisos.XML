@@ -92,4 +92,12 @@
     <codigoRol>2</codigoRol>
     <codigoMenu>26</codigoMenu>
   </permiso>
+  <permiso codigo="38">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>10</codigoMenu>
+  </permiso>
+  <permiso codigo="39">
+    <codigoRol>2</codigoRol>
+    <codigoMenu>16</codigoMenu>
+  </permiso>
 </permisopermiso>

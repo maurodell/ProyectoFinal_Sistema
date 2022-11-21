@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Text.RegularExpressions;
 
 namespace UI
 {
@@ -146,7 +147,37 @@ namespace UI
                 this.rutaOrigen = file.FileName;
             }
         }
+        private bool UserRegex()
+        {
+            bool salida = true;
+            if (cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtUbicacion.Text == string.Empty || txtCodigoBarra.Text == string.Empty)
+            {
+                switch (true)
+                {
+                    case bool _ when Regex.IsMatch(txtNombre.Text, @"^(?![a-zA-Z\s\p{L}]+$)"):
+                        MessageBox.Show("El nombre acepta caracteres alfabéticos", "ERROR");
+                        salida = false;
+                        break;
+                    case bool _ when Regex.IsMatch(txtPrecio.Text, @"^(?![0-9\p{N}]+$)"):
+                        MessageBox.Show("El precio solo acepta caracteres númericos.\nControlar espacios en blanco.", "ERROR");
+                        salida = false;
+                        break;
+                    case bool _ when Regex.IsMatch(txtUbicacion.Text, "^(?![a-zA-Z0-9]+$)"):
+                        MessageBox.Show("La ubicación solo acepta caracteres alfanúmericos.\nControlar espacios en blanco.", "ERROR");
+                        salida = false;
+                        break;
+                    case bool _ when Regex.IsMatch(txtCodigoBarra.Text, "^(?![a-zA-Z0-9]+$)"):
+                        MessageBox.Show("El código de barra solo acepta caracteres alfanúmericos.\nControlar espacios en blanco.", "ERROR");
+                        salida = false;
+                        break;
 
+                    default:
+                        break;
+                }
+            }
+
+            return salida;
+        }
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             BarcodeLib.Barcode codigoBarra = new BarcodeLib.Barcode();
@@ -183,39 +214,61 @@ namespace UI
         {
             try
             {
-                bool respuesta = false;
-                DateTime hoy = DateTime.Now;
-                //evaluar los meses q se cargar dateTFecha.Value >= hoy.AddMonths(2) || 
-                if (cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtUbicacion.Text == string.Empty || txtCodigoBarra.Text == string.Empty)
+                if (UserRegex())
                 {
-                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                    errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
-                    errorProvider1.SetError(txtNombre, "Ingresar nombre");
-                    errorProvider1.SetError(dateTFecha, "Fecha de vencimiento superior o igual a 2 meses de la fecha actual");
-                    errorProvider1.SetError(txtPrecio, "El precio es necesario");
-                    errorProvider1.SetError(txtUbicacion, "Debe completar la ubicación del producto en el deposito");
-                    errorProvider1.SetError(txtCodigoBarra, "Debe completar el código de barra, este puede ser scaneado");
-                }
-                else
-                {
-                    respuesta = bllProducto.Insertar(Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), txtNombre.Text.Trim(), 
-                                                    Convert.ToDecimal(txtPrecio.Text.Trim()), txtDescripcion.Text.Trim(), txtUbicacion.Text, dateTFecha.Value,txtImagen.Text);
-                    if (respuesta == true)
+                    bool respuesta = false;
+                    DateTime hoy = DateTime.Now;
+                    //evaluar los meses q se cargar dateTFecha.Value >= hoy.AddMonths(2) || 
+                    if (cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtUbicacion.Text == string.Empty || txtCodigoBarra.Text == string.Empty)
                     {
-                        if (txtImagen.Text != string.Empty)
-                        {
-                            this.rutaDestino = this.Directorio + txtImagen.Text;
-                            File.Copy(rutaOrigen, rutaDestino);
-
-                        }
-                        this.MensajeOk("El producto fue registrado correctamente");
-                        this.Listar();
+                        this.MensajeError("Algunos de los datos faltan o son incorrectos");
+                        errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
+                        errorProvider1.SetError(txtNombre, "Ingresar nombre");
+                        errorProvider1.SetError(dateTFecha, "Fecha de vencimiento superior o igual a 2 meses de la fecha actual");
+                        errorProvider1.SetError(txtPrecio, "El precio es necesario");
+                        errorProvider1.SetError(txtUbicacion, "Debe completar la ubicación del producto en el deposito");
+                        errorProvider1.SetError(txtCodigoBarra, "Debe completar el código de barra, este puede ser scaneado");
                     }
                     else
                     {
-                        this.MensajeError("El producto no se pudo registrar");
+                        string nombreImagen = txtImagen.Text;
+                        string nombreImagenGuardar = "";
+                        bool flag = false;
+                        DirectoryInfo di = new DirectoryInfo(Directorio2);
+                        foreach (var fi in di.GetFiles())
+                        {
+                            nombreImagenGuardar = fi.Name;
+                            if (nombreImagenGuardar.Equals(nombreImagen))
+                            {
+                                flag = true;
+                            }
+                        }
+                        if (!flag)
+                        {
+                            respuesta = bllProducto.Insertar(Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), txtNombre.Text.Trim().ToLower(),
+                                                            Convert.ToDecimal(txtPrecio.Text.Trim()), txtDescripcion.Text.Trim(), txtUbicacion.Text, dateTFecha.Value, txtImagen.Text);
+                            if (respuesta)
+                            {
+                                if (txtImagen.Text != string.Empty)
+                                {
+                                    this.rutaDestino = this.Directorio + txtImagen.Text;
+                                    File.Copy(rutaOrigen, rutaDestino);
+                                }
+                                this.MensajeOk("El producto fue registrado correctamente");
+                                this.Listar();
+                            }
+                            else
+                            {
+                                this.MensajeError("El producto no se pudo registrar");
+                            }
+                        }
+                        else
+                        {
+                            MensajeError("El nombre de la imagen de producto ya existe");
+                        }
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -257,7 +310,6 @@ namespace UI
             catch (Exception ex)
             {
                 MessageBox.Show("Seleccionar desde la celda Nombre"+"| Error: "+ex.Message);
-                throw;
             }
         }
 
@@ -265,34 +317,69 @@ namespace UI
         {
             try
             {
-                bool respuesta = false;
-                if (cmbCategoria.Text == string.Empty && txtNombre.Text == string.Empty && txtPrecio.Text == string.Empty)
+                if (UserRegex())
                 {
-                    this.MensajeError("Falta ingresar algunos datos");
-                    errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
-                    errorProvider1.SetError(txtNombre, "Ingresar nombre");
-                }
-                else
-                {
-                    respuesta = bllProducto.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), this.nombreAnterior, Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), Convert.ToDecimal(txtPrecio.Text.Trim()),
-                                                    txtNombre.Text.Trim(), txtDescripcion.Text.Trim(), txtUbicacion.Text, txtImagen.Text);
-                    if (respuesta == true)
+                    bool respuesta = false;
+                    if (cmbCategoria.Text == string.Empty && txtNombre.Text == string.Empty && txtPrecio.Text == string.Empty)
                     {
-                        this.MensajeOk("El producto se actualizo correctamente");
-                        if (txtImagen.Text != string.Empty && this.rutaOrigen != string.Empty)
-                        {
-                            this.rutaDestino = this.rutaDestino + txtImagen.Text;
-                            File.Copy(this.rutaOrigen, rutaDestino);
-                        }
-                        this.Listar();
-                        txtCodigo.Visible = false;
-                        tabControl1.SelectedIndex = 0;
+                        this.MensajeError("Falta ingresar algunos datos");
+                        errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
+                        errorProvider1.SetError(txtNombre, "Ingresar nombre");
                     }
                     else
                     {
-                        this.MensajeError("El producto no se pudo registrar");
+                        string nombreImagen = txtImagen.Text;
+                        string nombreImagenGuardar = "";
+                        bool flag = false;
+                        DirectoryInfo di = new DirectoryInfo(Directorio2);
+                        foreach (var fi in di.GetFiles())
+                        {
+                            nombreImagenGuardar = fi.Name;
+                            if (nombreImagenGuardar.Equals(nombreImagen))
+                            {
+                                flag = true;
+                            }
+                        }
+                        if (flag)
+                        {
+                            respuesta = bllProducto.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), this.nombreAnterior.ToLower(), Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), Convert.ToDecimal(txtPrecio.Text.Trim()),
+                                                            txtNombre.Text.Trim().ToLower(), txtDescripcion.Text.Trim(), txtUbicacion.Text, txtImagen.Text, dateTFecha.Value);
+                            if (respuesta)
+                            {
+                                this.MensajeOk("El producto se actualizo correctamente");
+                                this.Listar();
+                                txtCodigo.Visible = false;
+                                tabControl1.SelectedIndex = 0;
+                            }
+                            else
+                            {
+                                this.MensajeError("El producto no se pudo actualizar");
+                            }
+                        }
+                        else
+                        {
+                            respuesta = bllProducto.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), this.nombreAnterior.ToLower(), Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), Convert.ToDecimal(txtPrecio.Text.Trim()),
+                                                    txtNombre.Text.Trim().ToLower(), txtDescripcion.Text.Trim(), txtUbicacion.Text, txtImagen.Text, dateTFecha.Value);
+                            if (respuesta)
+                            {
+                                if (txtImagen.Text != string.Empty && this.rutaOrigen != string.Empty)
+                                {
+                                    this.rutaDestino = this.Directorio + txtImagen.Text;
+                                    File.Copy(this.rutaOrigen, rutaDestino);
+                                }
+                                this.MensajeOk("El producto se actualizo correctamente");
+                                this.Listar();
+                                txtCodigo.Visible = false;
+                                tabControl1.SelectedIndex = 0;
+                            }
+                            else
+                            {
+                                this.MensajeError("El producto no se pudo actualizar");
+                            }
+                        }
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -355,36 +442,51 @@ namespace UI
         {
             try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Esta seguro que va a eliminar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (opcion.Equals(DialogResult.OK))
+                int codigoProd = 0;
+                foreach (DataGridViewRow row in dgvListadoProd.Rows)
                 {
-                    int codigo;
-                    bool flag = false;
-                    string imagen = "";
-                    foreach (DataGridViewRow row in dgvListadoProd.Rows)
+                    if (Convert.ToBoolean(row.Cells[0].Value))
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        codigoProd = Convert.ToInt32(row.Cells[11].Value);
+                    }
+                }
+                if (codigoProd>0)
+                {
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Esta seguro que va a eliminar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion.Equals(DialogResult.OK))
+                    {
+                        int codigo;
+                        bool flag = false;
+                        string imagen = "";
+                        foreach (DataGridViewRow row in dgvListadoProd.Rows)
                         {
-                            codigo = Convert.ToInt32(row.Cells[11].Value);
-                            imagen = Convert.ToString(row.Cells[9].Value);
-                            flag = bllProducto.Eliminar(codigo);
+                            if (Convert.ToBoolean(row.Cells[0].Value))
+                            {
+                                codigo = Convert.ToInt32(row.Cells[11].Value);
+                                imagen = Convert.ToString(row.Cells[9].Value);
+                                flag = bllProducto.Eliminar(codigo);
+                            }
+                        }
+
+                        //entra en el while hasta que se libere el processor System.IO en caso que la imagen se haya actualizado o se recién guardado.
+                        //while (!estaListoParaUsar(this.Directorio + imagen)) { }
+                        if (flag)
+                        {
+                            File.Delete(this.Directorio + imagen);
+                            this.MensajeOk("El producto fue eliminado correctamente");
+                            this.Limpiar();
+                            this.Listar();
+                        }
+                        else
+                        {
+                            this.MensajeError("Algo salío mal, la categoría no se pudo eliminar");
                         }
                     }
-
-                    //entra en el while hasta que se libere el processor System.IO en caso que la imagen se haya actualizado o se recién guardado.
-                    //while (!estaListoParaUsar(this.Directorio + imagen)) { }
-                    if (flag)
-                    {
-                        File.Delete(this.Directorio + imagen);
-                        this.MensajeOk("El producto fue eliminado correctamente");
-                        this.Limpiar();
-                        this.Listar();
-                    }
-                    else
-                    {
-                        this.MensajeError("Algo salío mal, la categoría no se pudo eliminar");
-                    }
+                }
+                else
+                {
+                    this.MensajeError("Debe seleccionar un producto.");
                 }
             }
             catch (Exception ex)

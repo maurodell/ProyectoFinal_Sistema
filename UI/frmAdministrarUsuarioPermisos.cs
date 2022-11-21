@@ -26,30 +26,62 @@ namespace UI
         BLLPermiso bllPermiso;
         private void btnConfigUser_Click(object sender, EventArgs e)
         {
-            var usuarioSeleccionado = (BEUsuario)this.cmbUser.SelectedItem;
-            beUsuario = new BEUsuario();
-            beUsuario.Codigo = usuarioSeleccionado.Codigo;
-            beUsuario.nombre = usuarioSeleccionado.nombre;
-            btnQuitar.Enabled = true;
-            ConfiguracionInicialTreeView(beUsuario);
+            try
+            {
+                var usuarioSeleccionado = (BEUsuario)this.cmbUser.SelectedItem;
+                beUsuario = new BEUsuario();
+                beUsuario.Codigo = usuarioSeleccionado.Codigo;
+                beUsuario.nombre = usuarioSeleccionado.nombre;
+                btnQuitar.Enabled = true;
+                ConfiguracionInicialTreeView(beUsuario);
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
         private void ConfiguracionInicialTreeView(BEUsuario Usuario)
         {
-            if (Usuario != null)
+            try
             {
-                bllPermiso.CompletarRolDeUsuario(Usuario);
-                MostrarPermisos2(Usuario);
+                if (Usuario != null)
+                {
+                    bllPermiso.CompletarRolDeUsuario(Usuario);
+                    MostrarPermisos2(Usuario);
+                }
             }
+            catch (Exception)
+            {
+
+            }
+
         }
         public void LlenarCmbRolFamilia()
         {
-            this.cmbRol.DataSource = null;
-            this.cmbRol.DataSource = bllPermiso.TraerTodosRolesFamilia();
+            try
+            {
+                this.cmbRol.DataSource = null;
+                this.cmbRol.DataSource = bllPermiso.TraerTodosRolesFamilia();
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
         public void LlenarCmbPermisos()
         {
-            this.cmbPermisos.DataSource = null;
-            this.cmbPermisos.DataSource = bllPermiso.TraerTodosPermisosConNombre();
+            try
+            {
+                this.cmbPermisos.DataSource = null;
+                this.cmbPermisos.DataSource = bllPermiso.TraerTodosPermisosConNombre();
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
         private void ActualizarComboBoxUsuario()
         {
@@ -60,28 +92,47 @@ namespace UI
         }
         public void MostrarPermisos2(BEUsuario beUsuario)
         {
-            if (beUsuario != null)
-            { 
-                this.treeViewUserRol.Nodes.Clear();
-                TreeNode root = new TreeNode(beUsuario.nombre);
-                this.treeViewUserRol.Nodes.Add(root);
-                foreach (var item in beUsuario.Permisos)
-                {
-                    MostrarTreeView(root, item);
+            try
+            {
+                if (beUsuario != null)
+                { 
+                    this.treeViewUserRol.Nodes.Clear();
+                    TreeNode root = new TreeNode(beUsuario.nombre);
+                    this.treeViewUserRol.Nodes.Add(root);
+                    foreach (var item in beUsuario.Permisos)
+                    {
+                        MostrarTreeView(root, item);
+                    }
+                    treeViewUserRol.ExpandAll();
                 }
-                treeViewUserRol.ExpandAll();
             }
+            catch (Exception)
+            {
+
+            }
+
         }
         public void MostrarTreeView(TreeNode tn, BEComponente componente)
         {
-            TreeNode nodo = new TreeNode(componente._nombre);
-            tn.Tag = componente;
-            tn.Nodes.Add(nodo);
-            if (componente.ObjenerHijos != null)
-                foreach (var item in componente.ObjenerHijos)
-                {  //funcion recursiva
-                    MostrarTreeView(nodo, item);
+            try
+            {
+                TreeNode nodo = new TreeNode(componente._nombre);
+                tn.Tag = componente;
+                tn.Nodes.Add(nodo);
+                if (componente.ObjenerHijos != null)
+                {
+                    foreach (var item in componente.ObjenerHijos)
+                    {  //funcion recursiva
+                        MostrarTreeView(nodo, item);
+                    }
                 }
+
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
         private void frmAdministrarUsuarioPermisos_Load(object sender, EventArgs e)
         {
@@ -92,26 +143,35 @@ namespace UI
 
         private void btnAgregarRol_Click(object sender, EventArgs e)
         {
-            if (beUsuario!=null)
+            try
             {
-                var permiso = (BEFamillia)cmbRol.SelectedItem;
-                bool existe = false;
-                existe = bllPermiso.ExisteRolEnUsuario2(beUsuario, permiso._codigo);
-                if (existe)
+                if (beUsuario!=null)
                 {
-                    MessageBox.Show("El permiso ya fue asigando al usuario.");
+                    var permiso = (BEFamillia)cmbRol.SelectedItem;
+                    bool existe = false;
+                    existe = bllPermiso.ExisteRolEnUsuario2(beUsuario, permiso._codigo);
+                    if (existe)
+                    {
+                        MessageBox.Show("El permiso ya fue asigando al usuario.");
+                    }
+                    else
+                    {
+                        bllPermiso.CompletarPermisos(permiso);
+                        beUsuario.Permisos.Add(permiso);
+                        MostrarPermisos2(beUsuario);
+                    }
                 }
                 else
                 {
-                    bllPermiso.CompletarPermisos(permiso);
-                    beUsuario.Permisos.Add(permiso);
-                    MostrarPermisos2(beUsuario);
+                    MessageBox.Show("Debe seleccionar un usuario!");
                 }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Debe seleccionar un usuario!");
+
+                throw;
             }
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -138,53 +198,69 @@ namespace UI
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            bool respuesta = false;
-            var nodoRol = treeViewUserRol.SelectedNode;
-
-            BEComponente rol = beUsuario.listaPermisos.Find(x => x._nombre.Equals(nodoRol.Text));
-
-            if (treeViewUserRol.SelectedNode != null)
+            try
             {
-                if (nodoRol != null)
-                {
-                    beUsuario.listaPermisos.Remove(rol);
-                    respuesta = true;
-                }
+                bool respuesta = false;
+                var nodoRol = treeViewUserRol.SelectedNode;
 
-                if (respuesta)
+                BEComponente rol = beUsuario.listaPermisos.Find(x => x._nombre.Equals(nodoRol.Text));
+
+                if (treeViewUserRol.SelectedNode != null)
                 {
-                    MostrarPermisos2(beUsuario);
-                    MessageBox.Show("Se quito de forma exitosa.");
+                    if (nodoRol != null)
+                    {
+                        beUsuario.listaPermisos.Remove(rol);
+                        respuesta = true;
+                    }
+
+                    if (respuesta)
+                    {
+                        MostrarPermisos2(beUsuario);
+                        MessageBox.Show("Se quito de forma exitosa.");
+                    }
+                }   
+                else
+                {
+                    MessageBox.Show("Debe seleccionar un usuario");
                 }
-            }   
-            else
-            {
-                MessageBox.Show("Debe seleccionar un usuario");
             }
+            catch (Exception)
+            {
+
+            }
+
 
         }
 
         private void btnAsignarPermiso_Click(object sender, EventArgs e)
         {
-             if (beUsuario != null)
+            try
             {
-                var rol = (BEPermiso)cmbPermisos.SelectedItem;
-                bool existe = false;
-                existe = bllPermiso.ExistePermisosUsuario(beUsuario, rol._codigo);
-                if (existe)
+                 if (beUsuario != null)
                 {
-                    MessageBox.Show("El permiso ya fue asigando al usuario.");
+                    var rol = (BEPermiso)cmbPermisos.SelectedItem;
+                    bool existe = false;
+                    existe = bllPermiso.ExistePermisosUsuario(beUsuario, rol._codigo);
+                    if (existe)
+                    {
+                        MessageBox.Show("El permiso ya fue asigando al usuario.");
+                    }
+                    else
+                    {
+                        beUsuario.Permisos.Add(rol);
+                        MostrarPermisos2(beUsuario);
+                    }
                 }
                 else
                 {
-                    beUsuario.Permisos.Add(rol);
-                    MostrarPermisos2(beUsuario);
+                    MessageBox.Show("Debe seleccionar un usuario!");
                 }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Debe seleccionar un usuario!");
+
             }
+
         }
     }
 }

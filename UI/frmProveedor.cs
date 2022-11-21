@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using BLL;
+using System.Text.RegularExpressions;
 
 namespace UI
 {
@@ -98,30 +99,34 @@ namespace UI
         {
             try
             {
-                bool respuesta = false;
-                if (txtRSocial.Text == string.Empty || txtCuit.Text == string.Empty || txtDomicilio.Text == string.Empty || txtProvincia.Text == string.Empty || cmbCondicion.Text == string.Empty)
+                if (UserRegex())
                 {
-                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                    errorProvider1.SetError(cmbCondicion, "Seleccionar condición frente al IVA");
-                    errorProvider1.SetError(txtRSocial, "Ingresar Razón Social");
-                    errorProvider1.SetError(txtCuit, "Ingresar CUIT");
-                    errorProvider1.SetError(txtDomicilio, "Ingresar domicilio del proveedor");
-                    errorProvider1.SetError(txtProvincia, "Ingresar Provincia");
-                }
-                else
-                {
-                    respuesta = bllProveedores.Crear(cmbCondicion.Text.Trim(), txtRSocial.Text.Trim(), txtCuit.Text.Trim(), txtProvincia.Text.Trim(),
-                                                    txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim());
-                    if (respuesta == true)
+                    bool respuesta = false;
+                    if (txtRSocial.Text == string.Empty || txtCuit.Text == string.Empty || txtDomicilio.Text == string.Empty || txtProvincia.Text == string.Empty || cmbCondicion.Text == string.Empty)
                     {
-                        this.MensajeOk("El proveedor fue registrado correctamente");
-                        this.Listar();
+                        this.MensajeError("Algunos de los datos faltan o son incorrectos");
+                        errorProvider1.SetError(cmbCondicion, "Seleccionar condición frente al IVA");
+                        errorProvider1.SetError(txtRSocial, "Ingresar Razón Social");
+                        errorProvider1.SetError(txtCuit, "Ingresar CUIT");
+                        errorProvider1.SetError(txtDomicilio, "Ingresar domicilio del proveedor");
+                        errorProvider1.SetError(txtProvincia, "Ingresar Provincia");
                     }
                     else
                     {
-                        this.MensajeError("El proveedor no se pudo registrar, es posible que el CUIT ya exista.");
+                        respuesta = bllProveedores.Crear(cmbCondicion.Text.Trim(), txtRSocial.Text.Trim(), txtCuit.Text.Trim(), txtProvincia.Text.Trim(),
+                                                        txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim());
+                        if (respuesta == true)
+                        {
+                            this.MensajeOk("El proveedor fue registrado correctamente");
+                            this.Listar();
+                        }
+                        else
+                        {
+                            this.MensajeError("El proveedor no se pudo registrar, es posible que el CUIT ya exista.");
+                        }
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -133,39 +138,73 @@ namespace UI
         {
             try
             {
-                bool respuesta = false;
-                this.cuitAnterior = txtCuit.Text;
-                if (txtRSocial.Text == string.Empty || txtDomicilio.Text == string.Empty || txtCuit.Text == string.Empty || txtProvincia.Text == string.Empty || cmbCondicion.Text == string.Empty)
+                if (UserRegex())
                 {
-                    this.MensajeError("Falta ingresar el nombre");
-                    errorProvider1.SetError(txtRSocial, "Debe ingresar Razón Social");
-                    errorProvider1.SetError(txtDomicilio, "Debe ingresar Domicilio");
-                    errorProvider1.SetError(txtCuit, "Debe ingresar CUIT");
-                    errorProvider1.SetError(txtProvincia, "Debe ingresar una Provincia");
-                    errorProvider1.SetError(cmbCondicion, "Debe ingresar condición");
-                }
-                else
-                {
-                    respuesta = bllProveedores.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), cmbCondicion.Text, txtRSocial.Text.Trim(), txtCuit.Text.Trim(), txtProvincia.Text.Trim(), txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), cuitAnterior);
-                    if (respuesta == true)
+                    bool respuesta = false;
+                    this.cuitAnterior = txtCuit.Text;
+                    if (txtRSocial.Text == string.Empty || txtDomicilio.Text == string.Empty || txtCuit.Text == string.Empty || txtProvincia.Text == string.Empty || cmbCondicion.Text == string.Empty)
                     {
-                        this.MensajeOk("El proveedor fue actualizada correctamente");
-                        this.Limpiar();
-                        this.Listar();
+                        this.MensajeError("Falta ingresar el nombre");
+                        errorProvider1.SetError(txtRSocial, "Debe ingresar Razón Social");
+                        errorProvider1.SetError(txtDomicilio, "Debe ingresar Domicilio");
+                        errorProvider1.SetError(txtCuit, "Debe ingresar CUIT");
+                        errorProvider1.SetError(txtProvincia, "Debe ingresar una Provincia");
+                        errorProvider1.SetError(cmbCondicion, "Debe ingresar condición");
                     }
                     else
                     {
-                        this.MensajeError("El registro no se pudo actualizar \n" +
-                                        "Controlar que el CUIT del proveedor ya no exista");
+                        respuesta = bllProveedores.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), cmbCondicion.Text, txtRSocial.Text.Trim(), txtCuit.Text.Trim(), txtProvincia.Text.Trim(), txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), cuitAnterior);
+                        if (respuesta == true)
+                        {
+                            this.MensajeOk("El proveedor fue actualizada correctamente");
+                            this.Limpiar();
+                            this.Listar();
+                        }
+                        else
+                        {
+                            this.MensajeError("El registro no se pudo actualizar \n" +
+                                            "Controlar que el CUIT del proveedor ya no exista");
+                        }
                     }
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Doble click sobre la celda nombre. " + ex.Message + " | " + ex.StackTrace);
             }
         }
+        private bool UserRegex()
+        {
+            bool salida = true;
+            switch (true)
+            {
+                case bool _ when Regex.IsMatch(txtCuit.Text, "^(?![0-9]+$)"):
+                    MessageBox.Show("El CUIT solo acepta caracteres alfanúmericos.\nControlar espacios en blanco.", "ERROR");
+                    salida = false;
+                    break;
+                case bool _ when Regex.IsMatch(txtDomicilio.Text, @"^(?![a-zA-Z0-9\s\p{L}]+$)"):
+                    MessageBox.Show("El domicilio solo acepta caracteres alfanúmericos", "ERROR");
+                    salida = false;
+                    break;
+                case bool _ when Regex.IsMatch(txtProvincia.Text, @"^(?![a-zA-Z\s\p{L}]+$)"):
+                    MessageBox.Show("La provincia solo acepta caracteres alfabéticos.", "ERROR");
+                    salida = false;
+                    break;
+                case bool _ when Regex.IsMatch(txtTelefono.Text, "^(?![0-9]+$)"):
+                    MessageBox.Show("El telefono solo acepta caracteres númericos.\nControlar espacios en blanco.", "ERROR");
+                    salida = false;
+                    break;
+                case bool _ when Regex.IsMatch(txtEmail.Text, "^(?!([\\w-]+\\.)*?[\\w-]+@[\\w-]+\\.([\\w-]+\\.)*?[\\w]+$)"):
+                    MessageBox.Show("Debe ingresar un email valido.\nControlar espacios en blanco.", "ERROR");
+                    salida = false;
+                    break;
 
+                default:
+                    break;
+            }
+            return salida;
+        }
         private void dgvListadoProveedor_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             this.Limpiar();
