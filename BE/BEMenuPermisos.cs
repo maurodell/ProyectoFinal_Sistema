@@ -25,6 +25,7 @@ namespace BE
         submenuConsultasCompras,
         menuBackUp,
         submenuNuevoBackUp,
-        submenuRestore
+        submenuRestore,
+        menuCaja
     }
 }

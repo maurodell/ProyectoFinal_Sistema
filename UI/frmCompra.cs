@@ -72,27 +72,28 @@ namespace UI
         private void Formato()
         {
             dgvListadoCompra.Columns[0].Visible = false;
-            dgvListadoCompra.Columns[1].HeaderText = "Código Usuario";
-            dgvListadoCompra.Columns[1].Width = 50;
-            dgvListadoCompra.Columns[2].HeaderText = "Tipo Comprobante";
-            dgvListadoCompra.Columns[2].Width = 100;
-            dgvListadoCompra.Columns[3].HeaderText = "Punto De venta";
+            dgvListadoCompra.Columns[1].HeaderText = "Proveedor";
+            dgvListadoCompra.Columns[1].Width = 60;
+            dgvListadoCompra.Columns[2].HeaderText = "Usuario";
+            dgvListadoCompra.Columns[2].Width = 60;
+            dgvListadoCompra.Columns[3].HeaderText = "Tipo Comprobante";
             dgvListadoCompra.Columns[3].Width = 80;
-            dgvListadoCompra.Columns[4].HeaderText = "Nro. Comprobante";
-            dgvListadoCompra.Columns[4].Width = 100;
-            dgvListadoCompra.Columns[5].HeaderText = "Fecha";
-            dgvListadoCompra.Columns[5].Width = 100;
-            dgvListadoCompra.Columns[6].HeaderText = "Impuesto";
-            dgvListadoCompra.Columns[6].Width = 100;
-            dgvListadoCompra.Columns[7].HeaderText = "Total";
+            dgvListadoCompra.Columns[4].HeaderText = "Punto De venta";
+            dgvListadoCompra.Columns[4].Width = 130;
+            dgvListadoCompra.Columns[5].HeaderText = "Nro. Comprobante";
+            dgvListadoCompra.Columns[5].Width = 130;
+            dgvListadoCompra.Columns[6].HeaderText = "Fecha";
+            dgvListadoCompra.Columns[6].Width = 150;
+            dgvListadoCompra.Columns[7].HeaderText = "Impuesto";
             dgvListadoCompra.Columns[7].Width = 100;
-            dgvListadoCompra.Columns[8].HeaderText = "Estado Actual";
+            dgvListadoCompra.Columns[8].HeaderText = "Total";
             dgvListadoCompra.Columns[8].Width = 100;
             dgvListadoCompra.Columns[9].Width = 100;
-            dgvListadoCompra.Columns[9].HeaderText = "Estado";
-            dgvListadoCompra.Columns[9].Visible = false;
-            dgvListadoCompra.Columns[10].HeaderText = "Código";
-            dgvListadoCompra.Columns[10].Width = 60;
+            dgvListadoCompra.Columns[9].HeaderText = "Estado Actual";
+            dgvListadoCompra.Columns[10].Visible = false;
+            dgvListadoCompra.Columns[10].HeaderText = "Estado";
+            dgvListadoCompra.Columns[11].HeaderText = "Código";
+            dgvListadoCompra.Columns[11].Width = 60;
         }
         private void FormatoProductoPanel()
         {
@@ -118,6 +119,8 @@ namespace UI
         }
         private void Limpiar()
         {
+            txtCodProveedor.Clear();
+            txtNombreProveedor.Clear();
             txtBuscarComprobante.Clear();
             txtCodigo.Clear();
             txtNumComprob.Clear();
@@ -287,7 +290,7 @@ namespace UI
         {
             try 
             {
-                bool respuesta = Regex.IsMatch(txtBuscarProducPanel.Text, "^(?![a-zA-Z][a-zA-Z])");
+                bool respuesta = Regex.IsMatch(txtBuscarProducPanel.Text, @"^[a-zA-Z\s\p{L}]+$");
                 if (respuesta)
                 {
                     string texto = txtBuscarProducPanel.Text.Trim().ToLower();
@@ -296,7 +299,7 @@ namespace UI
                 }
                 else
                 {
-                    MessageBox.Show("Solo acepta caracteres", "ERROR");
+                    MessageBox.Show("Solo acepta caracteres alfabéticos.", "ERROR");
                 }
 
             }
@@ -331,19 +334,19 @@ namespace UI
         {
             try
             {
-                if (UserRegex())
+                bool respuesta = false;
+                if (txtCodProveedor.Text == string.Empty || txtNumComprob.Text == string.Empty || dgvDetalle.Rows.Count == 0)
                 {
-                    bool respuesta = false;
-                    if (txtNumComprob.Text == string.Empty || dgvDetalle.Rows.Count == 0)
+                    this.MensajeError("Falta ingresar algunos datos");
+                    errorProvider1.SetError(txtCodProveedor, "Ingresar código proveedor");
+                    errorProvider1.SetError(txtNumComprob, "Ingresar número comprobante");
+                    errorProvider1.SetError(dgvDetalle, "Debe ingresar al menos un producto");
+                }
+                else
+                {
+                    if (UserRegex())
                     {
-                        this.MensajeError("Falta ingresar algunos datos");
-
-                        errorProvider1.SetError(txtNumComprob, "Ingresar número comprobante");
-                        errorProvider1.SetError(dgvDetalle, "Debe ingresar al menos un producto");
-                    }
-                    else
-                    {
-                        respuesta = bllCompra.Crear(VariablesCompra.codigoUsuario, cmbComprobante.Text, txtNumComprob.Text, txtPuntoVenta.Text,
+                        respuesta = bllCompra.Crear(Convert.ToInt32(txtCodProveedor.Text.Trim()), VariablesCompra.codigoUsuario, cmbComprobante.Text, txtNumComprob.Text, txtPuntoVenta.Text,
                                                     dateFecha.Value, Convert.ToDecimal(txtAlicuota.Text), Convert.ToDecimal(txtTotal.Text), dtDetalle);
                         if (respuesta == true)
                         {
@@ -359,7 +362,6 @@ namespace UI
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -372,7 +374,7 @@ namespace UI
             switch (true)
             {
                 case bool _ when Regex.IsMatch(txtPuntoVenta.Text, "^(?![0-9]+$)"):
-                    MessageBox.Show("El punto de venta solo caracteres númericos", "ERROR");
+                    MessageBox.Show("El punto de venta solo acepta caracteres númericos", "ERROR");
                     salida = false;
                     break;
                 case bool _ when Regex.IsMatch(txtNumComprob.Text, "^(?![0-9]+$)"):
@@ -469,48 +471,71 @@ namespace UI
         {
             try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Esta seguro que desea anular el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (opcion.Equals(DialogResult.OK))
+                int codigoControl = 0;
+                foreach (DataGridViewRow row in dgvListadoCompra.Rows)
                 {
-                    int codigo;
-                    int estado;
-                    bool flag = false;
-                    foreach (DataGridViewRow row in dgvListadoCompra.Rows)
+                    if (Convert.ToBoolean(row.Cells[0].Value))
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        codigoControl = Convert.ToInt32(row.Cells[10].Value);
+                    }
+                }
+                if (codigoControl > 0)
+                {
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Esta seguro que desea anular el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion.Equals(DialogResult.OK))
+                    {
+                        int codigo;
+                        int estado;
+                        bool flag = false;
+                        foreach (DataGridViewRow row in dgvListadoCompra.Rows)
                         {
-                            estado = Convert.ToInt32(row.Cells[9].Value);
-                            if (estado.Equals(1))
+                            if (Convert.ToBoolean(row.Cells[0].Value))
                             {
-                                codigo = Convert.ToInt32(row.Cells[10].Value);
-                                flag = bllCompra.Baja(codigo);
-                            }
-                            else
-                            {
-                                MensajeError("Imposible anular la compra dado que ya está dada de baja.");
-                            }
+                                estado = Convert.ToInt32(row.Cells[9].Value);
+                                if (estado.Equals(1))
+                                {
+                                    codigo = Convert.ToInt32(row.Cells[10].Value);
+                                    flag = bllCompra.Baja(codigo);
+                                }
+                                else
+                                {
+                                    MensajeError("Imposible anular la compra dado que ya está dada de baja.");
+                                }
 
+                            }
+                        }
+
+                        if (flag)
+                        {
+                            this.MensajeOk("La compra fue dada de baja correctamente");
+                            this.Limpiar();
+                            this.Listar();
+                        }
+
+                        else
+                        {
+                            this.MensajeError("Algo salío mal al dar de baja la compra");
                         }
                     }
-
-                    if (flag)
-                    {
-                        this.MensajeOk("La compra fue dada de baja correctamente");
-                        this.Limpiar();
-                        this.Listar();
-                    }
-
-                    else
-                    {
-                        this.MensajeError("Algo salío mal al dar de baja la compra");
-                    }
+                }
+                else
+                {
+                    MensajeError("Debe seleccionar al menos una compra.");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
+        }
+
+        private void btnBuscarProveedor_Click(object sender, EventArgs e)
+        {
+            frmBuscarProveedor FrmBuscarProveedor = new frmBuscarProveedor();
+            FrmBuscarProveedor.ShowDialog();
+            txtCodProveedor.Text = Convert.ToString(VariablesCompra.codigoProveedor);
+            txtNombreProveedor.Text = VariablesCompra.razonSocial;
         }
     }
 }

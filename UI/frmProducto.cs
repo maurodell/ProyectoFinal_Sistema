@@ -214,22 +214,22 @@ namespace UI
         {
             try
             {
-                if (UserRegex())
+                bool respuesta = false;
+                DateTime hoy = DateTime.Now;
+                //evaluar los meses q se cargar dateTFecha.Value >= hoy.AddMonths(2) || 
+                if (cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtUbicacion.Text == string.Empty || txtCodigoBarra.Text == string.Empty)
                 {
-                    bool respuesta = false;
-                    DateTime hoy = DateTime.Now;
-                    //evaluar los meses q se cargar dateTFecha.Value >= hoy.AddMonths(2) || 
-                    if (cmbCategoria.Text == string.Empty || txtNombre.Text == string.Empty || txtPrecio.Text == string.Empty || txtUbicacion.Text == string.Empty || txtCodigoBarra.Text == string.Empty)
-                    {
-                        this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                        errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
-                        errorProvider1.SetError(txtNombre, "Ingresar nombre");
-                        errorProvider1.SetError(dateTFecha, "Fecha de vencimiento superior o igual a 2 meses de la fecha actual");
-                        errorProvider1.SetError(txtPrecio, "El precio es necesario");
-                        errorProvider1.SetError(txtUbicacion, "Debe completar la ubicación del producto en el deposito");
-                        errorProvider1.SetError(txtCodigoBarra, "Debe completar el código de barra, este puede ser scaneado");
-                    }
-                    else
+                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
+                    errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
+                    errorProvider1.SetError(txtNombre, "Ingresar nombre");
+                    errorProvider1.SetError(dateTFecha, "Fecha de vencimiento superior o igual a 2 meses de la fecha actual");
+                    errorProvider1.SetError(txtPrecio, "El precio es necesario");
+                    errorProvider1.SetError(txtUbicacion, "Debe completar la ubicación del producto en el deposito");
+                    errorProvider1.SetError(txtCodigoBarra, "Debe completar el código de barra, este puede ser scaneado");
+                }
+                else
+                {
+                    if (UserRegex())
                     {
                         string nombreImagen = txtImagen.Text;
                         string nombreImagenGuardar = "";
@@ -268,7 +268,6 @@ namespace UI
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -317,16 +316,16 @@ namespace UI
         {
             try
             {
-                if (UserRegex())
+                bool respuesta = false;
+                if (cmbCategoria.Text == string.Empty && txtNombre.Text == string.Empty && txtPrecio.Text == string.Empty)
                 {
-                    bool respuesta = false;
-                    if (cmbCategoria.Text == string.Empty && txtNombre.Text == string.Empty && txtPrecio.Text == string.Empty)
-                    {
-                        this.MensajeError("Falta ingresar algunos datos");
-                        errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
-                        errorProvider1.SetError(txtNombre, "Ingresar nombre");
-                    }
-                    else
+                    this.MensajeError("Falta ingresar algunos datos");
+                    errorProvider1.SetError(cmbCategoria, "Seleccionar una categoria");
+                    errorProvider1.SetError(txtNombre, "Ingresar nombre");
+                }
+                else
+                {
+                    if (UserRegex())
                     {
                         string nombreImagen = txtImagen.Text;
                         string nombreImagenGuardar = "";
@@ -379,7 +378,6 @@ namespace UI
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {

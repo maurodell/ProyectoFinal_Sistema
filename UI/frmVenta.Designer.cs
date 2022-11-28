@@ -80,6 +80,7 @@ namespace UI
             this.label4 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnInsertar = new System.Windows.Forms.Button();
+            this.btnImprimir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabCat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListadoCompra)).BeginInit();
@@ -360,6 +361,7 @@ namespace UI
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnImprimir);
             this.tabPage2.Controls.Add(this.btnEliminar);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox1);
@@ -603,6 +605,19 @@ namespace UI
             this.btnInsertar.UseVisualStyleBackColor = true;
             this.btnInsertar.Click += new System.EventHandler(this.btnInsertar_Click);
             // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImprimir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnImprimir.Location = new System.Drawing.Point(773, 1273);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(561, 51);
+            this.btnImprimir.TabIndex = 11;
+            this.btnImprimir.Text = "Imprimir";
+            this.btnImprimir.UseVisualStyleBackColor = false;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            // 
             // frmVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -682,5 +697,6 @@ namespace UI
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnInsertar;
+        private System.Windows.Forms.Button btnImprimir;
     }
 }

@@ -40,6 +40,7 @@ namespace UI
             this.menuVentas = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuClientes = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuVentas = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCaja = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAcceso = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuPermisos = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,8 +49,6 @@ namespace UI
             this.submenuConsultasVentas = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuConsultasCompras = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBackUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.submenuNuevoBackUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.submenuRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -67,6 +66,7 @@ namespace UI
             this.menuStock,
             this.menuIngresos,
             this.menuVentas,
+            this.menuCaja,
             this.menuAcceso,
             this.menuConsulta,
             this.menuBackUp,
@@ -86,7 +86,7 @@ namespace UI
             this.submenuCategoria,
             this.submenuProducto});
             this.menuStock.Name = "menuStock";
-            this.menuStock.Size = new System.Drawing.Size(114, 45);
+            this.menuStock.Size = new System.Drawing.Size(114, 48);
             this.menuStock.Text = "Stock";
             // 
             // submenuCategoria
@@ -109,7 +109,7 @@ namespace UI
             this.submenuProveedores,
             this.submenuCompras});
             this.menuIngresos.Name = "menuIngresos";
-            this.menuIngresos.Size = new System.Drawing.Size(155, 45);
+            this.menuIngresos.Size = new System.Drawing.Size(155, 48);
             this.menuIngresos.Text = "Ingresos";
             // 
             // submenuProveedores
@@ -132,7 +132,7 @@ namespace UI
             this.submenuClientes,
             this.submenuVentas});
             this.menuVentas.Name = "menuVentas";
-            this.menuVentas.Size = new System.Drawing.Size(130, 45);
+            this.menuVentas.Size = new System.Drawing.Size(130, 48);
             this.menuVentas.Text = "Ventas";
             // 
             // submenuClientes
@@ -149,6 +149,13 @@ namespace UI
             this.submenuVentas.Text = "Ventas";
             this.submenuVentas.Click += new System.EventHandler(this.ventasToolStripMenuItem1_Click);
             // 
+            // menuCaja
+            // 
+            this.menuCaja.Name = "menuCaja";
+            this.menuCaja.Size = new System.Drawing.Size(98, 48);
+            this.menuCaja.Text = "Caja";
+            this.menuCaja.Click += new System.EventHandler(this.cajaToolStripMenuItem_Click);
+            // 
             // menuAcceso
             // 
             this.menuAcceso.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -156,7 +163,7 @@ namespace UI
             this.submenuPermisos,
             this.administrarUsuariosToolStripMenuItem});
             this.menuAcceso.Name = "menuAcceso";
-            this.menuAcceso.Size = new System.Drawing.Size(149, 45);
+            this.menuAcceso.Size = new System.Drawing.Size(149, 48);
             this.menuAcceso.Text = "Accesos";
             // 
             // submenuUsuarios
@@ -186,7 +193,7 @@ namespace UI
             this.submenuConsultasVentas,
             this.submenuConsultasCompras});
             this.menuConsulta.Name = "menuConsulta";
-            this.menuConsulta.Size = new System.Drawing.Size(171, 45);
+            this.menuConsulta.Size = new System.Drawing.Size(171, 48);
             this.menuConsulta.Text = "Consultas";
             // 
             // submenuConsultasVentas
@@ -205,37 +212,22 @@ namespace UI
             // 
             // menuBackUp
             // 
-            this.menuBackUp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.submenuNuevoBackUp,
-            this.submenuRestore});
             this.menuBackUp.Name = "menuBackUp";
             this.menuBackUp.Size = new System.Drawing.Size(154, 45);
             this.menuBackUp.Text = "Back-Up";
-            // 
-            // submenuNuevoBackUp
-            // 
-            this.submenuNuevoBackUp.Name = "submenuNuevoBackUp";
-            this.submenuNuevoBackUp.Size = new System.Drawing.Size(284, 54);
-            this.submenuNuevoBackUp.Text = "Nuevo";
-            this.submenuNuevoBackUp.Click += new System.EventHandler(this.nuevoBackUpToolStripMenuItem_Click);
-            // 
-            // submenuRestore
-            // 
-            this.submenuRestore.Name = "submenuRestore";
-            this.submenuRestore.Size = new System.Drawing.Size(284, 54);
-            this.submenuRestore.Text = "Restore";
+            this.menuBackUp.Click += new System.EventHandler(this.menuBackUp_Click);
             // 
             // menuSalir
             // 
             this.menuSalir.Name = "menuSalir";
-            this.menuSalir.Size = new System.Drawing.Size(97, 45);
+            this.menuSalir.Size = new System.Drawing.Size(97, 48);
             this.menuSalir.Text = "Salir";
             this.menuSalir.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // logOutToolStripMenuItem
             // 
             this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(217, 45);
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(217, 48);
             this.logOutToolStripMenuItem.Text = "Cerrar Sesión";
             this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
@@ -304,10 +296,9 @@ namespace UI
         private System.Windows.Forms.ToolStripMenuItem menuSalir;
         private System.Windows.Forms.ToolStripMenuItem submenuPermisos;
         private System.Windows.Forms.ToolStripMenuItem menuBackUp;
-        private System.Windows.Forms.ToolStripMenuItem submenuNuevoBackUp;
-        private System.Windows.Forms.ToolStripMenuItem submenuRestore;
         private System.Windows.Forms.ToolStripMenuItem administrarUsuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuCaja;
     }
 }
 

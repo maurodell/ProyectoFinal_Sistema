@@ -84,9 +84,22 @@ namespace UI
         {
             try
             {
-                dgvListadoUser.DataSource = bllUsuario.Buscar(txtBuscar.Text.ToLower());
-                this.Formato();
-                lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoUser.Rows.Count);
+                string nombre = txtBuscar.Text.ToLower();
+                if (nombre != string.Empty)
+                {
+                    bool respuesta = Regex.IsMatch(nombre, @"^[a-zA-Z\s\p{L}]+$");
+                    if (respuesta)
+                    {
+                        dgvListadoUser.DataSource = bllUsuario.Buscar(txtBuscar.Text.ToLower());
+                        this.Formato();
+                        lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoUser.Rows.Count);
+                    }
+                }
+                else
+                {
+                    this.Listar();
+                }
+
             }
             catch (Exception ex)
             {
@@ -108,35 +121,35 @@ namespace UI
         {
             try
             {
-                if (UserRegex())
+                bool respuesta = false;
+                if (txtEmail.Text == string.Empty || txtNombre.Text == string.Empty || txtClave.Text == string.Empty)
                 {
-                    bool respuesta = false;
-                    if (txtEmail.Text == string.Empty || txtNombre.Text == string.Empty || txtClave.Text == string.Empty)
+                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
+                    errorProvider1.SetError(txtNombre, "Ingresar nombre");
+                    errorProvider1.SetError(txtEmail, "Ingresar Email");
+                    errorProvider1.SetError(txtClave, "Ingresar Clave \nRepetirla en el siguiente campo");
+                }
+                else
+                {
+                    if (txtClave.Text != txtReClave.Text)
                     {
-                        this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                        errorProvider1.SetError(txtNombre, "Ingresar nombre");
-                        errorProvider1.SetError(txtEmail, "Ingresar Email");
-                        errorProvider1.SetError(txtClave, "Ingresar Clave \nRepetirla en el siguiente campo");
+                        this.MensajeError("Las claves no coinciden.");
+
                     }
                     else
                     {
-                        if (txtClave.Text != txtReClave.Text)
-                        {
-                            this.MensajeError("Las claves no coinciden");
-
-                        }
-                        else
+                        if (UserRegex())
                         {
                             respuesta = bllUsuario.Crear(txtNombre.Text.Trim().ToLower(), cmbTipoDoc.Text.Trim(), txtDomicilio.Text.Trim(),
                                                             txtDocumento.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), txtClave.Text.Trim());
                             if (respuesta == true)
                             {
-                                this.MensajeOk("El usuario fue registrado correctamente");
+                                this.MensajeOk("El usuario fue registrado correctamente.");
                                 this.Listar();
                             }
                             else
                             {
-                                this.MensajeError("El usuario no se pudo registrar");
+                                this.MensajeError("El usuario no se pudo registrar.");
                             }
                         }
                     }
@@ -185,17 +198,17 @@ namespace UI
         {
             try
             {
-                if (UserRegex())
+                bool respuesta = false;
+                if (txtCodigo.Text == string.Empty || txtEmail.Text == string.Empty || txtNombre.Text == string.Empty)
                 {
-                    bool respuesta = false;
-                    if (txtCodigo.Text == string.Empty || txtEmail.Text == string.Empty || txtNombre.Text == string.Empty)
-                    {
-                        this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                        errorProvider1.SetError(txtNombre, "Ingresar nombre");
-                        errorProvider1.SetError(txtEmail, "Ingresar Email");
-                        errorProvider1.SetError(txtCodigo, "Falta Código!");
-                    }
-                    else
+                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
+                    errorProvider1.SetError(txtNombre, "Ingresar nombre");
+                    errorProvider1.SetError(txtEmail, "Ingresar Email");
+                    errorProvider1.SetError(txtCodigo, "Falta Código!");
+                }
+                else
+                {
+                    if (UserRegex())
                     {
                         respuesta = bllUsuario.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), txtNombre.Text.Trim().ToLower(), cmbTipoDoc.Text.Trim(),
                                                             txtDocumento.Text.Trim(), txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), EmailNombreAnterior);
@@ -211,7 +224,6 @@ namespace UI
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -223,15 +235,15 @@ namespace UI
             bool salida = true;
             switch (true)
             {
-                case bool _ when Regex.IsMatch(txtNombre.Text, "^(?![a-zA-Z][a-zA-Z])"):
-                    MessageBox.Show("El campo nombre solo acepta letras", "ERROR");
+                case bool _ when Regex.IsMatch(txtNombre.Text, @"^(?![a-zA-Z\s\p{L}]+$)"):
+                    MessageBox.Show("El campo nombre solo acepta caracteres alfabéticos.", "ERROR");
                     salida = false;
                     break;
                 case bool _ when Regex.IsMatch(txtDocumento.Text, "^(?![0-9]+$)"):
                     MessageBox.Show("El campo documento solo acepta caracteres númericos", "ERROR");
                     salida = false;
                     break;
-                case bool _ when Regex.IsMatch(txtDomicilio.Text, "^[a-zA-Z0-9]+$"):
+                case bool _ when Regex.IsMatch(txtDomicilio.Text, @"^(?![a-zA-Z0-9\s\p{L}]+$)"):
                     MessageBox.Show("El campo domicilio solo acepta caracteres alfanúmericos", "ERROR");
                     salida = false;
                     break;
@@ -239,8 +251,8 @@ namespace UI
                     MessageBox.Show("El campo telefono solo acepta caracteres númericos", "ERROR");
                     salida = false;
                     break;
-                case bool _ when Regex.IsMatch(txtEmail.Text, "^([\\w-]+\\.)*?[\\w-]+@[\\w-]+\\.([\\w-]+\\.)*?[\\w]+$"):
-                    MessageBox.Show("El campo email debe ser valido", "ERROR");
+                case bool _ when Regex.IsMatch(txtEmail.Text, "^(?!([\\w-]+\\.)*?[\\w-]+@[\\w-]+\\.([\\w-]+\\.)*?[\\w]+$)"):
+                    MessageBox.Show("El email ingresado debe ser valido", "ERROR");
                     salida = false;
                     break;
 
@@ -286,31 +298,46 @@ namespace UI
         {
             try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Esta seguro que va a eliminar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (opcion.Equals(DialogResult.OK))
+                int codigoControl = 0;
+                foreach (DataGridViewRow row in dgvListadoUser.Rows)
                 {
-                    int codigo;
-                    bool flag = false;
-                    foreach (DataGridViewRow row in dgvListadoUser.Rows)
+                    if (Convert.ToBoolean(row.Cells[0].Value))
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        codigoControl = Convert.ToInt32(row.Cells[6].Value);
+                    }
+                }
+                if (codigoControl > 0)
+                {
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Esta seguro que va a eliminar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion.Equals(DialogResult.OK))
+                    {
+                        int codigo;
+                        bool flag = false;
+                        foreach (DataGridViewRow row in dgvListadoUser.Rows)
                         {
-                            codigo = Convert.ToInt32(row.Cells[9].Value);
-                            flag = bllUsuario.Eliminar(codigo);
+                            if (Convert.ToBoolean(row.Cells[0].Value))
+                            {
+                                codigo = Convert.ToInt32(row.Cells[6].Value);
+                                flag = bllUsuario.Eliminar(codigo);
+                            }
+                        }
+
+                        if (flag)
+                        {
+                            this.MensajeOk("El usuario fue eliminado correctamente.");
+                            this.Listar();
+                        }
+
+                        else
+                        {
+                            this.MensajeError("Algo salío mal, el usuario no se pudo eliminar.");
                         }
                     }
-
-                    if (flag)
-                    {
-                        this.MensajeOk("El usuario fue eliminado correctamente");
-                        this.Listar();
-                    }
-
-                    else
-                    {
-                        this.MensajeError("Algo salío mal, el usuario no se pudo eliminar");
-                    }
+                }
+                else
+                {
+                    this.MensajeError("Debe seleccionar al menos un usuario.");
                 }
             }
             catch (Exception ex)
@@ -323,31 +350,46 @@ namespace UI
         {
             try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Esta seguro que desea desactivar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (opcion.Equals(DialogResult.OK))
+                int codigoControl = 0;
+                foreach (DataGridViewRow row in dgvListadoUser.Rows)
                 {
-                    int codigo;
-                    bool flag = false;
-                    foreach (DataGridViewRow row in dgvListadoUser.Rows)
+                    if (Convert.ToBoolean(row.Cells[0].Value))
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        codigoControl = Convert.ToInt32(row.Cells[6].Value);
+                    }
+                }
+                if (codigoControl > 0)
+                {
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Esta seguro que desea desactivar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion.Equals(DialogResult.OK))
+                    {
+                        int codigo;
+                        bool flag = false;
+                        foreach (DataGridViewRow row in dgvListadoUser.Rows)
                         {
-                            codigo = Convert.ToInt32(row.Cells[9].Value);
-                            flag = bllUsuario.Baja(codigo);
+                            if (Convert.ToBoolean(row.Cells[0].Value))
+                            {
+                                codigo = Convert.ToInt32(row.Cells[6].Value);
+                                flag = bllUsuario.Baja(codigo);
+                            }
+                        }
+
+                        if (flag)
+                        {
+                            this.MensajeOk("El usuario fue dada de baja correctamente");
+                            this.Listar();
+                        }
+
+                        else
+                        {
+                            this.MensajeError("Algo salío mal al dar de baja el usuario.");
                         }
                     }
-
-                    if (flag)
-                    {
-                        this.MensajeOk("El usuario fue dada de baja correctamente");
-                        this.Listar();
-                    }
-
-                    else
-                    {
-                        this.MensajeError("Algo salío mal al dar de baja el usuario");
-                    }
+                }
+                else
+                {
+                    this.MensajeError("Debe seleccionar al menos un usuario.");
                 }
             }
             catch (Exception ex)
@@ -360,32 +402,47 @@ namespace UI
         {
             try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Esta seguro que desea activar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (opcion.Equals(DialogResult.OK))
+                int codigoControl = 0;
+                foreach (DataGridViewRow row in dgvListadoUser.Rows)
                 {
-                    int codigo;
-                    bool flag = false;
-                    foreach (DataGridViewRow row in dgvListadoUser.Rows)
+                    if (Convert.ToBoolean(row.Cells[0].Value))
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        codigoControl = Convert.ToInt32(row.Cells[6].Value);
+                    }
+                }
+                if (codigoControl > 0)
+                {
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Esta seguro que desea activar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion.Equals(DialogResult.OK))
+                    {
+                        int codigo;
+                        bool flag = false;
+                        foreach (DataGridViewRow row in dgvListadoUser.Rows)
                         {
-                            codigo = Convert.ToInt32(row.Cells[9].Value);
-                            flag = bllUsuario.Alta(codigo);
+                            if (Convert.ToBoolean(row.Cells[0].Value))
+                            {
+                                codigo = Convert.ToInt32(row.Cells[6].Value);
+                                flag = bllUsuario.Alta(codigo);
+                            }
+                        }
+
+                        if (flag)
+                        {
+                            this.MensajeOk("El usuario fue dada de alta correctamente.");
+                            this.Limpiar();
+                            this.Listar();
+                        }
+
+                        else
+                        {
+                            this.MensajeError("Algo salío mal al dar de alta el usuario.");
                         }
                     }
-
-                    if (flag)
-                    {
-                        this.MensajeOk("El usuario fue dada de alta correctamente");
-                        this.Limpiar();
-                        this.Listar();
-                    }
-
-                    else
-                    {
-                        this.MensajeError("Algo salío mal al dar de alta el usuario");
-                    }
+                }
+                else
+                {
+                    this.MensajeError("Debe seleccionar al menos un usuario.");
                 }
             }
             catch (Exception ex)

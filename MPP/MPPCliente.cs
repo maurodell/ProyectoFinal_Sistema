@@ -59,6 +59,28 @@ namespace MPP
                 throw ex;
             }
         }
+        public string DevolverNombre(int codigoUsuario)
+        {
+            try
+            {
+                string nombre = "";
+                XDocument documento = XDocument.Load(pathClientes);
+
+                var consulta = from cliente in documento.Descendants("cliente")
+                               where cliente.Attribute("codigo").Value == codigoUsuario.ToString()
+                               select cliente;
+
+                foreach (XElement EModifcar in consulta)
+                {
+                    nombre = EModifcar.Element("nombre").Value;
+                }
+                return nombre;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
+        }
         public bool Crear(BECliente Parametro)
         {
             try

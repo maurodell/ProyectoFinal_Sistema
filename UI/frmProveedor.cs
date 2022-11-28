@@ -99,19 +99,19 @@ namespace UI
         {
             try
             {
-                if (UserRegex())
+                bool respuesta = false;
+                if (txtRSocial.Text == string.Empty || txtCuit.Text == string.Empty || txtDomicilio.Text == string.Empty || txtProvincia.Text == string.Empty || cmbCondicion.Text == string.Empty)
                 {
-                    bool respuesta = false;
-                    if (txtRSocial.Text == string.Empty || txtCuit.Text == string.Empty || txtDomicilio.Text == string.Empty || txtProvincia.Text == string.Empty || cmbCondicion.Text == string.Empty)
-                    {
-                        this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                        errorProvider1.SetError(cmbCondicion, "Seleccionar condición frente al IVA");
-                        errorProvider1.SetError(txtRSocial, "Ingresar Razón Social");
-                        errorProvider1.SetError(txtCuit, "Ingresar CUIT");
-                        errorProvider1.SetError(txtDomicilio, "Ingresar domicilio del proveedor");
-                        errorProvider1.SetError(txtProvincia, "Ingresar Provincia");
-                    }
-                    else
+                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
+                    errorProvider1.SetError(cmbCondicion, "Seleccionar condición frente al IVA");
+                    errorProvider1.SetError(txtRSocial, "Ingresar Razón Social");
+                    errorProvider1.SetError(txtCuit, "Ingresar CUIT");
+                    errorProvider1.SetError(txtDomicilio, "Ingresar domicilio del proveedor");
+                    errorProvider1.SetError(txtProvincia, "Ingresar Provincia");
+                }
+                else
+                {
+                    if (UserRegex())
                     {
                         respuesta = bllProveedores.Crear(cmbCondicion.Text.Trim(), txtRSocial.Text.Trim(), txtCuit.Text.Trim(), txtProvincia.Text.Trim(),
                                                         txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim());
@@ -126,7 +126,6 @@ namespace UI
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -138,22 +137,22 @@ namespace UI
         {
             try
             {
-                if (UserRegex())
+                bool respuesta = false;
+                this.cuitAnterior = txtCuit.Text;
+                if (txtRSocial.Text == string.Empty || txtDomicilio.Text == string.Empty || txtCuit.Text == string.Empty || txtProvincia.Text == string.Empty || cmbCondicion.Text == string.Empty)
                 {
-                    bool respuesta = false;
-                    this.cuitAnterior = txtCuit.Text;
-                    if (txtRSocial.Text == string.Empty || txtDomicilio.Text == string.Empty || txtCuit.Text == string.Empty || txtProvincia.Text == string.Empty || cmbCondicion.Text == string.Empty)
+                    this.MensajeError("Falta ingresar el nombre");
+                    errorProvider1.SetError(txtRSocial, "Debe ingresar Razón Social");
+                    errorProvider1.SetError(txtDomicilio, "Debe ingresar Domicilio");
+                    errorProvider1.SetError(txtCuit, "Debe ingresar CUIT");
+                    errorProvider1.SetError(txtProvincia, "Debe ingresar una Provincia");
+                    errorProvider1.SetError(cmbCondicion, "Debe ingresar condición");
+                }
+                else
+                {
+                    if (UserRegex())
                     {
-                        this.MensajeError("Falta ingresar el nombre");
-                        errorProvider1.SetError(txtRSocial, "Debe ingresar Razón Social");
-                        errorProvider1.SetError(txtDomicilio, "Debe ingresar Domicilio");
-                        errorProvider1.SetError(txtCuit, "Debe ingresar CUIT");
-                        errorProvider1.SetError(txtProvincia, "Debe ingresar una Provincia");
-                        errorProvider1.SetError(cmbCondicion, "Debe ingresar condición");
-                    }
-                    else
-                    {
-                        respuesta = bllProveedores.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), cmbCondicion.Text, txtRSocial.Text.Trim(), txtCuit.Text.Trim(), txtProvincia.Text.Trim(), txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), cuitAnterior);
+                            respuesta = bllProveedores.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), cmbCondicion.Text, txtRSocial.Text.Trim(), txtCuit.Text.Trim(), txtProvincia.Text.Trim(), txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), cuitAnterior);
                         if (respuesta == true)
                         {
                             this.MensajeOk("El proveedor fue actualizada correctamente");
@@ -167,7 +166,6 @@ namespace UI
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -255,31 +253,47 @@ namespace UI
         {
             try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Esta seguro que va a eliminar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (opcion.Equals(DialogResult.OK))
+                int codigoControl = 0;
+                foreach (DataGridViewRow row in dgvListadoProveedor.Rows)
                 {
-                    int codigo;
-                    bool flag = false;
-                    foreach (DataGridViewRow row in dgvListadoProveedor.Rows)
+                    if (Convert.ToBoolean(row.Cells[0].Value))
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
-                        {
-                            codigo = Convert.ToInt32(row.Cells[5].Value);
-                            flag = bllProveedores.Eliminar(codigo);
-                        }
-                    }
-
-                    if (flag)
-                    {
-                        this.MensajeOk("El usuario fue eliminado correctamente");
-                        this.Listar();
-                    }
-                    else
-                    {
-                        this.MensajeError("Algo salío mal, el usuario no se pudo eliminar");
+                        codigoControl = Convert.ToInt32(row.Cells[5].Value);
                     }
                 }
+                if (codigoControl > 0)
+                {
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Esta seguro que va a eliminar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion.Equals(DialogResult.OK))
+                    {
+                        int codigo;
+                        bool flag = false;
+                        foreach (DataGridViewRow row in dgvListadoProveedor.Rows)
+                        {
+                            if (Convert.ToBoolean(row.Cells[0].Value))
+                            {
+                                codigo = Convert.ToInt32(row.Cells[5].Value);
+                                flag = bllProveedores.Eliminar(codigo);
+                            }
+                        }
+
+                        if (flag)
+                        {
+                            this.MensajeOk("El proveedor fue eliminado correctamente");
+                            this.Listar();
+                        }
+                        else
+                        {
+                            this.MensajeError("Algo salío mal, el proveedor no se pudo eliminar.");
+                        }
+                    }
+                }
+                else
+                {
+                    this.MensajeError("Debe seleccionar al menos un proveedor.");
+                }
+
             }
             catch (Exception ex)
             {

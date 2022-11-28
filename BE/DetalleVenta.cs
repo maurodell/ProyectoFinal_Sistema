@@ -9,7 +9,7 @@ namespace BE
     public class DetalleVenta : Entidad
     {
         public int codigoCompra { get; set; }
-        public int codigoBarra { get; set; }
+        public long codigoBarra { get; set; }
         public int codigoProducto { get; set; }
         public string nombreProducto { get; set; }
         public int stock { get; set; }

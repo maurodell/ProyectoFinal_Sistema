@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Factura</title>
+    <style>
+        table.border {
+            border-collapse: collapse;
+        }
+
+        table.border th {
+            padding: 5px;
+            border: 1px solid black;
+        }
+
+        table.border td {
+            padding: 5px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table style="width:100%">
+        <tr>
+            <td style="width:20%"></td>
+            <td style="width:50%" align="center">
+                <table>
+                    <tr><td align="center">Factura Venta</td></tr>
+                    <tr><td align="center">Direccion: Iriondo 303</td></tr>
+                    <tr><td align="center">Telefono: +59 0341-2567890</td></tr>
+                </table>
+            </td>
+            <td style="width:30%" align="center">
+                <table>
+                    <tr><td align="center">Punto de Venta:</td></tr>
+                    <tr><td align="center">@PUNTO</td></tr>
+                    <tr><td align="center">Nro. Comprobante:</td></tr>
+                    <tr><td align="center">@COMPROBANTE</td></tr>
+                </table>
+            </td>
+        </tr>
+        <tr><td colspan="3" height="20"></td></tr>
+        <tr>
+            <td colspan="2">
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="1" style="width: 30%">Cliente</td>
+                        <td colspan="3" style="width: 70%; border-bottom:1px solid black">@CLIENTE</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" style="width: 30%">Documento</td>
+                        <td colspan="3" style="width: 20%; border-bottom:1px solid black">@DOCUMENTO</td>
+                        <td colspan="1" style="width: 20%">Fecha</td>
+                        <td colspan="3" style="width: 30%; border-bottom:1px solid black">@FECHA</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr><td colspan="3" height="20"></td></tr>
+        <tr>
+            <td colspan="3">
+                <table class="border" style="width:100%">
+                    <thead style="background-color: #D8D8D8">
+                        <tr>
+                            <th>Cant.</th>
+                            <th>Descripcion</th>
+                            <th>Precio Uni.</th>
+                            <th>Importe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @FILAS
+                        <tr>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td align="right">Total:</td>
+                            <td>@TOTAL</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

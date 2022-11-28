@@ -35,6 +35,14 @@ namespace UI
             dataGridView1.Columns[3].HeaderText = "Fecha";
             dataGridView1.Columns[4].Width = 50;
         }
+        private void MensajeError(string mensaje)
+        {
+            MessageBox.Show(mensaje, "Back-Up", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private void MensajeOk(string mensaje)
+        {
+            MessageBox.Show(mensaje, "Back-Up", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         public void CargarDgv()
         {
             this.dataGridView1.DataSource = null;
@@ -52,7 +60,7 @@ namespace UI
             }
             else
             {
-                MessageBox.Show("Algo salió mal, el back-up no pudo realizarce!");
+                MensajeError("Algo salió mal, el back-up no pudo realizarce!");
             }
 
         }
@@ -97,31 +105,38 @@ namespace UI
         {
             try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Esta seguro que desea realizar un restore?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (opcion.Equals(DialogResult.OK))
+                if (!chkSeleccionar.Checked)
                 {
-                    int codigo;
-                    bool flag = false;
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    MensajeError("Primero hacer check en Seleccionar");
+                }
+                else
+                {
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Esta seguro que desea realizar un restore?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion.Equals(DialogResult.OK))
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        int codigo;
+                        bool flag = false;
+                        foreach (DataGridViewRow row in dataGridView1.Rows)
                         {
-                            codigo = Convert.ToInt32(row.Cells[4].Value);
-                            flag = bllBack.Restore(codigo);
+                            if (Convert.ToBoolean(row.Cells[0].Value))
+                            {
+                                codigo = Convert.ToInt32(row.Cells[4].Value);
+                                flag = bllBack.Restore(codigo);
+                            }
+                        }
+
+                        if (flag)
+                        {
+                            MensajeOk("Restore realizado correctamente!");
+                        }
+                        else
+                        {
+                            MensajeError("Algo salío mal!");
                         }
                     }
-
-                    if (flag)
-                    {
-                        MessageBox.Show("Restore realizado correctamente!");
-                    }
-
-                    else
-                    {
-                        MessageBox.Show("Algo salío mal al dar de alta el Rol");
-                    }
                 }
+
             }
             catch (Exception ex)
             {

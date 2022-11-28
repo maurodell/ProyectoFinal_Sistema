@@ -335,7 +335,7 @@ namespace MPP
                         DetalleVenta detalle = new DetalleVenta
                         {
                             Codigo = Convert.ToInt32(item["codigo"]),
-                            codigoBarra = Convert.ToInt32(item["codigoBarra"]),
+                            codigoBarra = Convert.ToInt64(item["codigoBarra"]),
                             codigoProducto = Convert.ToInt32(item["codigoProducto"]),
                             nombreProducto = Convert.ToString(item["nombreProducto"]),
                             stock = Convert.ToInt32(item["stock"]),
@@ -405,7 +405,7 @@ namespace MPP
                                codigoCompra = Convert.ToInt32(detalle.Element("codigoVenta").Value),
                                codigoProducto = Convert.ToInt32(detalle.Element("codigoProducto").Value),
                                nombreProducto = Convert.ToString(detalle.Element("nombreProducto").Value),
-                               codigoBarra = Convert.ToInt32(detalle.Element("codigoBarra").Value),
+                               codigoBarra = Convert.ToInt64(detalle.Element("codigoBarra").Value),
                                stock = Convert.ToInt32(detalle.Element("stock").Value),
                                precio = Convert.ToDecimal(detalle.Element("precio").Value),
                                descuento = Convert.ToDecimal(detalle.Element("descuento").Value),

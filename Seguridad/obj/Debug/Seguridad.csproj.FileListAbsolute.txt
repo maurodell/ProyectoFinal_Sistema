@@ -54,3 +54,9 @@ C:\Users\mdo\Desktop\Solución - Final - 3\Sistemas_Sale_Point\Seguridad\bin\Deb
 C:\Users\mdo\Desktop\Solución - Final - 3\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.csproj.CoreCompileInputs.cache
 C:\Users\mdo\Desktop\Solución - Final - 3\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.dll
 C:\Users\mdo\Desktop\Solución - Final - 3\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.pdb
+C:\Users\mdo\Desktop\Solución - Final - 3\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.csproj.AssemblyReference.cache
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\Seguridad\bin\Debug\Seguridad.dll
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\Seguridad\bin\Debug\Seguridad.pdb
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.csproj.CoreCompileInputs.cache
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.dll
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\Seguridad\obj\Debug\Seguridad.pdb

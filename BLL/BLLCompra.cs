@@ -45,7 +45,7 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
-        public bool Crear(int codigoUsuario, string tipoComprobante, string nroComprobante, string puntoVenta, DateTime fecha, decimal impuesto, 
+        public bool Crear(int codigoProveedor, int codigoUsuario, string tipoComprobante, string nroComprobante, string puntoVenta, DateTime fecha, decimal impuesto, 
                             decimal total, DataTable detalles)
         {
             List<Detalle> listaDetalle = new List<Detalle>();
@@ -55,7 +55,7 @@ namespace BLL
             for (int i=0; i<detalles.Rows.Count; i++)
             {
                 detalle = new Detalle();
-                detalle.codigoBarra = Convert.ToInt32(detalles.Rows[i]["codigoBarra"]);
+                detalle.codigoBarra = Convert.ToInt64(detalles.Rows[i]["codigoBarra"]);
                 detalle.codigoProducto = Convert.ToInt32(detalles.Rows[i]["codigoProducto"]);
                 detalle.nombreProducto = Convert.ToString(detalles.Rows[i]["nombreProducto"]);
                 detalle.cantidad = Convert.ToInt32(detalles.Rows[i]["cantidad"]);
@@ -63,6 +63,7 @@ namespace BLL
                 detalle.importe = Convert.ToDecimal(detalles.Rows[i]["importe"]);
                 listaDetalle.Add(detalle);
             }
+            beCompra.codigoProveedor = codigoProveedor;
             beCompra.codigoUsuario = codigoUsuario;
             beCompra.detalles = listaDetalle;
             beCompra.tipoComprobante = tipoComprobante;

@@ -149,18 +149,25 @@ namespace UI
             this.submenuConsultasVentas.Enabled = ConsultarPermiso(this.submenuConsultasVentas.Name);
             this.submenuConsultasCompras.Enabled = ConsultarPermiso(this.submenuConsultasCompras.Name);
             this.menuBackUp.Enabled = ConsultarPermiso(this.menuBackUp.Name);
-            this.submenuNuevoBackUp.Enabled = ConsultarPermiso(this.submenuNuevoBackUp.Name);
-            this.submenuRestore.Enabled = ConsultarPermiso(this.submenuRestore.Name);
-
+            this.menuCaja.Enabled = ConsultarPermiso(this.menuCaja.Name);
         }
         private bool ConsultarPermiso(string nombreMenu)
         {
 
             foreach (var rolUser in beUsuario.Permisos)
             {
-                foreach (var menu in rolUser.ObjenerHijos)
+                if (rolUser.ObjenerHijos.Count > 0)//consulto si es un permiso o un rol(familia)
                 {
-                    if (menu.Permiso.ToString().Equals(nombreMenu)) return true;
+                    //familia
+                    foreach (var menu in rolUser.ObjenerHijos)
+                    {
+                        if (menu.Permiso.ToString().Equals(nombreMenu)) return true;
+                    }
+                }
+                else
+                {
+                    //permiso
+                    if (rolUser.Permiso.ToString().Equals(nombreMenu)) return true;
                 }
             }
             return false;
@@ -274,6 +281,21 @@ namespace UI
             {
                 this.Close();
             }
+        }
+
+        private void cajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCaja Caja = new frmCaja();
+            Caja.MdiParent = this;
+            Caja.Show();
+            Caja.Size = new Size(730, 580);
+        }
+
+        private void menuBackUp_Click(object sender, EventArgs e)
+        {
+            frmBackup FrmBackup = new frmBackup();
+            FrmBackup.MdiParent = this;
+            FrmBackup.Show();
         }
     }
 }

@@ -46,18 +46,10 @@ namespace UI
             try
             {
                 string nombre = txtBuscar.Text.ToLower();
-                bool respuesta = Regex.IsMatch(nombre, "^(?![a-zA-Z][a-zA-Z])");
-                if (respuesta)
-                {
-                    dgvListadoProveedor.DataSource = null;
-                    dgvListadoProveedor.DataSource = bllProveedores.Buscar(nombre);
-                    this.Formato();
-                }
-                else
-                {
-                    MessageBox.Show("El nombre solo acepta caracteres", "ERROR");
-                }
 
+                dgvListadoProveedor.DataSource = null;
+                dgvListadoProveedor.DataSource = bllProveedores.Buscar(nombre);
+                this.Formato();
             }
             catch (Exception ex)
             {

@@ -8,9 +8,8 @@ namespace BE
 {
     public class Detalle : Entidad
     {
-        //es el código de la compra o la venta, según corresponda
         public int codigoCompra { get; set; }
-        public int codigoBarra { get; set; }
+        public long codigoBarra { get; set; }
         public int codigoProducto { get; set; }
         public string nombreProducto { get; set; }
         public int cantidad { get; set; }

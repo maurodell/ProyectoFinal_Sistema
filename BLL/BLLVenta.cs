@@ -47,7 +47,7 @@ namespace BLL
             for (int i = 0; i < detalles.Rows.Count; i++)
             {
                 detalle = new DetalleVenta();
-                detalle.codigoBarra = Convert.ToInt32(detalles.Rows[i]["codigoBarra"]);
+                detalle.codigoBarra = Convert.ToInt64(detalles.Rows[i]["codigoBarra"]);
                 detalle.codigoProducto = Convert.ToInt32(detalles.Rows[i]["codigoProducto"]);
                 detalle.nombreProducto = Convert.ToString(detalles.Rows[i]["nombreProducto"]);
                 detalle.stock = Convert.ToInt32(detalles.Rows[i]["stock"]);

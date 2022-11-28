@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BEAdministrador.cs" />
     <Compile Include="BEBackup.cs" />
+    <Compile Include="BECaja.cs" />
     <Compile Include="BECategoria.cs" />
     <Compile Include="BECliente.cs" />
     <Compile Include="BEComponente.cs" />

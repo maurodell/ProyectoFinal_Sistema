@@ -122,6 +122,7 @@ namespace MPP
                 XDocument crear = XDocument.Load(path);
                 crear.Element("compras").Add(new XElement("compra",
                                                 new XAttribute("codigo", codigoCompra),
+                                                new XElement("codigoProveedor", Parametro.codigoProveedor),
                                                 new XElement("codigoUsuario", Parametro.codigoUsuario),
                                                 new XElement("tipoComprobante", Parametro.tipoComprobante),
                                                 new XElement("nroComprobante", Parametro.nroComprobante),
@@ -182,7 +183,7 @@ namespace MPP
                                codigoCompra = Convert.ToInt32(detalle.Element("codigoCompra").Value),
                                codigoProducto = Convert.ToInt32(detalle.Element("codigoProducto").Value),
                                nombreProducto = Convert.ToString(detalle.Element("nombreProducto").Value),
-                               codigoBarra = Convert.ToInt32(detalle.Element("codigoBarra").Value),
+                               codigoBarra = Convert.ToInt64(detalle.Element("codigoBarra").Value),
                                precio = Convert.ToDecimal(detalle.Element("precio").Value),
                                cantidad = Convert.ToInt32(detalle.Element("cantidad").Value),
                                importe = Convert.ToDecimal(detalle.Element("importe").Value)
@@ -219,6 +220,7 @@ namespace MPP
                 {
                     compraBuscar = new BECompra();
                     compraBuscar.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
+                    compraBuscar.codigoProveedor = Convert.ToInt32(EModifcar.Element("codigoProveedor").Value);
                     compraBuscar.codigoUsuario = Convert.ToInt32(EModifcar.Element("codigoUsuario").Value);
                     compraBuscar.tipoComprobante = EModifcar.Element("tipoComprobante").Value;
                     compraBuscar.nroComprobante = EModifcar.Element("nroComprobante").Value;
@@ -314,12 +316,12 @@ namespace MPP
 
                 List<BECompra> compras = new List<BECompra>();
 
-
                 foreach (XElement EModifcar in consulta)
                 {
                     BECompra compra = new BECompra
                     {
                         Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value),
+                        codigoProveedor = Convert.ToInt32(EModifcar.Element("codigoProveedor").Value),
                         codigoUsuario = Convert.ToInt32(EModifcar.Element("codigoUsuario").Value),
                         tipoComprobante = Convert.ToString(EModifcar.Element("tipoComprobante").Value),
                         nroComprobante = Convert.ToString(EModifcar.Element("nroComprobante").Value),
@@ -356,7 +358,8 @@ namespace MPP
                             Detalle detalle = new Detalle
                             {
                                 Codigo = Convert.ToInt32(item["codigo"]),
-                                codigoBarra = Convert.ToInt32(item["codigoBarra"]),
+                                codigoCompra = Convert.ToInt32(item["codigoCompra"]),
+                                codigoBarra = Convert.ToInt64(item["codigoBarra"]),
                                 codigoProducto = Convert.ToInt32(item["codigoProducto"]),
                                 nombreProducto = Convert.ToString(item["nombreProducto"]),
                                 precio = Convert.ToDecimal(item["precio"]),
@@ -392,6 +395,7 @@ namespace MPP
                             BECompra compra = new BECompra
                             {
                                 Codigo = Convert.ToInt32(item["codigo"]),
+                                codigoProveedor = Convert.ToInt32(item["codigoProveedor"]),
                                 codigoUsuario = Convert.ToInt32(item["codigoUsuario"]),
                                 tipoComprobante = Convert.ToString(item["tipoComprobante"]),
                                 nroComprobante = Convert.ToString(item["nroComprobante"]),
@@ -431,6 +435,7 @@ namespace MPP
                         BECompra compra = new BECompra
                         {
                             Codigo = Convert.ToInt32(item["codigo"]),
+                            codigoProveedor = Convert.ToInt32(item["codigoProveedor"]),
                             codigoUsuario = Convert.ToInt32(item["codigoUsuario"]),
                             tipoComprobante = Convert.ToString(item["tipoComprobante"]),
                             nroComprobante = Convert.ToString(item["nroComprobante"]),
@@ -467,6 +472,7 @@ namespace MPP
                 {
                     foreach (XElement EModifcar in consulta)
                     {
+                        EModifcar.Element("codigoProveedor").Value = Convert.ToString(Parametro.codigoProveedor);
                         EModifcar.Element("codigoUsuario").Value = Convert.ToString(Parametro.codigoUsuario);
                         EModifcar.Element("tipoComprobante").Value = Parametro.tipoComprobante;
                         EModifcar.Element("nroComprobante").Value = Parametro.nroComprobante;

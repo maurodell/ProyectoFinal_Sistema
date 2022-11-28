@@ -135,7 +135,7 @@ namespace MPP
         {
             try
             {
-                List<BEUsuario> usuarios = Listar();
+                List<BEUsuario> usuarios = ListarTodos();
                 int cantidadPart = usuarios.Count();
 
                 XDocument crear = XDocument.Load(path);

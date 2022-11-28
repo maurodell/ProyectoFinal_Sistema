@@ -36,8 +36,8 @@ namespace BLL
         {
             return mppUsuario.BuscarUsuario(Parametro);
         }
-        public bool Crear(string nombre, string tipoDocumento, 
-                            string documento, string domicilio, string telefono, string email, string clave)
+        public bool Crear(string nombre, string tipoDocumento, string domicilio, 
+                            string documento, string telefono, string email, string clave)
         {
             Encriptado encriptar = new Encriptado();
 

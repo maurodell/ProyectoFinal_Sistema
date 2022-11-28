@@ -76,6 +76,10 @@ namespace UI
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCat = new System.Windows.Forms.TabPage();
             this.dgvListadoCompra = new System.Windows.Forms.DataGridView();
+            this.btnBuscarProveedor = new System.Windows.Forms.Button();
+            this.txtNombreProveedor = new System.Windows.Forms.TextBox();
+            this.txtCodProveedor = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -95,7 +99,7 @@ namespace UI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1939, 1283);
+            this.label4.Location = new System.Drawing.Point(1939, 1292);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(280, 32);
             this.label4.TabIndex = 7;
@@ -112,7 +116,7 @@ namespace UI
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(2952, 1273);
+            this.btnCancelar.Location = new System.Drawing.Point(2952, 1282);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(537, 51);
             this.btnCancelar.TabIndex = 5;
@@ -122,7 +126,7 @@ namespace UI
             // 
             // btnInsertar
             // 
-            this.btnInsertar.Location = new System.Drawing.Point(2294, 1273);
+            this.btnInsertar.Location = new System.Drawing.Point(2294, 1282);
             this.btnInsertar.Name = "btnInsertar";
             this.btnInsertar.Size = new System.Drawing.Size(561, 51);
             this.btnInsertar.TabIndex = 4;
@@ -148,7 +152,7 @@ namespace UI
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(146, 1273);
+            this.btnEliminar.Location = new System.Drawing.Point(146, 1282);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(561, 51);
             this.btnEliminar.TabIndex = 10;
@@ -170,7 +174,7 @@ namespace UI
             this.groupBox2.Controls.Add(this.btnExplorarProd);
             this.groupBox2.Controls.Add(this.txtCodBarra);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(44, 212);
+            this.groupBox2.Location = new System.Drawing.Point(44, 243);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(3445, 1021);
             this.groupBox2.TabIndex = 9;
@@ -348,6 +352,10 @@ namespace UI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnBuscarProveedor);
+            this.groupBox1.Controls.Add(this.txtNombreProveedor);
+            this.groupBox1.Controls.Add(this.txtCodProveedor);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dateFecha);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.txtPuntoVenta);
@@ -361,7 +369,7 @@ namespace UI
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Location = new System.Drawing.Point(44, 33);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(3439, 148);
+            this.groupBox1.Size = new System.Drawing.Size(3439, 190);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cabecera";
@@ -384,7 +392,7 @@ namespace UI
             // 
             // txtPuntoVenta
             // 
-            this.txtPuntoVenta.Location = new System.Drawing.Point(834, 67);
+            this.txtPuntoVenta.Location = new System.Drawing.Point(834, 126);
             this.txtPuntoVenta.Name = "txtPuntoVenta";
             this.txtPuntoVenta.Size = new System.Drawing.Size(247, 38);
             this.txtPuntoVenta.TabIndex = 14;
@@ -393,7 +401,7 @@ namespace UI
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(607, 70);
+            this.label8.Location = new System.Drawing.Point(607, 129);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(208, 32);
             this.label8.TabIndex = 13;
@@ -419,7 +427,7 @@ namespace UI
             // 
             // txtNumComprob
             // 
-            this.txtNumComprob.Location = new System.Drawing.Point(1472, 67);
+            this.txtNumComprob.Location = new System.Drawing.Point(1472, 126);
             this.txtNumComprob.Name = "txtNumComprob";
             this.txtNumComprob.Size = new System.Drawing.Size(678, 38);
             this.txtNumComprob.TabIndex = 7;
@@ -427,7 +435,7 @@ namespace UI
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1132, 70);
+            this.label7.Location = new System.Drawing.Point(1132, 129);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(330, 32);
             this.label7.TabIndex = 6;
@@ -441,7 +449,7 @@ namespace UI
             "Factura A",
             "Factura B",
             "Factura C"});
-            this.cmbComprobante.Location = new System.Drawing.Point(267, 67);
+            this.cmbComprobante.Location = new System.Drawing.Point(267, 126);
             this.cmbComprobante.Name = "cmbComprobante";
             this.cmbComprobante.Size = new System.Drawing.Size(316, 39);
             this.cmbComprobante.TabIndex = 5;
@@ -451,7 +459,7 @@ namespace UI
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(23, 70);
+            this.label6.Location = new System.Drawing.Point(23, 129);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(223, 32);
             this.label6.TabIndex = 3;
@@ -567,6 +575,41 @@ namespace UI
             this.dgvListadoCompra.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCompra_CellContentClick);
             this.dgvListadoCompra.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCompra_CellDoubleClick);
             // 
+            // btnBuscarProveedor
+            // 
+            this.btnBuscarProveedor.Location = new System.Drawing.Point(1451, 48);
+            this.btnBuscarProveedor.Name = "btnBuscarProveedor";
+            this.btnBuscarProveedor.Size = new System.Drawing.Size(225, 51);
+            this.btnBuscarProveedor.TabIndex = 20;
+            this.btnBuscarProveedor.Text = "Buscar";
+            this.btnBuscarProveedor.UseVisualStyleBackColor = true;
+            this.btnBuscarProveedor.Click += new System.EventHandler(this.btnBuscarProveedor_Click);
+            // 
+            // txtNombreProveedor
+            // 
+            this.txtNombreProveedor.Enabled = false;
+            this.txtNombreProveedor.Location = new System.Drawing.Point(436, 54);
+            this.txtNombreProveedor.Name = "txtNombreProveedor";
+            this.txtNombreProveedor.Size = new System.Drawing.Size(968, 38);
+            this.txtNombreProveedor.TabIndex = 19;
+            // 
+            // txtCodProveedor
+            // 
+            this.txtCodProveedor.Enabled = false;
+            this.txtCodProveedor.Location = new System.Drawing.Point(216, 54);
+            this.txtCodProveedor.Name = "txtCodProveedor";
+            this.txtCodProveedor.Size = new System.Drawing.Size(194, 38);
+            this.txtCodProveedor.TabIndex = 18;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(23, 57);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(182, 32);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Proveedor (*)";
+            // 
             // frmCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -643,5 +686,9 @@ namespace UI
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnBuscarProveedor;
+        private System.Windows.Forms.TextBox txtNombreProveedor;
+        private System.Windows.Forms.TextBox txtCodProveedor;
+        private System.Windows.Forms.Label label2;
     }
 }

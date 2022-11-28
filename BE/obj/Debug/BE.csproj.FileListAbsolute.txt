@@ -97,3 +97,12 @@ C:\Users\mdo\Desktop\Solución - Final - 3\Sistemas_Sale_Point\BE\obj\Debug\BE.c
 C:\Users\mdo\Desktop\Solución - Final - 3\Sistemas_Sale_Point\BE\obj\Debug\BE.csproj.CopyComplete
 C:\Users\mdo\Desktop\Solución - Final - 3\Sistemas_Sale_Point\BE\obj\Debug\BE.dll
 C:\Users\mdo\Desktop\Solución - Final - 3\Sistemas_Sale_Point\BE\obj\Debug\BE.pdb
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\BE\bin\Debug\BE.dll
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\BE\bin\Debug\BE.pdb
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\BE\bin\Debug\Abstraccion.dll
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\BE\bin\Debug\Abstraccion.pdb
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\BE\obj\Debug\BE.csproj.AssemblyReference.cache
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\BE\obj\Debug\BE.csproj.CoreCompileInputs.cache
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\BE\obj\Debug\BE.csproj.CopyComplete
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\BE\obj\Debug\BE.dll
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\BE\obj\Debug\BE.pdb

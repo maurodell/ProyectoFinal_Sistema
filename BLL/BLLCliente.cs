@@ -75,6 +75,10 @@ namespace BLL
         {
             return mppCliente.Buscar(Parametro);
         }
+        public string DevolverNombre(int codigoUsuario)
+        {
+            return mppCliente.DevolverNombre(codigoUsuario);
+        }
         public bool Crear(BECliente Parametro)
         {
             throw new NotImplementedException();

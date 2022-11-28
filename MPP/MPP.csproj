@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MPPBackUp.cs" />
+    <Compile Include="MPPCaja.cs" />
     <Compile Include="MPPCategoria.cs" />
     <Compile Include="MPPCompra.cs" />
     <Compile Include="MPPLogin.cs" />

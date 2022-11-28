@@ -6,6 +6,10 @@ using BLL;
 using UI.Utils;
 using BE;
 using System.Text.RegularExpressions;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using System.IO;
 
 namespace UI
 {
@@ -17,11 +21,13 @@ namespace UI
             dtDetalle = new DataTable();
             bllVenta = new BLLVenta();
             bllProducto = new BLLProducto();
+            bllCliente = new BLLCliente();
         }
         private BLLVenta bllVenta;
         private DataTable dtDetalle;
         BEProducto producto;
         BLLProducto bllProducto;
+        BLLCliente bllCliente;
 
         private int codigoProducto;
         private string codigoBarra;
@@ -200,11 +206,11 @@ namespace UI
         }
         private void MensajeError(string mensaje)
         {
-            MessageBox.Show(mensaje, "Categorias", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(mensaje, "Venta", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void MensajeOk(string mensaje)
         {
-            MessageBox.Show(mensaje, "Categorias", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(mensaje, "Venta", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void Buscar()
         {
@@ -229,6 +235,7 @@ namespace UI
             this.Listar();
             this.ListarCondicion();
             this.CrearDgvDetalle();
+            btnImprimir.Visible = false;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -295,7 +302,7 @@ namespace UI
         {
             try
             {
-                bool respuesta = Regex.IsMatch(txtBuscarProducPanel.Text, "^(?![a-zA-Z][a-zA-Z])");
+                bool respuesta = Regex.IsMatch(txtBuscarProducPanel.Text, @"^(?![a-zA-Z\s\p{L}]+$)");
                 if (respuesta)
                 {
                     string texto = txtBuscarProducPanel.Text.Trim().ToLower();
@@ -348,18 +355,18 @@ namespace UI
         {
             try
             {
-                if (UserRegex())
+                bool respuesta = false;
+                if (txtNumComprob.Text == string.Empty || dgvDetalle.Rows.Count == 0 || txtNombreCliente.Text == string.Empty)
                 {
-                    bool respuesta = false;
-                    if (txtNumComprob.Text == string.Empty || dgvDetalle.Rows.Count == 0 || txtNombreCliente.Text == string.Empty)
-                    {
-                        this.MensajeError("Falta ingresar algunos datos");
+                    this.MensajeError("Falta ingresar algunos datos");
 
-                        errorProvider1.SetError(txtNumComprob, "Ingresar número comprobante");
-                        errorProvider1.SetError(dgvDetalle, "Debe ingresar al menos un producto");
-                        errorProvider1.SetError(txtNombreCliente, "Debe ingresar un cliente");
-                    }
-                    else
+                    errorProvider1.SetError(txtNumComprob, "Ingresar número comprobante");
+                    errorProvider1.SetError(dgvDetalle, "Debe ingresar al menos un producto");
+                    errorProvider1.SetError(txtNombreCliente, "Debe ingresar un cliente");
+                }
+                else
+                {
+                    if (UserRegex())
                     {
                         respuesta = bllVenta.Crear(Convert.ToInt32(txtCodCliente.Text.Trim()), VariablesCompra.codigoUsuario, cmbComprobante.Text, txtNumComprob.Text, txtPuntoVenta.Text,
                                                     dateFecha.Value, Convert.ToDecimal(txtAlicuota.Text.Trim()), Convert.ToDecimal(txtTotal.Text), dtDetalle);
@@ -373,11 +380,10 @@ namespace UI
                         {
                             this.MensajeError("El registro no se pudo realizar\n" +
                                                 "Puede ser que el número de comprobante ya exísta.\n" +
-                                                "O el stock ingresado no alcance.");
+                                                "O quizás el stock ingresado no alcance.");
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -409,6 +415,7 @@ namespace UI
             tabControl1.SelectedIndex = 0;
             btnInsertar.Enabled = true;
             btnEliminar.Enabled = true;
+            btnImprimir.Visible = false;
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -437,7 +444,7 @@ namespace UI
             dateFecha.Value = venta.fecha;
             txtCodigo.Visible = true;
             txtCodigo.Text = Convert.ToString(venta.Codigo);
-
+            txtNombreCliente.Text = bllCliente.DevolverNombre(Convert.ToInt32(txtCodCliente.Text));
             foreach (var item in venta.detalles)
             {
                 DataRow fila = dtDetalle.NewRow();
@@ -455,6 +462,7 @@ namespace UI
             this.CalcularTotales();
             btnInsertar.Enabled = false;
             btnEliminar.Enabled = false;
+            btnImprimir.Visible = true;
         }
 
         private void chkSeleccionar_CheckedChanged(object sender, EventArgs e)
@@ -481,42 +489,56 @@ namespace UI
         {
             try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Esta seguro que desea anular el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (opcion.Equals(DialogResult.OK))
+                int codigoControl = 0;
+                foreach (DataGridViewRow row in dgvListadoCompra.Rows)
                 {
-                    int codigo;
-                    int estado;
-                    bool flag = false;
-                    foreach (DataGridViewRow row in dgvListadoCompra.Rows)
+                    if (Convert.ToBoolean(row.Cells[0].Value))
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        codigoControl = Convert.ToInt32(row.Cells[11].Value);
+                    }
+                }
+                if (codigoControl > 0)
+                {
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Esta seguro que desea anular el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion.Equals(DialogResult.OK))
+                    {
+                        int codigo;
+                        int estado;
+                        bool flag = false;
+                        foreach (DataGridViewRow row in dgvListadoCompra.Rows)
                         {
-                            estado = Convert.ToInt32(row.Cells[10].Value);
-                            if (estado.Equals(1))
+                            if (Convert.ToBoolean(row.Cells[0].Value))
                             {
-                                codigo = Convert.ToInt32(row.Cells[11].Value);
-                                flag = bllVenta.Baja(codigo);
-                            }
-                            else
-                            {
-                                MensajeError("Imposible anular la compra dado que ya está dada de baja.");
-                            }
+                                estado = Convert.ToInt32(row.Cells[10].Value);
+                                if (estado.Equals(1))
+                                {
+                                    codigo = Convert.ToInt32(row.Cells[11].Value);
+                                    flag = bllVenta.Baja(codigo);
+                                }
+                                else
+                                {
+                                    MensajeError("Imposible anular la compra dado que ya está dada de baja.");
+                                }
 
+                            }
+                        }
+
+                        if (flag)
+                        {
+                            this.MensajeOk("La venta fue dada de baja correctamente.");
+                            this.Limpiar();
+                            this.Listar();
+                        }
+                        else
+                        {
+                            this.MensajeError("Algo salío mal al dar de baja la venta.");
                         }
                     }
-
-                    if (flag)
-                    {
-                        this.MensajeOk("La venta fue dada de baja correctamente");
-                        this.Limpiar();
-                        this.Listar();
-                    }
-
-                    else
-                    {
-                        this.MensajeError("Algo salío mal al dar de baja la venta");
-                    }
+                }
+                else
+                {
+                    this.MensajeError("Debe seleccionar al menos una venta.");
                 }
             }
             catch (Exception ex)
@@ -531,6 +553,56 @@ namespace UI
             {
                 DataGridViewCheckBoxCell chkEliminar = (DataGridViewCheckBoxCell)dgvListadoCompra.Rows[e.RowIndex].Cells["Seleccionar"];
                 chkEliminar.Value = !Convert.ToBoolean(chkEliminar.Value);//Determino si esta o no esta marcado el checkBox(Documentacion DataGridView)
+            }
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog guardarArchivo = new SaveFileDialog();
+            guardarArchivo.FileName = dateFecha.Value.ToString("ddMMyyyy")+txtNumComprob.Text+".pdf";
+            string maquetaHtml = Properties.Resources.plantilla.ToString();
+
+            maquetaHtml = maquetaHtml.Replace("@PUNTO", txtPuntoVenta.Text);
+            maquetaHtml = maquetaHtml.Replace("@COMPROBANTE", txtNumComprob.Text);
+            maquetaHtml = maquetaHtml.Replace("@CLIENTE", txtNombreCliente.Text);
+            maquetaHtml = maquetaHtml.Replace("@DOCUMENTO", cmbComprobante.Text);
+            maquetaHtml = maquetaHtml.Replace("@FECHA", dateFecha.Value.ToString("dd/MM/yyyy"));
+
+            string filas = string.Empty;
+            foreach (DataGridViewRow row in dgvDetalle.Rows)
+            {
+                filas += "<tr>";
+                filas += "<td>" + row.Cells["cantidad"].Value.ToString() + "</td>";
+                filas += "<td>" + row.Cells["nombreProducto"].Value.ToString() + "</td>";
+                filas += "<td>" + row.Cells["precio"].Value.ToString() + "</td>";
+                filas += "<td>" + row.Cells["importe"].Value.ToString() + "</td>";
+                filas += "</tr>";
+            }
+            maquetaHtml = maquetaHtml.Replace("@FILAS", filas);
+            maquetaHtml = maquetaHtml.Replace("@TOTAL", txtTotal.Text);
+
+            if (guardarArchivo.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream stream = new FileStream(guardarArchivo.FileName, FileMode.Create)) 
+                {
+                    Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+
+                    pdfDoc.Open();
+
+                    pdfDoc.Add(new Phrase(""));
+
+                    using (StringReader sr = new StringReader(maquetaHtml))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                    }
+
+                    pdfDoc.Close();
+
+                    stream.Close();//en memoria.
+                }
+
+
             }
         }
     }

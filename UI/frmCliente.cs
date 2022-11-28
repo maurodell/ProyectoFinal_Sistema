@@ -73,18 +73,24 @@ namespace UI
             try
             {
                 string nombre = txtBuscar.Text.ToLower();
-                bool respuesta = Regex.IsMatch(nombre, "^(?![a-zA-Z][a-zA-Z])");
-                if (respuesta)
+                if (nombre != string.Empty)
                 {
-                    dgvListadoUser.DataSource = bllCliente.Buscar(nombre);
-                    this.Formato();
-                    lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoUser.Rows.Count);
+                    bool respuesta = Regex.IsMatch(nombre, @"^[a-zA-Z\s\p{L}]+$");
+                    if (respuesta)
+                    {
+                        dgvListadoUser.DataSource = bllCliente.Buscar(nombre);
+                        this.Formato();
+                        lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoUser.Rows.Count);
+                    }
+                    else
+                    {
+                        MessageBox.Show("El nombre solo acepta caracteres", "ERROR");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("El nombre solo acepta caracteres", "ERROR");
+                    this.Listar();
                 }
-
             }
             catch (Exception ex)
             {
@@ -100,18 +106,17 @@ namespace UI
         {
             try
             {
-                if (UserRegex())
+                bool respuesta = false;
+                if (txtNombre.Text == string.Empty)
                 {
-                    bool respuesta = false;
-                    if (txtNombre.Text == string.Empty)
-                    {
-                        this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                        errorProvider1.SetError(txtNombre, "Ingresar nombre");
+                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
+                    errorProvider1.SetError(txtNombre, "Ingresar nombre");
 
-                    }
-                    else
+                }
+                else
+                {
+                    if (UserRegex())
                     {
-
                         respuesta = bllCliente.Crear(txtNombre.Text.Trim().ToLower(), cmbTipoDoc.Text.Trim(), txtDocumento.Text.Trim(), 
                                                         txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim());
                         if (respuesta == true)
@@ -125,7 +130,6 @@ namespace UI
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -168,16 +172,16 @@ namespace UI
         {
             try
             {
-                if (UserRegex())
+                bool respuesta = false;
+                if (txtCodigo.Text == string.Empty || txtNombre.Text == string.Empty)
                 {
-                    bool respuesta = false;
-                    if (txtCodigo.Text == string.Empty || txtNombre.Text == string.Empty)
-                    {
-                        this.MensajeError("Algunos de los datos faltan o son incorrectos");
-                        errorProvider1.SetError(txtNombre, "Ingresar nombre");
-                        errorProvider1.SetError(txtCodigo, "Falta Código!");
-                    }
-                    else
+                    this.MensajeError("Algunos de los datos faltan o son incorrectos");
+                    errorProvider1.SetError(txtNombre, "Ingresar nombre");
+                    errorProvider1.SetError(txtCodigo, "Falta Código!");
+                }
+                else
+                {
+                    if (UserRegex())
                     {
                         respuesta = bllCliente.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), txtNombre.Text.Trim().ToLower(), cmbTipoDoc.Text.Trim(),
                                                             txtDocumento.Text.Trim(), txtDomicilio.Text.Trim(), txtTelefono.Text.Trim(), txtEmail.Text.Trim(), EmailNombreAnterior);
@@ -193,7 +197,6 @@ namespace UI
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -205,24 +208,24 @@ namespace UI
             bool salida = true;
             switch (true)
             {
-                case bool _ when Regex.IsMatch(txtNombre.Text, "^(?![a-zA-Z][a-zA-Z])"):
-                    MessageBox.Show("El nombre solo acepta caracteres", "ERROR");
+                case bool _ when Regex.IsMatch(txtNombre.Text, @"^(?![a-zA-Z\s\p{L}]+$)"):
+                    MessageBox.Show("El nombre solo acepta caracteres alfabéticos", "ERROR");
                     salida = false;
                     break;
                 case bool _ when Regex.IsMatch(txtDocumento.Text, "^(?![0-9]+$)"):
-                    MessageBox.Show("El documento solo acepta caracteres númericos", "ERROR");
+                    MessageBox.Show("El documento solo acepta caracteres númericos\nControlar espacios en blanco.", "ERROR");
                     salida = false;
                     break;
-                case bool _ when Regex.IsMatch(txtDomicilio.Text, "^[a-zA-Z0-9]+$"):
+                case bool _ when Regex.IsMatch(txtDomicilio.Text, @"^(?![a-zA-Z0-9\s\p{L}]+$)"):
                     MessageBox.Show("El domicilio solo acepta caracteres alfanúmericos", "ERROR");
                     salida = false;
                     break;
                 case bool _ when Regex.IsMatch(txtTelefono.Text, "^(?![0-9]+$)"):
-                    MessageBox.Show("El telefono solo acepta caracteres númericos", "ERROR");
+                    MessageBox.Show("El telefono solo acepta caracteres númericos\nControlar espacios en blanco.", "ERROR");
                     salida = false;
                     break;
-                case bool _ when Regex.IsMatch(txtEmail.Text, "^([\\w-]+\\.)*?[\\w-]+@[\\w-]+\\.([\\w-]+\\.)*?[\\w]+$"):
-                    MessageBox.Show("Debe ingresar un email valido", "ERROR");
+                case bool _ when Regex.IsMatch(txtEmail.Text, "^(?!([\\w-]+\\.)*?[\\w-]+@[\\w-]+\\.([\\w-]+\\.)*?[\\w]+$)"):
+                    MessageBox.Show("Debe ingresar un email valido\nControlar espacios en blanco.", "ERROR");
                     salida = false;
                     break;
 
@@ -258,31 +261,46 @@ namespace UI
         {
             try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Esta seguro que va a eliminar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (opcion.Equals(DialogResult.OK))
+                int codigoControl = 0;
+                foreach (DataGridViewRow row in dgvListadoUser.Rows)
                 {
-                    int codigo;
-                    bool flag = false;
-                    foreach (DataGridViewRow row in dgvListadoUser.Rows)
+                    if (Convert.ToBoolean(row.Cells[0].Value))
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        codigoControl = Convert.ToInt32(row.Cells[4].Value);
+                    }
+                }
+                if (codigoControl > 0)
+                {
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Esta seguro que va a eliminar el/los registro/s?", "MarketSoft", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion.Equals(DialogResult.OK))
+                    {
+                        int codigo;
+                        bool flag = false;
+                        foreach (DataGridViewRow row in dgvListadoUser.Rows)
                         {
-                            codigo = Convert.ToInt32(row.Cells[4].Value);
-                            flag = bllCliente.Eliminar(codigo);
+                            if (Convert.ToBoolean(row.Cells[0].Value))
+                            {
+                                codigo = Convert.ToInt32(row.Cells[4].Value);
+                                flag = bllCliente.Eliminar(codigo);
+                            }
+                        }
+
+                        if (flag)
+                        {
+                            this.MensajeOk("El cliente fue eliminado correctamente.");
+                            this.Listar();
+                        }
+
+                        else
+                        {
+                            this.MensajeError("Algo salío mal, el cliente no se pudo eliminar.");
                         }
                     }
-
-                    if (flag)
-                    {
-                        this.MensajeOk("El cliente fue eliminado correctamente");
-                        this.Listar();
-                    }
-
-                    else
-                    {
-                        this.MensajeError("Algo salío mal, el cliente no se pudo eliminar");
-                    }
+                }
+                else
+                {
+                    this.MensajeError("Debe seleccionar al menos un cliente.");
                 }
             }
             catch (Exception ex)
