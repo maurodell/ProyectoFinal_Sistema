@@ -257,8 +257,8 @@ namespace MPP
                             EModifcar.Element("codigoCategoria").Value = Convert.ToString(Parametro.codigoCategoria);
                             EModifcar.Element("codigoBarra").Value = Parametro.codigoBarra;
                             EModifcar.Element("precioVenta").Value = Convert.ToString(Parametro.precioVenta);
-                            EModifcar.Element("stock").Value = Convert.ToString(Parametro.stock);
                             EModifcar.Element("descripcion").Value = Parametro.descripcion;
+                            EModifcar.Element("ubicacion").Value = Parametro.ubicacion;
                             EModifcar.Element("fechaVencimiento").Value = Convert.ToString(Parametro.fechaVencimiento);
                             EModifcar.Element("imagen").Value = Parametro.imagen;
                         }
@@ -277,8 +277,8 @@ namespace MPP
                         EModifcar.Element("codigoCategoria").Value = Convert.ToString(Parametro.codigoCategoria);
                         EModifcar.Element("codigoBarra").Value = Parametro.codigoBarra;
                         EModifcar.Element("precioVenta").Value = Convert.ToString(Parametro.precioVenta);
-                        EModifcar.Element("stock").Value = Convert.ToString(Parametro.stock);
                         EModifcar.Element("descripcion").Value = Parametro.descripcion;
+                        EModifcar.Element("ubicacion").Value = Parametro.ubicacion;
                         EModifcar.Element("fechaVencimiento").Value = Convert.ToString(Parametro.fechaVencimiento);
                         EModifcar.Element("imagen").Value = Parametro.imagen;
                     }

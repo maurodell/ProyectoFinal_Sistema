@@ -72,4 +72,31 @@
     <cantidad>30</cantidad>
     <importe>36000</importe>
   </detalle>
+  <detalle codigo="9">
+    <codigoCompra>6</codigoCompra>
+    <codigoProducto>11</codigoProducto>
+    <nombreProducto>aceite de maiz cocinero</nombreProducto>
+    <codigoBarra>1223444551</codigoBarra>
+    <precio>188</precio>
+    <cantidad>30</cantidad>
+    <importe>5640</importe>
+  </detalle>
+  <detalle codigo="10">
+    <codigoCompra>7</codigoCompra>
+    <codigoProducto>9</codigoProducto>
+    <nombreProducto>gamuza economica</nombreProducto>
+    <codigoBarra>11223334500</codigoBarra>
+    <precio>120</precio>
+    <cantidad>13</cantidad>
+    <importe>1560</importe>
+  </detalle>
+  <detalle codigo="11">
+    <codigoCompra>8</codigoCompra>
+    <codigoProducto>2</codigoProducto>
+    <nombreProducto>fernet</nombreProducto>
+    <codigoBarra>11223456</codigoBarra>
+    <precio>2000</precio>
+    <cantidad>20</cantidad>
+    <importe>40000</importe>
+  </detalle>
 </detallecompra>

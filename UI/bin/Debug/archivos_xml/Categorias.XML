@@ -25,4 +25,9 @@
     <descripcion>Artículos de pérfumeria para el baños.</descripcion>
     <estado>1</estado>
   </categoria>
+  <categoria codigo="6">
+    <nombre>condimentos</nombre>
+    <descripcion>Condimentos y especias.</descripcion>
+    <estado>1</estado>
+  </categoria>
 </categorias>

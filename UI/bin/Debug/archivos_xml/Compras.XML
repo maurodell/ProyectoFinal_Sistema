@@ -60,4 +60,40 @@
     <estadoActual>Activo</estadoActual>
     <estado>1</estado>
   </compra>
+  <compra codigo="6">
+    <codigoProveedor>5</codigoProveedor>
+    <codigoUsuario>1</codigoUsuario>
+    <tipoComprobante>Factura A</tipoComprobante>
+    <nroComprobante>6789895545</nroComprobante>
+    <puntoVenta>0001</puntoVenta>
+    <fecha>2022-11-28T00:00:00</fecha>
+    <impuesto>21</impuesto>
+    <total>5640.00</total>
+    <estadoActual>Activo</estadoActual>
+    <estado>1</estado>
+  </compra>
+  <compra codigo="7">
+    <codigoProveedor>3</codigoProveedor>
+    <codigoUsuario>1</codigoUsuario>
+    <tipoComprobante>Factura A</tipoComprobante>
+    <nroComprobante>6789895546</nroComprobante>
+    <puntoVenta>0001</puntoVenta>
+    <fecha>2022-11-28T00:00:00</fecha>
+    <impuesto>21</impuesto>
+    <total>1560.00</total>
+    <estadoActual>Activo</estadoActual>
+    <estado>1</estado>
+  </compra>
+  <compra codigo="8">
+    <codigoProveedor>1</codigoProveedor>
+    <codigoUsuario>1</codigoUsuario>
+    <tipoComprobante>Factura A</tipoComprobante>
+    <nroComprobante>6789895547</nroComprobante>
+    <puntoVenta>0001</puntoVenta>
+    <fecha>2022-11-28T00:00:00</fecha>
+    <impuesto>21</impuesto>
+    <total>40000.00</total>
+    <estadoActual>Activo</estadoActual>
+    <estado>1</estado>
+  </compra>
 </compras>

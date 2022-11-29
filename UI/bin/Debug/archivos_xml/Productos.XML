@@ -17,7 +17,7 @@
     <codigoBarra>11223456</codigoBarra>
     <nombre>fernet</nombre>
     <precioVenta>2000</precioVenta>
-    <stock>8</stock>
+    <stock>28</stock>
     <descripcion>Fernet x 750ml</descripcion>
     <ubicacion>S1</ubicacion>
     <fechaVencimiento>18/07/2025 0:00:00</fechaVencimiento>
@@ -41,10 +41,10 @@
     <codigoBarra>111222333</codigoBarra>
     <nombre>alma mora</nombre>
     <precioVenta>650</precioVenta>
-    <stock>16</stock>
+    <stock>0</stock>
     <descripcion>Bodega Zucarrdi.</descripcion>
-    <ubicacion>D"2</ubicacion>
-    <fechaVencimiento>2024-06-13T00:00:00</fechaVencimiento>
+    <ubicacion>D3</ubicacion>
+    <fechaVencimiento>13/06/2024 0:00:00</fechaVencimiento>
     <imagen>vinoAlmamota.JPG</imagen>
     <estado>1</estado>
   </producto>
@@ -77,10 +77,10 @@
     <codigoBarra>001112233</codigoBarra>
     <nombre>blem</nombre>
     <precioVenta>1000</precioVenta>
-    <stock>30</stock>
+    <stock>0</stock>
     <descripcion>Protección para Muebles</descripcion>
     <ubicacion>A1</ubicacion>
-    <fechaVencimiento>2024-06-13T00:00:00</fechaVencimiento>
+    <fechaVencimiento>13/06/2024 0:00:00</fechaVencimiento>
     <imagen>blem.jpg</imagen>
     <estado>1</estado>
   </producto>
@@ -98,13 +98,13 @@
   </producto>
   <producto codigo="9">
     <codigoCategoria>2</codigoCategoria>
-    <codigoBarra>0011223334567</codigoBarra>
+    <codigoBarra>0011223334500</codigoBarra>
     <nombre>gamuza economica</nombre>
     <precioVenta>120</precioVenta>
-    <stock>100</stock>
-    <descripcion></descripcion>
+    <stock>13</stock>
+    <descripcion>Gamuza para muebles.</descripcion>
     <ubicacion>D1</ubicacion>
-    <fechaVencimiento>2024-06-13T00:00:00</fechaVencimiento>
+    <fechaVencimiento>29/06/2024 0:00:00</fechaVencimiento>
     <imagen>gamuza.jpg</imagen>
     <estado>1</estado>
   </producto>
@@ -116,8 +116,20 @@
     <stock>29</stock>
     <descripcion>Shampoo Dove x 500ml.</descripcion>
     <ubicacion>A3</ubicacion>
-    <fechaVencimiento>2023-01-21T00:00:00</fechaVencimiento>
+    <fechaVencimiento>21/01/2023 0:00:00</fechaVencimiento>
     <imagen>shampooDove.JPG</imagen>
+    <estado>1</estado>
+  </producto>
+  <producto codigo="11">
+    <codigoCategoria>6</codigoCategoria>
+    <codigoBarra>1223444551</codigoBarra>
+    <nombre>aceite de maiz cocinero</nombre>
+    <precioVenta>188</precioVenta>
+    <stock>30</stock>
+    <descripcion>Aceite de Maiz Cocinero x 900ml.</descripcion>
+    <ubicacion>D2</ubicacion>
+    <fechaVencimiento>2025-07-17T00:00:00</fechaVencimiento>
+    <imagen>aceiteCocinero.JPG</imagen>
     <estado>1</estado>
   </producto>
 </productos>

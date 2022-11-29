@@ -36,4 +36,13 @@
     <telefono>341125678</telefono>
     <email>unileverasoc@gmail.com</email>
   </proveedor>
+  <proveedor codigo="5">
+    <condicion>Responsable Inscripto</condicion>
+    <razonSocial>Aceites, especias y Enlatados</razonSocial>
+    <provincia>Santa Fe</provincia>
+    <cuit>123434321</cuit>
+    <domicilio>Lima 456</domicilio>
+    <telefono>341567890</telefono>
+    <email>aceites@gmail.com</email>
+  </proveedor>
 </proveedores>

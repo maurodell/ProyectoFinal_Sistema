@@ -18,6 +18,8 @@ namespace UI
             bllProducto = new BLLProducto();
             dtDetalle = new DataTable();
         }
+        BECompra beCompra;
+        Detalle detalle;
         BLLCompra bllCompra;
         BLLProducto bllProducto;
         private DataTable dtDetalle;
@@ -36,11 +38,30 @@ namespace UI
                 this.Formato();
                 this.Limpiar();
                 lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoCompra.Rows.Count);
+
+                //solo se ejecuta la primera para ponerle un valor al nro. comprobante
+                if (dgvListadoCompra.Rows.Count == 0)
+                {
+                    txtNumComprob.Text = "00000000";
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
+        }
+        private void setNroComproantesAutomatico(DataGridView dgvCompra)
+        {
+            long valor = 0;
+            foreach (DataGridViewRow item in dgvCompra.Rows)
+            {
+                long valor2 = Convert.ToInt64(item.Cells[5].Value);
+                if (valor2 > valor)
+                {
+                    valor = valor2;
+                }
+            }
+            txtNumComprob.Text = (valor + 1).ToString();
         }
         private void CrearDgvDetalle()
         {
@@ -124,7 +145,6 @@ namespace UI
             txtBuscarComprobante.Clear();
             txtCodigo.Clear();
             txtNumComprob.Clear();
-            txtPuntoVenta.Text = "0000";
             dtDetalle.Clear();
             txtTotal.Clear();
             txtSubTotal.Clear();
@@ -170,6 +190,8 @@ namespace UI
         {
             this.Listar();
             this.CrearDgvDetalle();
+            txtNumComprob.Enabled = false;
+            txtPuntoVenta.Text = "0001";
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -346,8 +368,32 @@ namespace UI
                 {
                     if (UserRegex())
                     {
-                        respuesta = bllCompra.Crear(Convert.ToInt32(txtCodProveedor.Text.Trim()), VariablesCompra.codigoUsuario, cmbComprobante.Text, txtNumComprob.Text, txtPuntoVenta.Text,
-                                                    dateFecha.Value, Convert.ToDecimal(txtAlicuota.Text), Convert.ToDecimal(txtTotal.Text), dtDetalle);
+                        List<Detalle> listaDetalle = new List<Detalle>();
+
+                        beCompra = new BECompra();
+
+                        for (int i = 0; i < dtDetalle.Rows.Count; i++)
+                        {
+                            detalle = new Detalle();
+                            detalle.codigoBarra = Convert.ToInt64(dtDetalle.Rows[i]["codigoBarra"]);
+                            detalle.codigoProducto = Convert.ToInt32(dtDetalle.Rows[i]["codigoProducto"]);
+                            detalle.nombreProducto = Convert.ToString(dtDetalle.Rows[i]["nombreProducto"]);
+                            detalle.cantidad = Convert.ToInt32(dtDetalle.Rows[i]["cantidad"]);
+                            detalle.precio = Convert.ToDecimal(dtDetalle.Rows[i]["precio"]);
+                            detalle.importe = Convert.ToDecimal(dtDetalle.Rows[i]["importe"]);
+                            listaDetalle.Add(detalle);
+                        }
+                        beCompra.codigoProveedor = Convert.ToInt32(txtCodProveedor.Text.Trim());
+                        beCompra.codigoUsuario = VariablesCompra.codigoUsuario;
+                        beCompra.detalles = listaDetalle;
+                        beCompra.tipoComprobante = cmbComprobante.Text.Trim();
+                        beCompra.nroComprobante = txtNumComprob.Text.Trim();
+                        beCompra.puntoVenta = txtPuntoVenta.Text.Trim();
+                        beCompra.fecha = Convert.ToDateTime(dateFecha.Value.ToString("dd/MM/yyyy"));
+                        beCompra.impuesto = Convert.ToDecimal(txtAlicuota.Text);
+                        beCompra.total = Convert.ToDecimal(txtTotal.Text);
+
+                        respuesta = bllCompra.Crear(beCompra);
                         if (respuesta == true)
                         {
                             this.MensajeOk("Fue registrado de forma correctamente");
@@ -536,6 +582,8 @@ namespace UI
             FrmBuscarProveedor.ShowDialog();
             txtCodProveedor.Text = Convert.ToString(VariablesCompra.codigoProveedor);
             txtNombreProveedor.Text = VariablesCompra.razonSocial;
+
+            setNroComproantesAutomatico(dgvListadoCompra);
         }
     }
 }

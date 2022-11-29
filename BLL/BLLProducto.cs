@@ -34,24 +34,8 @@ namespace BLL
 
         public bool Crear(BEProducto Parametro)
         {
-            throw new NotImplementedException();
+            return mppProducto.Crear(Parametro);
         }
-        public bool Insertar(int codigoCategoria, string codigoBarra, string nombre, decimal precioVenta, string descripcion, string ubicacion, DateTime fechaVencimiento, string imagen)
-        {
-            BEproducto = new BEProducto();
-            BEproducto.codigoCategoria = codigoCategoria;
-            BEproducto.codigoBarra = codigoBarra;
-            BEproducto.nombre = nombre;
-            BEproducto.precioVenta = precioVenta;
-            BEproducto.stock = 0;
-            BEproducto.descripcion = descripcion;
-            BEproducto.ubicacion = ubicacion;
-            BEproducto.fechaVencimiento = Convert.ToDateTime(fechaVencimiento.ToString("dd/MM/yyyy"));
-            BEproducto.imagen = imagen;
-
-            return mppProducto.Crear(BEproducto);
-        }
-
         public bool Eliminar(int Parametro)
         {
             return mppProducto.Eliminar(Parametro);
@@ -66,25 +50,9 @@ namespace BLL
         {
             return mppProducto.ListarTodos();
         }
-        public bool Modificar(int codigo, string nombreAnterior, int codigoCategoria, string codigoBarra, 
-                        decimal precioVenta, string nombre, string descripcion, string ubicacion, string imagen, DateTime fechaVencimiento)
-        {
-            BEproducto = new BEProducto();
-            BEproducto.Codigo = codigo;
-            BEproducto.codigoCategoria = codigoCategoria;
-            BEproducto.codigoBarra = codigoBarra.Count() > 0 ? codigoBarra : "";
-            BEproducto.nombre = nombre;
-            BEproducto.precioVenta = precioVenta;
-            BEproducto.descripcion = descripcion;
-            BEproducto.ubicacion = ubicacion;
-            BEproducto.imagen = imagen;
-            BEproducto.fechaVencimiento = Convert.ToDateTime(fechaVencimiento.ToString("dd/MM/yyyy"));
-
-            return mppProducto.Modificar(BEproducto, nombreAnterior);
-        }
         public bool Modificar(BEProducto Parametro, string parametro2)
         {
-            throw new NotImplementedException();
+            return mppProducto.Modificar(Parametro, parametro2);
         }
     }
 }

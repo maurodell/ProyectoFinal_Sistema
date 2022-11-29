@@ -472,8 +472,10 @@ namespace UI
             this.dgvListadoProd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListadoProd.Size = new System.Drawing.Size(3528, 850);
             this.dgvListadoProd.TabIndex = 0;
+            this.dgvListadoProd.DataSourceChanged += new System.EventHandler(this.dgvListadoProd_DataSourceChanged);
             this.dgvListadoProd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoProd_CellContentClick);
             this.dgvListadoProd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoProd_CellDoubleClick);
+            this.dgvListadoProd.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvListadoProd_DataBindingComplete);
             // 
             // frmProducto
             // 

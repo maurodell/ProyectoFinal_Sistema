@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using BLL;
+using BE;
 using System.IO;
 using System.Reflection;
 using System.Drawing;
@@ -24,6 +25,7 @@ namespace UI
         }
         BLLProducto bllProducto;
         BLLCategoria bllCategoria;
+        BEProducto beProducto;
         private void Listar()
         {
             try
@@ -62,6 +64,7 @@ namespace UI
             dgvListadoProd.Columns[3].Width = 100;
             dgvListadoProd.Columns[4].Width = 60;
             dgvListadoProd.Columns[4].HeaderText = "Precio Venta";
+            dgvListadoProd.Columns[5].HeaderText = "Stock";
             dgvListadoProd.Columns[5].Width = 50;
             dgvListadoProd.Columns[6].Width = 150;
             dgvListadoProd.Columns[6].HeaderText = "Descripción";
@@ -130,7 +133,22 @@ namespace UI
             txtCodigo.Visible = false;
             this.CargarCategoria();
         }
-
+        private void ControlarStockFilaColor()
+        {
+            int cantidadStock = 0;
+            foreach (DataGridViewRow item in dgvListadoProd.Rows)
+            {
+                cantidadStock = Convert.ToInt32(item.Cells[5].Value);
+                if (cantidadStock <= 15 && cantidadStock >= 10)
+                {
+                    item.DefaultCellStyle.BackColor = Color.Orange;
+                }
+                if (cantidadStock <= 9 && cantidadStock >= 0)
+                {
+                    item.DefaultCellStyle.BackColor = Color.OrangeRed;
+                }
+            }
+        }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             this.Buscar();
@@ -231,7 +249,7 @@ namespace UI
                 {
                     if (UserRegex())
                     {
-                        string nombreImagen = txtImagen.Text;
+                        string nombreImagen = txtImagen.Text.Trim();
                         string nombreImagenGuardar = "";
                         bool flag = false;
                         DirectoryInfo di = new DirectoryInfo(Directorio2);
@@ -243,10 +261,19 @@ namespace UI
                                 flag = true;
                             }
                         }
+                        beProducto = new BEProducto();
+                        beProducto.codigoCategoria = Convert.ToInt32(cmbCategoria.SelectedValue);
+                        beProducto.codigoBarra = txtCodigoBarra.Text.Trim();
+                        beProducto.nombre = txtNombre.Text.Trim().ToLower();
+                        beProducto.precioVenta = Convert.ToDecimal(txtPrecio.Text.Trim());
+                        beProducto.stock = 0;
+                        beProducto.descripcion = txtDescripcion.Text.Trim();
+                        beProducto.ubicacion = txtUbicacion.Text.Trim();
+                        beProducto.fechaVencimiento = Convert.ToDateTime(dateTFecha.Value.ToString("dd/MM/yyyy"));
+                        beProducto.imagen = txtImagen.Text.Trim();
                         if (!flag)
                         {
-                            respuesta = bllProducto.Insertar(Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), txtNombre.Text.Trim().ToLower(),
-                                                            Convert.ToDecimal(txtPrecio.Text.Trim()), txtDescripcion.Text.Trim(), txtUbicacion.Text, dateTFecha.Value, txtImagen.Text);
+                            respuesta = bllProducto.Crear(beProducto);
                             if (respuesta)
                             {
                                 if (txtImagen.Text != string.Empty)
@@ -339,10 +366,21 @@ namespace UI
                                 flag = true;
                             }
                         }
+
+                        beProducto = new BEProducto();
+                        beProducto.Codigo = Convert.ToInt32(txtCodigo.Text.Trim());
+                        beProducto.codigoCategoria = Convert.ToInt32(cmbCategoria.SelectedValue);
+                        beProducto.codigoBarra = txtCodigoBarra.Text.Trim().Length > 0 ? txtCodigoBarra.Text.Trim() : "";
+                        beProducto.nombre = txtNombre.Text.Trim().ToLower();
+                        beProducto.precioVenta = Convert.ToDecimal(txtPrecio.Text);
+                        beProducto.descripcion = txtDescripcion.Text;
+                        beProducto.ubicacion = txtUbicacion.Text.Trim();
+                        beProducto.imagen = txtImagen.Text;
+                        beProducto.fechaVencimiento = Convert.ToDateTime(dateTFecha.Value.ToString("dd/MM/yyyy"));
+
                         if (flag)
                         {
-                            respuesta = bllProducto.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), this.nombreAnterior.ToLower(), Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), Convert.ToDecimal(txtPrecio.Text.Trim()),
-                                                            txtNombre.Text.Trim().ToLower(), txtDescripcion.Text.Trim(), txtUbicacion.Text, txtImagen.Text, dateTFecha.Value);
+                            respuesta = bllProducto.Modificar(beProducto, this.nombreAnterior.ToLower());
                             if (respuesta)
                             {
                                 this.MensajeOk("El producto se actualizo correctamente");
@@ -357,8 +395,7 @@ namespace UI
                         }
                         else
                         {
-                            respuesta = bllProducto.Modificar(Convert.ToInt32(txtCodigo.Text.Trim()), this.nombreAnterior.ToLower(), Convert.ToInt32(cmbCategoria.SelectedValue), txtCodigoBarra.Text.Trim(), Convert.ToDecimal(txtPrecio.Text.Trim()),
-                                                    txtNombre.Text.Trim().ToLower(), txtDescripcion.Text.Trim(), txtUbicacion.Text, txtImagen.Text, dateTFecha.Value);
+                            respuesta = bllProducto.Modificar(beProducto, this.nombreAnterior.ToLower());
                             if (respuesta)
                             {
                                 if (txtImagen.Text != string.Empty && this.rutaOrigen != string.Empty)
@@ -566,6 +603,19 @@ namespace UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void dgvListadoProd_DataSourceChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void dgvListadoProd_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            bool flag = true;
+            if (flag)
+            {
+                ControlarStockFilaColor();
             }
         }
     }

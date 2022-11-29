@@ -43,7 +43,7 @@ namespace BLL
         }
         public bool Crear(BECompra Parametro)
         {
-            throw new NotImplementedException();
+            return mppCompra.Crear(Parametro);
         }
         public bool Crear(int codigoProveedor, int codigoUsuario, string tipoComprobante, string nroComprobante, string puntoVenta, DateTime fecha, decimal impuesto, 
                             decimal total, DataTable detalles)
