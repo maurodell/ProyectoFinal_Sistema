@@ -54,6 +54,7 @@ namespace UI
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.LoginInferior = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.consultasProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +76,7 @@ namespace UI
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(16, 5, 0, 5);
-            this.menuStrip.Size = new System.Drawing.Size(1685, 55);
+            this.menuStrip.Size = new System.Drawing.Size(1685, 58);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             this.menuStrip.Validated += new System.EventHandler(this.menuStrip_Validated);
@@ -107,7 +108,8 @@ namespace UI
             // 
             this.menuIngresos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.submenuProveedores,
-            this.submenuCompras});
+            this.submenuCompras,
+            this.consultasProveedoresToolStripMenuItem});
             this.menuIngresos.Name = "menuIngresos";
             this.menuIngresos.Size = new System.Drawing.Size(155, 48);
             this.menuIngresos.Text = "Ingresos";
@@ -115,14 +117,14 @@ namespace UI
             // submenuProveedores
             // 
             this.submenuProveedores.Name = "submenuProveedores";
-            this.submenuProveedores.Size = new System.Drawing.Size(350, 54);
+            this.submenuProveedores.Size = new System.Drawing.Size(487, 54);
             this.submenuProveedores.Text = "Proveedores";
             this.submenuProveedores.Click += new System.EventHandler(this.proveedoresToolStripMenuItem_Click);
             // 
             // submenuCompras
             // 
             this.submenuCompras.Name = "submenuCompras";
-            this.submenuCompras.Size = new System.Drawing.Size(350, 54);
+            this.submenuCompras.Size = new System.Drawing.Size(487, 54);
             this.submenuCompras.Text = "Compras";
             this.submenuCompras.Click += new System.EventHandler(this.comprasToolStripMenuItem_Click);
             // 
@@ -213,7 +215,7 @@ namespace UI
             // menuBackUp
             // 
             this.menuBackUp.Name = "menuBackUp";
-            this.menuBackUp.Size = new System.Drawing.Size(154, 45);
+            this.menuBackUp.Size = new System.Drawing.Size(154, 48);
             this.menuBackUp.Text = "Back-Up";
             this.menuBackUp.Click += new System.EventHandler(this.menuBackUp_Click);
             // 
@@ -248,6 +250,13 @@ namespace UI
             this.LoginInferior.Name = "LoginInferior";
             this.LoginInferior.Size = new System.Drawing.Size(205, 41);
             this.LoginInferior.Text = "Proyecto Final";
+            // 
+            // consultasProveedoresToolStripMenuItem
+            // 
+            this.consultasProveedoresToolStripMenuItem.Name = "consultasProveedoresToolStripMenuItem";
+            this.consultasProveedoresToolStripMenuItem.Size = new System.Drawing.Size(487, 54);
+            this.consultasProveedoresToolStripMenuItem.Text = "Consultas Proveedores";
+            this.consultasProveedoresToolStripMenuItem.Click += new System.EventHandler(this.consultasProveedoresToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -299,6 +308,7 @@ namespace UI
         private System.Windows.Forms.ToolStripMenuItem administrarUsuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuCaja;
+        private System.Windows.Forms.ToolStripMenuItem consultasProveedoresToolStripMenuItem;
     }
 }
 

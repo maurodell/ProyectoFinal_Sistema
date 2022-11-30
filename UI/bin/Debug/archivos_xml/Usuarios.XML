@@ -18,26 +18,6 @@
     <telefono>ss</telefono>
     <email>vendedor</email>
     <clave>rUvj1G+ybfI=</clave>
-    <estado>0</estado>
-  </usuario>
-  <usuario codigo="3">
-    <nombre>martín</nombre>
-    <tipoDocumento>DNI</tipoDocumento>
-    <documento>32456811</documento>
-    <domicilio>Pasaje Gutemberg 457</domicilio>
-    <telefono>1234567</telefono>
-    <email>martinboca@gmail.com</email>
-    <clave>rUvj1G+ybfI=</clave>
-    <estado>1</estado>
-  </usuario>
-  <usuario codigo="4">
-    <nombre>profesor</nombre>
-    <tipoDocumento>DNI</tipoDocumento>
-    <documento>11111</documento>
-    <domicilio>iriondo 310</domicilio>
-    <telefono>341256788</telefono>
-    <email>profe@gmail.com</email>
-    <clave>rUvj1G+ybfI=</clave>
     <estado>1</estado>
   </usuario>
 </usuarios>

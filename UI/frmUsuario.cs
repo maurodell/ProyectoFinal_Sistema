@@ -12,9 +12,10 @@ namespace UI
         {
             InitializeComponent();
             bllUsuario = new BLLUsuario();
+            bllPermiso = new BLLPermiso();
         }
         BLLUsuario bllUsuario;
-
+        BLLPermiso bllPermiso;
         private void Listar()
         {
             try
@@ -314,16 +315,18 @@ namespace UI
                     {
                         int codigo;
                         bool flag = false;
+                        bool flagPermisos = false;
                         foreach (DataGridViewRow row in dgvListadoUser.Rows)
                         {
                             if (Convert.ToBoolean(row.Cells[0].Value))
                             {
                                 codigo = Convert.ToInt32(row.Cells[6].Value);
                                 flag = bllUsuario.Eliminar(codigo);
+                                flagPermisos = bllPermiso.EliminarPermisosUsuario(codigo);
                             }
                         }
 
-                        if (flag)
+                        if (flag && flagPermisos)
                         {
                             this.MensajeOk("El usuario fue eliminado correctamente.");
                             this.Listar();

@@ -16,7 +16,6 @@ namespace BLL
             mppProducto = new MPPProducto();
         }
         MPPProducto mppProducto;
-        BEProducto BEproducto;
         public bool Alta(int Parametro)
         {
             return mppProducto.Alta(Parametro);

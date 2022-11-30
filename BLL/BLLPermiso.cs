@@ -69,5 +69,9 @@ namespace BLL
         {
             return mppPermiso.ExisteRolEnUsuario2(beUsuario, codigoRol);
         }
+        public bool EliminarPermisosUsuario(int codigoUsuario)
+        {
+            return mppPermiso.EliminarPermisosUsuario(codigoUsuario);
+        }
     }
 }

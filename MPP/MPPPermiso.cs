@@ -507,5 +507,49 @@ namespace MPP
                 throw ex;
             }
         }
+        public bool EliminarPermisosUsuario(int codigoUsuario)
+        {
+            bool respuesta = false;
+            int codigoPermiso = 0;
+            XDocument documento = XDocument.Load(pathPermisosUsuarios);//borra el rol del xml permiso
+
+            var consulta = from rolPermiso in documento.Descendants("permiso")
+                           where rolPermiso.Element("codigoUsuario").Value == codigoUsuario.ToString()
+                           select new
+                           {
+                               codigoUsuario = Convert.ToInt32(rolPermiso.Element("codigoUsuario").Value),
+                               codigoPermiso = Convert.ToInt32(rolPermiso.Element("codigoPermiso").Value)
+                           };
+
+            foreach (var item in consulta)
+            {
+                codigoPermiso = item.codigoPermiso;
+            }
+
+            var eliminar = from rolPermiso in documento.Descendants("permiso")
+                           where rolPermiso.Element("codigoUsuario").Value == codigoUsuario.ToString()
+                           select rolPermiso;
+
+            if (eliminar != null)
+            {
+                eliminar.Remove();
+
+                documento.Save(pathPermisosUsuarios);
+
+                XDocument documento2 = XDocument.Load(pathPermisoPermiso);//borra el rol del xml permiso
+
+                var eliminar2 = from rolPermiso in documento2.Descendants("permiso")
+                               where rolPermiso.Element("codigoRol").Value == codigoPermiso.ToString()
+                               select rolPermiso;
+                if (eliminar2 != null)
+                {
+                    eliminar2.Remove();
+
+                    documento2.Save(pathPermisoPermiso);
+                }
+                respuesta = true;
+            }
+            return respuesta;
+        }
     }
 }

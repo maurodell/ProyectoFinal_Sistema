@@ -1,49 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <permisopermiso>
-  <permiso codigo="41">
-    <codigoRol>27</codigoRol>
-    <codigoMenu>10</codigoMenu>
-  </permiso>
-  <permiso codigo="42">
-    <codigoRol>27</codigoRol>
-    <codigoMenu>20</codigoMenu>
-  </permiso>
-  <permiso codigo="43">
-    <codigoRol>27</codigoRol>
-    <codigoMenu>11</codigoMenu>
-  </permiso>
-  <permiso codigo="44">
-    <codigoRol>27</codigoRol>
-    <codigoMenu>21</codigoMenu>
-  </permiso>
-  <permiso codigo="45">
-    <codigoRol>27</codigoRol>
-    <codigoMenu>22</codigoMenu>
-  </permiso>
-  <permiso codigo="65">
-    <codigoRol>29</codigoRol>
-    <codigoMenu>1</codigoMenu>
-  </permiso>
-  <permiso codigo="66">
-    <codigoRol>29</codigoRol>
-    <codigoMenu>4</codigoMenu>
-  </permiso>
-  <permiso codigo="67">
-    <codigoRol>29</codigoRol>
-    <codigoMenu>8</codigoMenu>
-  </permiso>
-  <permiso codigo="68">
-    <codigoRol>29</codigoRol>
-    <codigoMenu>11</codigoMenu>
-  </permiso>
-  <permiso codigo="69">
-    <codigoRol>29</codigoRol>
-    <codigoMenu>14</codigoMenu>
-  </permiso>
-  <permiso codigo="70">
-    <codigoRol>29</codigoRol>
-    <codigoMenu>15</codigoMenu>
-  </permiso>
   <permiso codigo="71">
     <codigoRol>2</codigoRol>
     <codigoMenu>1</codigoMenu>

@@ -116,9 +116,9 @@ namespace UI
             }
 
             subtotal = total / (1 + Convert.ToDecimal(txtAlicuota.Text));
-            txtTotal.Text = total.ToString("#0.00#");
-            txtSubTotal.Text = subtotal.ToString("#0.00#");
-            txtTotalImpuesto.Text = (total - subtotal).ToString("#0.00#");
+            txtTotal.Text = total.ToString("#0.0#");
+            txtSubTotal.Text = subtotal.ToString("#0.0#");
+            txtTotalImpuesto.Text = (total - subtotal).ToString("#0.0#");
         }
         private void Listar()
         {
@@ -129,6 +129,12 @@ namespace UI
                 this.Formato();
                 this.Limpiar();
                 lblTotalReg.Text = "Total registros: " + Convert.ToString(dgvListadoCompra.Rows.Count);
+
+                //solo se ejecuta la primera para ponerle un valor al nro. comprobante
+                if (dgvListadoCompra.Rows.Count == 0)
+                {
+                    txtNumComprob.Text = "00000000";
+                }
             }
             catch (Exception ex)
             {
@@ -191,7 +197,6 @@ namespace UI
             txtCodigo.Clear();
             txtCodCliente.Clear();
             txtNumComprob.Clear();
-            txtPuntoVenta.Text = "0000";
             dtDetalle.Clear();
             txtTotal.Clear();
             txtSubTotal.Clear();
@@ -236,6 +241,8 @@ namespace UI
             this.ListarCondicion();
             this.CrearDgvDetalle();
             btnImprimir.Visible = false;
+            txtNumComprob.Enabled = false;
+            txtPuntoVenta.Text = "0001";
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -249,8 +256,25 @@ namespace UI
             FrmBuscarClientes.ShowDialog();
             txtCodCliente.Text = Convert.ToString(VariableCliente.codigoCliente);
             txtNombreCliente.Text = VariableCliente.nombreCliente;
-        }
 
+            if (txtNombreCliente.Text.Length > 0)
+            {
+                setNroComproantesAutomatico(dgvListadoCompra);
+            }
+        }
+        private void setNroComproantesAutomatico(DataGridView dgvCompra)
+        {
+            long valor = 0;
+            foreach (DataGridViewRow item in dgvCompra.Rows)
+            {
+                long valor2 = Convert.ToInt64(item.Cells[5].Value);
+                if (valor2 > valor)
+                {
+                    valor = valor2;
+                }
+            }
+            txtNumComprob.Text = (valor + 1).ToString();
+        }
         private void txtCodBarra_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -328,27 +352,67 @@ namespace UI
             nombre = Convert.ToString(dgvProductoPanel.CurrentRow.Cells["nombre"].Value);
             precio = Convert.ToDecimal(dgvProductoPanel.CurrentRow.Cells["precioVenta"].Value);
             stock = Convert.ToInt32(dgvProductoPanel.CurrentRow.Cells["stock"].Value);
-            this.AgregarDetalle(codigoProducto, codigoBarra, nombre, precio, stock);
+            if (stock == 0)
+            {
+                MensajeError("El producto no tiene stock");
+            }
+            else if(stock >= 1 && stock <= 15)
+            {
+                this.AgregarDetalle(codigoProducto, codigoBarra, nombre, precio, stock);
+                MensajeOk("El stock del producto está bajo");
+            }
+            else
+            {
+                this.AgregarDetalle(codigoProducto, codigoBarra, nombre, precio, stock);
+            }
         }
 
         private void dgvDetalle_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            decimal total = 0M;
+            decimal calcularDescuento = 0M;
+            decimal descuento = 0M;
+            int cantidad = 0;
+            string nombreProducto = "";
+            int stock = 0;
+            decimal precio = 0M;
             DataRow fila = dtDetalle.Rows[e.RowIndex];
-            string nombreProducto = Convert.ToString(fila["nombreProducto"]);
-            int stock = Convert.ToInt32(fila["stock"]);
-            decimal precio = Convert.ToDecimal(fila["precio"]);
-            decimal descuento = Convert.ToDecimal(fila["descuento"]);
-            int cantidad = Convert.ToInt32(fila["cantidad"]);
+            string desc = Convert.ToString(fila["descuento"]);
+            string cant = Convert.ToString(fila["cantidad"]);
+
+            if (desc.Equals(string.Empty))
+            {
+                fila["descuento"] = 0;
+            }
+            else if(cant.Equals(string.Empty))
+            {
+                fila["cantidad"] = 1;
+            }
+
+            nombreProducto = Convert.ToString(fila["nombreProducto"]);
+            stock = Convert.ToInt32(fila["stock"]);
+            precio = Convert.ToDecimal(fila["precio"]);
+            descuento = Convert.ToDecimal(fila["descuento"]);
+            cantidad = Convert.ToInt32(fila["cantidad"]);
+
             if (cantidad > stock)
             {
                 this.MensajeError($"La cantidad del producto:{nombreProducto}, debe ser menor o igual al stock");
                 fila["cantidad"] = 1;
+            }
+            else if(descuento > 0)
+            {
+                total = precio * cantidad;
+                calcularDescuento = (descuento / 100) * total;
+                fila["importe"] = total - calcularDescuento;
+                this.CalcularTotales();
             }
             else
             {
                 fila["importe"] = precio * cantidad;
                 this.CalcularTotales();
             }
+
         }
 
         private void btnInsertar_Click(object sender, EventArgs e)

@@ -17,8 +17,6 @@ namespace BLL
             mppCompra = new MPPCompra();
         }
         MPPCompra mppCompra;
-        BECompra beCompra;
-        Detalle detalle;
         public bool Alta(int Parametro)
         {
             throw new NotImplementedException();
@@ -45,37 +43,6 @@ namespace BLL
         {
             return mppCompra.Crear(Parametro);
         }
-        public bool Crear(int codigoProveedor, int codigoUsuario, string tipoComprobante, string nroComprobante, string puntoVenta, DateTime fecha, decimal impuesto, 
-                            decimal total, DataTable detalles)
-        {
-            List<Detalle> listaDetalle = new List<Detalle>();
-
-            beCompra = new BECompra();
-
-            for (int i=0; i<detalles.Rows.Count; i++)
-            {
-                detalle = new Detalle();
-                detalle.codigoBarra = Convert.ToInt64(detalles.Rows[i]["codigoBarra"]);
-                detalle.codigoProducto = Convert.ToInt32(detalles.Rows[i]["codigoProducto"]);
-                detalle.nombreProducto = Convert.ToString(detalles.Rows[i]["nombreProducto"]);
-                detalle.cantidad = Convert.ToInt32(detalles.Rows[i]["cantidad"]);
-                detalle.precio = Convert.ToDecimal(detalles.Rows[i]["precio"]);
-                detalle.importe = Convert.ToDecimal(detalles.Rows[i]["importe"]);
-                listaDetalle.Add(detalle);
-            }
-            beCompra.codigoProveedor = codigoProveedor;
-            beCompra.codigoUsuario = codigoUsuario;
-            beCompra.detalles = listaDetalle;
-            beCompra.tipoComprobante = tipoComprobante;
-            beCompra.nroComprobante = nroComprobante;
-            beCompra.puntoVenta = puntoVenta;
-            beCompra.fecha = Convert.ToDateTime(fecha.ToString("dd/MM/yyyy"));
-            beCompra.impuesto = impuesto;
-            beCompra.total = total;
-
-            return mppCompra.Crear(beCompra);
-        }
-        
         public BECompra CargarCompra(int codigoCompra)
         {
             return mppCompra.CargarCompra(codigoCompra);
@@ -101,6 +68,14 @@ namespace BLL
         public bool Modificar(BECompra Parametro, string parametro2)
         {
             return mppCompra.Modificar(Parametro, parametro2);
+        }
+        public string DevolverNombre(int codigoProveedor)
+        {
+            return mppCompra.DevolverNombre(codigoProveedor);
+        }
+        public List<BEProducto> ListarProductosPorProveedor(int codigoProveedor)
+        {
+            return mppCompra.ListarProductosPorProveedor(codigoProveedor);
         }
     }
 }

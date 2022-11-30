@@ -20,6 +20,7 @@ namespace MPP
         private string pathDetalle = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\DetalleCompra.XML";
 
         private string pathProducto = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\Productos.XML";
+        private string pathProveedores = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\Proveedores.XML";
         MPPProducto mppProducto = new MPPProducto();
         MPPCategoria mppCategoria = new MPPCategoria();
         public bool Alta(int Parametro)
@@ -527,6 +528,99 @@ namespace MPP
                 }
             }
             return resp;
+        }
+        public string DevolverNombre(int codigoProveedor)
+        {
+            try
+            {
+                string nombre = "";
+                XDocument documento = XDocument.Load(pathProveedores);
+
+                var consulta = from proveedor in documento.Descendants("proveedor")
+                               where proveedor.Attribute("codigo").Value == codigoProveedor.ToString()
+                               select proveedor;
+
+                foreach (XElement EModifcar in consulta)
+                {
+                    nombre = EModifcar.Element("razonSocial").Value;
+                }
+                return nombre;
+            }
+            catch (XmlException ex)
+            {
+                throw ex;
+            }
+        }
+        public List<BEProducto> ListarProductosPorProveedor(int codigoProveedor)
+        {
+            try
+            {
+                //primero se hace la consulta a compras para sacar el id de la compra según el código del proveedor.
+                //----------------------------------------------------------------------------------------
+                List<string> listadoCodigoCompra = new List<string>();
+                XDocument documento = XDocument.Load(path);
+
+                var consulta = from compra in documento.Descendants("compra")
+                               where compra.Element("codigoProveedor").Value == codigoProveedor.ToString()
+                               select compra;
+                foreach (XElement EModifcar in consulta)
+                {
+                    listadoCodigoCompra.Add(EModifcar.Attribute("codigo").Value);
+                }
+
+                //-----------------------------------------------------------------------------------------
+                //luego se buscan en los detalles de cada compra el código de los productos que se relación a la compra del proveedor.
+                XDocument documento2 = XDocument.Load(pathDetalle);
+                List<string> listadoCodigoProducto = new List<string>();
+                foreach (string codigoCompra in listadoCodigoCompra)
+                {
+                    var consulta2 = from detalle in documento2.Descendants("detalle")
+                                   where detalle.Element("codigoCompra").Value == codigoCompra
+                                    select detalle;
+
+                    foreach (XElement EModifcar in consulta2)
+                    {
+                        listadoCodigoProducto.Add(EModifcar.Element("codigoProducto").Value);
+                    }
+                }
+
+                //------------------------------------------------------------------------------------------
+                //y por último mapeo según el listado anterios de código de productos por compra
+                XDocument documento3 = XDocument.Load(pathProducto);
+                List<BEProducto> listadoProductos = new List<BEProducto>();
+                foreach (string codigoProductos in listadoCodigoProducto)
+                {
+                    var consulta3 = from productos in documento3.Descendants("producto")
+                                    where productos.Attribute("codigo").Value == codigoProductos
+                                    select new BEProducto
+                                    {
+                                        Codigo = Convert.ToInt32(productos.Attribute("codigo").Value),
+                                        codigoCategoria = Convert.ToInt32(productos.Element("codigoCategoria").Value),
+                                        codigoBarra = Convert.ToString(productos.Element("codigoBarra").Value),
+                                        nombre = Convert.ToString(productos.Element("nombre").Value),
+                                        precioVenta = Convert.ToDecimal(productos.Element("precioVenta").Value),
+                                        stock = Convert.ToInt32(productos.Element("stock").Value),
+                                        descripcion = Convert.ToString(productos.Element("descripcion").Value),
+                                        ubicacion = Convert.ToString(productos.Element("ubicacion").Value),
+                                        fechaVencimiento = Convert.ToDateTime(productos.Element("fechaVencimiento").Value),
+                                        imagen = Convert.ToString(productos.Element("imagen").Value),
+                                        estado = Convert.ToBoolean(Convert.ToInt32(productos.Element("estado").Value))
+                                    };
+
+                    foreach (BEProducto producto in consulta3)
+                    {
+                        listadoProductos.Add(producto);
+                    }
+
+                }
+
+                return listadoProductos;
+            }
+            catch (XmlException ex)
+            {
+
+                throw ex;
+            }
         }
     }
 

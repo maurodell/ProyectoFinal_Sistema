@@ -460,12 +460,14 @@ namespace UI
             this.Limpiar();
             int codigoCompra = Convert.ToInt32(dgvListadoCompra.CurrentRow.Cells["codigo"].Value);
             BECompra compra = bllCompra.CargarCompra(codigoCompra);
+            txtCodProveedor.Text = compra.codigoProveedor.ToString();
             cmbComprobante.SelectedItem = compra.tipoComprobante;
             txtPuntoVenta.Text = compra.puntoVenta;
             txtNumComprob.Text = compra.nroComprobante;
             dateFecha.Value = compra.fecha;
             txtCodigo.Visible = true;
             txtCodigo.Text = Convert.ToString(compra.Codigo);
+            txtNombreProveedor.Text = bllCompra.DevolverNombre(compra.codigoProveedor);
 
             foreach (var item in compra.detalles)
             {
@@ -583,7 +585,10 @@ namespace UI
             txtCodProveedor.Text = Convert.ToString(VariablesCompra.codigoProveedor);
             txtNombreProveedor.Text = VariablesCompra.razonSocial;
 
-            setNroComproantesAutomatico(dgvListadoCompra);
+            if (txtNombreProveedor.Text.Length > 0)
+            {
+                setNroComproantesAutomatico(dgvListadoCompra);
+            }
         }
     }
 }

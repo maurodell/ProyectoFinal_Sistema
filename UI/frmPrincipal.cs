@@ -297,5 +297,13 @@ namespace UI
             FrmBackup.MdiParent = this;
             FrmBackup.Show();
         }
+
+        private void consultasProveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListarProductosXProveedor Consulta = new frmListarProductosXProveedor();
+            Consulta.MdiParent = this;
+            Consulta.Show();
+            Consulta.Size = new Size(1220, 560);
+        }
     }
 }
