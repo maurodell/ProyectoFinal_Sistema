@@ -53,5 +53,25 @@ namespace BLL
         {
             return mppProducto.Modificar(Parametro, parametro2);
         }
+        public List<BEProducto> MasVendido()
+        {
+            return mppProducto.MasVendido();
+        }
+        public List<BEProducto> MenosVendido()
+        {
+            return mppProducto.MenosVendido();
+        }
+        public List<BEProducto> PorVencer()
+        {
+            return mppProducto.PorVencer();
+        }
+        public List<BEProducto> BajoStock()
+        {
+            return mppProducto.BajoStock();
+        }
+        public List<BEProducto> AgruparCategoria()
+        {
+            return mppProducto.AgruparCategoria();
+        }
     }
 }

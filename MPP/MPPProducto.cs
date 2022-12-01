@@ -16,6 +16,7 @@ namespace MPP
     public class MPPProducto : IRepositorio<BEProducto>
     {
         private string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\Productos.XML";
+        private string pathDetalleVenta = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\archivos_xml" + "\\VentaDetalle.XML";
         public bool Alta(int Parametro)
         {
             try
@@ -309,6 +310,119 @@ namespace MPP
                 }
             }
             return resp;
+        }
+        public List<BEProducto> MasVendido()
+        {
+            BEProducto productoConsulta;
+            List<BEProducto> listaProductos = new List<BEProducto>();
+            XDocument documento = XDocument.Load(pathDetalleVenta);
+
+            var consulta = from producto in documento.Descendants("detalle")
+                           select new
+                           {
+                               codigoProducto = producto.Element("codigoProducto").Value,
+                               cantidad = Convert.ToInt32(producto.Element("cantidad").Value)
+                           };
+            var totales = (from x in consulta
+                          group x by x.codigoProducto into codigo
+                          select new
+                          {
+                              codProduct = codigo.Key,
+                              total = codigo.Sum(c=>c.cantidad)
+                          }).OrderByDescending(z=>z.total);
+            foreach (var item in totales)
+            {
+                if (item.total > 1)//desde aca manejo la cantidad que quiero que filtren como maximo de venta
+                {
+                    XDocument documento2 = XDocument.Load(path);
+
+                    var devuelveProducto = from producto in documento2.Descendants("producto")
+                                           where producto.Attribute("codigo").Value == item.codProduct
+                                           select producto;
+
+                    foreach (XElement EModifcar in devuelveProducto)
+                    {
+                        productoConsulta = new BEProducto();
+                        productoConsulta.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
+                        productoConsulta.codigoCategoria = Convert.ToInt32(EModifcar.Element("codigoCategoria").Value);
+                        productoConsulta.codigoBarra = EModifcar.Element("codigoBarra").Value;
+                        productoConsulta.nombre = EModifcar.Element("nombre").Value;
+                        productoConsulta.precioVenta = Convert.ToDecimal(EModifcar.Element("precioVenta").Value);
+                        productoConsulta.stock = item.total;
+                        productoConsulta.ubicacion = EModifcar.Element("ubicacion").Value;
+                        productoConsulta.descripcion = EModifcar.Element("descripcion").Value;
+                        productoConsulta.fechaVencimiento = Convert.ToDateTime(EModifcar.Element("fechaVencimiento").Value);
+                        productoConsulta.imagen = EModifcar.Element("imagen").Value;
+                        productoConsulta.estado = Convert.ToBoolean(Convert.ToInt32(EModifcar.Element("estado").Value));
+
+                        listaProductos.Add(productoConsulta);
+                    }
+                }
+
+            }
+            return listaProductos;
+        }
+        public List<BEProducto> MenosVendido()
+        {
+            BEProducto productoConsulta;
+            List<BEProducto> listaProductos = new List<BEProducto>();
+            XDocument documento = XDocument.Load(pathDetalleVenta);
+
+            var consulta = from producto in documento.Descendants("detalle")
+                           select new
+                           {
+                               codigoProducto = producto.Element("codigoProducto").Value,
+                               cantidad = Convert.ToInt32(producto.Element("cantidad").Value)
+                           };
+            var totales = (from x in consulta
+                           group x by x.codigoProducto into codigo
+                           select new
+                           {
+                               codProduct = codigo.Key,
+                               total = codigo.Sum(c => c.cantidad)
+                           }).OrderBy(z => z.total);
+            foreach (var item in totales)
+            {
+                if (item.total <= 1)//desde aca manejo la cantidad que quiero que filtren como minimo de venta
+                {
+                    XDocument documento2 = XDocument.Load(path);
+
+                    var devuelveProducto = from producto in documento2.Descendants("producto")
+                                           where producto.Attribute("codigo").Value == item.codProduct
+                                           select producto;
+
+                    foreach (XElement EModifcar in devuelveProducto)
+                    {
+                        productoConsulta = new BEProducto();
+                        productoConsulta.Codigo = Convert.ToInt32(EModifcar.Attribute("codigo").Value);
+                        productoConsulta.codigoCategoria = Convert.ToInt32(EModifcar.Element("codigoCategoria").Value);
+                        productoConsulta.codigoBarra = EModifcar.Element("codigoBarra").Value;
+                        productoConsulta.nombre = EModifcar.Element("nombre").Value;
+                        productoConsulta.precioVenta = Convert.ToDecimal(EModifcar.Element("precioVenta").Value);
+                        productoConsulta.stock = item.total;
+                        productoConsulta.ubicacion = EModifcar.Element("ubicacion").Value;
+                        productoConsulta.descripcion = EModifcar.Element("descripcion").Value;
+                        productoConsulta.fechaVencimiento = Convert.ToDateTime(EModifcar.Element("fechaVencimiento").Value);
+                        productoConsulta.imagen = EModifcar.Element("imagen").Value;
+                        productoConsulta.estado = Convert.ToBoolean(Convert.ToInt32(EModifcar.Element("estado").Value));
+
+                        listaProductos.Add(productoConsulta);
+                    }
+                }
+            }
+            return listaProductos;
+        }
+        public List<BEProducto> PorVencer()
+        {
+            return null;
+        }
+        public List<BEProducto> BajoStock()
+        {
+            return null;
+        }
+        public List<BEProducto> AgruparCategoria()
+        {
+            return null;
         }
     }
 }

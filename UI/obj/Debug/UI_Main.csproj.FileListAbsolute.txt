@@ -662,3 +662,4 @@ C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\bin\Debug\itextsharp.dll
 C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\bin\Debug\itextsharp.xmlworker.dll
 C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\bin\Debug\itextsharp.xml
 C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\obj\Debug\UI.frmListarProductosXProveedor.resources
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\obj\Debug\UI.frmConsultivoProductos.resources

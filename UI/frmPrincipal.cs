@@ -305,5 +305,13 @@ namespace UI
             Consulta.Show();
             Consulta.Size = new Size(1220, 560);
         }
+
+        private void consultivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultivoProductos Consultivo = new frmConsultivoProductos();
+            Consultivo.MdiParent = this;
+            Consultivo.Show();
+            Consultivo.Size = new Size(1220, 560);
+        }
     }
 }

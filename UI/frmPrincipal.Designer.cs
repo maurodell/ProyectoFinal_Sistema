@@ -37,6 +37,7 @@ namespace UI
             this.menuIngresos = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuProveedores = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuCompras = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultasProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuVentas = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuClientes = new System.Windows.Forms.ToolStripMenuItem();
             this.submenuVentas = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +55,7 @@ namespace UI
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.LoginInferior = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.consultasProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -85,7 +86,8 @@ namespace UI
             // 
             this.menuStock.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.submenuCategoria,
-            this.submenuProducto});
+            this.submenuProducto,
+            this.consultivoToolStripMenuItem});
             this.menuStock.Name = "menuStock";
             this.menuStock.Size = new System.Drawing.Size(114, 48);
             this.menuStock.Text = "Stock";
@@ -93,14 +95,14 @@ namespace UI
             // submenuCategoria
             // 
             this.submenuCategoria.Name = "submenuCategoria";
-            this.submenuCategoria.Size = new System.Drawing.Size(325, 54);
+            this.submenuCategoria.Size = new System.Drawing.Size(448, 54);
             this.submenuCategoria.Text = "Categorías";
             this.submenuCategoria.Click += new System.EventHandler(this.categoríasToolStripMenuItem_Click);
             // 
             // submenuProducto
             // 
             this.submenuProducto.Name = "submenuProducto";
-            this.submenuProducto.Size = new System.Drawing.Size(325, 54);
+            this.submenuProducto.Size = new System.Drawing.Size(448, 54);
             this.submenuProducto.Text = "Producto";
             this.submenuProducto.Click += new System.EventHandler(this.artToolStripMenuItem_Click);
             // 
@@ -127,6 +129,13 @@ namespace UI
             this.submenuCompras.Size = new System.Drawing.Size(487, 54);
             this.submenuCompras.Text = "Compras";
             this.submenuCompras.Click += new System.EventHandler(this.comprasToolStripMenuItem_Click);
+            // 
+            // consultasProveedoresToolStripMenuItem
+            // 
+            this.consultasProveedoresToolStripMenuItem.Name = "consultasProveedoresToolStripMenuItem";
+            this.consultasProveedoresToolStripMenuItem.Size = new System.Drawing.Size(487, 54);
+            this.consultasProveedoresToolStripMenuItem.Text = "Consultas Proveedores";
+            this.consultasProveedoresToolStripMenuItem.Click += new System.EventHandler(this.consultasProveedoresToolStripMenuItem_Click);
             // 
             // menuVentas
             // 
@@ -251,12 +260,12 @@ namespace UI
             this.LoginInferior.Size = new System.Drawing.Size(205, 41);
             this.LoginInferior.Text = "Proyecto Final";
             // 
-            // consultasProveedoresToolStripMenuItem
+            // consultivoToolStripMenuItem
             // 
-            this.consultasProveedoresToolStripMenuItem.Name = "consultasProveedoresToolStripMenuItem";
-            this.consultasProveedoresToolStripMenuItem.Size = new System.Drawing.Size(487, 54);
-            this.consultasProveedoresToolStripMenuItem.Text = "Consultas Proveedores";
-            this.consultasProveedoresToolStripMenuItem.Click += new System.EventHandler(this.consultasProveedoresToolStripMenuItem_Click);
+            this.consultivoToolStripMenuItem.Name = "consultivoToolStripMenuItem";
+            this.consultivoToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.consultivoToolStripMenuItem.Text = "Consultivo";
+            this.consultivoToolStripMenuItem.Click += new System.EventHandler(this.consultivoToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -309,6 +318,7 @@ namespace UI
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuCaja;
         private System.Windows.Forms.ToolStripMenuItem consultasProveedoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultivoToolStripMenuItem;
     }
 }
 
