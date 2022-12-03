@@ -150,6 +150,8 @@ namespace UI
             this.submenuConsultasCompras.Enabled = ConsultarPermiso(this.submenuConsultasCompras.Name);
             this.menuBackUp.Enabled = ConsultarPermiso(this.menuBackUp.Name);
             this.menuCaja.Enabled = ConsultarPermiso(this.menuCaja.Name);
+            this.submenuConsultivo.Enabled = ConsultarPermiso(this.submenuConsultivo.Name);
+            this.submenuConsultaProveedor.Enabled = ConsultarPermiso(this.submenuConsultaProveedor.Name);
         }
         private bool ConsultarPermiso(string nombreMenu)
         {

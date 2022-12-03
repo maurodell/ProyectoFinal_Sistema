@@ -9,18 +9,26 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLL;
 using BE;
+using System.Collections;
 
 namespace UI
 {
     public partial class frmConsultivoProductos : Form
     {
-        private int totalLista = 0;
+        public struct DatosProductos
+        {
+            public string nombre { get; set; }
+            public int cantidad { get; set; }
+            public string categoria { get; set; }
+        }
         public frmConsultivoProductos()
         {
             InitializeComponent();
             bllProducto = new BLLProducto();
+            listaParaGraficos = new List<BEProducto>();
         }
         BLLProducto bllProducto;
+        private List<BEProducto> listaParaGraficos;
         private void MensajeError(string mensaje)
         {
             MessageBox.Show(mensaje, "Consultivo Productos", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -29,7 +37,7 @@ namespace UI
         {
             MessageBox.Show(mensaje, "Consultivo Productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        private void Formato()
+        private void Formato(bool flag)
         {
             dgvProductos.Columns[0].HeaderText = "Categoría";
             dgvProductos.Columns[0].Width = 50;
@@ -41,7 +49,7 @@ namespace UI
             dgvProductos.Columns[3].Width = 60;
             dgvProductos.Columns[3].HeaderText = "Precio Venta";
             dgvProductos.Columns[4].Width = 50;
-            dgvProductos.Columns[4].HeaderText = "Cantidad Vendido";
+            dgvProductos.Columns[4].HeaderText = flag ? "Cantidad Vendido" : "Stock";
             dgvProductos.Columns[5].Width = 100;
             dgvProductos.Columns[5].HeaderText = "Descripción";
             dgvProductos.Columns[6].Width = 50;
@@ -58,36 +66,89 @@ namespace UI
             dgvProductos.Columns[10].Width = 50;
             dgvProductos.Columns[10].HeaderText = "Código";
         }
-        private void Listar(List<BEProducto> listaProductos)
+        private void Listar(List<BEProducto> listaProductos, bool flag)
         {
-            dgvProductos.DataSource = null;
-            dgvProductos.DataSource = listaProductos;
-            Formato();
+            if (listaProductos.Count > 0 || listaProductos != null)
+            {
+                dgvProductos.DataSource = null;
+                dgvProductos.DataSource = listaProductos;
+                listaParaGraficos = listaProductos;
+                Formato(flag);
+                ActualizarChair();
+            }
+            else
+            {
+                dgvProductos.DataSource = null;
+                MensajeError("No se obtuvieron resultados");
+            }
+
         }
 
         private void frmConsultivoProductos_Load(object sender, EventArgs e)
         {
 
         }
+        private void ControlRadioButton()
+        {
+            if (rbtnMasVendidos.Checked == true || rbtnMenosVendidos.Checked == true)
+                txtCantidad.Enabled = true;
 
+            if (rbtnMasVendidos.Checked == false && rbtnMenosVendidos.Checked == false)
+                txtCantidad.Enabled = false;
+        }
+        private void ControlVencer()
+        {
+            if (rbtnPorVencer.Checked)
+            {
+                menosMes.Enabled = true;
+                MasMes.Enabled = true;
+            }
+            if (!rbtnPorVencer.Checked)
+            {
+                menosMes.Enabled = false;
+                MasMes.Enabled = false;
+            }
+        }
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
             switch (ControlarSeleccion())
             {
                 case "1":
-                    Listar(bllProducto.MasVendido());
+                    if (txtCantidad.Text.Length > 0)
+                    {
+                        Listar(bllProducto.MasVendido(Convert.ToInt32(txtCantidad.Text)), true);
+                    }
+                    else
+                    {
+                        dgvProductos.DataSource = null;
+                        MensajeError("Debe ingresar una cantidad de stock a filtrar");
+                    }
                     break;
                 case "2":
-                    Listar(bllProducto.MenosVendido());
+                    if (txtCantidad.Text.Length > 0)
+                    {
+                        Listar(bllProducto.MenosVendido(Convert.ToInt32(txtCantidad.Text)), true);
+                    }
+                    else
+                    {
+                        dgvProductos.DataSource = null;
+                        MensajeError("Debe ingresar una cantidad de stock a filtrar");
+                    }
                     break;
                 case "3":
-                    Listar(bllProducto.PorVencer());
+                    string orden = "";
+                    if (MasMes.Checked)
+                        orden = "mas";
+                    else
+                        orden = "menos";
+
+                    Listar(bllProducto.PorVencer(orden), false);
                     break;
                 case "4":
-                    Listar(bllProducto.BajoStock());
+                    Listar(bllProducto.BajoStock(), false);
                     break;
                 case "5":
-                    Listar(bllProducto.AgruparCategoria());
+                    Listar(bllProducto.AgruparCategoria(), false);
                     break;
                 case "x":
                     MensajeError("Algo salío mal, debe seleccionar un filtro!");
@@ -120,6 +181,53 @@ namespace UI
                 return "5";
             }
             return "x";
+        }
+
+        private void rbtnMasVendidos_CheckedChanged(object sender, EventArgs e)
+        {
+            ControlRadioButton();
+        }
+
+        private void rbtnMenosVendidos_CheckedChanged(object sender, EventArgs e)
+        {
+            ControlRadioButton();
+        }
+
+        private void rbtnPorVencer_CheckedChanged(object sender, EventArgs e)
+        {
+            ControlVencer();
+        }
+
+        private void menosMes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (menosMes.Checked)
+                MasMes.Checked = false;
+        }
+
+        private void MasMes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (MasMes.Checked)
+                menosMes.Checked = false;
+        }
+        private void ActualizarChair()
+        {
+            chart1.Series["Series1"].Points.Clear();
+
+            var resultado = from product in listaParaGraficos
+                            //group product by product.codigoCategoria into totales
+                            select new
+                            {
+                                nombre = product.nombre,
+                                cantidad = product.stock
+                            };
+            ArrayList nombre = new ArrayList();
+            ArrayList cantidad = new ArrayList();
+            foreach (var item in resultado.OrderBy(x=>x.cantidad))
+            {
+                nombre.Add(item.nombre);
+                cantidad.Add(item.cantidad);
+            }
+            chart1.Series[0].Points.DataBindXY(nombre, cantidad);
         }
     }
 }

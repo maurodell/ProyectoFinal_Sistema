@@ -53,17 +53,17 @@ namespace BLL
         {
             return mppProducto.Modificar(Parametro, parametro2);
         }
-        public List<BEProducto> MasVendido()
+        public List<BEProducto> MasVendido(int cantidad)
         {
-            return mppProducto.MasVendido();
+            return mppProducto.MasVendido(cantidad);
         }
-        public List<BEProducto> MenosVendido()
+        public List<BEProducto> MenosVendido(int cantidad)
         {
-            return mppProducto.MenosVendido();
+            return mppProducto.MenosVendido(cantidad);
         }
-        public List<BEProducto> PorVencer()
+        public List<BEProducto> PorVencer(string orden)
         {
-            return mppProducto.PorVencer();
+            return mppProducto.PorVencer(orden);
         }
         public List<BEProducto> BajoStock()
         {

@@ -311,7 +311,7 @@ namespace MPP
             }
             return resp;
         }
-        public List<BEProducto> MasVendido()
+        public List<BEProducto> MasVendido(int cantidad)
         {
             BEProducto productoConsulta;
             List<BEProducto> listaProductos = new List<BEProducto>();
@@ -332,7 +332,7 @@ namespace MPP
                           }).OrderByDescending(z=>z.total);
             foreach (var item in totales)
             {
-                if (item.total > 1)//desde aca manejo la cantidad que quiero que filtren como maximo de venta
+                if (item.total >= cantidad)//desde aca manejo la cantidad que quiero que filtren como maximo de venta
                 {
                     XDocument documento2 = XDocument.Load(path);
 
@@ -362,7 +362,7 @@ namespace MPP
             }
             return listaProductos;
         }
-        public List<BEProducto> MenosVendido()
+        public List<BEProducto> MenosVendido(int cantidad)
         {
             BEProducto productoConsulta;
             List<BEProducto> listaProductos = new List<BEProducto>();
@@ -383,7 +383,7 @@ namespace MPP
                            }).OrderBy(z => z.total);
             foreach (var item in totales)
             {
-                if (item.total <= 1)//desde aca manejo la cantidad que quiero que filtren como minimo de venta
+                if (item.total <= cantidad)//desde aca manejo la cantidad que quiero que filtren como minimo de venta
                 {
                     XDocument documento2 = XDocument.Load(path);
 
@@ -412,17 +412,55 @@ namespace MPP
             }
             return listaProductos;
         }
-        public List<BEProducto> PorVencer()
+        public List<BEProducto> PorVencer(string orden)
         {
-            return null;
+            List<BEProducto> listaProductos = Listar();
+            List<BEProducto> listaFiltrada = new List<BEProducto>();
+            bool flag = false;
+
+            foreach (BEProducto item in listaProductos)
+            {
+                TimeSpan difDias = (item.fechaVencimiento - DateTime.Now);
+                int dias = difDias.Days;
+                if (orden.Equals("menos"))
+                {
+                    flag = true;
+                }
+                if (flag)
+                {
+                    if (dias <= 25)
+                    {
+                        listaFiltrada.Add(item);
+                    }
+                }
+                else
+                {
+                    if (dias >= 30)
+                    {
+                        listaFiltrada.Add(item);
+                    }
+                }
+            }
+
+            return listaFiltrada.OrderBy(x=>x.fechaVencimiento).ToList();
         }
         public List<BEProducto> BajoStock()
         {
-            return null;
+            List<BEProducto> listaProductos = Listar();
+            List<BEProducto> filtrados = new List<BEProducto>();
+            foreach (BEProducto item in listaProductos)
+            {
+                if (item.stock <= 15 && item.stock >= 0)
+                {
+                    filtrados.Add(item);
+                }
+            }
+            return filtrados.OrderByDescending(x=>x.stock).ToList();
         }
         public List<BEProducto> AgruparCategoria()
         {
-            return null;
+            List<BEProducto> listaProductos = Listar();
+            return listaProductos.OrderByDescending(x => x.codigoCategoria).ToList();
         }
     }
 }

@@ -26,6 +26,8 @@ namespace BE
         menuBackUp,
         submenuNuevoBackUp,
         submenuRestore,
-        menuCaja
+        menuCaja,
+        submenuConsultivo,
+        submenuConsultaProveedor
     }
 }
