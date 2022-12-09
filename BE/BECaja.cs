@@ -8,12 +8,15 @@ namespace BE
 {
     public class BECaja : Entidad
     {
-        public decimal cajaInicial { get; set; }
-        public decimal ingresosVenta { get; set; }
-        public decimal egresosCompra { get; set; }
+        public DateTime fechaApertura { get; set; }
+        public DateTime fechaCierre { get; set; }
+        public decimal saldoInicial { get; set; }
+        public decimal saldoDeposito { get; set; }
+        public decimal saldoSalida { get; set; }
+        public decimal saldoVentas { get; set; }
+        public decimal saldoCompras { get; set; }
+        public decimal saldoFaltante { get; set; }
         public decimal saldoFinal { get; set; }
-        public int codigoUsuario { get; set; }
-        public DateTime fecha { get; set; }
         public bool estado { get; set; }
     }
 }

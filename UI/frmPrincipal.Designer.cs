@@ -95,21 +95,21 @@ namespace UI
             // submenuCategoria
             // 
             this.submenuCategoria.Name = "submenuCategoria";
-            this.submenuCategoria.Size = new System.Drawing.Size(448, 54);
+            this.submenuCategoria.Size = new System.Drawing.Size(325, 54);
             this.submenuCategoria.Text = "Categorías";
             this.submenuCategoria.Click += new System.EventHandler(this.categoríasToolStripMenuItem_Click);
             // 
             // submenuProducto
             // 
             this.submenuProducto.Name = "submenuProducto";
-            this.submenuProducto.Size = new System.Drawing.Size(448, 54);
+            this.submenuProducto.Size = new System.Drawing.Size(325, 54);
             this.submenuProducto.Text = "Producto";
             this.submenuProducto.Click += new System.EventHandler(this.artToolStripMenuItem_Click);
             // 
             // submenuConsultivo
             // 
             this.submenuConsultivo.Name = "submenuConsultivo";
-            this.submenuConsultivo.Size = new System.Drawing.Size(448, 54);
+            this.submenuConsultivo.Size = new System.Drawing.Size(325, 54);
             this.submenuConsultivo.Text = "Consultivo";
             this.submenuConsultivo.Click += new System.EventHandler(this.consultivoToolStripMenuItem_Click);
             // 
@@ -134,7 +134,7 @@ namespace UI
             // 
             this.submenuCompras.Name = "submenuCompras";
             this.submenuCompras.Size = new System.Drawing.Size(487, 54);
-            this.submenuCompras.Text = "Compras";
+            this.submenuCompras.Text = "Consultas Compras";
             this.submenuCompras.Click += new System.EventHandler(this.comprasToolStripMenuItem_Click);
             // 
             // submenuConsultaProveedor
@@ -156,15 +156,15 @@ namespace UI
             // submenuClientes
             // 
             this.submenuClientes.Name = "submenuClientes";
-            this.submenuClientes.Size = new System.Drawing.Size(289, 54);
+            this.submenuClientes.Size = new System.Drawing.Size(409, 54);
             this.submenuClientes.Text = "Clientes";
             this.submenuClientes.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // submenuVentas
             // 
             this.submenuVentas.Name = "submenuVentas";
-            this.submenuVentas.Size = new System.Drawing.Size(289, 54);
-            this.submenuVentas.Text = "Ventas";
+            this.submenuVentas.Size = new System.Drawing.Size(409, 54);
+            this.submenuVentas.Text = "Consultas Ventas";
             this.submenuVentas.Click += new System.EventHandler(this.ventasToolStripMenuItem1_Click);
             // 
             // menuCaja

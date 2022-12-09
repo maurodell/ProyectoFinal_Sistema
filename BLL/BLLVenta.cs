@@ -17,8 +17,6 @@ namespace BLL
             mppVenta = new MPPVenta();
         }
         MPPVenta mppVenta;
-        BEVenta beVenta;
-        DetalleVenta detalle;
         public bool Alta(int Parametro)
         {
             throw new NotImplementedException();
@@ -37,39 +35,6 @@ namespace BLL
         {
             return mppVenta.BuscarCategoriaProducto(codigoProducto);
         }
-        public bool Crear(int codigoCliente,int codigoUsuario, string tipoComprobante, string nroComprobante, string puntoVenta, DateTime fecha, decimal impuesto,
-                            decimal total, DataTable detalles)
-        {
-            List<DetalleVenta> listaDetalle = new List<DetalleVenta>();
-
-            beVenta = new BEVenta();
-
-            for (int i = 0; i < detalles.Rows.Count; i++)
-            {
-                detalle = new DetalleVenta();
-                detalle.codigoBarra = Convert.ToInt64(detalles.Rows[i]["codigoBarra"]);
-                detalle.codigoProducto = Convert.ToInt32(detalles.Rows[i]["codigoProducto"]);
-                detalle.nombreProducto = Convert.ToString(detalles.Rows[i]["nombreProducto"]);
-                detalle.stock = Convert.ToInt32(detalles.Rows[i]["stock"]);
-                detalle.cantidad = Convert.ToInt32(detalles.Rows[i]["cantidad"]);
-                detalle.precio = Convert.ToDecimal(detalles.Rows[i]["precio"]);
-                detalle.descuento = Convert.ToDecimal(detalles.Rows[i]["descuento"]);
-                detalle.importe = Convert.ToDecimal(detalles.Rows[i]["importe"]);
-                listaDetalle.Add(detalle);
-            }
-            beVenta.codigoCliente = codigoCliente;
-            beVenta.codigoUsuario = codigoUsuario;
-            beVenta.detalles = listaDetalle;
-            beVenta.tipoComprobante = tipoComprobante;
-            beVenta.nroComprobante = nroComprobante;
-            beVenta.puntoVenta = puntoVenta;
-            beVenta.fecha = Convert.ToDateTime(fecha.ToString("dd/MM/yyyy"));
-            beVenta.impuesto = impuesto;
-            beVenta.total = total;
-
-            return mppVenta.Crear(beVenta);
-        }
-
         public bool Eliminar(int Parametro)
         {
             throw new NotImplementedException();
@@ -102,7 +67,7 @@ namespace BLL
         }
         public bool Crear(BEVenta Parametro)
         {
-            throw new NotImplementedException();
+            return mppVenta.Crear(Parametro);
         }
     }
 }

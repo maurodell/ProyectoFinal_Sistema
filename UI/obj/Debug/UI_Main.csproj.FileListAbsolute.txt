@@ -663,3 +663,8 @@ C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\bin\Debug\itextsharp.xmlworker.dll
 C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\bin\Debug\itextsharp.xml
 C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\obj\Debug\UI.frmListarProductosXProveedor.resources
 C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\obj\Debug\UI.frmConsultivoProductos.resources
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\obj\Debug\UI.frmCajaSalgoInicial.resources
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\obj\Debug\UI.frmCajaDeposito.resources
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\obj\Debug\UI.frmCajaSalida.resources
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\obj\Debug\UI.frmVentaConsultivo.resources
+C:\Users\mdo\Desktop\Sistemas_Sale_Point\UI\obj\Debug\UI.frmCompraConsultivo.resources

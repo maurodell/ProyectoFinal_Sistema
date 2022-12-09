@@ -16,7 +16,6 @@ namespace BLL
             mppCaja = new MPPCaja();
         }
         MPPCaja mppCaja;
-        BECaja beCaja;
         public decimal CalcularVentas(DateTime Fecha)
         {
             return mppCaja.CalcularVentas(Fecha);
@@ -42,19 +41,7 @@ namespace BLL
 
         public bool Crear(BECaja Parametro)
         {
-            throw new NotImplementedException();
-        }
-        public bool Crear(string date, decimal totalVenta, decimal totalCompra, decimal saldoInicial, decimal saldoFinal, int codigoUsuario)
-        {
-            beCaja = new BECaja();
-            beCaja.fecha = Convert.ToDateTime(date);
-            beCaja.ingresosVenta = totalVenta;
-            beCaja.egresosCompra = totalCompra;
-            beCaja.cajaInicial = saldoInicial;
-            beCaja.saldoFinal = saldoFinal;
-            beCaja.codigoUsuario = codigoUsuario;
-
-            return mppCaja.Crear(beCaja);
+            return mppCaja.Crear(Parametro);
         }
         public bool Eliminar(int Parametro)
         {

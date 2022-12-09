@@ -69,9 +69,8 @@ namespace UI
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
             }
         }
         public void CerrarSesion(object sender, FormClosedEventArgs e)

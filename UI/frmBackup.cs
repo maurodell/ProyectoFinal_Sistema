@@ -45,35 +45,57 @@ namespace UI
         }
         public void CargarDgv()
         {
-            this.dataGridView1.DataSource = null;
-            this.dataGridView1.DataSource = bllBack.Listar();
-            Formato();
+            try
+            {
+                this.dataGridView1.DataSource = null;
+                this.dataGridView1.DataSource = bllBack.Listar();
+                Formato();
+            }
+            catch (Exception)
+            {
+
+            }
         }
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            int ultBackCod = bllBack.Listar().Count;
-            string nombreCarpeta = "\\"+(ultBackCod+1);
-            if (CargarDatosUsuario())
+            try
             {
-                thisComputer.FileSystem.CopyDirectory(directorioOrigen, String.Concat(directorioDestino, nombreCarpeta));
-                CargarDgv();
+                int ultBackCod = bllBack.Listar().Count;
+                string nombreCarpeta = "\\"+(ultBackCod+1);
+                if (CargarDatosUsuario())
+                {
+                    thisComputer.FileSystem.CopyDirectory(directorioOrigen, String.Concat(directorioDestino, nombreCarpeta));
+                    CargarDgv();
+                }
+                else
+                {
+                    MensajeError("Algo salió mal, el back-up no pudo realizarce!");
+                }
             }
-            else
+            catch (Exception)
             {
-                MensajeError("Algo salió mal, el back-up no pudo realizarce!");
-            }
 
+            }
         }
         private bool CargarDatosUsuario()
         {
-            bool resp = false;
-            var usuario = bllLogin.GetUsuario();
-
-            if (bllBack.Crear(usuario.Codigo, usuario.nombre))
+            try
             {
-                resp = true;
+                bool resp = false;
+                var usuario = bllLogin.GetUsuario();
+
+                if (bllBack.Crear(usuario.Codigo, usuario.nombre))
+                {
+                    resp = true;
+                }
+                return resp;
             }
-            return resp;
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
         private void frmBackup_Load(object sender, EventArgs e)
         {
@@ -138,9 +160,9 @@ namespace UI
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message + ex.StackTrace);
+
             }
         }
     }

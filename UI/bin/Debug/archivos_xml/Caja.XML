@@ -1,12 +1,3 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <cajasdiarias>
-  <caja codigo="1">
-    <cajaInicial>123000</cajaInicial>
-    <ingresosVenta>380000.0</ingresosVenta>
-    <egresosCompra>7560000.0</egresosCompra>
-    <saldoFinal>-7057000.0</saldoFinal>
-    <codigoUsuario>1</codigoUsuario>
-    <fecha>2022-11-21T00:00:00</fecha>
-    <estado>1</estado>
-  </caja>
 </cajasdiarias>

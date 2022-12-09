@@ -56,6 +56,10 @@ namespace UI
             this.txtCodBarra = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBuscarProveedor = new System.Windows.Forms.Button();
+            this.txtNombreProveedor = new System.Windows.Forms.TextBox();
+            this.txtCodProveedor = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.dateFecha = new System.Windows.Forms.DateTimePicker();
             this.label13 = new System.Windows.Forms.Label();
             this.txtPuntoVenta = new System.Windows.Forms.TextBox();
@@ -76,10 +80,6 @@ namespace UI
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCat = new System.Windows.Forms.TabPage();
             this.dgvListadoCompra = new System.Windows.Forms.DataGridView();
-            this.btnBuscarProveedor = new System.Windows.Forms.Button();
-            this.txtNombreProveedor = new System.Windows.Forms.TextBox();
-            this.txtCodProveedor = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -120,7 +120,7 @@ namespace UI
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(537, 51);
             this.btnCancelar.TabIndex = 5;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -374,6 +374,41 @@ namespace UI
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cabecera";
             // 
+            // btnBuscarProveedor
+            // 
+            this.btnBuscarProveedor.Location = new System.Drawing.Point(1451, 48);
+            this.btnBuscarProveedor.Name = "btnBuscarProveedor";
+            this.btnBuscarProveedor.Size = new System.Drawing.Size(225, 51);
+            this.btnBuscarProveedor.TabIndex = 20;
+            this.btnBuscarProveedor.Text = "Buscar";
+            this.btnBuscarProveedor.UseVisualStyleBackColor = true;
+            this.btnBuscarProveedor.Click += new System.EventHandler(this.btnBuscarProveedor_Click);
+            // 
+            // txtNombreProveedor
+            // 
+            this.txtNombreProveedor.Enabled = false;
+            this.txtNombreProveedor.Location = new System.Drawing.Point(436, 54);
+            this.txtNombreProveedor.Name = "txtNombreProveedor";
+            this.txtNombreProveedor.Size = new System.Drawing.Size(968, 38);
+            this.txtNombreProveedor.TabIndex = 19;
+            // 
+            // txtCodProveedor
+            // 
+            this.txtCodProveedor.Enabled = false;
+            this.txtCodProveedor.Location = new System.Drawing.Point(216, 54);
+            this.txtCodProveedor.Name = "txtCodProveedor";
+            this.txtCodProveedor.Size = new System.Drawing.Size(194, 38);
+            this.txtCodProveedor.TabIndex = 18;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(23, 57);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(182, 32);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Proveedor (*)";
+            // 
             // dateFecha
             // 
             this.dateFecha.Location = new System.Drawing.Point(2328, 70);
@@ -575,41 +610,6 @@ namespace UI
             this.dgvListadoCompra.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCompra_CellContentClick);
             this.dgvListadoCompra.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListadoCompra_CellDoubleClick);
             // 
-            // btnBuscarProveedor
-            // 
-            this.btnBuscarProveedor.Location = new System.Drawing.Point(1451, 48);
-            this.btnBuscarProveedor.Name = "btnBuscarProveedor";
-            this.btnBuscarProveedor.Size = new System.Drawing.Size(225, 51);
-            this.btnBuscarProveedor.TabIndex = 20;
-            this.btnBuscarProveedor.Text = "Buscar";
-            this.btnBuscarProveedor.UseVisualStyleBackColor = true;
-            this.btnBuscarProveedor.Click += new System.EventHandler(this.btnBuscarProveedor_Click);
-            // 
-            // txtNombreProveedor
-            // 
-            this.txtNombreProveedor.Enabled = false;
-            this.txtNombreProveedor.Location = new System.Drawing.Point(436, 54);
-            this.txtNombreProveedor.Name = "txtNombreProveedor";
-            this.txtNombreProveedor.Size = new System.Drawing.Size(968, 38);
-            this.txtNombreProveedor.TabIndex = 19;
-            // 
-            // txtCodProveedor
-            // 
-            this.txtCodProveedor.Enabled = false;
-            this.txtCodProveedor.Location = new System.Drawing.Point(216, 54);
-            this.txtCodProveedor.Name = "txtCodProveedor";
-            this.txtCodProveedor.Size = new System.Drawing.Size(194, 38);
-            this.txtCodProveedor.TabIndex = 18;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(182, 32);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Proveedor (*)";
-            // 
             // frmCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -618,7 +618,9 @@ namespace UI
             this.Controls.Add(this.tabControl1);
             this.Name = "frmCompra";
             this.Text = "Compra";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCompra_FormClosing);
             this.Load += new System.EventHandler(this.frmCompra_Load);
+            this.Resize += new System.EventHandler(this.frmCompra_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();

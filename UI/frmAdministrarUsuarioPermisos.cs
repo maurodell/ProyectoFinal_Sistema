@@ -169,7 +169,6 @@ namespace UI
             catch (Exception)
             {
 
-                throw;
             }
 
         }
@@ -190,9 +189,9 @@ namespace UI
                                     "\n Contactar al provedor del sistema.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                MessageBox.Show(ex.Message);
+
             }
         }
 

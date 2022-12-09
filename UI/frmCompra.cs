@@ -6,11 +6,15 @@ using BLL;
 using UI.Utils;
 using BE;
 using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
 
 namespace UI
 {
     public partial class frmCompra : Form
     {
+        public delegate void Delegado(decimal mensaje);
+        public event Delegado MiEvent;
+        public decimal totalFinal = 0;
         public frmCompra()
         {
             InitializeComponent();
@@ -29,6 +33,17 @@ namespace UI
         private string nombre;
         private decimal precio;
         private int posicion;
+
+        //-----------------------------------------------------------------------------------
+        //Deshabilitar botón cerrar del formulario
+        [DllImport("user32")]
+        static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+        [DllImport("user32")]
+        static extern bool EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
+        const int MF_BYCOMMAND = 0;
+        const int MF_DISABLED = 2;
+        const int SC_CLOSE = 0xF060;
+        //-----------------------------------------------------------------------------------
         private void Listar()
         {
             try
@@ -188,10 +203,17 @@ namespace UI
         }
         private void frmCompra_Load(object sender, EventArgs e)
         {
+            tabControl1.SelectedIndex = 1;
             this.Listar();
             this.CrearDgvDetalle();
             txtNumComprob.Enabled = false;
             txtPuntoVenta.Text = "0001";
+
+            //--------------------------------------------------------
+            //Deshabilitar boton cerrar del formulario
+            var sm = GetSystemMenu(Handle, false);
+            EnableMenuItem(sm, SC_CLOSE, MF_BYCOMMAND | MF_DISABLED);
+            //--------------------------------------------------------
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -276,25 +298,29 @@ namespace UI
         }
         private void CalcularTotales()
         {
-            decimal total = 0;
-            decimal subtotal = 0;
-            //esta condición me aseguro que al eliminar un producto se actualice o no los totales y subtotales
-            if (dgvDetalle.Rows.Count == 0)
+            try
             {
-                total = 0;
-            }
-            else
-            {
-                foreach (DataRow item in dtDetalle.Rows)
+                decimal subtotal = 0;
+                //esta condición me aseguro que al eliminar un producto se actualice o no los totales y subtotales
+                if (dgvDetalle.Rows.Count == 0)
                 {
-                    total = total + Convert.ToDecimal(item["importe"]);
+                    totalFinal = 0;
                 }
-            }
+                else
+                {
+                    foreach (DataRow item in dtDetalle.Rows)
+                    {
+                        totalFinal = totalFinal + Convert.ToDecimal(item["importe"]);
+                    }
+                }
 
-            subtotal = total / (1+Convert.ToDecimal(txtAlicuota.Text));
-            txtTotal.Text = total.ToString("#0.00#");
-            txtSubTotal.Text = subtotal.ToString("#0.00#");
-            txtTotalImpuesto.Text = (total - subtotal).ToString("#0.00#");
+                subtotal = totalFinal / (1+Convert.ToDecimal(txtAlicuota.Text));
+                txtTotal.Text = totalFinal.ToString("#0,00#");
+                txtSubTotal.Text = subtotal.ToString("#0,00#");
+                txtTotalImpuesto.Text = (totalFinal - subtotal).ToString("#0,00#");
+            }
+            catch (Exception){}
+
         }
         private void btnExplorarProd_Click(object sender, EventArgs e)
         {
@@ -325,30 +351,45 @@ namespace UI
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                MessageBox.Show(ex.Message);
+
             }
         }
 
         private void dgvProductoPanel_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            codigoProducto = Convert.ToInt32(dgvProductoPanel.CurrentRow.Cells["codigo"].Value);
-            codigoBarra = Convert.ToString(dgvProductoPanel.CurrentRow.Cells["codigoBarra"].Value);
-            nombre = Convert.ToString(dgvProductoPanel.CurrentRow.Cells["nombre"].Value);
-            precio = Convert.ToDecimal(dgvProductoPanel.CurrentRow.Cells["precioVenta"].Value);
-            this.AgregarDetalle(codigoProducto, codigoBarra, nombre, precio);
+            try
+            {
+                codigoProducto = Convert.ToInt32(dgvProductoPanel.CurrentRow.Cells["codigo"].Value);
+                codigoBarra = Convert.ToString(dgvProductoPanel.CurrentRow.Cells["codigoBarra"].Value);
+                nombre = Convert.ToString(dgvProductoPanel.CurrentRow.Cells["nombre"].Value);
+                precio = Convert.ToDecimal(dgvProductoPanel.CurrentRow.Cells["precioVenta"].Value);
+                this.AgregarDetalle(codigoProducto, codigoBarra, nombre, precio);
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
 
         private void dgvDetalle_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            //se crea un objeto de tipo DataRow para capturar la celda que se quiere modificar.
-            //para saber el indice de la celda que se quiere modificar, como la cantidad se usa el index del parametro e
-            DataRow fila = dtDetalle.Rows[e.RowIndex];
-            decimal precio = Convert.ToDecimal(fila["precio"]);
-            int cantidad = Convert.ToInt32(fila["cantidad"]);
-            fila["importe"] = precio * cantidad;
-            this.CalcularTotales();
+            try
+            {
+                //se crea un objeto de tipo DataRow para capturar la celda que se quiere modificar.
+                //para saber el indice de la celda que se quiere modificar, como la cantidad se usa el index del parametro e
+                DataRow fila = dtDetalle.Rows[e.RowIndex];
+                decimal precio = Convert.ToDecimal(fila["precio"]);
+                int cantidad = Convert.ToInt32(fila["cantidad"]);
+                fila["importe"] = precio * cantidad;
+                this.CalcularTotales();
+            }
+            catch (Exception)
+            {
+
+            }
 
         }
 
@@ -397,8 +438,10 @@ namespace UI
                         if (respuesta == true)
                         {
                             this.MensajeOk("Fue registrado de forma correctamente");
-                            this.Limpiar();
                             this.Listar();
+                            this.MiEvent(Convert.ToDecimal(totalFinal));
+                            this.Limpiar();
+                            totalFinal = 0;
                         }
                         else
                         {
@@ -409,9 +452,9 @@ namespace UI
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                MessageBox.Show(ex.Message + ex.StackTrace);
+
             }
         }
         private bool UserRegex()
@@ -435,11 +478,19 @@ namespace UI
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (dgvDetalle.SelectedRows.Count > 0)
+            try
             {
-                dgvDetalle.Rows.RemoveAt(posicion);
-                this.CalcularTotales();
+                if (dgvDetalle.SelectedRows.Count > 0)
+                {
+                    dgvDetalle.Rows.RemoveAt(posicion);
+                    this.CalcularTotales();
+                }
             }
+            catch (Exception)
+            {
+
+            }
+
         }
 
         private void dgvDetalle_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -450,40 +501,48 @@ namespace UI
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
-            tabControl1.SelectedIndex = 0;
             btnInsertar.Enabled = true;
             btnEliminar.Enabled = true;
+            this.Close();
         }
 
         private void dgvListadoCompra_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Limpiar();
-            int codigoCompra = Convert.ToInt32(dgvListadoCompra.CurrentRow.Cells["codigo"].Value);
-            BECompra compra = bllCompra.CargarCompra(codigoCompra);
-            txtCodProveedor.Text = compra.codigoProveedor.ToString();
-            cmbComprobante.SelectedItem = compra.tipoComprobante;
-            txtPuntoVenta.Text = compra.puntoVenta;
-            txtNumComprob.Text = compra.nroComprobante;
-            dateFecha.Value = compra.fecha;
-            txtCodigo.Visible = true;
-            txtCodigo.Text = Convert.ToString(compra.Codigo);
-            txtNombreProveedor.Text = bllCompra.DevolverNombre(compra.codigoProveedor);
-
-            foreach (var item in compra.detalles)
+            try
             {
-                DataRow fila = dtDetalle.NewRow();
-                fila["codigoProducto"] = item.codigoProducto;
-                fila["codigoBarra"] = item.codigoBarra;
-                fila["nombreProducto"] = item.nombreProducto;
-                fila["cantidad"] = item.cantidad;
-                fila["precio"] = item.precio;
-                fila["importe"] = item.importe;
-                this.dtDetalle.Rows.Add(fila);
+                this.Limpiar();
+                int codigoCompra = Convert.ToInt32(dgvListadoCompra.CurrentRow.Cells["codigo"].Value);
+                BECompra compra = bllCompra.CargarCompra(codigoCompra);
+                txtCodProveedor.Text = compra.codigoProveedor.ToString();
+                cmbComprobante.SelectedItem = compra.tipoComprobante;
+                txtPuntoVenta.Text = compra.puntoVenta;
+                txtNumComprob.Text = compra.nroComprobante;
+                dateFecha.Value = compra.fecha;
+                txtCodigo.Visible = true;
+                txtCodigo.Text = Convert.ToString(compra.Codigo);
+                txtNombreProveedor.Text = bllCompra.DevolverNombre(compra.codigoProveedor);
+
+                foreach (var item in compra.detalles)
+                {
+                    DataRow fila = dtDetalle.NewRow();
+                    fila["codigoProducto"] = item.codigoProducto;
+                    fila["codigoBarra"] = item.codigoBarra;
+                    fila["nombreProducto"] = item.nombreProducto;
+                    fila["cantidad"] = item.cantidad;
+                    fila["precio"] = item.precio;
+                    fila["importe"] = item.importe;
+                    this.dtDetalle.Rows.Add(fila);
+                }
+                tabControl1.SelectedIndex = 1;
+                this.CalcularTotales();
+                btnInsertar.Enabled = false;
+                btnEliminar.Enabled = false;
             }
-            tabControl1.SelectedIndex = 1;
-            this.CalcularTotales();
-            btnInsertar.Enabled = false;
-            btnEliminar.Enabled = false;
+            catch (Exception)
+            {
+
+            }
+
         }
 
         private void dgvListadoCompra_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -497,22 +556,30 @@ namespace UI
 
         private void chkSeleccionar_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkSeleccionar.Checked)
+            try
             {
-                dgvListadoCompra.Columns[0].Visible = true;
-                btnAnular.Visible = true;
+                if (chkSeleccionar.Checked)
+                {
+                    dgvListadoCompra.Columns[0].Visible = true;
+                    btnAnular.Visible = true;
 
-                dgvListadoCompra.DataSource = null;
-                dgvListadoCompra.DataSource = bllCompra.ListarTodos();
+                    dgvListadoCompra.DataSource = null;
+                    dgvListadoCompra.DataSource = bllCompra.ListarTodos();
+                }
+                else
+                {
+                    dgvListadoCompra.Columns[0].Visible = false;
+                    btnAnular.Visible = false;
+
+                    dgvListadoCompra.DataSource = null;
+                    dgvListadoCompra.DataSource = bllCompra.Listar();
+                }
             }
-            else
+            catch (Exception)
             {
-                dgvListadoCompra.Columns[0].Visible = false;
-                btnAnular.Visible = false;
 
-                dgvListadoCompra.DataSource = null;
-                dgvListadoCompra.DataSource = bllCompra.Listar();
             }
+
         }
 
         private void btnAnular_Click(object sender, EventArgs e)
@@ -572,23 +639,52 @@ namespace UI
                     MensajeError("Debe seleccionar al menos una compra.");
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + ex.StackTrace);
-            }
+            catch (Exception ) {}
         }
 
         private void btnBuscarProveedor_Click(object sender, EventArgs e)
         {
-            frmBuscarProveedor FrmBuscarProveedor = new frmBuscarProveedor();
-            FrmBuscarProveedor.ShowDialog();
-            txtCodProveedor.Text = Convert.ToString(VariablesCompra.codigoProveedor);
-            txtNombreProveedor.Text = VariablesCompra.razonSocial;
-
-            if (txtNombreProveedor.Text.Length > 0)
+            try
             {
-                setNroComproantesAutomatico(dgvListadoCompra);
+                frmBuscarProveedor FrmBuscarProveedor = new frmBuscarProveedor();
+                FrmBuscarProveedor.ShowDialog();
+                txtCodProveedor.Text = Convert.ToString(VariablesCompra.codigoProveedor);
+                txtNombreProveedor.Text = VariablesCompra.razonSocial;
+
+                if (txtNombreProveedor.Text.Length > 0)
+                {
+                    setNroComproantesAutomatico(dgvListadoCompra);
+                }
             }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        private void frmCompra_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                DialogResult dialogo = MessageBox.Show("Cierra definitivamente la carga de Compras del Día?", "Cierre", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialogo == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    this.Hide();
+                }
+                else
+                {
+                    e.Cancel = false;
+                }
+            }
+            catch (Exception) { }
+        }
+
+        private void frmCompra_Resize(object sender, EventArgs e)
+        {
+            var sm = GetSystemMenu(Handle, false);
+            EnableMenuItem(sm, SC_CLOSE, MF_BYCOMMAND | MF_DISABLED);
         }
     }
 }

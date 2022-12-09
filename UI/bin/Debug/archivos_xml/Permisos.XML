@@ -88,4 +88,8 @@
     <nombre>Caja</nombre>
     <menu>menuCaja</menu>
   </permiso>
+  <permiso codigo="31">
+    <nombre>Consultivo productos</nombre>
+    <menu>submenuConsultivo</menu>
+  </permiso>
 </permisos>

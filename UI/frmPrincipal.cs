@@ -218,18 +218,18 @@ namespace UI
 
         private void comprasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmCompra FrmCompra = new frmCompra();
-            FrmCompra.MdiParent = this;
-            FrmCompra.Show();
-            FrmCompra.Size = new Size(1370, 660);
+            frmCompraConsultivo FrmCompraConsultivo = new frmCompraConsultivo();
+            FrmCompraConsultivo.MdiParent = this;
+            FrmCompraConsultivo.Show();
+            FrmCompraConsultivo.Size = new Size(1370, 660);
         }
 
         private void ventasToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            frmVenta FrmVenta = new frmVenta();
-            FrmVenta.MdiParent = this;
-            FrmVenta.Show();
-            FrmVenta.Size = new Size(1370, 660);
+            frmVentaConsultivo FrmVentaConsultivo = new frmVentaConsultivo();
+            FrmVentaConsultivo.MdiParent = this;
+            FrmVentaConsultivo.Show();
+            FrmVentaConsultivo.Size = new Size(1370, 660);
         }
 
         private void permisosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -290,7 +290,7 @@ namespace UI
             frmCaja Caja = new frmCaja();
             Caja.MdiParent = this;
             Caja.Show();
-            Caja.Size = new Size(730, 580);
+            Caja.Size = new Size(1280, 700);
         }
 
         private void menuBackUp_Click(object sender, EventArgs e)

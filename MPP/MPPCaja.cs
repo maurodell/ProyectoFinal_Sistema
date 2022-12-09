@@ -64,18 +64,18 @@ namespace MPP
         {
             try
             {
-                List<BECaja> cajas = ListarTodos();
-                int cantidadPart = cajas.Count();
-                int codigoCaja= (cantidadPart + 1);
                 XDocument crear = XDocument.Load(path);
                 crear.Element("cajasdiarias").Add(new XElement("caja",
-                                                new XAttribute("codigo", codigoCaja),
-                                                new XElement("cajaInicial", caja.cajaInicial),
-                                                new XElement("ingresosVenta", caja.ingresosVenta),
-                                                new XElement("egresosCompra", caja.egresosCompra),
+                                                new XAttribute("nro", caja.Codigo),
+                                                new XElement("fechaApertura", caja.fechaApertura),
+                                                new XElement("fechaCierre", caja.fechaCierre),
+                                                new XElement("saldoInicial", caja.saldoInicial),
+                                                new XElement("saldoDeposito", caja.saldoDeposito),
+                                                new XElement("saldoSalida", caja.saldoSalida),
+                                                new XElement("saldoVentas", caja.saldoVentas),
+                                                new XElement("saldoCompras", caja.saldoCompras),
+                                                new XElement("saldoFaltante", caja.saldoFaltante),
                                                 new XElement("saldoFinal", caja.saldoFinal),
-                                                new XElement("codigoUsuario", caja.codigoUsuario),
-                                                new XElement("fecha", caja.fecha),
                                                 new XElement("estado", 1)));
 
                 crear.Save(path);
@@ -104,13 +104,16 @@ namespace MPP
                         {
                             BECaja caja = new BECaja
                             {
-                                Codigo = Convert.ToInt32(item["codigo"]),
-                                cajaInicial = Convert.ToDecimal(item["cajaInicial"]),
-                                ingresosVenta = Convert.ToDecimal(item["ingresosVenta"]),
-                                egresosCompra = Convert.ToDecimal(item["egresosCompra"]),
+                                Codigo = Convert.ToInt32(item["nro"]),
+                                fechaApertura = Convert.ToDateTime(item["fechaApertura"]),
+                                fechaCierre = Convert.ToDateTime(item["fechaCierre"]),
+                                saldoInicial = Convert.ToDecimal(item["saldoInicial"]),
+                                saldoDeposito = Convert.ToDecimal(item["saldoDeposito"]),
+                                saldoSalida = Convert.ToDecimal(item["saldoSalida"]),
+                                saldoVentas = Convert.ToDecimal(item["saldoVentas"]),
+                                saldoCompras = Convert.ToDecimal(item["saldoCompras"]),
+                                saldoFaltante = Convert.ToDecimal(item["saldoFaltante"]),
                                 saldoFinal = Convert.ToDecimal(item["saldoFinal"]),
-                                codigoUsuario = Convert.ToInt32(item["codigoUsuario"]),
-                                fecha = Convert.ToDateTime(item["fecha"]),
                                 estado = Convert.ToBoolean(Convert.ToInt32(item["estado"]))
                             };
                             cajas.Add(caja);
@@ -140,13 +143,16 @@ namespace MPP
                     {
                         BECaja caja = new BECaja
                         {
-                            Codigo = Convert.ToInt32(item["codigo"]),
-                            cajaInicial = Convert.ToDecimal(item["cajaInicial"]),
-                            ingresosVenta = Convert.ToDecimal(item["ingresosVenta"]),
-                            egresosCompra = Convert.ToDecimal(item["egresosCompra"]),
+                            Codigo = Convert.ToInt32(item["nro"]),
+                            fechaApertura = Convert.ToDateTime(item["fechaApertura"]),
+                            fechaCierre = Convert.ToDateTime(item["fechaCierre"]),
+                            saldoInicial = Convert.ToDecimal(item["saldoInicial"]),
+                            saldoDeposito = Convert.ToDecimal(item["saldoDeposito"]),
+                            saldoSalida = Convert.ToDecimal(item["saldoSalida"]),
+                            saldoVentas = Convert.ToDecimal(item["saldoVentas"]),
+                            saldoCompras = Convert.ToDecimal(item["saldoCompras"]),
+                            saldoFaltante = Convert.ToDecimal(item["saldoFaltante"]),
                             saldoFinal = Convert.ToDecimal(item["saldoFinal"]),
-                            codigoUsuario = Convert.ToInt32(item["codigoUsuario"]),
-                            fecha = Convert.ToDateTime(item["fecha"]),
                             estado = Convert.ToBoolean(Convert.ToInt32(item["estado"]))
                         };
                         cajas.Add(caja);
